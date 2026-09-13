@@ -7,10 +7,12 @@ output = root.parent / 'public'
 name = 'xbtpulse-datum-collector-1.0.0.zip'
 files = ['datum.py', 'configure.py', 'check.py', 'config.example.json', 'INSTALL.md', 'README.md', 'test_datum.py']
 buffer = io.BytesIO()
-with zipfile.ZipFile(buffer, 'w', zipfile.ZIP_DEFLATED) as archive:
+with zipfile.ZipFile(buffer, 'w', zipfile.ZIP_STORED) as archive:
     for filename in files:
         info = zipfile.ZipInfo(filename, date_time=(2026, 9, 13, 0, 0, 0))
-        info.compress_type = zipfile.ZIP_DEFLATED
+        info.create_system = 3
+        info.external_attr = 0o100644 << 16
+        info.compress_type = zipfile.ZIP_STORED
         archive.writestr(info, (root/filename).read_text(encoding='utf-8').replace('\r\n','\n'))
 data = buffer.getvalue()
 checksum = hashlib.sha256(data).hexdigest()+'  '+name+'\n'
