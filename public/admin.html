@@ -78,6 +78,12 @@
           not award a decentralization rating or automatically contact the
           applicant.
         </p>
+        <p class="small muted">
+          Automated evidence checks refresh every minute while this page is
+          open. New providers need approval and evidence collection first;
+          select Approved or All applications to review their readiness. These
+          checks never award higher ratings.
+        </p>
         <div id="applications"></div>
         <section class="panel intake-panel">
           <p class="eyebrow">PROVIDER ACCESS</p>
@@ -93,6 +99,16 @@
           <div id="audit"></div>
         </section>
       </section>
+      <dialog id="challenge-dialog">
+        <h2>Credential challenge</h2>
+        <p>
+          Share these instructions privately with the operator. They must
+          respond using their existing provider token. This proves credential
+          access only.
+        </p>
+        <pre id="challenge-text" class="admin-token"></pre>
+        <button id="close-challenge" class="quiet-button">Close</button>
+      </dialog>
       <dialog id="action-dialog">
         <form id="action-form">
           <h2 id="action-title"></h2>

@@ -58,6 +58,10 @@ async function session() {
     $("#audit").innerHTML = "";
   }
 }
+function reviewCard(review) {
+  if (!review) return "";
+  return `<section><h3>Automated checks · ${esc(review.status)}</h3><p class="small muted">Checked ${esc(new Date(review.checkedAt).toLocaleString())}. Readiness is for human review, not a rating.</p>${review.checks.map((c) => `<p><strong>${esc(c.label)} — ${esc(c.status)}</strong><br>${esc(c.detail)}</p>`).join("")}<h4>Human review still required</h4><ul>${review.manual.map((m) => `<li>${esc(m)}</li>`).join("")}</ul>${review.providerIds.map((id) => `<button class="quiet-button" data-challenge="${esc(id)}">Issue credential challenge for ${esc(id)}</button>`).join("")}</section>`;
+}
 function render() {
   const filter = $("#filter").value,
     list = records.filter((r) => filter === "all" || r.status === filter);
@@ -67,7 +71,7 @@ function render() {
     ? list
         .map(
           (r) =>
-            `<article class="panel intake-panel"><p class="eyebrow">${esc(r.status)} · ${new Date(r.created).toLocaleString()}</p><h2>${esc(r.body.name)}</h2><dl class="rating-criteria"><dt>Contact</dt><dd>${esc(r.body.contact)}</dd><dt>Website</dt><dd>${esc(r.body.website || "Not provided")}</dd><dt>Software / template role</dt><dd>${esc(r.body.software)} / ${esc(r.body.role)}</dd><dt>Setup notes</dt><dd class="admin-notes">${esc(r.body.notes || "No notes")}</dd></dl>${r.body.profileConsent ? `<h3>Public profile submission</h3><pre>${esc(JSON.stringify(r.body.profile, null, 2))}</pre><button class="quiet-button" data-action="publish-profile" data-id="${esc(r.id)}">Review & publish profile</button>` : ""}<p class="small muted">Reference: ${esc(r.id)}</p><div class="admin-actions">${r.status === "pending" ? `<button class="primary-button" data-action="approve" data-id="${esc(r.id)}">Review & approve</button><button class="quiet-button" data-action="reject" data-id="${esc(r.id)}">Decline</button>` : r.status === "declined" ? `<button class="quiet-button" data-action="reopen" data-id="${esc(r.id)}">Reopen application</button>` : ""}</div></article>`,
+            `<article class="panel intake-panel"><p class="eyebrow">${esc(r.status)} · ${new Date(r.created).toLocaleString()}</p><h2>${esc(r.body.name)}</h2>${reviewCard(r.review)}<dl class="rating-criteria"><dt>Contact</dt><dd>${esc(r.body.contact)}</dd><dt>Website</dt><dd>${esc(r.body.website || "Not provided")}</dd><dt>Software / template role</dt><dd>${esc(r.body.software)} / ${esc(r.body.role)}</dd><dt>Setup notes</dt><dd class="admin-notes">${esc(r.body.notes || "No notes")}</dd></dl>${r.body.profileConsent ? `<h3>Public profile submission</h3><pre>${esc(JSON.stringify(r.body.profile, null, 2))}</pre><button class="quiet-button" data-action="publish-profile" data-id="${esc(r.id)}">Review & publish profile</button>` : ""}<p class="small muted">Reference: ${esc(r.id)}</p><div class="admin-actions">${r.status === "pending" ? `<button class="primary-button" data-action="approve" data-id="${esc(r.id)}">Review & approve</button><button class="quiet-button" data-action="reject" data-id="${esc(r.id)}">Decline</button>` : r.status === "declined" ? `<button class="quiet-button" data-action="reopen" data-id="${esc(r.id)}">Reopen application</button>` : ""}</div></article>`,
         )
         .join("")
     : '<p class="empty">No applications in this view.</p>';
@@ -193,3 +197,30 @@ $("#token-dialog").addEventListener(
   () => ($("#token-value").textContent = ""),
 );
 session().catch((e) => ($("#message").textContent = e.message));
+
+document.addEventListener("click", async (e) => {
+  const b = e.target.closest("[data-challenge]");
+  if (!b) return;
+  b.disabled = true;
+  try {
+    const c = await api("review-challenge", { provider: b.dataset.challenge });
+    $("#challenge-text").textContent =
+      `Provider: ${b.dataset.challenge}\nPOST https://xbtpulse.tech/api/telemetry/challenge\nAuthorization: Bearer YOUR_PROVIDER_TOKEN\nContent-Type: application/json\n\n${JSON.stringify({ code: c.code })}\n\nExpires: ${new Date(c.expires).toLocaleString()}`;
+    $("#challenge-dialog").showModal();
+  } catch (error) {
+    $("#message").textContent = error.message;
+  } finally {
+    b.disabled = false;
+  }
+});
+$("#close-challenge").addEventListener("click", () =>
+  $("#challenge-dialog").close(),
+);
+$("#challenge-dialog").addEventListener(
+  "close",
+  () => ($("#challenge-text").textContent = ""),
+);
+setInterval(() => {
+  if (csrf && !document.hidden && !document.querySelector("dialog[open]"))
+    refresh().catch((e) => ($("#message").textContent = e.message));
+}, 60000);

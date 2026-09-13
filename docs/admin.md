@@ -23,3 +23,11 @@ Click a pool name on the dashboard to open `/pool?id=...`. Operators can submit 
 ## Private pools
 
 Operators can choose Private pool and supply a public statement about their nodes and template policy. Publication still requires explicit consent and administrator review. For a private pool with no existing attributed profile, use a unique ID such as private:pool-name. These profiles are listed on the main page and show unavailable attribution rather than claiming zero mining share. Link attribution and telemetry only after reviewing evidence in the registry. Public connection guides and fee fields are omitted for private profiles. No badge or rating is awarded merely for publishing a profile; the draft assessment rules apply equally to all pools.
+
+## Automated review checks (v1)
+
+Application cards contain evidence checklists, recomputed on each admin refresh and every minute while the review desk is visible. These are read-only checks, not background website monitoring or rating decisions. Approve a provider for onboarding first, then select Approved or All applications. A Ready for review label requires active database providers, successful credential challenges in the last 30 days, positive work within 30 minutes, at least 95% complete interval coverage in the past 24 hours for each provider, and no detected inconsistencies in accepted intervals. This readiness threshold is separate from Telemetry Contributor eligibility.
+
+Use Issue credential challenge and privately deliver the displayed instructions. Operators POST the code to /api/telemetry/challenge using their existing bearer token. Codes expire in 30 minutes, are single-use, and are bound to the current token digest. Rotation or revocation invalidates the evidence. This establishes credential access only; it does not prove hardware ownership, truthful reports or independent templates.
+
+Reported found/expected ratios are context only and are never scored because mining luck varies. Chain comparisons, public-policy changes, ownership and template control still require human review. Rejected submissions are not retained, so the checklist does not claim to audit rejection history. Profiles created directly through the backend need an application and approved provider before telemetry review is available. No automatic higher-rating award or external messages are sent.

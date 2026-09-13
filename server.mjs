@@ -1,3 +1,4 @@
+import { answerChallenge } from "./lib/review.mjs";
 import { privateProfiles } from "./lib/profiles.mjs";
 import http from "node:http";
 import { readFile, mkdir } from "node:fs/promises";
@@ -129,6 +130,17 @@ const server = http.createServer(async (req, res) => {
         });
       }
       return;
+    }
+    if (url.pathname === "/api/telemetry/challenge" && req.method === "POST") {
+      const provider = authenticate(req);
+      if (!provider)
+        return send(res, 401, { error: "Provider token required" });
+      try {
+        const body = await jsonBody(req);
+        return send(res, 200, answerChallenge(store, provider, body.code));
+      } catch (error) {
+        return send(res, 400, { error: error.message });
+      }
     }
     if (url.pathname === "/admin" || url.pathname === "/admin.js")
       res.setHeader("X-Robots-Tag", "noindex, nofollow");
