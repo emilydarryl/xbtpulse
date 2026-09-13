@@ -35,6 +35,24 @@
   border-radius: 6px;
   font: inherit;
 }
+.pool-search.home-search {
+  margin: 10px 0;
+  gap: 10px;
+}
+.home-search input {
+  height: 34px;
+  padding: 6px 10px;
+  font-size: 12px;
+}
+.home-search .primary-button {
+  min-height: 34px;
+  padding: 7px 13px;
+  font-size: 12px;
+}
+.home-search label,
+.home-search > a {
+  font-size: 12px;
+}
 .directory-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
