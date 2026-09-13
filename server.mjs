@@ -10,6 +10,8 @@ import { validateApplication } from "./lib/onboarding.mjs";
 import { participation, poolRating } from "./lib/ratings.mjs";
 import { initializeAdmin, adminRoute } from "./lib/admin.mjs";
 import {
+  wilson,
+  attribute,
   summarize,
   summarizeTelemetry,
   validateTelemetry,
@@ -51,6 +53,8 @@ const files = {
   "/contribute": "contribute.html",
   "/contribute.js": "contribute.js",
   "/ratings": "ratings.html",
+  "/pool": "pool.html",
+  "/pool.js": "pool.js",
   "/admin": "admin.html",
   "/admin.js": "admin.js",
 };
@@ -97,6 +101,13 @@ const server = http.createServer(async (req, res) => {
     if (url.pathname.startsWith("/api/admin/")) {
       try {
         await adminRoute({
+          knownPoolIds: new Set(
+            store
+              .blocks(retention)
+              .map((b) => attribute(b, registry))
+              .filter((p) => !p.unknown)
+              .map((p) => p.id),
+          ),
           req,
           res,
           url,
@@ -169,12 +180,17 @@ const server = http.createServer(async (req, res) => {
         );
       return send(res, ready ? 200 : 503, { ready });
     }
-    if (url.pathname === "/api/dashboard") {
+    if (["/api/dashboard", "/api/pool"].includes(url.pathname)) {
       const window = Number(url.searchParams.get("window") || 144);
       if (![144, 576, 2016].includes(window))
         return send(res, 400, { error: "Window must be 144, 576, or 2016" });
       const old = cache.get(window);
-      if (old && Date.now() - old.time < 5000) return send(res, 200, old.body);
+      if (
+        url.pathname === "/api/dashboard" &&
+        old &&
+        Date.now() - old.time < 5000
+      )
+        return send(res, 200, old.body);
       const last = store.get("lastSuccess"),
         fresh =
           last &&
@@ -217,6 +233,43 @@ const server = http.createServer(async (req, res) => {
         events: store.events(),
         retention,
       };
+      if (url.pathname === "/api/pool") {
+        const id = url.searchParams.get("id");
+        const known = summarize(store.blocks(retention), registry).pools.find(
+          (p) => p.id === id && !p.unknown,
+        );
+        if (!known)
+          return send(res, 404, {
+            error: "Pool not found in retained observations.",
+          });
+        const measured = store
+            .blocks(window)
+            .filter((b) => attribute(b, registry).id === id),
+          details = summarize(measured, registry);
+        return send(res, 200, {
+          id,
+          name: known.name,
+          sample: summary.sample,
+          requested: window,
+          blocks: measured.length,
+          share: summary.sample ? measured.length / summary.sample : null,
+          interval: summary.sample
+            ? wilson(measured.length, summary.sample)
+            : null,
+          recent: details.blocks,
+          addresses: details.addresses,
+          status: body.status,
+          updatedAt: body.updatedAt,
+          evidence: known.evidence,
+          rating: poolRating(known, registry, contributors),
+          profile: store.get("pool-profile:" + id),
+          telemetry: telemetry.providers.filter((p) =>
+            (registry.find((r) => r.id === id)?.providerIds || []).includes(
+              p.name,
+            ),
+          ),
+        });
+      }
       cache.set(window, { time: Date.now(), body });
       return send(res, 200, body);
     }

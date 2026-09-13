@@ -11,3 +11,7 @@ Declined applications can be reopened. Revoke stops a database provider's new re
 Sessions expire after eight hours and use Secure, HttpOnly, SameSite cookies. Mutations require the configured request origin and a session CSRF token. Login attempts are globally limited to 20 per 15-minute window. Passwords use salted scrypt hashes; provider tokens and session tokens are stored as SHA-256 digests. Back up the data volume securely because it contains private applications and authentication data.
 
 `ADMIN_ORIGIN` defaults to `https://xbtpulse.tech`; override it only for another deployment origin. HTTPS is required for the session cookie.
+
+## Pool profiles
+
+Click a pool name on the dashboard to open `/pool?id=...`. Operators can submit optional public details through `/contribute`, including replacements for existing profiles. They must explicitly consent to publication. In admin, review the submitted fields and website, select **Review & publish profile**, enter the exact Pool ID shown on its public page, and confirm identity and scope. Publication replaces the profile details, records the review date, and does not approve telemetry or award ratings. Contact details and setup notes never enter the public profile.

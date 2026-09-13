@@ -67,7 +67,7 @@ function render() {
     ? list
         .map(
           (r) =>
-            `<article class="panel intake-panel"><p class="eyebrow">${esc(r.status)} · ${new Date(r.created).toLocaleString()}</p><h2>${esc(r.body.name)}</h2><dl class="rating-criteria"><dt>Contact</dt><dd>${esc(r.body.contact)}</dd><dt>Website</dt><dd>${esc(r.body.website || "Not provided")}</dd><dt>Software / template role</dt><dd>${esc(r.body.software)} / ${esc(r.body.role)}</dd><dt>Setup notes</dt><dd class="admin-notes">${esc(r.body.notes || "No notes")}</dd></dl><p class="small muted">Reference: ${esc(r.id)}</p><div class="admin-actions">${r.status === "pending" ? `<button class="primary-button" data-action="approve" data-id="${esc(r.id)}">Review & approve</button><button class="quiet-button" data-action="reject" data-id="${esc(r.id)}">Decline</button>` : r.status === "declined" ? `<button class="quiet-button" data-action="reopen" data-id="${esc(r.id)}">Reopen application</button>` : ""}</div></article>`,
+            `<article class="panel intake-panel"><p class="eyebrow">${esc(r.status)} · ${new Date(r.created).toLocaleString()}</p><h2>${esc(r.body.name)}</h2><dl class="rating-criteria"><dt>Contact</dt><dd>${esc(r.body.contact)}</dd><dt>Website</dt><dd>${esc(r.body.website || "Not provided")}</dd><dt>Software / template role</dt><dd>${esc(r.body.software)} / ${esc(r.body.role)}</dd><dt>Setup notes</dt><dd class="admin-notes">${esc(r.body.notes || "No notes")}</dd></dl>${r.body.profileConsent ? `<h3>Public profile submission</h3><pre>${esc(JSON.stringify(r.body.profile, null, 2))}</pre><button class="quiet-button" data-action="publish-profile" data-id="${esc(r.id)}">Review & publish profile</button>` : ""}<p class="small muted">Reference: ${esc(r.id)}</p><div class="admin-actions">${r.status === "pending" ? `<button class="primary-button" data-action="approve" data-id="${esc(r.id)}">Review & approve</button><button class="quiet-button" data-action="reject" data-id="${esc(r.id)}">Decline</button>` : r.status === "declined" ? `<button class="quiet-button" data-action="reopen" data-id="${esc(r.id)}">Reopen application</button>` : ""}</div></article>`,
         )
         .join("")
     : '<p class="empty">No applications in this view.</p>';
@@ -127,6 +127,7 @@ document.addEventListener("click", (e) => {
   $("#action-form").reset();
   $("#action-error").textContent = "";
   $("#action-title").textContent = {
+    "publish-profile": "Publish profile (replaces current details)",
     approve: "Approve operator",
     reject: "Decline application",
     reopen: "Reopen application",
@@ -138,10 +139,16 @@ document.addEventListener("click", (e) => {
       action.id +
       ". Existing tokens will stop working."
     : "Review this application before changing its status. Declined applications can be reopened.";
+  $("#pool-label").hidden = action.type !== "publish-profile";
+  $("#pool-label input").required = action.type === "publish-profile";
   $("#provider-label").hidden = action.type !== "approve";
   $("#provider-label input").required = action.type === "approve";
-  $("#review-label").hidden = action.type !== "approve";
-  $("#review-label input").required = action.type === "approve";
+  $("#review-label").hidden = !["approve", "publish-profile"].includes(
+    action.type,
+  );
+  $("#review-label input").required = ["approve", "publish-profile"].includes(
+    action.type,
+  );
   $("#action-dialog").showModal();
 });
 $("#cancel").addEventListener("click", () => $("#action-dialog").close());
@@ -152,6 +159,7 @@ $("#action-form").addEventListener("submit", async (e) => {
   try {
     const result = await api(action.type, {
       application: action.id,
+      poolId: e.target.elements.poolId.value,
       reviewed: e.target.elements.reviewed.checked,
       provider:
         action.type === "approve"

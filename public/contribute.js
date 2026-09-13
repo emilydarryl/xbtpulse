@@ -43,6 +43,7 @@ wire("operator-form", async (form, result) => {
     ...fields,
     id: applicationId,
     consent: fields.consent === "on",
+    profileConsent: fields.profileConsent === "on",
   });
   result.textContent = `Details received for review. Reference: ${response.reference}. An administrator will use your contact details to follow up; telemetry is not enabled yet.`;
   for (const control of form.elements) control.disabled = true;

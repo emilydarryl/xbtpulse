@@ -43,6 +43,11 @@ function assignPoolColors(pools) {
   // These two categories never borrow a named pool's color.
   poolColors.set("other", "#E2B526");
 }
+function poolLink(p) {
+  return !demo && !p.unknown && p.id !== "other"
+    ? `<a href="/pool?id=${encodeURIComponent(p.id)}">${escape(p.name)}</a>`
+    : escape(p.name);
+}
 function poolColor(p) {
   if (p.unknown) return "#84919F";
   return poolColors.get(p.id) || "#84919F";
@@ -181,7 +186,7 @@ function render() {
     ? chart
         .map(
           (p, i) =>
-            `<div class="legend-row"><i class="swatch" style="background:${poolColor(p)}"></i><span>${escape(p.name)}</span><strong>${pct(p.share)}</strong></div>`,
+            `<div class="legend-row"><i class="swatch" style="background:${poolColor(p)}"></i><span>${poolLink(p)}</span><strong>${pct(p.share)}</strong></div>`,
         )
         .join("")
     : '<p class="small muted">Pool distribution will appear after blocks are indexed.</p>';
@@ -192,7 +197,7 @@ function render() {
     ? pools
         .map(
           (p, i) =>
-            `<tr><td><span class="pool-name"><i class="swatch" style="background:${poolColor(p)}"></i>${escape(p.name)}</span></td><td>${p.blocks}</td><td><div class="share-cell"><span>${pct(p.share)}</span><div class="bar"><span style="width:${p.share * 100}%;background:${poolColor(p)}"></span></div></div></td><td>${pct(p.interval[0])}–${pct(p.interval[1])}</td><td><span class="evidence">${escape(p.evidence)}</span></td><td><a href="/ratings" class="rating-badge ${p.rating?.status === "Telemetry Contributor" ? "contributor" : ""}" title="${escape(p.rating?.evidence || "No completed assessment; not a failing grade.")}">${demo ? "Sample only" : escape(p.rating?.status || "Not assessed")}</a></td></tr>`,
+            `<tr><td><span class="pool-name"><i class="swatch" style="background:${poolColor(p)}"></i>${poolLink(p)}</span></td><td>${p.blocks}</td><td><div class="share-cell"><span>${pct(p.share)}</span><div class="bar"><span style="width:${p.share * 100}%;background:${poolColor(p)}"></span></div></div></td><td>${pct(p.interval[0])}–${pct(p.interval[1])}</td><td><span class="evidence">${escape(p.evidence)}</span></td><td><a href="/ratings" class="rating-badge ${p.rating?.status === "Telemetry Contributor" ? "contributor" : ""}" title="${escape(p.rating?.evidence || "No completed assessment; not a failing grade.")}">${demo ? "Sample only" : escape(p.rating?.status || "Not assessed")}</a></td></tr>`,
         )
         .join("")
     : emptyRow(
