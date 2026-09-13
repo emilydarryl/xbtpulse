@@ -15,7 +15,7 @@ Mission: **Making XBT mining decentralization visible.** Explore pool concentrat
 | `/collector` | Install the compatible DATUM telemetry collector; it is an uploader, not the read API |
 | `/admin` | Private operator review, token management, conversations and assessment tools |
 
-Every page uses the coin-and-pulse logo. Secondary pages provide an explicit Main site link. The homepage has a compact Find a pool search and links to the directory, map and history.
+Every page uses the coin-and-pulse logo. Secondary pages provide an explicit Main site link. The homepage has a compact Find a pool search and links to the directory, map and history. The observation-window selector sits immediately above dashboard statistics, beside the source update timestamp.
 
 ## Smaller pools and production ranking
 

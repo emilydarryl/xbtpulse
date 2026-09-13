@@ -319,9 +319,17 @@ h1 span {
   margin: 17px 0 0;
 }
 .window-control {
-  display: grid;
-  gap: 9px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  margin: -12px 0 16px;
+}
+.window-control select {
   min-width: 190px;
+}
+.window-control > span {
+  margin-left: auto;
 }
 .window-control label {
   font-size: 11px;
@@ -910,9 +918,10 @@ dialog::backdrop {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    margin-top: 25px;
+    margin-top: -10px;
   }
   .window-control > span {
+    margin-left: 0;
     flex-basis: 100%;
   }
   .window-control label {
