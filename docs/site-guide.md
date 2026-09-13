@@ -12,6 +12,7 @@ Mission: **Making XBT mining decentralization visible.** Explore pool concentrat
 | `/ratings` and `/scoring-rules` | Understand badges, proposed tiers, the numerical pilot rubric and review requirements |
 | `/scorecard?pool=...` | A published reviewer scorecard; absent/unpublished assessments are unavailable |
 | `/contribute` | Register a public/private operator, update details or submit authorized telemetry |
+| `/adapter` | Operator-controlled upload kit, download, compatibility checklist and scope guidance |
 | `/collector` | Install the compatible DATUM telemetry collector; it is an uploader, not the read API |
 | `/admin` | Private operator review, token management, conversations and assessment tools |
 

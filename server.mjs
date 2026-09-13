@@ -77,6 +77,9 @@ const files = {
   "/style.css": "style.css",
   "/favicon.svg": "favicon.svg",
   "/collector": "collector.html",
+  "/adapter": "adapter.html",
+  "/downloads/xbtpulse-adapter-kit-0.1.0.zip": "downloads/xbtpulse-adapter-kit-0.1.0.zip",
+  "/downloads/ADAPTER-SHA256SUMS.txt": "downloads/ADAPTER-SHA256SUMS.txt",
   "/downloads/xbtpulse-datum-collector-1.0.0.zip":
     "downloads/xbtpulse-datum-collector-1.0.0.zip",
   "/downloads/SHA256SUMS.txt": "downloads/SHA256SUMS.txt",
@@ -454,7 +457,7 @@ const server = http.createServer(async (req, res) => {
     if (file.endsWith(".zip"))
       res.setHeader(
         "Content-Disposition",
-        'attachment; filename="xbtpulse-datum-collector-1.0.0.zip"',
+        `attachment; filename="${file.split("/").pop()}"`,
       );
     res.setHeader("Cache-Control", "no-cache");
     res.end(

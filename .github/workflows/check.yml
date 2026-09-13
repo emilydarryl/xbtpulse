@@ -15,5 +15,7 @@ jobs:
       - run: python3 -m unittest discover -s collector -p test_datum.py
       - run: python3 -m unittest discover -s collector/ratum -p test_ratum.py
       - run: python3 collector/package.py --check
+      - run: python3 -m unittest discover -s collector/adapter-kit -p test_uploader.py
+      - run: python3 collector/package-adapter.py --check
       - run: docker build -t xbtpulse:test .
 

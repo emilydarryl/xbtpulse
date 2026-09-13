@@ -46,3 +46,7 @@ Template refresh counts are intentionally not used as work or an attack detector
 Accepted telemetry is retained for 35 days to support observation-period review; the public dashboard summarizes the last 24 hours. Retention does not guarantee complete reporting history. Revoking a token stops new reports, not historical display.
 
 The [DATUM download](https://xbtpulse.tech/collector) is one compatible uploader. Operator-owned adapters may implement this contract without installing our scraper. Verify local counter units, reset handling and template scope first; see [adapter guidance](operators.md#bring-your-own-adapter). The current release checksum is unsigned. Public data consumers should use the separate [read API](api.md), with no provider token.
+
+## Operator-owned upload transport
+
+The [adapter kit](https://xbtpulse.tech/adapter) provides local validation and durable single-pending-report upload without gateway scraping. Operators still implement and verify their measurement layer. Its [compatibility checklist](../collector/adapter-kit/COMPATIBILITY.md) covers scope, units and reset handling. The package is unsigned and does not automate credential challenges or assessments.

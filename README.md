@@ -67,3 +67,5 @@ XBT Pulse is licensed under **AGPL-3.0-or-later**. See [LICENSE](LICENSE). This 
 Operators can review the code without installing the scraper, or implement the [telemetry contract](docs/telemetry.md) in their own adapter. Start with the [operator guide](docs/operators.md). See [CONTRIBUTING](CONTRIBUTING.md) for patches and compatibility reports, and [SECURITY](SECURITY.md) for private vulnerability reporting.
 
 The public repository contains source and examples, not production databases, operator conversations or credentials. Collector v1.0.0 checksums are reproducible but currently unsigned; signed releases are not yet implemented.
+
+Custom gateway operators can use the [adapter kit and compatibility checklist](https://xbtpulse.tech/adapter). Source lives in `collector/adapter-kit`; reproducible packaging uses `python collector/package-adapter.py`. The kit uploads operator-supplied measurements and is separate from the DATUM scraper.
