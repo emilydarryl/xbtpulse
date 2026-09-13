@@ -19,3 +19,7 @@ Click a pool name on the dashboard to open `/pool?id=...`. Operators can submit 
 ## Researched public profiles
 
 `config/researched-profiles.json` supplies dated public research when no reviewed operator profile exists. Each entry needs official source links and a last-checked date; preserve endpoint-specific fees and disclose conflicting claims. Unknown fields remain blank. Operator publications take precedence over the entire researched profile, so sources are never silently mixed. Research does not enable telemetry or award ratings. Mining observations refresh every 30 seconds; public terms are reviewed snapshots and do not automatically update.
+
+## Private pools
+
+Operators can choose Private pool and supply a public statement about their nodes and template policy. Publication still requires explicit consent and administrator review. For a private pool with no existing attributed profile, use a unique ID such as private:pool-name. These profiles are listed on the main page and show unavailable attribution rather than claiming zero mining share. Link attribution and telemetry only after reviewing evidence in the registry. Public connection guides and fee fields are omitted for private profiles. No badge or rating is awarded merely for publishing a profile; the draft assessment rules apply equally to all pools.

@@ -132,6 +132,10 @@ function render() {
     blocks = data.blocks || [],
     chart = chartGroups(pools);
   assignPoolColors(pools);
+  $("#private-pools").innerHTML =
+    !demo && data.privatePools?.length
+      ? `<h3>Participating private pool profiles</h3><p class="small muted">Not accepting miners. A listing is not a rating or proof of decentralization.</p>${data.privatePools.map((p) => `<p><a href="/pool?id=${encodeURIComponent(p.id)}">${escape(p.name)}</a> · Private pool</p>`).join("")}`
+      : "";
   $("#source-status").textContent = demo
     ? "Sample mode"
     : data.status === "live"

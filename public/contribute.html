@@ -113,12 +113,37 @@
               ></label
             >
             <fieldset>
-              <legend>Public pool profile (optional)</legend>
+              <legend>Published pool profile (optional)</legend>
+              <p>
+                Public and private DATUM pools can submit details for a
+                decentralization and transparency assessment. Private pools do
+                not need to accept miners or disclose connection endpoints.
+                Evidence requirements are the same for everyone; submission does
+                not guarantee a rating.
+              </p>
+              <label
+                >Pool access<select name="poolType">
+                  <option value="unspecified">Not specified</option>
+                  <option value="public">Public pool</option>
+                  <option value="private">
+                    Private pool — not accepting miners
+                  </option>
+                </select></label
+              ><label
+                >Public operator statement (optional)<textarea
+                  name="ethos"
+                  maxlength="500"
+                  placeholder="Describe your approach to independent nodes, local templates and decentralization."
+                ></textarea>
+              </label>
               <p>
                 Submit a new profile or replacement details. Include the pool
                 profile URL in setup notes. Leave unknown fields blank.
               </p>
-              <label>Pool fee (%)<input name="fee" maxlength="500" /></label
+              <label
+                >Pool fee (%) — leave blank for private pools<input
+                  name="fee"
+                  maxlength="500" /></label
               ><label
                 >Payout method<input name="payout" maxlength="500" /></label
               ><label
@@ -146,7 +171,8 @@
               ><label class="consent"
                 ><input name="profileConsent" type="checkbox" /><span
                   >I authorize publishing my website and these profile fields
-                  after review. Contact and setup notes stay private.</span
+                  and operator name after review. Contact and setup notes stay
+                  private. Private profiles omit fees and setup links.</span
                 ></label
               >
             </fieldset>

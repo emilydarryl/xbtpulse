@@ -1,3 +1,4 @@
+import { privateProfiles } from "./lib/profiles.mjs";
 import http from "node:http";
 import { readFile, mkdir } from "node:fs/promises";
 import { resolve, join } from "node:path";
@@ -218,6 +219,7 @@ const server = http.createServer(async (req, res) => {
       const summary = summarize(store.blocks(window), registry);
       const body = {
         ...summary,
+        privatePools: privateProfiles(store),
         pools: summary.pools.map((p) => ({
           ...p,
           rating: poolRating(p, registry, contributors),
@@ -238,9 +240,21 @@ const server = http.createServer(async (req, res) => {
       };
       if (url.pathname === "/api/pool") {
         const id = url.searchParams.get("id");
-        const known = summarize(store.blocks(retention), registry).pools.find(
-          (p) => p.id === id && !p.unknown,
-        );
+        const published = store.get("pool-profile:" + id);
+        const observed = summarize(
+          store.blocks(retention),
+          registry,
+        ).pools.find((p) => p.id === id && !p.unknown);
+        const known =
+          observed ||
+          (published
+            ? {
+                id,
+                name: published.name || id,
+                evidence: "Published profile; block attribution not linked",
+              }
+            : null);
+        const attributed = !!observed || registry.some((p) => p.id === id);
         if (!known)
           return send(res, 404, {
             error: "Pool not found in retained observations.",
@@ -254,11 +268,15 @@ const server = http.createServer(async (req, res) => {
           name: known.name,
           sample: summary.sample,
           requested: window,
-          blocks: measured.length,
-          share: summary.sample ? measured.length / summary.sample : null,
-          interval: summary.sample
-            ? wilson(measured.length, summary.sample)
-            : null,
+          blocks: attributed ? measured.length : null,
+          share:
+            attributed && summary.sample
+              ? measured.length / summary.sample
+              : null,
+          interval:
+            attributed && summary.sample
+              ? wilson(measured.length, summary.sample)
+              : null,
           recent: details.blocks,
           addresses: details.addresses,
           status: body.status,
