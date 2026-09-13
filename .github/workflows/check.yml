@@ -17,5 +17,6 @@ jobs:
       - run: python3 collector/package.py --check
       - run: python3 -m unittest discover -s collector/adapter-kit -p test_uploader.py
       - run: python3 collector/package-adapter.py --check
+      - run: python3 scripts/verify-releases.py public/downloads --self-test
       - run: docker build -t xbtpulse:test .
 

@@ -6,4 +6,4 @@ Include the affected commit/version, a minimal reproduction, expected impact and
 
 The source repository must not contain production `.env` files, databases, collector configuration/state, wallet keys or provider tokens. Example configuration should use placeholders. The admin area, applications, conversations and unpublished evidence remain private even though source code is public.
 
-Collector checksums detect differences from the published digest. The current checksum file is unsigned and is not an independently authenticated publisher signature. Do not claim a signed release until a signing process and public verification key are published.
+Both checksum files have detached OpenSSH signatures. Verify the pinned key and signature before checking archive hashes; see [release verification](docs/release-signing.md). First-use key authenticity still requires an established trusted channel.

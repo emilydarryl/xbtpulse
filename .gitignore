@@ -25,3 +25,6 @@ collector/ratum/status.json
 
 adapter-state/
 collector/adapter-kit/token.txt
+
+# Private signing material never belongs in source
+*.dpapi

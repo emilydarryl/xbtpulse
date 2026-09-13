@@ -78,6 +78,11 @@ const files = {
   "/favicon.svg": "favicon.svg",
   "/collector": "collector.html",
   "/adapter": "adapter.html",
+  "/verify-downloads": "verify-downloads.html",
+  "/downloads/release-signing-key.pub": "downloads/release-signing-key.pub",
+  "/downloads/allowed_signers": "downloads/allowed_signers",
+  "/downloads/SHA256SUMS.txt.sig": "downloads/SHA256SUMS.txt.sig",
+  "/downloads/ADAPTER-SHA256SUMS.txt.sig": "downloads/ADAPTER-SHA256SUMS.txt.sig",
   "/downloads/xbtpulse-adapter-kit-0.1.0.zip": "downloads/xbtpulse-adapter-kit-0.1.0.zip",
   "/downloads/ADAPTER-SHA256SUMS.txt": "downloads/ADAPTER-SHA256SUMS.txt",
   "/downloads/xbtpulse-datum-collector-1.0.0.zip":
@@ -453,7 +458,7 @@ const server = http.createServer(async (req, res) => {
       res.setHeader("X-Robots-Tag", "noindex, nofollow");
     const file = files[url.pathname];
     if (!file) return send(res, 404, { error: "Not found" });
-    res.setHeader("Content-Type", mime[file.split(".").pop()]);
+    res.setHeader("Content-Type", mime[file.split(".").pop()] || "text/plain; charset=utf-8");
     if (file.endsWith(".zip"))
       res.setHeader(
         "Content-Disposition",

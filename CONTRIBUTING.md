@@ -22,6 +22,6 @@ python3 collector/package.py --check
 
 Explain the problem, final behavior, evidence and validation in your pull request. Preserve unknown/unassessed states instead of manufacturing scores or zero values. Update relevant documentation when behavior changes.
 
-Do not silently replace an already distributed versioned archive. Collector release changes need an intentional version, matching source, checksum and installation guidance. The existing v1.0.0 ZIP remains unchanged for reviewers comparing it with source. Release signatures are not implemented yet.
+Do not silently replace an already distributed versioned archive. Collector release changes need an intentional version, matching source, checksum and installation guidance. The existing v1.0.0 ZIP remains unchanged for reviewers comparing it with source. Release checksum signatures are verified in CI; see docs/release-signing.md. The private signing key is never stored in CI.
 
 Submit only work you have permission to contribute under AGPL-3.0-or-later and retain third-party attribution. See LICENSE. Public issues are not the place for vulnerabilities or private operator applications; see SECURITY.md.

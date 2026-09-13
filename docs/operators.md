@@ -74,6 +74,6 @@ Before enabling an adapter, agree on:
 
 Do not infer independent template control from public Stratum jobs or hashrate. If a port distributes pool-built jobs, report that scope honestly; DATUM/Prime-side measurements may be needed to assess the actual template builder. The current JSON contract measures aggregate work and outcomes; it does not itself certify template origin.
 
-The published SHA256SUMS file checks archive integrity against the published digest. It is currently unsigned and does not authenticate the publisher through an independently trusted signing key. Signed releases with a stable, published key are not yet implemented; do not describe the package as signed.
+Both download packages now have detached checksum signatures. Follow the [verification guide](release-signing.md), pin the release-key fingerprint through an established channel, then verify the signature and archive checksum.
 
 The [adapter starter kit](https://xbtpulse.tech/adapter) now provides local validation and durable single-report delivery. Read its compatibility checklist before implementing your measurement layer. It is transport only, not a ready-made Lazarus or RATUM integration.
