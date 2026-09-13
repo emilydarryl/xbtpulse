@@ -1,5 +1,15 @@
 # Deploy xbtpulse.tech on the existing VPS
 
+## Current installation (2026-09-13)
+
+Public HTTPS is active at https://xbtpulse.tech, with https://www.xbtpulse.tech redirecting to the apex. The Hostinger VPS is `root@2.25.153.143`; application files are in `/opt/xbtpulse`. Source was delivered from a Git archive of the private repository, not by installing a persistent GitHub credential on the VPS.
+
+Use `docker compose -f compose.yaml -f deploy/compose.vps.yaml` in that directory for lifecycle commands. The override connects the app to the existing Caddy network with alias `xbtpulse-web`. Its database volume is `xbtpulse_pulse-data`; the private mining pool is not involved. Caddy's live configuration is `/opt/emilygaming-rt/Caddyfile`, with a pre-change backup alongside it. The two XBT Pulse routes are in `deploy/Caddyfile.vps.snippet`. Existing game app containers were left running; only the proxy was recreated to refresh a stale bind mount.
+
+The live source is the public mempool.guide explorer. No node wallet or private pool credentials were transferred. Public health/readiness, 144-block accounting, the www redirect, and unauthenticated telemetry rejection were verified after deployment. Template providers still need onboarding.
+
+## Deployment procedure
+
 The app is separate from the user's private mining pool. Do not reuse that pool's node, database, credentials, ports, or service configuration. Inspect the existing web server before modifying routing.
 
 1. Clone the private repository into `/opt/xbtpulse` using the VPS's authorized GitHub access. No repository credential belongs in source code or Compose.
