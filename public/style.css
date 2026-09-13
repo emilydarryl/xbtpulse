@@ -1024,3 +1024,43 @@ dialog::backdrop {
   border-color: #9fbd86;
   color: #244c3e;
 }
+.admin-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.admin-notes {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.admin-token {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  padding: 18px;
+  background: #f0f4ec;
+  user-select: all;
+}
+#action-form label {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+  font-size: 13px;
+}
+#action-form input {
+  min-width: 0;
+}
+#action-form .consent {
+  display: flex;
+  align-items: flex-start;
+}
+#action-form .consent input {
+  width: 18px;
+}
+#login-panel {
+  max-width: 560px;
+}
+
+[hidden] {
+  display: none !important;
+}

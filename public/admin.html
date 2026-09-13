@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Admin · XBT Pulse</title>
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="module" src="/admin.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/"
+        ><img src="/favicon.svg" width="34" height="34" alt="" />XBT PULSE</a
+      >
+      <div class="header-right">
+        <a href="/">Public site ↗</a
+        ><button id="logout" class="quiet-button" hidden>Log out</button>
+      </div>
+    </header>
+    <main class="contribute-main">
+      <section class="page-heading">
+        <div>
+          <p class="eyebrow">PRIVATE ADMINISTRATION</p>
+          <h1>Operator review desk.</h1>
+          <p class="intro">
+            Review applications, issue provider tokens, and manage access.
+          </p>
+        </div>
+      </section>
+      <p id="message" role="status" class="form-result"></p>
+      <section id="login-panel" class="panel intake-panel" hidden>
+        <h2 id="login-title">Admin login</h2>
+        <form id="login-form">
+          <label id="setup-label" hidden
+            >One-time setup code<input
+              name="code"
+              type="password"
+              autocomplete="off"
+              maxlength="128" /></label
+          ><label
+            >Password<input
+              name="password"
+              type="password"
+              required
+              minlength="14"
+              maxlength="256"
+              autocomplete="current-password"
+          /></label>
+          <p id="setup-help" class="small muted" hidden>
+            Use the private setup code provided through SSH, then choose your
+            own password of at least 14 characters. No public registration
+            grants admin access.
+          </p>
+          <button class="primary-button" type="submit">Continue</button>
+        </form>
+      </section>
+      <section id="desk" hidden>
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">APPLICATION QUEUE</p>
+            <h2 id="queue-title">Applications</h2>
+          </div>
+          <div>
+            <select id="filter" aria-label="Application status">
+              <option value="pending">Pending</option>
+              <option value="approved">Approved</option>
+              <option value="declined">Declined</option>
+              <option value="all">All applications</option>
+            </select>
+            <button id="refresh" class="quiet-button">Refresh</button>
+          </div>
+        </div>
+        <p class="small muted">
+          Applicant claims are unverified. Check identity and template-control
+          scope before approving. Contact details stay private. Approval does
+          not award a decentralization rating or automatically contact the
+          applicant.
+        </p>
+        <div id="applications"></div>
+        <section class="panel intake-panel">
+          <p class="eyebrow">PROVIDER ACCESS</p>
+          <h2>Tokens and reporting</h2>
+          <p class="small muted">
+            Reissuing a token invalidates the previous one. Revocation stops new
+            reports; previously submitted work remains historical data.
+          </p>
+          <div id="providers"></div>
+        </section>
+        <section class="panel intake-panel">
+          <h2>Recent admin activity</h2>
+          <div id="audit"></div>
+        </section>
+      </section>
+      <dialog id="action-dialog">
+        <form id="action-form">
+          <h2 id="action-title"></h2>
+          <p id="action-info" class="small muted"></p>
+          <label id="provider-label"
+            >Public provider ID<input
+              name="provider"
+              pattern="[a-zA-Z0-9_-]{1,80}"
+              maxlength="80"
+              placeholder="pool-name-gateway" /></label
+          ><label class="consent" id="review-label"
+            ><input name="reviewed" type="checkbox" /><span
+              >I reviewed the operator's identity and reporting scope.</span
+            ></label
+          >
+          <p id="action-error" role="status" class="form-result"></p>
+          <div class="admin-actions">
+            <button type="button" id="cancel" class="quiet-button">
+              Cancel</button
+            ><button type="submit" class="primary-button">Confirm</button>
+          </div>
+        </form>
+      </dialog>
+      <dialog id="token-dialog">
+        <h2>Save this provider token</h2>
+        <p class="small muted">
+          Shown once. Send it privately to the reviewed operator; it will not be
+          recoverable after closing this window.
+        </p>
+        <pre id="token-value" class="admin-token"></pre>
+        <div class="admin-actions">
+          <button id="copy-token" class="primary-button">Copy token</button
+          ><button id="close-token" class="quiet-button">
+            I saved it — close
+          </button>
+        </div>
+        <p id="copy-status" role="status"></p>
+      </dialog>
+      <footer>XBT PULSE / Private administration</footer>
+    </main>
+  </body>
+</html>

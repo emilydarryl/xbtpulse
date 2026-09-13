@@ -8,6 +8,7 @@ import { ExplorerSource, RpcSource } from "./lib/source.mjs";
 import { Collector } from "./lib/collector.mjs";
 import { validateApplication } from "./lib/onboarding.mjs";
 import { participation, poolRating } from "./lib/ratings.mjs";
+import { initializeAdmin, adminRoute } from "./lib/admin.mjs";
 import {
   summarize,
   summarizeTelemetry,
@@ -19,6 +20,7 @@ const dataDir = resolve(root, process.env.DATA_DIR || "data");
 await mkdir(dataDir, { recursive: true });
 const store = new Store(join(dataDir, "pulse.sqlite"));
 store.expireApplications();
+initializeAdmin(store);
 const registry = JSON.parse(
   await readFile(join(root, "config/pools.json"), "utf8"),
 );
@@ -49,6 +51,8 @@ const files = {
   "/contribute": "contribute.html",
   "/contribute.js": "contribute.js",
   "/ratings": "ratings.html",
+  "/admin": "admin.html",
+  "/admin.js": "admin.js",
 };
 const mime = {
   html: "text/html; charset=utf-8",
@@ -90,6 +94,29 @@ const server = http.createServer(async (req, res) => {
   );
   try {
     const url = new URL(req.url, "http://localhost");
+    if (url.pathname.startsWith("/api/admin/")) {
+      try {
+        await adminRoute({
+          req,
+          res,
+          url,
+          store,
+          send,
+          jsonBody,
+          cache,
+          origin: process.env.ADMIN_ORIGIN || "https://xbtpulse.tech",
+        });
+      } catch (error) {
+        send(res, 400, {
+          error: error.message.includes("UNIQUE")
+            ? "That provider ID is already in use."
+            : error.message,
+        });
+      }
+      return;
+    }
+    if (url.pathname === "/admin" || url.pathname === "/admin.js")
+      res.setHeader("X-Robots-Tag", "noindex, nofollow");
     if (
       url.pathname === "/api/operator-applications" &&
       req.method === "POST"
