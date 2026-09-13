@@ -17,6 +17,31 @@
         "soleRecipient": true,
         "source": "https://github.com/emilydarryl/xbtpulse/blob/main/docs/alphapool-attribution.md"
       }
-    ]
+    ],
+    "attributionReview": {
+      "reviewedAt": "2026-09-13",
+      "startHeight": 963202,
+      "endHeight": 971931,
+      "address": "bc1qlrmjpgg0e5jrhmzyjmtgc6dfpdr66sps8vjl2q",
+      "groups": [
+        {
+          "name": "AlphaPool-containing tags",
+          "blocks": 1656
+        },
+        {
+          "name": "CEO of LukeCoin",
+          "blocks": 42
+        },
+        {
+          "name": "Test Test",
+          "blocks": 42
+        }
+      ],
+      "source": "https://github.com/emilydarryl/xbtpulse/blob/main/docs/alphapool-attribution.md",
+      "researchUrl": "https://blog.blake2bminer.com/blog/one-address-three-names/",
+      "researchName": "BLAKE2b MINER",
+      "scope": "Exact collection address as the sole positive-value coinbase recipient. Tags alone do not trigger this rule. Explorer-sourced reproduction; earlier activation history was not covered.",
+      "limitation": "Other blocks retain explorer attribution, so current pool totals can include payouts elsewhere. This map does not establish common ownership or who builds templates."
+    }
   }
 ]

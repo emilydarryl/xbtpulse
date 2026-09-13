@@ -431,6 +431,7 @@ const server = http.createServer(async (req, res) => {
           status: body.status,
           updatedAt: body.updatedAt,
           evidence: known.evidence,
+          attributionReview: registry.find((p) => p.id === id)?.attributionReview || null,
           rating: poolRating(known, registry, contributors),
           profile: visibleProfile,
           assessment: publicReview(store, published),

@@ -68,3 +68,5 @@ Errors use `{ "error": "message" }`. Invalid observation windows return 400; mis
 ## Submitting telemetry
 
 `POST /api/telemetry` requires a reviewed provider's bearer token. `POST /api/telemetry/challenge` answers a one-time credential challenge with that same token. See [telemetry contract](telemetry.md) and [collector installation](../collector/INSTALL.md). Approval, profile publication, participation badges and scorecard publication are separate actions.
+
+Pool responses include `attributionReview` (null if unavailable): curated public address/tag evidence, dated range, snapshot counts and source links. These counts do not refresh with the requested block window and are not template-control measurements.

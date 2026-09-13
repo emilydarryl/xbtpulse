@@ -34,3 +34,5 @@ The Mining map currently contains a dated Soveroot–Lazarus connection inspecti
 History grows from retained canonical blocks and can be partial during backfill or after resets. The change feed records status observations from when tracking began. No observations, no profile or no recent block must not be presented as evidence that a pool is offline.
 
 For data integrations, use the [public API](api.md). For contributing, follow the [operator decision guide](operators.md).
+
+Pool pages include an attribution section. Where a reviewed map exists, it shows observed tag groups flowing to a collection address and the pool grouping, with dated snapshot counts, source links and limitations. Unmapped pools explicitly state that no reviewed map is published.
