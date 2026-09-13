@@ -44,6 +44,8 @@ function assignPoolColors(pools) {
   poolColors.set("other", "#E2B526");
 }
 function poolLink(p) {
+  if (p.id === "other")
+    return '<button class="text-link" data-other-groups>Other attributed groups ↗</button>';
   return !demo && !p.unknown && p.id !== "other"
     ? `<a href="/pool?id=${encodeURIComponent(p.id)}">${escape(p.name)}</a>`
     : escape(p.name);
@@ -53,7 +55,9 @@ function poolColor(p) {
   return poolColors.get(p.id) || "#84919F";
 }
 function chartGroups(pools) {
-  const known = pools.filter((p) => !p.unknown).sort((a, b) => b.share - a.share || a.name.localeCompare(b.name));
+  const known = pools
+    .filter((p) => !p.unknown)
+    .sort((a, b) => b.share - a.share || a.name.localeCompare(b.name));
   const top = known.slice(0, 4);
   const rest = known.slice(4);
   if (rest.length)
@@ -62,7 +66,9 @@ function chartGroups(pools) {
       name: "Other attributed groups",
       share: rest.reduce((s, p) => s + p.share, 0),
     });
-  return [...top, ...pools.filter((p) => p.unknown)].sort((a, b) => b.share - a.share || a.name.localeCompare(b.name));
+  return [...top, ...pools.filter((p) => p.unknown)].sort(
+    (a, b) => b.share - a.share || a.name.localeCompare(b.name),
+  );
 }
 const pct = (n) => `${(Number(n) * 100).toFixed(1)}%`;
 const short = (s) => (s.length > 30 ? `${s.slice(0, 16)}…${s.slice(-9)}` : s);
@@ -328,7 +334,27 @@ $("#window").addEventListener("change", refresh);
 $("#threshold").addEventListener("change", renderAlerts);
 $("#address-search").addEventListener("input", renderAddresses);
 $("#close-detail").addEventListener("click", () => $("#detail").close());
+$("#close-other").addEventListener("click", () => $("#other-detail").close());
+function openOtherGroups() {
+  if (!data) return;
+  const groups = data.pools
+    .filter((p) => !p.unknown)
+    .sort((a, b) => b.share - a.share || a.name.localeCompare(b.name))
+    .slice(4);
+  const total = groups.reduce((sum, p) => sum + p.blocks, 0);
+  const share = groups.reduce((sum, p) => sum + p.share, 0);
+  const largest = Math.max(1, ...groups.map((p) => p.blocks));
+  const rank = (p) =>
+    1 + data.pools.filter((q) => !q.unknown && q.blocks > p.blocks).length;
+  $("#other-content").innerHTML =
+    `<p class="small muted">${demo ? "Illustrative sample · " : ""}Snapshot of ${data.sample} observed network blocks${data.updatedAt ? " · " + escape(new Date(data.updatedAt).toLocaleString()) : ""}${data.status === "stale" ? " · Source stale" : ""}. Close and reopen for the latest breakdown.</p><div class="other-metrics"><p><strong>${groups.length}</strong>Named groups</p><p><strong>${total}</strong>Combined blocks</p><p><strong>${pct(share)}</strong>Of network observations</p></div><p>The four largest named pools and Unknown are excluded. These are separate attributed groups, not one operator. Ranks compare all named pools by observed block count; tied counts share a rank. This is not a decentralization rating.</p><h3>Blocks by group · largest first</h3><p class="small muted">Bar lengths compare block counts within this breakdown.</p><div class="other-bars">${groups.map((p) => `<div class="other-bar-row"><span><b>#${rank(p)}</b> ${poolLink(p)}</span><div class="bar"><span style="width:${(p.blocks / largest) * 100}%;background:${poolColor(p)}"></span></div><strong>${p.blocks}</strong></div>`).join("")}</div><h3>Group statistics</h3><div class="table-scroll"><table><thead><tr><th>Block rank</th><th>Group</th><th>Blocks</th><th>Network share</th><th>Share of Other</th><th>Network share · 95% interval</th></tr></thead><tbody>${groups.map((p) => `<tr><td>#${rank(p)}</td><td>${poolLink(p)}</td><td>${p.blocks}</td><td>${pct(p.share)}</td><td>${total ? pct(p.blocks / total) : "—"}</td><td>${p.interval ? p.interval.map(pct).join("–") : "—"}</td></tr>`).join("")}</tbody></table></div><p class="small muted">Network share uses all ${data.sample} observed blocks, including Unknown. Share of Other uses only these ${total} blocks. Block share is an estimate, not live hashrate or proof of common ownership.</p>`;
+  $("#other-detail").showModal();
+}
 document.addEventListener("click", (e) => {
+  if (e.target.closest("[data-other-groups]")) {
+    openOtherGroups();
+    return;
+  }
   const block = e.target.closest("[data-block]");
   const address = e.target.closest("[data-address]");
   if (block) {

@@ -16,6 +16,66 @@
   --bitcoin-ink: #a64b00;
   --lime: #c8ef89;
 }
+.text-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  text-decoration: underline;
+  font: inherit;
+  text-align: left;
+}
+#other-detail {
+  width: min(960px, calc(100% - 24px));
+  max-width: 960px;
+  max-height: 88vh;
+  overflow-y: auto;
+}
+.other-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.other-metrics p {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 12px;
+}
+.other-metrics strong {
+  display: block;
+  font-size: 26px;
+  margin-bottom: 6px;
+}
+.other-bars {
+  display: grid;
+  gap: 14px;
+  margin: 22px 0;
+}
+.other-bar-row {
+  display: grid;
+  grid-template-columns: minmax(100px, 1fr) 2fr 40px;
+  align-items: center;
+  gap: 14px;
+  font-size: 13px;
+}
+.other-bar-row > span {
+  overflow-wrap: anywhere;
+}
+.other-bar-row .bar {
+  width: 100%;
+  height: 12px;
+}
+@media (max-width: 480px) {
+  .other-metrics {
+    gap: 5px;
+  }
+  .other-metrics p {
+    padding: 8px;
+  }
+  .other-metrics strong {
+    font-size: 22px;
+  }
+}
 .mining-map-nav {
   align-self: center;
   padding: 16px 0;
@@ -91,7 +151,9 @@ button {
   font-weight: 650;
   text-decoration: none;
 }
-.main-site-link:hover { background: #ffe2b9; }
+.main-site-link:hover {
+  background: #ffe2b9;
+}
 @media (max-width: 640px) {
   .topbar:has(.main-site-link) {
     height: auto;
@@ -101,8 +163,12 @@ button {
     padding-top: 14px;
     padding-bottom: 14px;
   }
-  .topbar:has(.main-site-link) .brand { flex-shrink: 0; }
-  .topbar:has(.main-site-link) > a:not(.brand):not(.main-site-link) { order: 3; }
+  .topbar:has(.main-site-link) .brand {
+    flex-shrink: 0;
+  }
+  .topbar:has(.main-site-link) > a:not(.brand):not(.main-site-link) {
+    order: 3;
+  }
 }
 .network-label {
   font-size: 10px;
