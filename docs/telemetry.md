@@ -2,9 +2,9 @@
 
 ## Public onboarding
 
-Operators can apply at https://xbtpulse.tech/contribute. Details are stored in the private SQLite `applications` table, never in the public dashboard. The form has durable global intake limits (30 new requests/hour, 1,000 pending) and rejects credentials in website URLs. Pending submissions are purged after 90 days when new intake is processed. This form does not send email automatically; administrators must review the queue and follow up using the supplied contact channel. Submitted content is untrusted; never run commands or visit private endpoints requested in application notes.
+Operators can apply at https://xbtpulse.tech/contribute. Applications are stored in the private SQLite `applications` table. Contact details and setup notes remain private; consenting names/statuses and reviewed profiles may be public. See the [operator decision guide](operators.md) for publication choices and collector alternatives. The form has durable global intake limits (30 new requests/hour, 1,000 pending) and rejects credentials in website URLs. Pending submissions are purged after 90 days when new intake is processed. This form does not send email automatically; administrators review the queue and can reply through private application conversations. Applicants must save their conversation link and return to check replies; an external contact channel can also be used manually. Submitted content is untrusted; never run commands or visit private endpoints requested in application notes.
 
-Review through SSH on the VPS:
+Prefer the authenticated `/admin` review desk for approval, tokens and conversations; see [administration](admin.md). The following SSH commands remain an operations fallback:
 
 ```
 docker exec xbtpulse-xbtpulse-1 node ops.mjs list
@@ -40,3 +40,9 @@ Each segment sums accepted share difficulty for work under that network difficul
 Expected blocks = sum(shareDifficultySum / networkDifficulty). Reported work share = provider's sum of share difficulty / all reporting providers' sum over included intervals. This is **not network-wide coverage**. The dashboard includes whole intervals within the last 24 hours and labels reporting providers as partial coverage. Missing intervals and stale sources can bias the comparison. Authentication is accountability, not a proof that the report is true or the provider independent.
 
 Template refresh counts are intentionally not used as work or an attack detector. Future adapters should export aggregates from audited share ledgers and attach verifiable block outcomes before offering stronger withholding diagnostics.
+
+## Retention and integrations
+
+Accepted telemetry is retained for 35 days to support observation-period review; the public dashboard summarizes the last 24 hours. Retention does not guarantee complete reporting history. Revoking a token stops new reports, not historical display.
+
+The [DATUM download](https://xbtpulse.tech/collector) is one compatible uploader. Operator-owned adapters may implement this contract without installing our scraper. Verify local counter units, reset handling and template scope first; see [adapter guidance](operators.md#bring-your-own-adapter). The current release checksum is unsigned. Public data consumers should use the separate [read API](api.md), with no provider token.

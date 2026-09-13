@@ -1,10 +1,18 @@
-# Rating framework: draft v0.1
+# Ratings, participation and block-production ranks
 
-The public framework is at `/ratings`. Launch implementation deliberately does not calculate numerical scores or award Documented, Verified, or Leading Decentralization. The proposal needs detailed rubrics, minimum evidence coverage, review governance, expiry schedules, and an appeal procedure before those tiers can launch. Pool concentration, reported protocol support, payouts, and luck cannot supply missing template-control evidence.
+XBT Pulse separates three measurements:
 
-Only approved active telemetry providers reporting nonzero work within 30 minutes are eligible for Telemetry Contributor recognition. The public report remains operator-reported, not audited. Historical work may remain in the 24-hour table after recognition pauses; badge status and work coverage are separate. Recognition is recalculated at each dashboard response (cache up to 5 seconds, browser refresh every 30 seconds).
+- **Block-production rank:** attributed blocks in a selected window, affected by luck and attribution quality. It is not a decentralization score.
+- **Telemetry Contributor:** approved, active reporting with positive work within 30 minutes. This recognizes participation, not an independent audit.
+- **Published pilot scorecard:** reviewer-assessed decentralization and transparency totals, each out of 100, with scope, evidence and dates.
 
-Pool badges additionally require explicit operator-reviewed mapping in `config/pools.json`. Add `providerIds` to the record with the exact pool ID returned by `/api/dashboard`:
+The public framework is at `/ratings`; numerical pilot v0.2 rules are at `/scoring-rules`. See [scorecards](scorecards.md) for publication requirements and [assessment checks](assessment-checks.md) for automation limits. Documented, Verified and Leading Decentralization tiers remain proposed; the app does not award these higher tiers.
+
+Historical work may remain in the 24-hour telemetry table after contributor recognition pauses. Badge freshness and work coverage are separate. Recognition is recalculated on dashboard responses, cached for up to five seconds; the browser refreshes every 30 seconds.
+
+## Link a provider to a pool
+
+Pool badges require an explicitly reviewed mapping in `config/pools.json`, using the exact pool ID:
 
 ```json
 [
@@ -17,6 +25,10 @@ Pool badges additionally require explicit operator-reviewed mapping in `config/p
 ]
 ```
 
-This mapping alone is not a block-attribution rule: do not add tags or fee addresses without evidence. Verify the relationship, record supporting evidence, deploy the updated config, and retain the review in Git. Never infer links from matching names, addresses, shared payouts, or applicant claims alone. Unknown blocks cannot receive contributor recognition. No mappings are preloaded and no existing pool has been awarded a score.
+A provider mapping is not a block-attribution rule. Do not add tags or fee addresses without evidence. Record the relationship and supporting review, deploy the config and retain the review in Git. Do not infer common control from matching names, payouts or applicant claims alone. Unknown blocks cannot receive contributor recognition. The repository includes a scoped Soveroot example; it does not establish every aspect of template independence.
 
-Both numerical score fields remain null even for contributors. The framework version and a scope explanation are returned in each pool's `rating` field. Payment or sponsorship must never affect eligibility or future points.
+## API interpretation
+
+The legacy pool `rating` object contains participation/framework status and null numerical fields. Published reviewer scores are separate in `scorecard` and `/api/scorecard?pool=ID`. Consumers must not treat legacy null fields as zero or ignore a separately published scorecard.
+
+Private and public operators use the same evidence rules; private operators need not publish commercial fees. A single private operator is not multiple independent ownership groups. Neither payment, sponsorship nor merely installing a collector should determine points. Missing evidence remains unassessed. See the [operator decision guide](operators.md) before applying.

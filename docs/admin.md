@@ -37,3 +37,13 @@ Reported found/expected ratios are context only and are never scored because min
 Use Messages on an application to read the conversation and send an operator-visible reply. New applicants receive a private link when they submit; they must bookmark it and return to check replies. For existing applicants, create a link from the conversation dialog and share it through their stated contact channel yourself. Creating a replacement link invalidates the previous one. Anyone holding the link can read and reply, so treat it as a credential. Only its hash is stored in the database; the secret is in the URL fragment, not the request path. No email or Discord notifications are sent.
 
 Messages are plain text (4000 characters maximum); operators can send ten per hour and each conversation holds at most 200 messages. Application cards display unread operator replies. The operator view refreshes every 30 seconds. Conversation access ends if the application is removed. Messages stay in the private database and never appear in pool profiles. Never send wallet keys or telemetry tokens through the conversation. Admin sending is explicit through Send reply; opening a conversation or creating a link does not send messages.
+
+## Scorecard workflow
+
+Open an application's Assessment scorecard. Select the observation period and run assessment checks. The assistant examines accepted telemetry intervals and bounded public website sources. It prefills only empty evidence, scope and reason fields; existing entries and numeric scores are preserved. These changes remain unsaved. Review source claims and redact private details before saving.
+
+Accepting a suggested telemetry percentage requires explicit confirmation that the reporting scope and accounting are representative. Automated results cannot establish independent templates or common ownership. Save the draft, inspect the public preview, and publish only when the separate publication checks pass. Publication requires an approved application, consent, a linked published profile, complete evidence, current dates and at least 30 calendar days of observation. See [scorecards](scorecards.md) and [assessment checks](assessment-checks.md).
+
+## Public visibility
+
+Listing consent permits a pending name/status listing; profile consent permits reviewed publication and approved onboarding visibility. The directory includes approved consenting listings as well as public block attributions and profiles. Similar names are not automatically merged. Contact details, conversations and draft assessments remain private. The public change feed records observed participation-status changes, not historical approval dates or scorecard revisions.
