@@ -73,9 +73,9 @@
   border-style: dashed;
 }
 .map-flow [aria-pressed="true"] {
-  outline: 2px solid var(--green);
+  outline: 2px solid var(--bitcoin-ink);
   outline-offset: 2px;
-  background: #dceebc;
+  background: #fff0dc;
 }
 .map-details {
   background: white;
