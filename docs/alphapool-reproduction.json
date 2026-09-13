@@ -1,0 +1,103 @@
+{
+  "address": "bc1qlrmjpgg0e5jrhmzyjmtgc6dfpdr66sps8vjl2q",
+  "requestedEnd": 971931,
+  "retainedStart": 963202,
+  "observedBlocks": 8730,
+  "activationHeight": 961640,
+  "coversActivation": false,
+  "source": [
+    "https://mempool.guide/api"
+  ],
+  "addressMatchedBlocks": 1740,
+  "groups": {
+    "AlphaPool-containing tag": {
+      "count": 1656,
+      "examples": [
+        {
+          "height": 971931,
+          "hash": "0000000000000000fe8da982bdcd663ac428dd93a664770ff776ecccd5c68f8e",
+          "tag": "AlphaPool AlphaPool",
+          "outputs": [
+            {
+              "address": "bc1qlrmjpgg0e5jrhmzyjmtgc6dfpdr66sps8vjl2q",
+              "sats": 312765390
+            }
+          ],
+          "explorerLabel": "AlphaPool"
+        },
+        {
+          "height": 971927,
+          "hash": "00000000000000004d936ca3ca9f0a163e3c2ae35d196db13f75352a24e03053",
+          "tag": "AlphaPool AlphaPool",
+          "outputs": [
+            {
+              "address": "bc1qlrmjpgg0e5jrhmzyjmtgc6dfpdr66sps8vjl2q",
+              "sats": 312504696
+            }
+          ],
+          "explorerLabel": "AlphaPool"
+        }
+      ]
+    },
+    "Test Test": {
+      "count": 42,
+      "examples": [
+        {
+          "height": 971868,
+          "hash": "0000000000000000a916b46d537522cc4e3acfba89b4f87a8855ab257ce65b73",
+          "tag": "\\   Test Test",
+          "outputs": [
+            {
+              "address": "bc1qlrmjpgg0e5jrhmzyjmtgc6dfpdr66sps8vjl2q",
+              "sats": 312517933
+            }
+          ],
+          "explorerLabel": "Unknown"
+        },
+        {
+          "height": 971866,
+          "hash": "00000000000000009e9aea3ae67b9c22b9c881f9e98e22037a738192e1a9a068",
+          "tag": "Z   Test Test",
+          "outputs": [
+            {
+              "address": "bc1qlrmjpgg0e5jrhmzyjmtgc6dfpdr66sps8vjl2q",
+              "sats": 312536348
+            }
+          ],
+          "explorerLabel": "Unknown"
+        }
+      ]
+    },
+    "CEO of LukeCoin": {
+      "count": 42,
+      "examples": [
+        {
+          "height": 971473,
+          "hash": "0000000000000000b302487172487f19ff97828ed63b91c136b84d3adf5af90d",
+          "tag": "CEO of LukeCoin CEO of LukeCoin",
+          "outputs": [
+            {
+              "address": "bc1qlrmjpgg0e5jrhmzyjmtgc6dfpdr66sps8vjl2q",
+              "sats": 312533104
+            }
+          ],
+          "explorerLabel": "CEO of LukeCoin"
+        },
+        {
+          "height": 971471,
+          "hash": "00000000000000013d06a5eaf8e6c24bf344fcd733b5dd19aa6cb9a9356f53e9",
+          "tag": "CEO of LukeCoin CEO of LukeCoin",
+          "outputs": [
+            {
+              "address": "bc1qlrmjpgg0e5jrhmzyjmtgc6dfpdr66sps8vjl2q",
+              "sats": 312516617
+            }
+          ],
+          "explorerLabel": "CEO of LukeCoin"
+        }
+      ]
+    }
+  },
+  "alphaTaggedElsewhere": 14,
+  "scope": "Single positive coinbase output to the exact address; not an ownership or template-control proof. No spend analysis."
+}

@@ -172,3 +172,20 @@ test("collector backfills, advances and rebuilds after a canonical mismatch", as
 test("inconsistent source windows never enter canonical accounting", () => {
   assert.throws(() => validateChain([block(3), block(1)]), /Non-contiguous/);
 });
+import { readFileSync } from 'node:fs';
+const productionRegistry = JSON.parse(readFileSync(new URL('../config/pools.json', import.meta.url)));
+test('reviewed AlphaPool address groups aliases without following spoofed tags or mixed payouts', () => {
+  const address = 'bc1qlrmjpgg0e5jrhmzyjmtgc6dfpdr66sps8vjl2q';
+  const output = { address, sats: 312500000 };
+  for (const tag of ['CEO of LukeCoin CEO of LukeCoin', 'Test Test', 'AlphaPool DATUM User']) {
+    const b = block(3, { tag, outputs:[output], reportedPool:{slug:'unknown',name:'Unknown'} });
+    assert.equal(attribute(b,productionRegistry).id,'explorer:alphapool');
+    assert.equal(attribute({...b,outputs:[{address:'different',sats:312500000}]},productionRegistry).unknown,true);
+    assert.equal(attribute({...b,outputs:[output,{address:'miner',sats:1}]},productionRegistry).unknown,true);
+    assert.equal(attribute({...b,outputs:[{...output,sats:0}]},productionRegistry).unknown,true);
+    assert.equal(attribute({...b,outputs:[output,{address:'commitment',sats:0}]},productionRegistry).id,'explorer:alphapool');
+  }
+  const d = summarize([block(3,{outputs:[output]}),block(2)],productionRegistry);
+  assert.equal(d.sample,2);
+  assert.equal(d.pools.find(p=>p.id==='explorer:alphapool').share,0.5);
+});

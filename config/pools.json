@@ -2,6 +2,21 @@
   {
     "id": "explorer:soveroot",
     "name": "Soveroot",
-    "providerIds": ["soveroot"]
+    "providerIds": [
+      "soveroot"
+    ]
+  },
+  {
+    "id": "explorer:alphapool",
+    "name": "AlphaPool",
+    "source": "https://github.com/emilydarryl/xbtpulse/blob/main/docs/alphapool-attribution.md",
+    "addresses": [
+      {
+        "address": "bc1qlrmjpgg0e5jrhmzyjmtgc6dfpdr66sps8vjl2q",
+        "role": "collection",
+        "soleRecipient": true,
+        "source": "https://github.com/emilydarryl/xbtpulse/blob/main/docs/alphapool-attribution.md"
+      }
+    ]
   }
 ]
