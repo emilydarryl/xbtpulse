@@ -1,4 +1,4 @@
-import { answerChallenge } from "./lib/review.mjs";
+import { answerChallenge, publicReview } from "./lib/review.mjs";
 import { privateProfiles } from "./lib/profiles.mjs";
 import http from "node:http";
 import { readFile, mkdir } from "node:fs/promises";
@@ -253,6 +253,10 @@ const server = http.createServer(async (req, res) => {
       if (url.pathname === "/api/pool") {
         const id = url.searchParams.get("id");
         const published = store.get("pool-profile:" + id);
+        const visibleProfile = published
+          ? { ...published }
+          : researchedProfiles[id] || null;
+        if (visibleProfile) delete visibleProfile.applicationId;
         const observed = summarize(
           store.blocks(retention),
           registry,
@@ -295,8 +299,8 @@ const server = http.createServer(async (req, res) => {
           updatedAt: body.updatedAt,
           evidence: known.evidence,
           rating: poolRating(known, registry, contributors),
-          profile:
-            store.get("pool-profile:" + id) || researchedProfiles[id] || null,
+          profile: visibleProfile,
+          assessment: publicReview(store, published),
           telemetry: telemetry.providers.filter((p) =>
             (registry.find((r) => r.id === id)?.providerIds || []).includes(
               p.name,
