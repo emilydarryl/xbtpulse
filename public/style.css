@@ -1090,7 +1090,7 @@ dialog::backdrop {
 }
 .onboarding-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
   gap: 10px;
 }
 .onboarding-card {
@@ -1099,7 +1099,7 @@ dialog::backdrop {
   border-radius: 10px;
   padding: 10px 12px;
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
   align-items: center;
   column-gap: 12px;
   row-gap: 5px;
@@ -1113,6 +1113,7 @@ dialog::backdrop {
   grid-row: 2;
 }
 .onboarding-card p { margin: 0; }
+.onboarding-card > .small { grid-column: 1 / -1; }
 .onboarding-card .eyebrow { grid-column: 1 / -1; font-size: 9px; }
 .onboarding-card .muted { grid-column: 1 / -1; }
 .onboarding-highlight > .small { margin: 8px 0 0; }
@@ -1122,6 +1123,7 @@ dialog::backdrop {
   grid-row: 2;
   margin: 0;
   max-width: 230px;
+  justify-self: end;
 }
 @media (max-width: 640px) {
   .onboarding-highlight {
