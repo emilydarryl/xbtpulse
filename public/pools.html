@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Pool directory · XBT Pulse</title>
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="module" src="/pools.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="XBT Pulse home"
+        ><img src="/favicon.svg" width="34" height="34" alt="" /><span
+          >XBT<span class="brand-light">PULSE</span></span
+        ></a
+      ><a href="/contribute">Add your pool →</a
+      ><a class="main-site-link" href="/">← Main site</a>
+    </header>
+    <main>
+      <p class="eyebrow">EVERY SIZE OF OPERATOR</p>
+      <h1>Find your pool.</h1>
+      <p class="intro">
+        Explore named groups from retained blocks, published profiles, and
+        approved public listings.
+      </p>
+      <form class="pool-search" id="directory-search" role="search">
+        <label for="directory-query">Pool name</label
+        ><input
+          id="directory-query"
+          type="search"
+          maxlength="100"
+          placeholder="Search pool names…"
+        /><label for="directory-type">Type</label
+        ><select id="directory-type">
+          <option value="all">All types</option>
+          <option value="public">Public</option>
+          <option value="private">Private</option>
+          <option value="unspecified">Not specified</option></select
+        ><button class="primary-button">Search</button>
+      </form>
+      <p id="directory-status" role="status">Loading pools…</p>
+      <p class="small muted">
+        Alphabetical order. Type comes from submitted profiles; unknown type
+        does not mean public. Explorer attribution is not verified ownership. No
+        recent blocks does not mean offline. Private pools are not accepting
+        miners.
+      </p>
+      <div id="directory-results" class="directory-grid"></div>
+      <nav class="directory-pages" aria-label="Directory pages">
+        <button id="directory-prev" class="quiet-button">← Previous</button
+        ><span id="directory-page"></span
+        ><button id="directory-next" class="quiet-button">Next →</button>
+      </nav>
+      <footer>
+        <a href="/">← Main site</a> ·
+        <a href="/trends">Explore network history →</a>
+      </footer>
+    </main>
+  </body>
+</html>

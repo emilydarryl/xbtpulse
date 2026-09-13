@@ -49,20 +49,36 @@
           ><span id="updated">Waiting for observations</span>
         </div>
       </section>
+      <form class="pool-search" action="/pools" method="get" role="search">
+        <label for="find-pool">Find a pool</label
+        ><input
+          id="find-pool"
+          name="q"
+          type="search"
+          maxlength="100"
+          placeholder="Search any pool, large or small…"
+        /><button class="primary-button" type="submit">Search →</button
+        ><a href="/pools">Browse all pools</a>
+      </form>
       <section class="onboarding-highlight" aria-labelledby="onboarding-title">
         <div class="onboarding-heading">
           <div>
             <h2 id="onboarding-title">Recently joined & onboarding</h2>
-            <p class="small muted" style="margin:6px 0 0">Show your commitment to decentralization and transparency.</p>
+            <p class="small muted" style="margin: 6px 0 0">
+              Show your commitment to decentralization and transparency.
+            </p>
           </div>
-          <a class="primary-button" href="/contribute">Get your pool assessed →</a>
+          <a class="primary-button" href="/contribute"
+            >Get your pool assessed →</a
+          >
         </div>
         <div id="onboarding-cards" class="onboarding-cards">
           <p>Loading participating operators…</p>
         </div>
         <p class="small muted">
-          Public & private operators welcome. Start with telemetry participation;
-          higher ratings require reviewed evidence and are not yet awarded.
+          Public & private operators welcome. Start with telemetry
+          participation; higher ratings require reviewed evidence and are not
+          yet awarded.
           <a href="/ratings">See the rating framework →</a>
         </p>
       </section>

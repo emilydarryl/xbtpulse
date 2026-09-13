@@ -1,4 +1,5 @@
 import { onboardingFeed } from "./lib/onboarding-feed.mjs";
+import { poolDirectory } from "./lib/directory.mjs";
 import {
   publicScorecard,
   criteria as scoreCriteria,
@@ -82,6 +83,8 @@ const files = {
   "/contribute": "contribute.html",
   "/contribute.js": "contribute.js",
   "/ratings": "ratings.html",
+  "/pools": "pools.html",
+  "/pools.js": "pools.js",
   "/scorecard": "scorecard.html",
   "/scoring-rules": "scorecard.html",
   "/scorecard.js": "scorecard.js",
@@ -255,6 +258,37 @@ const server = http.createServer(async (req, res) => {
       return send(res, 405, { error: "Method not allowed" });
     }
     if (url.pathname === "/healthz") return send(res, 200, { ok: true });
+    if (url.pathname === "/api/pools") {
+      const q = (url.searchParams.get("q") || "")
+          .trim()
+          .slice(0, 100)
+          .toLowerCase(),
+        type = url.searchParams.get("type") || "all";
+      const page = Math.max(
+        1,
+        Math.min(10000, parseInt(url.searchParams.get("page") || "1", 10) || 1),
+      );
+      let snapshot = cache.get("directory");
+      if (!snapshot || Date.now() - snapshot.time > 10000) {
+        snapshot = {
+          time: Date.now(),
+          rows: poolDirectory(store, registry, retention),
+        };
+        cache.set("directory", snapshot);
+      }
+      const rows = snapshot.rows.filter(
+        (p) =>
+          (!q || p.name.toLowerCase().includes(q)) &&
+          (type === "all" || p.poolType === type),
+      );
+      return send(res, 200, {
+        rows: rows.slice((page - 1) * 30, page * 30),
+        total: rows.length,
+        page,
+        pages: Math.ceil(rows.length / 30),
+        lastSuccess: store.get("lastSuccess"),
+      });
+    }
     if (url.pathname === "/api/scoring-rules")
       return send(res, 200, { criteria: scoreCriteria, rubric: "pilot-v0.2" });
     if (url.pathname === "/api/scorecard") {
