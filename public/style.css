@@ -1066,8 +1066,8 @@ dialog::backdrop {
 }
 
 .onboarding-highlight {
-  margin: 0 0 30px;
-  padding: 26px;
+  margin: 0 0 20px;
+  padding: 14px 18px;
   border: 1px solid #bdcdb3;
   border-top: 4px solid #214c3c;
   border-radius: 14px;
@@ -1077,12 +1077,12 @@ dialog::backdrop {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 22px;
-  margin-bottom: 22px;
+  gap: 12px;
+  margin-bottom: 10px;
 }
 .onboarding-heading h2 {
-  font-size: clamp(24px, 3vw, 32px);
-  margin: 8px 0;
+  font-size: 20px;
+  margin: 0;
 }
 .onboarding-heading .primary-button {
   flex-shrink: 0;
@@ -1091,29 +1091,45 @@ dialog::backdrop {
 .onboarding-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-  gap: 16px;
+  gap: 10px;
 }
 .onboarding-card {
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 10px;
-  padding: 20px;
+  padding: 10px 12px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  column-gap: 12px;
+  row-gap: 5px;
   min-width: 0;
   overflow-wrap: anywhere;
 }
 .onboarding-card h3 {
-  font-size: 24px;
-  margin: 12px 0;
+  font-size: 18px;
+  margin: 0;
+  grid-column: 1;
+  grid-row: 2;
 }
+.onboarding-card p { margin: 0; }
+.onboarding-card .eyebrow { grid-column: 1 / -1; font-size: 9px; }
+.onboarding-card .muted { grid-column: 1 / -1; }
+.onboarding-highlight > .small { margin: 8px 0 0; }
 .onboarding-card .rating-badge {
   white-space: normal;
+  grid-column: 2;
+  grid-row: 2;
+  margin: 0;
+  max-width: 230px;
 }
 @media (max-width: 640px) {
   .onboarding-highlight {
-    padding: 18px;
+    padding: 12px;
   }
   .onboarding-heading {
-    align-items: flex-start;
-    flex-direction: column;
+    align-items: center;
   }
+  .onboarding-heading h2 { font-size: 18px; }
+  .onboarding-heading .primary-button { padding: 10px; }
 }
