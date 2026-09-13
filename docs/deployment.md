@@ -2,7 +2,7 @@
 
 ## Current installation
 
-The Hostinger VPS is `root@2.25.153.143`, with application files in `/opt/xbtpulse`. HTTPS serves https://xbtpulse.tech; www redirects to the apex. Source is delivered as a Git archive from the private repository, without a persistent GitHub credential on the VPS.
+The Hostinger VPS is `root@2.25.153.143`, with application files in `/opt/xbtpulse`. HTTPS serves https://xbtpulse.tech; www redirects to the apex. Source is delivered as a Git archive from the repository, without a persistent GitHub credential on the VPS.
 
 Use `docker compose -f compose.yaml -f deploy/compose.vps.yaml` for lifecycle commands. The override joins the existing Caddy network as `xbtpulse-web`. Data lives in `xbtpulse_pulse-data`; the app container is `xbtpulse-xbtpulse-1`. Existing Caddy configuration is `/opt/emilygaming-rt/Caddyfile`; XBT Pulse routes are recorded in `deploy/Caddyfile.vps.snippet`. Preserve other sites and services.
 
@@ -11,7 +11,7 @@ The live source is the public mempool.guide explorer. Provider onboarding, profi
 ## Updates
 
 1. Validate the intended checkout with `npm test`, `npm run check`, and `python collector/package.py --check`. Changes to packaged collector files require regenerating the package and reviewing its checksum before committing.
-2. Commit and push the intended revision to the private repository. Export that revision with `git archive --format=tar --output xbtpulse-release.tar HEAD`.
+2. Commit and push the intended revision to the repository. Export that revision with `git archive --format=tar --output xbtpulse-release.tar HEAD`.
 3. Transfer the archive to `/tmp` on the VPS and extract it into `/opt/xbtpulse`. Preserve the deployment's `.env`, data volume and unrelated services. Archives do not remove obsolete files: review deletions explicitly.
 4. From `/opt/xbtpulse`, run `docker compose -f compose.yaml -f deploy/compose.vps.yaml up -d --build` for application changes. Documentation-only changes do not need a service rebuild.
 5. Verify `/healthz`, `/readyz`, the public dashboard's source/freshness labels and changed routes. Check Compose logs if collection is delayed. Record the full deployed commit in `/opt/xbtpulse/DEPLOYED_COMMIT`.

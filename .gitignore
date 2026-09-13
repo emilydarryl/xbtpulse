@@ -8,3 +8,17 @@ data/
 test-results/
 __pycache__/
 *.pyc
+# Local collector credentials and state
+collector/config.json
+collector/challenge.json
+collector/state.json
+collector/pending.json
+collector/status.json
+collector/ratum/config.json
+collector/ratum/challenge.json
+collector/ratum/state.json
+collector/ratum/pending.json
+collector/ratum/status.json
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
