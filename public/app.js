@@ -53,7 +53,7 @@ function poolColor(p) {
   return poolColors.get(p.id) || "#84919F";
 }
 function chartGroups(pools) {
-  const known = pools.filter((p) => !p.unknown);
+  const known = pools.filter((p) => !p.unknown).sort((a, b) => b.share - a.share || a.name.localeCompare(b.name));
   const top = known.slice(0, 4);
   const rest = known.slice(4);
   if (rest.length)
@@ -62,7 +62,7 @@ function chartGroups(pools) {
       name: "Other attributed groups",
       share: rest.reduce((s, p) => s + p.share, 0),
     });
-  return [...top, ...pools.filter((p) => p.unknown)];
+  return [...top, ...pools.filter((p) => p.unknown)].sort((a, b) => b.share - a.share || a.name.localeCompare(b.name));
 }
 const pct = (n) => `${(Number(n) * 100).toFixed(1)}%`;
 const short = (s) => (s.length > 30 ? `${s.slice(0, 16)}…${s.slice(-9)}` : s);
