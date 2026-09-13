@@ -12,11 +12,13 @@
 }
 .daily-chart {
   display: grid;
-  grid-template-columns: repeat(30, minmax(28px, 1fr));
+  grid-template-columns: repeat(30, minmax(18px, 1fr));
   gap: 4px;
   overflow-x: auto;
   padding: 12px 4px;
 }
+.intake-panel .table-scroll { max-height: 420px; overflow: auto; }
+.intake-panel .table-scroll thead { position: sticky; top: 0; background: white; z-index: 1; }
 .day-column {
   height: 180px;
   display: flex;

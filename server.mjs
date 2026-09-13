@@ -60,7 +60,7 @@ const source = process.env.RPC_URL
     : null;
 const retention = Math.max(
   144,
-  Math.min(10080, Number(process.env.RETAIN_BLOCKS) || 10080),
+  Math.min(30000, Number(process.env.RETAIN_BLOCKS) || 30000),
 );
 const collector = new Collector(store, source, { retention }),
   pollSeconds = Math.max(10, Number(process.env.POLL_SECONDS) || 30);
