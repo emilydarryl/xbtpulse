@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Decentralization ratings · XBT Pulse</title>
+    <meta
+      name="description"
+      content="XBT Pulse's draft evidence-based framework for separate decentralization and transparency ratings."
+    />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/"
+        ><img src="/favicon.svg" width="34" height="34" alt="" /><span
+          >XBT<span class="brand-light">PULSE</span></span
+        ></a
+      >
+      <div class="header-right">
+        <a class="quiet-button" href="/">← Back to observatory</a>
+      </div>
+    </header>
+    <main class="contribute-main">
+      <section class="page-heading">
+        <div>
+          <p class="eyebrow">
+            RATING FRAMEWORK / DRAFT v0.1 / 13 SEPTEMBER 2026
+          </p>
+          <h1>Evidence earns the rating.</h1>
+          <p class="intro">
+            Two separate assessments: who controls the templates, and how
+            clearly a pool reports its practices.
+          </p>
+        </div>
+      </section>
+      <div class="notice">
+        <strong>Draft for community review.</strong> Numerical ratings and
+        higher tiers are not being awarded yet. Only participation badges are
+        available at launch. Joining does not automatically earn a
+        decentralization rating.
+      </div>
+      <div class="method-grid">
+        <section class="panel intake-panel">
+          <p class="eyebrow">DECENTRALIZATION / PROPOSED 100 POINTS</p>
+          <h2>Who controls the work?</h2>
+          <dl class="rating-criteria">
+            <dt>Miner control of templates <strong>40</strong></dt>
+            <dd>
+              Measured work using templates independently chosen by miners.
+              Proposed credit: 40 × the independently controlled fraction of
+              assessed work, with coverage disclosed.
+            </dd>
+            <dt>Independent template operators <strong>25</strong></dt>
+            <dd>
+              Distribution of measured work across distinct operators, grouping
+              related gateways. Many keys or addresses do not prove many
+              independent operators.
+            </dd>
+            <dt>Miner choice <strong>20</strong></dt>
+            <dd>
+              Tested ability to select transactions and policies without the
+              pool silently substituting templates.
+            </dd>
+            <dt>Operational independence <strong>15</strong></dt>
+            <dd>
+              Tested ability to change pools or continue solo mining while
+              retaining node and template control.
+            </dd>
+          </dl>
+        </section>
+        <section class="panel intake-panel">
+          <p class="eyebrow">TRANSPARENCY / PROPOSED 100 POINTS</p>
+          <h2>Can the claims be checked?</h2>
+          <dl class="rating-criteria">
+            <dt>Consistent, complete telemetry <strong>35</strong></dt>
+            <dd>
+              Representative reporting, visible gaps, and reproducible
+              accounting of work and block outcomes.
+            </dd>
+            <dt>Public payout rules and records <strong>25</strong></dt>
+            <dd>
+              Clear fees, reward allocation, payout conditions, and records that
+              can be checked.
+            </dd>
+            <dt>Ownership and routing disclosures <strong>25</strong></dt>
+            <dd>
+              Documented operator relationships, pool identities, and proxy
+              arrangements.
+            </dd>
+            <dt>Incident transparency <strong>15</strong></dt>
+            <dd>
+              Public incident history and timely explanations of material
+              discrepancies.
+            </dd>
+          </dl>
+        </section>
+      </div>
+      <p class="small muted">
+        Weights are proposed. Detailed scoring rubrics, acceptable evidence, and
+        minimum coverage for every criterion must be published before any
+        numerical score or higher tier is awarded. Missing evidence remains
+        unknown; it is not silently counted as zero or rescaled into a full
+        score.
+      </p>
+      <section class="panel intake-panel">
+        <p class="eyebrow">THE LABELS</p>
+        <h2>Participation is the starting point</h2>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Label</th>
+                <th>What it means</th>
+                <th>Availability</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="evidence">Not assessed</span></td>
+                <td>
+                  No completed assessment or insufficient evidence. Not a
+                  failing grade.
+                </td>
+                <td>Live</td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="rating-badge contributor"
+                    >Telemetry Contributor</span
+                  >
+                </td>
+                <td>
+                  Approved provider reporting recent, nonzero measured work. A
+                  pool badge additionally requires a manually reviewed
+                  provider-to-pool link.
+                </td>
+                <td>Live when eligible</td>
+              </tr>
+              <tr>
+                <td>Documented</td>
+                <td>
+                  Practices reviewed, with operator claims distinguished from
+                  independently checked evidence.
+                </td>
+                <td>Proposed</td>
+              </tr>
+              <tr>
+                <td>Verified</td>
+                <td>
+                  Relevant behavior independently tested and representative work
+                  observed, with scope and limitations published.
+                </td>
+                <td>Proposed</td>
+              </tr>
+              <tr>
+                <td>Leading Decentralization</td>
+                <td>
+                  Verified decentralization score ≥85 and transparency score
+                  ≥80; at least 30 days of observation; ≥90% of measured work
+                  uses independently controlled miner templates; no unresolved
+                  material evidence gaps.
+                </td>
+                <td>Proposed</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="panel intake-panel">
+        <p class="eyebrow">KEEPING THE RATINGS CREDIBLE</p>
+        <h2>What will never buy a higher tier</h2>
+        <ul class="rating-rules">
+          <li>
+            <strong>Protocol advertising alone.</strong> DATUM or Stratum V2
+            support earns no automatic points. Actual miner behavior matters.
+          </li>
+          <li>
+            <strong>Small pool size alone.</strong> Concentration is displayed
+            separately. A small pool can still control all its miners'
+            templates.
+          </li>
+          <li>
+            <strong>Good block luck.</strong> Luck is not decentralization; a
+            statistical shortfall alone does not prove an attack.
+          </li>
+          <li>
+            <strong>Sponsorship.</strong> Payment cannot purchase points,
+            evidence, or a tier.
+          </li>
+        </ul>
+        <p class="small muted">
+          Every future assessment must identify its evidence, coverage,
+          reviewer, framework version, review date, and expiry. The expiry
+          schedule and appeal procedure will be published before higher tiers
+          launch. Operators must have a way to challenge attribution errors.
+        </p>
+      </section>
+      <section class="panel intake-panel">
+        <p class="eyebrow">CURRENT BADGE POLICY</p>
+        <h2>Fresh reports, clearly limited claims</h2>
+        <p class="small">
+          A contributor badge requires an approved, active provider with nonzero
+          reported work and a reporting interval ending within the last 30
+          minutes. A gap longer than that pauses recognition until reporting
+          resumes. Token revocation also pauses recognition. Badges may take a
+          dashboard refresh to update.
+        </p>
+        <p class="small muted">
+          An operator's self-reported work is not independently audited simply
+          because its token is approved. The badge recognizes participation, not
+          security, profitability, payout reliability, or verified independence.
+          Pool names are never matched to providers automatically.
+        </p>
+        <a class="primary-button" href="/contribute"
+          >Join the telemetry program →</a
+        >
+      </section>
+      <footer>
+        <span>XBT PULSE / Draft rating framework</span
+        ><a href="/">Back to network observations →</a>
+      </footer>
+    </main>
+  </body>
+</html>

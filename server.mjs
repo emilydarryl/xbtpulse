@@ -7,6 +7,7 @@ import { Store } from "./lib/store.mjs";
 import { ExplorerSource, RpcSource } from "./lib/source.mjs";
 import { Collector } from "./lib/collector.mjs";
 import { validateApplication } from "./lib/onboarding.mjs";
+import { participation, poolRating } from "./lib/ratings.mjs";
 import {
   summarize,
   summarizeTelemetry,
@@ -47,6 +48,7 @@ const files = {
   "/favicon.svg": "favicon.svg",
   "/contribute": "contribute.html",
   "/contribute.js": "contribute.js",
+  "/ratings": "ratings.html",
 };
 const mime = {
   html: "text/html; charset=utf-8",
@@ -151,8 +153,29 @@ const server = http.createServer(async (req, res) => {
           last &&
           Date.now() - last < Math.max(120000, pollSeconds * 3000) &&
           !store.get("lastError");
+      const telemetry = summarizeTelemetry(store.telemetry());
+      const activeIds = new Set([
+        ...Object.keys(keys),
+        ...store.activeProviderIds(),
+      ]);
+      const contributors = new Set(
+        telemetry.providers
+          .filter((p) => participation(p, activeIds))
+          .map((p) => p.name),
+      );
+      telemetry.providers = telemetry.providers.map((p) => ({
+        ...p,
+        participationBadge: contributors.has(p.name)
+          ? "Telemetry Contributor"
+          : "Reporting paused",
+      }));
+      const summary = summarize(store.blocks(window), registry);
       const body = {
-        ...summarize(store.blocks(window), registry),
+        ...summary,
+        pools: summary.pools.map((p) => ({
+          ...p,
+          rating: poolRating(p, registry, contributors),
+        })),
         status: !source
           ? "unconfigured"
           : fresh
@@ -163,7 +186,7 @@ const server = http.createServer(async (req, res) => {
         updatedAt: last ? new Date(last).toISOString() : null,
         source: store.get("source") || source?.name || null,
         tip: store.get("tip"),
-        telemetry: summarizeTelemetry(store.telemetry()),
+        telemetry,
         events: store.events(),
         retention,
       };

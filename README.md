@@ -10,6 +10,8 @@ The sample UI is explicitly illustrative. Live data starts only when `EXPLORER_A
 
 ## What is implemented
 
+- Draft decentralization/transparency framework at `/ratings`, explicit Not assessed status, and recent-report Telemetry Contributor eligibility. Numerical ratings and higher tiers are not awarded. See `docs/ratings.md` for reviewed provider-to-pool mappings.
+
 - Public operator registration at `/contribute`, private application review, and approved-token report submission. Onboarding requires administrator review and follow-up; no email is sent automatically.
 
 - 144 / 576 / 2,016-block observation windows; pool block share and Wilson intervals.

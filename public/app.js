@@ -32,9 +32,14 @@ const colors = [
 let poolColors = new Map();
 function assignPoolColors(pools) {
   poolColors = new Map();
-  pools.filter((p) => !p.unknown).forEach((p, index) => {
-    poolColors.set(p.id, colors[index] || `hsl(${(index * 137.508) % 360} 55% 42%)`);
-  });
+  pools
+    .filter((p) => !p.unknown)
+    .forEach((p, index) => {
+      poolColors.set(
+        p.id,
+        colors[index] || `hsl(${(index * 137.508) % 360} 55% 42%)`,
+      );
+    });
   // These two categories never borrow a named pool's color.
   poolColors.set("other", "#E2B526");
 }
@@ -187,11 +192,11 @@ function render() {
     ? pools
         .map(
           (p, i) =>
-            `<tr><td><span class="pool-name"><i class="swatch" style="background:${poolColor(p)}"></i>${escape(p.name)}</span></td><td>${p.blocks}</td><td><div class="share-cell"><span>${pct(p.share)}</span><div class="bar"><span style="width:${p.share * 100}%;background:${poolColor(p)}"></span></div></div></td><td>${pct(p.interval[0])}–${pct(p.interval[1])}</td><td><span class="evidence">${escape(p.evidence)}</span></td></tr>`,
+            `<tr><td><span class="pool-name"><i class="swatch" style="background:${poolColor(p)}"></i>${escape(p.name)}</span></td><td>${p.blocks}</td><td><div class="share-cell"><span>${pct(p.share)}</span><div class="bar"><span style="width:${p.share * 100}%;background:${poolColor(p)}"></span></div></div></td><td>${pct(p.interval[0])}–${pct(p.interval[1])}</td><td><span class="evidence">${escape(p.evidence)}</span></td><td><a href="/ratings" class="rating-badge ${p.rating?.status === "Telemetry Contributor" ? "contributor" : ""}" title="${escape(p.rating?.evidence || "No completed assessment; not a failing grade.")}">${demo ? "Sample only" : escape(p.rating?.status || "Not assessed")}</a></td></tr>`,
         )
         .join("")
     : emptyRow(
-        5,
+        6,
         "No blocks indexed yet. Attribution will always include an unknown category.",
       );
   $("#block-feed").innerHTML = blocks.length
@@ -249,7 +254,7 @@ function renderTelemetry() {
     ? "Authenticated operator reports for the last 24 hours. Shares below are within reporting coverage only, not percentages of the entire network. Operator identities are not independently proven."
     : "Winning blocks do not reveal every attempted template. We need participating operators to measure template-control share and actual versus expected blocks.";
   $("#telemetry-data").innerHTML = providers.length
-    ? `<div class="table-scroll"><table><thead><tr><th>Provider</th><th>Reported work share</th><th>Expected blocks</th><th>Reported found</th><th>Found / expected</th></tr></thead><tbody>${providers.map((p) => `<tr><td>${escape(p.name)}${p.stale ? " · report delayed" : ""}</td><td>${pct(p.workShare)}</td><td>${p.expected.toFixed(2)}</td><td>${p.found}</td><td>${p.expected > 0 ? ((p.found / p.expected) * 100).toFixed(1) + "%" : "—"}</td></tr>`).join("")}</tbody></table></div>`
+    ? `<div class="table-scroll"><table><thead><tr><th>Provider</th><th>Reported work share</th><th>Expected blocks</th><th>Reported found</th><th>Found / expected</th></tr></thead><tbody>${providers.map((p) => `<tr><td>${escape(p.name)}${p.stale ? " · report delayed" : ""}<br><a href="/ratings" class="rating-badge ${p.participationBadge === "Telemetry Contributor" ? "contributor" : ""}">${escape(p.participationBadge || "Not assessed")}</a></td><td>${pct(p.workShare)}</td><td>${p.expected.toFixed(2)}</td><td>${p.found}</td><td>${p.expected > 0 ? ((p.found / p.expected) * 100).toFixed(1) + "%" : "—"}</td></tr>`).join("")}</tbody></table></div>`
     : "";
 }
 async function refresh() {
