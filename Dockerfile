@@ -1,7 +1,7 @@
 FROM node:24-alpine
 WORKDIR /app
 ENV NODE_ENV=production HOST=0.0.0.0 PORT=4317 DATA_DIR=/app/data
-COPY --chown=node:node package.json server.mjs ./
+COPY --chown=node:node package.json server.mjs ops.mjs ./
 COPY --chown=node:node lib ./lib
 COPY --chown=node:node config ./config
 COPY --chown=node:node public ./public

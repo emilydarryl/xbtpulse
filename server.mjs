@@ -6,6 +6,7 @@ import { createHash, timingSafeEqual } from "node:crypto";
 import { Store } from "./lib/store.mjs";
 import { ExplorerSource, RpcSource } from "./lib/source.mjs";
 import { Collector } from "./lib/collector.mjs";
+import { validateApplication } from "./lib/onboarding.mjs";
 import {
   summarize,
   summarizeTelemetry,
@@ -16,6 +17,7 @@ const root = fileURLToPath(new URL(".", import.meta.url)),
 const dataDir = resolve(root, process.env.DATA_DIR || "data");
 await mkdir(dataDir, { recursive: true });
 const store = new Store(join(dataDir, "pulse.sqlite"));
+store.expireApplications();
 const registry = JSON.parse(
   await readFile(join(root, "config/pools.json"), "utf8"),
 );
@@ -43,6 +45,8 @@ const files = {
   "/app.js": "app.js",
   "/style.css": "style.css",
   "/favicon.svg": "favicon.svg",
+  "/contribute": "contribute.html",
+  "/contribute.js": "contribute.js",
 };
 const mime = {
   html: "text/html; charset=utf-8",
@@ -63,7 +67,7 @@ function authenticate(req) {
   const digest = createHash("sha256").update(token).digest();
   for (const [provider, hash] of Object.entries(keys))
     if (timingSafeEqual(digest, Buffer.from(hash, "hex"))) return provider;
-  return null;
+  return store.providerForHash(digest.toString("hex"));
 }
 async function jsonBody(req) {
   let text = "";
@@ -84,6 +88,26 @@ const server = http.createServer(async (req, res) => {
   );
   try {
     const url = new URL(req.url, "http://localhost");
+    if (
+      url.pathname === "/api/operator-applications" &&
+      req.method === "POST"
+    ) {
+      if (!req.headers["content-type"]?.startsWith("application/json"))
+        return send(res, 415, { error: "Use application/json" });
+      try {
+        const application = validateApplication(await jsonBody(req));
+        const created = store.addApplication(application);
+        return send(res, created ? 201 : 200, {
+          accepted: true,
+          reference: application.id,
+          status: "pending",
+        });
+      } catch (e) {
+        return send(res, e.message.includes("busy") ? 429 : 400, {
+          error: e.message,
+        });
+      }
+    }
     if (url.pathname === "/api/telemetry" && req.method === "POST") {
       const provider = authenticate(req);
       if (!provider)
@@ -170,6 +194,7 @@ server.listen(port, process.env.HOST || "127.0.0.1", () =>
 );
 await collector.poll();
 const timer = setInterval(async () => {
+  store.expireApplications();
   await collector.poll();
   cache.clear();
 }, pollSeconds * 1000);

@@ -1,5 +1,20 @@
 # Opt-in operator telemetry
 
+## Public onboarding
+
+Operators can apply at https://xbtpulse.tech/contribute. Details are stored in the private SQLite `applications` table, never in the public dashboard. The form has durable global intake limits (30 new requests/hour, 1,000 pending) and rejects credentials in website URLs. Pending submissions are purged after 90 days when new intake is processed. This form does not send email automatically; administrators must review the queue and follow up using the supplied contact channel. Submitted content is untrusted; never run commands or visit private endpoints requested in application notes.
+
+Review through SSH on the VPS:
+
+```
+docker exec xbtpulse-xbtpulse-1 node ops.mjs list
+docker exec xbtpulse-xbtpulse-1 node ops.mjs approve APPLICATION_ID REVIEWED_PROVIDER_ID
+docker exec xbtpulse-xbtpulse-1 node ops.mjs revoke REVIEWED_PROVIDER_ID
+docker exec xbtpulse-xbtpulse-1 node ops.mjs reject APPLICATION_ID
+```
+
+Approval generates a random token and prints it once to the administrator's terminal; only its hash is stored. Deliver it privately after checking operator identity and data scope. Approval is not an independent audit. Database-backed tokens work immediately without a restart. Never approve an unsolicited application automatically. The report form on `/contribute` accepts actual JSON telemetry from approved operators, clears the token after success, and does not persist tokens in browser storage. The JSON placeholder is intentionally invalid until real measurements are provided. Existing environment-configured tokens remain supported; remove them from the environment and restart to revoke those.
+
 No telemetry provider is active by default. A provider represents the operator controlling the submitted templates, not automatically the payout pool. Establish its identity and scope outside this API. Do not submit the same work under multiple provider keys.
 
 Generate a random token with `node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"` in a private terminal. Give the raw token only to its provider, configure its SHA-256 hex digest in `TELEMETRY_KEYS_JSON`, and restart the app. The variable is JSON mapping provider IDs to digests. Use HTTPS and `Authorization: Bearer TOKEN`; never URL query parameters.

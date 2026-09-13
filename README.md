@@ -10,6 +10,8 @@ The sample UI is explicitly illustrative. Live data starts only when `EXPLORER_A
 
 ## What is implemented
 
+- Public operator registration at `/contribute`, private application review, and approved-token report submission. Onboarding requires administrator review and follow-up; no email is sent automatically.
+
 - 144 / 576 / 2,016-block observation windows; pool block share and Wilson intervals.
 - Explicit unknown attribution; local evidence registry plus labeled explorer attribution.
 - Coinbase recipient search and detail, integer-satoshi accounting, no balance or ownership inference.

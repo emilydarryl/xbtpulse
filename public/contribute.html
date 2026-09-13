@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Contribute telemetry · XBT Pulse</title>
+    <meta
+      name="description"
+      content="Register your Bitcoin Blake2b pool or gateway and contribute template-work telemetry to XBT Pulse."
+    />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="module" src="/contribute.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/"
+        ><img src="/favicon.svg" width="34" height="34" alt="" /><span
+          >XBT<span class="brand-light">PULSE</span></span
+        ></a
+      >
+      <div class="header-right">
+        <a class="quiet-button" href="/">← Back to observatory</a>
+      </div>
+    </header>
+    <main class="contribute-main">
+      <section class="page-heading">
+        <div>
+          <p class="eyebrow">FOR POOL & GATEWAY OPERATORS</p>
+          <h1>Help make the work visible.</h1>
+          <p class="intro">
+            Register your operator details, then connect your measured template
+            work.
+          </p>
+        </div>
+      </section>
+      <div class="contribute-grid">
+        <section class="panel intake-panel">
+          <p class="eyebrow">01 / REGISTER YOUR OPERATOR</p>
+          <h2>Join the telemetry program</h2>
+          <p class="muted small">
+            We review submissions before enabling a provider. Registering here
+            does not connect your gateway automatically.
+          </p>
+          <form id="operator-form">
+            <label
+              >Pool or gateway name<input
+                name="name"
+                required
+                minlength="2"
+                maxlength="100"
+                autocomplete="organization" /></label
+            ><label
+              >Contact email or Discord handle<input
+                name="contact"
+                required
+                minlength="3"
+                maxlength="200"
+                placeholder="How we can reach you" /></label
+            ><label
+              >Public website <span class="muted">(optional)</span
+              ><input
+                name="website"
+                type="url"
+                maxlength="300"
+                placeholder="https://your-pool.example" /></label
+            ><label
+              >Software and version<input
+                name="software"
+                required
+                minlength="2"
+                maxlength="200"
+                placeholder="For example, RATUM gateway and its version" /></label
+            ><label
+              >Who builds your templates?<select name="role" required>
+                <option value="">Choose your setup</option>
+                <option value="own-templates">
+                  We build our own templates
+                </option>
+                <option value="hosted-templates">
+                  We build templates for other miners
+                </option>
+                <option value="mixed">A mix of our templates and others</option>
+                <option value="unsure">I need help identifying this</option>
+              </select></label
+            ><label
+              >Setup notes <span class="muted">(optional)</span
+              ><textarea
+                name="notes"
+                rows="4"
+                maxlength="1500"
+                placeholder="What would help us connect your telemetry?"
+              ></textarea></label
+            ><label class="honeypot" aria-hidden="true"
+              >Fax<input name="fax" tabindex="-1" autocomplete="off" /></label
+            ><label class="consent"
+              ><input name="consent" type="checkbox" required /><span
+                >I understand that my contact and setup details are shared
+                privately with XBT Pulse administrators for onboarding. Approved
+                provider IDs and submitted aggregate measurements may appear
+                publicly.</span
+              ></label
+            >
+            <p class="small muted">
+              Never include wallet keys, seed phrases, RPC credentials, or
+              telemetry tokens here. Pending applications expire after 90 days;
+              approved details are retained for provider administration.
+            </p>
+            <button type="submit" class="primary-button">
+              Submit operator details
+            </button>
+            <p
+              id="operator-result"
+              role="status"
+              class="form-result"
+              tabindex="-1"
+            ></p>
+          </form>
+        </section>
+        <aside>
+          <section class="panel intake-panel">
+            <p class="eyebrow">WHAT HAPPENS NEXT</p>
+            <h2>A measured approach</h2>
+            <ol class="onboarding-steps">
+              <li>
+                <strong>We review your setup.</strong
+                ><span
+                  >Tell us which software you use and who controls the
+                  templates. A public name alone does not prove independent
+                  ownership.</span
+                >
+              </li>
+              <li>
+                <strong>You receive a provider token.</strong
+                ><span
+                  >After review, an administrator contacts you through the
+                  details supplied. There is no automatic email or instant
+                  approval.</span
+                >
+              </li>
+              <li>
+                <strong>Connect measured work.</strong
+                ><span
+                  >Your exporter sends accepted work and block outcomes.
+                  Depending on your software, an adapter may need to be
+                  built.</span
+                >
+              </li>
+            </ol>
+            <p class="small muted">
+              Reports are labeled operator-reported. Coverage includes
+              participating providers only, not the whole network.
+            </p>
+          </section>
+          <section class="panel intake-panel">
+            <p class="eyebrow">02 / ALREADY APPROVED?</p>
+            <h2>Submit a telemetry report</h2>
+            <p class="small muted">
+              Use this for a measured report or an integration check. Your token
+              stays in this page's memory and is cleared after a successful
+              submission.
+            </p>
+            <form id="report-form">
+              <label
+                >Provider token<input
+                  name="token"
+                  type="password"
+                  required
+                  minlength="20"
+                  maxlength="512"
+                  autocomplete="off"
+                  spellcheck="false" /></label
+              ><label
+                >Measured report (JSON)<textarea
+                  name="report"
+                  rows="10"
+                  required
+                  maxlength="30000"
+                  spellcheck="false"
+                  placeholder='{"id":"unique-interval-id","start":0,"end":0,"found":0,"segments":[{"shareDifficultySum":0,"networkDifficulty":1}]}'
+                ></textarea>
+              </label>
+              <p class="small muted">
+                Replace the format example with actual measurements and UTC
+                timestamps. The example is not valid telemetry.
+              </p>
+              <button type="submit" class="primary-button">
+                Send measured report
+              </button>
+              <p
+                id="report-result"
+                role="status"
+                class="form-result"
+                tabindex="-1"
+              ></p>
+            </form>
+          </section>
+        </aside>
+      </div>
+      <section class="panel intake-panel">
+        <p class="eyebrow">EXPORTER INTEGRATION</p>
+        <h2>Report work, not template refreshes</h2>
+        <p class="small">
+          Send JSON to
+          <code>POST https://xbtpulse.tech/api/telemetry</code> with
+          <code>Authorization: Bearer YOUR_TOKEN</code> and
+          <code>Content-Type: application/json</code>.
+        </p>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Field</th>
+                <th>Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>id</code></td>
+                <td>Unique interval ID; identical retries are safe.</td>
+              </tr>
+              <tr>
+                <td><code>start / end</code></td>
+                <td>
+                  UTC Unix milliseconds. Non-overlapping intervals of at most 15
+                  minutes.
+                </td>
+              </tr>
+              <tr>
+                <td><code>found</code></td>
+                <td>
+                  Measured blocks found before orphaning, not estimated blocks.
+                </td>
+              </tr>
+              <tr>
+                <td><code>segments</code></td>
+                <td>
+                  Accepted shareDifficultySum and matching networkDifficulty;
+                  split at difficulty changes.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small muted">
+          Use the same difficulty convention for shares and the network. Exclude
+          duplicate and invalid shares. Reports must be from the past seven
+          days; the dashboard shows complete intervals within the last 24 hours.
+          A submitted report is not independent verification of its contents.
+        </p>
+      </section>
+      <footer>
+        <span>XBT PULSE / Operator onboarding</span
+        ><a href="/">Return to network observations →</a>
+      </footer>
+    </main>
+  </body>
+</html>
