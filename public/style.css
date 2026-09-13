@@ -1064,3 +1064,56 @@ dialog::backdrop {
 [hidden] {
   display: none !important;
 }
+
+.onboarding-highlight {
+  margin: 0 0 30px;
+  padding: 26px;
+  border: 1px solid #bdcdb3;
+  border-top: 4px solid #214c3c;
+  border-radius: 14px;
+  background: #edf3e5;
+}
+.onboarding-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 22px;
+  margin-bottom: 22px;
+}
+.onboarding-heading h2 {
+  font-size: clamp(24px, 3vw, 32px);
+  margin: 8px 0;
+}
+.onboarding-heading .primary-button {
+  flex-shrink: 0;
+  text-decoration: none;
+}
+.onboarding-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 16px;
+}
+.onboarding-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 20px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.onboarding-card h3 {
+  font-size: 24px;
+  margin: 12px 0;
+}
+.onboarding-card .rating-badge {
+  white-space: normal;
+}
+@media (max-width: 640px) {
+  .onboarding-highlight {
+    padding: 18px;
+  }
+  .onboarding-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

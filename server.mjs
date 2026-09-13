@@ -1,3 +1,4 @@
+import { onboardingFeed } from "./lib/onboarding-feed.mjs";
 import {
   conversationLink,
   authorizeConversation,
@@ -279,6 +280,7 @@ const server = http.createServer(async (req, res) => {
       const body = {
         ...summary,
         privatePools: privateProfiles(store),
+        onboarding: onboardingFeed(store),
         pools: summary.pools.map((p) => ({
           ...p,
           rating: poolRating(p, registry, contributors),

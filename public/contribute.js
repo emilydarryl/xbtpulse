@@ -49,6 +49,7 @@ wire("operator-form", async (form, result) => {
     conversationToken,
     consent: fields.consent === "on",
     profileConsent: fields.profileConsent === "on",
+    listingConsent: fields.listingConsent === "on",
   });
   result.textContent = `Details received for review. Reference: ${response.reference}. An administrator will use your contact details to follow up; telemetry is not enabled yet.`;
   const link = document.createElement("a");
