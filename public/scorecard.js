@@ -186,9 +186,33 @@ function populate(d) {
   }
   if (d.checks) renderChecks(d.checks);
 }
+function prefillBlankFields(result) {
+  const f = $('#score-form').elements;
+  if(Date.parse(f.start.value)!==result.start || f.end.value!==result.endDate) {
+    $('#checks-status').textContent='Observation dates changed. Run checks for the current dates first.';
+    return;
+  }
+  let count=0;
+  for(const suggestion of result.suggestions) {
+    const field=f[suggestion.criterion+'-evidence'];
+    if(field.value.trim() || suggestion.evidence.length>2500)continue;
+    field.value=suggestion.evidence;
+    count++;
+  }
+  if(!f.scope.value.trim()) {
+    f.scope.value=`Evidence preparation for ${f.start.value} through ${f.end.value} UTC. ${result.metrics.length} linked reporting provider(s). ${result.historyComplete?'Retained telemetry covers the requested period.':'Retained history is incomplete; observed coverage is a lower bound.'} Reporting scope, template control, ownership and accounting still require reviewer confirmation.`;
+    count++;
+  }
+  if(!f.reason.value.trim()) {f.reason.value='Assessment prepared from automated checks; reviewer verification pending.';count++;}
+  if(count){$('#publish-controls').hidden=true;$('#score-confirm').checked=false;}
+  $('#checks-status').textContent=`Prefilled ${count} empty fields below. Existing entries, scores and review dates were preserved. Review and edit the form, then Save draft & preview.`;
+}
 function renderChecks(result) {
   const box = $("#checks-results");
   box.replaceChildren();
+  const prefill=add(box,'button','Prefill blank form fields ↓');
+  prefill.type='button';prefill.className='primary-button';
+  prefill.addEventListener('click',()=>prefillBlankFields(result));
   add(
     box,
     "p",
@@ -332,8 +356,7 @@ $("#run-checks").addEventListener("click", async () => {
       end: f.end.value,
     });
     renderChecks(result);
-    $("#checks-status").textContent =
-      "Checks ready. Saved scores are unchanged. Review individual suggestions below.";
+    prefillBlankFields(result);
   } catch (e) {
     $("#checks-status").textContent = e.message;
   } finally {

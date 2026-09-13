@@ -1,5 +1,7 @@
 # Assessment assistant
 
+After checks complete, empty evidence, scope and change-reason fields are automatically filled in the unsaved form. Existing text, scores, reviewer identity and review dates are preserved. The “Prefill blank form fields” button can repeat this for previously retrieved checks when the observation dates still match. Nothing is saved or published until the reviewer uses the existing controls.
+
 In an application's scorecard, set the observation start and end dates and select **Run assessment checks**. Dates are UTC, with the end date inclusive up to the current time. The API accepts at most 35 days and caches repeat requests for one minute. Calls require the existing admin login, Origin and CSRF checks.
 
 The assistant measures complete accepted telemetry intervals per provider: time coverage, uncovered ranges, largest gap, recent positive work, overlap, inconsistent work/outcome totals and reported found/expected blocks. Providers are never combined into a network coverage estimate. Existing reports only had eight-day retention; retention now extends to 35 days. A stored deployment baseline prevents older missing history being treated as proven downtime or earning a numerical coverage suggestion.
