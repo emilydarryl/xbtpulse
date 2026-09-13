@@ -33,7 +33,10 @@ test("public onboarding respects consent and excludes private application fields
       ),
     );
     assert.equal(JSON.stringify(rows).includes("secret"), false);
-    assert.equal(JSON.stringify(rows).includes("35"), false);
+    for (const row of rows) {
+      assert.deepEqual(Object.keys(row).sort(), ["name", "poolType", "submittedAt", "status", "lastReport", "ratingStatus", "profileUrl"].sort());
+      assert.equal(Object.hasOwn(row, "fee"), false);
+    }
     assert.equal(JSON.stringify(rows).includes(legacy.id), false);
     s.rejectApplication(pending.id);
     assert.equal(onboardingFeed(s).length, 1);
