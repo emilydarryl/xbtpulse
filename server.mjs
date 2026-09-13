@@ -1,5 +1,11 @@
 import { onboardingFeed } from "./lib/onboarding-feed.mjs";
 import {
+  networkTrends,
+  initializeChanges,
+  captureChanges,
+  changeFeed,
+} from "./lib/trends.mjs";
+import {
   conversationLink,
   authorizeConversation,
   conversation,
@@ -32,6 +38,7 @@ await mkdir(dataDir, { recursive: true });
 const store = new Store(join(dataDir, "pulse.sqlite"));
 store.expireApplications();
 initializeAdmin(store);
+initializeChanges(store);
 const registry = JSON.parse(
   await readFile(join(root, "config/pools.json"), "utf8"),
 );
@@ -53,7 +60,7 @@ const source = process.env.RPC_URL
     : null;
 const retention = Math.max(
   144,
-  Math.min(10080, Number(process.env.RETAIN_BLOCKS) || 2016),
+  Math.min(10080, Number(process.env.RETAIN_BLOCKS) || 10080),
 );
 const collector = new Collector(store, source, { retention }),
   pollSeconds = Math.max(10, Number(process.env.POLL_SECONDS) || 30);
@@ -71,6 +78,9 @@ const files = {
   "/contribute": "contribute.html",
   "/contribute.js": "contribute.js",
   "/ratings": "ratings.html",
+  "/trends": "trends.html",
+  "/trends.js": "trends.js",
+  "/trends.css": "trends.css",
   "/mining-map": "mining-map.html",
   "/mining-map.js": "mining-map.js",
   "/mining-map.css": "mining-map.css",
@@ -238,6 +248,22 @@ const server = http.createServer(async (req, res) => {
       return send(res, 405, { error: "Method not allowed" });
     }
     if (url.pathname === "/healthz") return send(res, 200, { ok: true });
+    if (url.pathname === "/api/trends") {
+      const old = cache.get("trends");
+      if (old && Date.now() - old.time < 10000) return send(res, 200, old.body);
+      const body = {
+        ...networkTrends(store.blocks(retention), registry),
+        lastSuccess: store.get("lastSuccess"),
+        stale:
+          !store.get("lastSuccess") ||
+          Date.now() - store.get("lastSuccess") > 120000 ||
+          Boolean(store.get("lastError")),
+        changesStarted: store.get("changesStarted"),
+        changes: changeFeed(store),
+      };
+      cache.set("trends", { time: Date.now(), body });
+      return send(res, 200, body);
+    }
     if (url.pathname === "/readyz") {
       const last = store.get("lastSuccess"),
         ready = Boolean(
@@ -393,9 +419,11 @@ server.listen(port, process.env.HOST || "127.0.0.1", () =>
   console.log(`XBT Pulse: http://127.0.0.1:${port}`),
 );
 await collector.poll();
+captureChanges(store);
 const timer = setInterval(async () => {
   store.expireApplications();
   await collector.poll();
+  captureChanges(store);
   cache.clear();
 }, pollSeconds * 1000);
 for (const signal of ["SIGTERM", "SIGINT"])

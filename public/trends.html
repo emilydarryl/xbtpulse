@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Trends & changes · XBT Pulse</title>
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/trends.css" />
+    <script type="module" src="/trends.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="XBT Pulse home"
+        ><img src="/favicon.svg" width="34" height="34" alt="" /><span
+          >XBT<span class="brand-light">PULSE</span></span
+        ></a
+      ><a href="/mining-map">Mining map →</a
+      ><a class="main-site-link" href="/">← Main site</a>
+    </header>
+    <main>
+      <p class="eyebrow">THE NETWORK OVER TIME</p>
+      <h1>What changed?</h1>
+      <p class="intro">
+        Follow observed pool shares and participating operators as the evidence
+        develops.
+      </p>
+      <p id="history-status" role="status">Loading history…</p>
+      <section class="panel intake-panel">
+        <div class="trend-heading">
+          <div>
+            <p class="eyebrow">NETWORK TRENDS</p>
+            <h2>Where the blocks came from</h2>
+          </div>
+          <label
+            >Window
+            <select id="trend-window">
+              <option value="1">24 hours</option>
+              <option value="7">7 days</option>
+              <option value="30" selected>30 days</option>
+            </select></label
+          >
+        </div>
+        <p id="trend-coverage"></p>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Pool / attribution</th>
+                <th>Blocks</th>
+                <th>Observed share</th>
+                <th>95% interval</th>
+              </tr>
+            </thead>
+            <tbody id="trend-pools"></tbody>
+          </table>
+        </div>
+        <p class="small muted">
+          Block share estimates mining share, not live hashrate. Unknown blocks
+          remain in the denominator. Intervals describe sampling uncertainty,
+          not attribution errors or proof of an attack. Attribution uses the
+          current registry and explorer labels.
+        </p>
+      </section>
+      <section class="panel intake-panel">
+        <div class="trend-heading">
+          <div>
+            <p class="eyebrow">DAILY HISTORY · UTC</p>
+            <h2>One operator, over time</h2>
+          </div>
+          <label
+            >Operator
+            <select id="trend-operator"></select
+          ></label>
+        </div>
+        <div
+          id="daily-chart"
+          class="daily-chart"
+          aria-label="Daily observed block share"
+        ></div>
+        <p class="small muted">
+          Each bar represents a UTC day. Today and days without full retained
+          coverage are marked partial; missing days are gaps. Daily percentages
+          can vary substantially with mining luck. Select a bar for its counts
+          and interval.
+        </p>
+        <p id="daily-detail" role="status">
+          Select a day to inspect its evidence.
+        </p>
+      </section>
+      <section class="panel intake-panel">
+        <p class="eyebrow">PUBLIC OPERATOR ACTIVITY</p>
+        <h2>What changed?</h2>
+        <p id="changes-coverage" class="small muted"></p>
+        <ol id="change-feed" class="change-feed"></ol>
+        <p class="small muted">
+          These are status observations, checked approximately every 30 seconds.
+          “First observed” records when tracking began, not when an operator
+          joined. Reporting pauses mean recent positive work reports are absent;
+          they do not establish that a pool is offline. Participation is not a
+          rating. Private contact details and messages never appear here.
+        </p>
+      </section>
+      <footer>
+        <a href="/">← Main site</a> ·
+        <a href="/contribute">Add your operator →</a>
+      </footer>
+    </main>
+  </body>
+</html>
