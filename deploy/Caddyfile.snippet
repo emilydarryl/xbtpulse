@@ -1,0 +1,10 @@
+# Merge this site block into the VPS's existing Caddy configuration.
+# Do not replace unrelated sites or run a second listener on ports 80/443.
+xbtpulse.tech {
+    encode zstd gzip
+    request_body {
+        max_size 32KB
+    }
+    reverse_proxy 127.0.0.1:4317
+    header Strict-Transport-Security "max-age=31536000"
+}

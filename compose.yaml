@@ -1,0 +1,29 @@
+services:
+  xbtpulse:
+    build: .
+    restart: unless-stopped
+    init: true
+    env_file: .env
+    environment:
+      HOST: 0.0.0.0
+      PORT: 4317
+      DATA_DIR: /app/data
+    ports:
+      - "127.0.0.1:4317:4317"
+    volumes:
+      - pulse-data:/app/data
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 512m
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+volumes:
+  pulse-data:

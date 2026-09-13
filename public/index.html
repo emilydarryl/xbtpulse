@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>XBT Pulse · Network observatory</title>
+    <meta
+      name="description"
+      content="Track Bitcoin Blake2b pool concentration, coinbase recipients, and the evidence behind template control."
+    />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/"
+        ><img src="/favicon.svg" width="34" height="34" alt="" /><span
+          >XBT<span class="brand-light">PULSE</span></span
+        ></a
+      ><span class="network-label"
+        >BITCOIN BLAKE2b <span class="beta">BETA</span></span
+      >
+      <div class="header-right">
+        <span id="source-status" class="status">Connecting</span
+        ><button id="demo" class="quiet-button">Explore sample data</button>
+      </div>
+    </header>
+    <main>
+      <div id="notice" class="notice" role="status" hidden></div>
+      <section class="page-heading">
+        <div>
+          <p class="eyebrow">THE NETWORK, IN PERSPECTIVE</p>
+          <h1>
+            Follow the work.<br /><span>Understand the concentration.</span>
+          </h1>
+          <p class="intro">
+            Block production, payout coordination, and who builds the templates.
+          </p>
+        </div>
+        <div class="window-control">
+          <label for="window">Observation window</label
+          ><select id="window">
+            <option value="144">Last 144 blocks</option>
+            <option value="576">Last 576 blocks</option>
+            <option value="2016">Last 2,016 blocks</option></select
+          ><span id="updated">Waiting for observations</span>
+        </div>
+      </section>
+      <nav class="tabs" aria-label="Dashboard views">
+        <button class="active" data-view="overview" aria-pressed="true">
+          Network overview</button
+        ><button data-view="payouts" aria-pressed="false">
+          Payout addresses</button
+        ><button data-view="templates" aria-pressed="false">
+          Template control</button
+        ><button data-view="method" aria-pressed="false">
+          Methodology <span>↗</span>
+        </button>
+      </nav>
+      <section id="overview" class="view">
+        <div class="metrics">
+          <article>
+            <p>OBSERVED BLOCKS</p>
+            <strong id="sample">—</strong
+            ><span id="range">No indexed blocks yet</span>
+          </article>
+          <article>
+            <p>LARGEST ATTRIBUTED POOL</p>
+            <strong id="largest">—</strong
+            ><span id="largest-name">Attribution pending</span>
+          </article>
+          <article>
+            <p>UNKNOWN BLOCK SHARE</p>
+            <strong id="unknown">—</strong
+            ><span>Kept visible, never redistributed</span>
+          </article>
+          <article>
+            <p>TEMPLATE TELEMETRY</p>
+            <strong id="coverage">—</strong
+            ><span id="coverage-label">No participating sources yet</span>
+          </article>
+        </div>
+        <div class="main-grid">
+          <section class="panel concentration">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">BLOCK PRODUCTION</p>
+                <h2>Where blocks come from</h2>
+              </div>
+              <span class="pill">Observed share</span>
+            </div>
+            <div class="concentration-body">
+              <div class="donut-wrap">
+                <div id="donut" class="donut">
+                  <div>
+                    <strong id="donut-count">—</strong
+                    ><span>blocks observed</span>
+                  </div>
+                </div>
+              </div>
+              <div id="legend" class="legend"></div>
+            </div>
+            <div class="panel-foot">
+              Block share estimates mining share over this window. It is not a
+              live hashrate reading.
+            </div>
+          </section>
+          <section class="panel watch">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">CONCENTRATION WATCH</p>
+                <h2>Signals worth a closer look</h2>
+              </div>
+              <span class="watch-dot"></span>
+            </div>
+            <div id="alerts"></div>
+            <div class="threshold-control">
+              <label for="threshold">Watch level</label
+              ><select id="threshold">
+                <option value="25">25% observed share</option>
+                <option value="33">33% observed share</option>
+                <option value="50">50% observed share</option>
+              </select>
+            </div>
+            <p class="small muted">
+              Crossing a watch level is a concentration signal, not evidence of
+              an attack.
+            </p>
+          </section>
+        </div>
+        <section class="panel pool-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">ATTRIBUTION REGISTER</p>
+              <h2>Pool distribution</h2>
+            </div>
+            <span id="pool-count" class="muted small"></span>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Pool / attribution</th>
+                  <th>Blocks</th>
+                  <th>Observed share</th>
+                  <th>95% interval</th>
+                  <th>Evidence</th>
+                </tr>
+              </thead>
+              <tbody id="pool-rows"></tbody>
+            </table>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">LATEST OBSERVATIONS</p>
+              <h2>The block feed</h2>
+            </div>
+            <span class="small muted">Newest first</span>
+          </div>
+          <div id="block-feed" class="block-feed"></div>
+        </section>
+      </section>
+      <section id="payouts" class="view" hidden>
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">FOLLOW THE COINBASE</p>
+            <h2>Payout-address activity</h2>
+            <p class="muted">
+              Recipients of block rewards. An address is not automatically a
+              pool or an independent miner.
+            </p>
+          </div>
+          <input
+            id="address-search"
+            type="search"
+            placeholder="Search an address…"
+            aria-label="Search payout addresses"
+          />
+        </div>
+        <section class="panel">
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Recipient address / script</th>
+                  <th>Blocks appearing in</th>
+                  <th>Coinbase amount (XBT)</th>
+                  <th>Documented role</th>
+                </tr>
+              </thead>
+              <tbody id="address-rows"></tbody>
+            </table>
+          </div>
+        </section>
+        <p class="small muted">
+          A block may pay multiple recipients. These amounts describe coinbase
+          outputs, not current balances or spendable funds.
+        </p>
+      </section>
+      <section id="templates" class="view" hidden>
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">SEPARATE POOL SIZE FROM TEMPLATE CONTROL</p>
+            <h2>Who chooses the work?</h2>
+            <p class="muted">
+              Cooperating gateways can share difficulty-weighted work and block
+              outcomes.
+            </p>
+          </div>
+        </div>
+        <section class="panel telemetry-panel">
+          <div class="telemetry-icon">⌁</div>
+          <h3 id="telemetry-title">Template telemetry is not connected</h3>
+          <p id="telemetry-description">
+            Winning blocks do not reveal every attempted template. We need
+            participating operators to measure template-control share and actual
+            versus expected blocks.
+          </p>
+          <div id="telemetry-data"></div>
+          <div class="telemetry-notes">
+            <span>01 &nbsp; Identify the template operator</span
+            ><span>02 &nbsp; Measure work, not template counts</span
+            ><span>03 &nbsp; Compare block outcomes</span>
+          </div>
+        </section>
+      </section>
+      <section id="method" class="view" hidden>
+        <p class="eyebrow">SHOW THE EVIDENCE</p>
+        <h2>What these numbers can tell you</h2>
+        <div class="method-grid">
+          <article class="panel">
+            <h3>Observed share, with uncertainty</h3>
+            <p>
+              Pool share is attributed blocks divided by all observed blocks in
+              the selected window. Unknown blocks remain in the denominator. The
+              95% Wilson interval describes sampling uncertainty under an
+              approximately stable block-finding share; it cannot capture
+              attribution mistakes or rapidly changing hashrate.
+            </p>
+          </article>
+          <article class="panel">
+            <h3>Attribution is evidence, not identity</h3>
+            <p>
+              Pool tags and documented collection or fee addresses support
+              attribution. Tags can be copied, addresses can rotate, and
+              conflicting matches stay unknown. Ordinary miner payout addresses
+              are never used to infer pool ownership automatically.
+            </p>
+          </article>
+          <article class="panel">
+            <h3>Templates are not mining work</h3>
+            <p>
+              Refreshing a template does not add hashrate. Expected blocks are
+              the sum of accepted share difficulty divided by the
+              contemporaneous network difficulty, using the same difficulty
+              convention. Template-control share requires work measurements and
+              operator attribution.
+            </p>
+          </article>
+          <article class="panel">
+            <h3>Signals do not prove attacks</h3>
+            <p>
+              Threshold crossings flag concentration. A shortfall in blocks may
+              reflect luck, accounting errors, stale work, or submission
+              failures. Stratum V1 may connect ASICs to a DATUM gateway; a
+              protocol label alone does not establish centralized template
+              control.
+            </p>
+          </article>
+          <article class="panel">
+            <h3>Coverage and chain changes</h3>
+            <p>
+              Only the indexed sample is measured. The collector checks the
+              canonical chain and rebuilds its retained window after a detected
+              reorganization. Reorg observations depend on this node's view and
+              are not a complete record of every competing block.
+            </p>
+          </article>
+          <article class="panel">
+            <h3>Independent public infrastructure</h3>
+            <p>
+              XBT Pulse reads chain data using a dedicated source. It needs no
+              wallet keys and does not connect to a private mining pool.
+              Telemetry remains unavailable until authenticated participating
+              operators supply it. Sample mode is illustrative and never used
+              for live alerts.
+            </p>
+          </article>
+        </div>
+      </section>
+      <footer>
+        <span class="footer-brand"
+          >XBT PULSE <span>/</span> Network observatory</span
+        ><span
+          >Evidence over assumptions.
+          <span class="muted">xbtpulse.tech</span></span
+        >
+      </footer>
+    </main>
+    <dialog id="detail">
+      <button id="close-detail" class="quiet-button">Close ×</button>
+      <div id="detail-content"></div>
+    </dialog>
+  </body>
+</html>
