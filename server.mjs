@@ -1,5 +1,9 @@
 import { onboardingFeed } from "./lib/onboarding-feed.mjs";
 import {
+  publicScorecard,
+  criteria as scoreCriteria,
+} from "./lib/scorecards.mjs";
+import {
   networkTrends,
   initializeChanges,
   captureChanges,
@@ -78,6 +82,9 @@ const files = {
   "/contribute": "contribute.html",
   "/contribute.js": "contribute.js",
   "/ratings": "ratings.html",
+  "/scorecard": "scorecard.html",
+  "/scoring-rules": "scorecard.html",
+  "/scorecard.js": "scorecard.js",
   "/trends": "trends.html",
   "/trends.js": "trends.js",
   "/trends.css": "trends.css",
@@ -248,6 +255,18 @@ const server = http.createServer(async (req, res) => {
       return send(res, 405, { error: "Method not allowed" });
     }
     if (url.pathname === "/healthz") return send(res, 200, { ok: true });
+    if (url.pathname === "/api/scoring-rules")
+      return send(res, 200, { criteria: scoreCriteria, rubric: "pilot-v0.2" });
+    if (url.pathname === "/api/scorecard") {
+      const card = publicScorecard(store, url.searchParams.get("pool"));
+      return send(
+        res,
+        card ? 200 : 404,
+        card
+          ? { card, criteria: scoreCriteria }
+          : { error: "No published scorecard" },
+      );
+    }
     if (url.pathname === "/api/trends") {
       const old = cache.get("trends");
       if (old && Date.now() - old.time < 10000) return send(res, 200, old.body);
@@ -379,6 +398,7 @@ const server = http.createServer(async (req, res) => {
           rating: poolRating(known, registry, contributors),
           profile: visibleProfile,
           assessment: publicReview(store, published),
+          scorecard: publicScorecard(store, id),
           telemetry: telemetry.providers.filter((p) =>
             (registry.find((r) => r.id === id)?.providerIds || []).includes(
               p.name,

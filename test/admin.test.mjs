@@ -1,6 +1,16 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { Store } from "../lib/store.mjs";
+
+test('scorecard endpoints require login, origin and CSRF before mutations', async t => {
+  const {store,call}=fixture(t);
+  assert.equal((await call('scorecard?application=missing')).status,401);
+  assert.equal((await call('publish-scorecard',{})).status,401);
+  const code=bootstrap(store);
+  await call('setup',{code,password:'test-scorecard-password-long'});
+  assert.equal((await call('save-scorecard',{}, {'x-csrf-token':''})).status,403);
+  assert.equal((await call('publish-scorecard',{}, {origin:'https://evil.test'})).status,403);
+});
 import {
   initializeAdmin,
   bootstrap,

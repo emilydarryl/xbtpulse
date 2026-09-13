@@ -16,6 +16,26 @@
   --bitcoin-ink: #a64b00;
   --lime: #c8ef89;
 }
+#score-form label {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0;
+}
+#score-form textarea {
+  min-height: 100px;
+  width: 100%;
+  font: inherit;
+  padding: 10px;
+}
+#score-form input {
+  padding: 10px;
+  max-width: 100%;
+}
+#score-form section {
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+  margin-top: 20px;
+}
 .text-link {
   padding: 0;
   border: 0;

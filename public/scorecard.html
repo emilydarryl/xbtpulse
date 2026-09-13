@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Assessment scorecard · XBT Pulse</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="module" src="/scorecard.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="XBT Pulse home"
+        ><img src="/favicon.svg" width="34" height="34" alt="" /><span
+          >XBT<span class="brand-light">PULSE</span></span
+        ></a
+      ><a href="/ratings">Scoring rules →</a
+      ><a class="main-site-link" href="/">← Main site</a>
+    </header>
+    <main class="contribute-main">
+      <p class="eyebrow">EVIDENCE BEFORE SCORES</p>
+      <h1>Assessment scorecard</h1>
+      <p id="score-status" role="status">Loading…</p>
+      <div id="score-admin" hidden>
+        <p><a href="/admin">← Admin applications</a></p>
+        <h2 id="operator-name"></h2>
+        <p>
+          All evidence entered here is intended for public release. Use redacted
+          references, not credentials, private contact information or
+          confidential logs. Saving is private; publishing is a separate action.
+        </p>
+        <form id="score-form" class="panel intake-panel">
+          <label
+            >Public reviewer name
+            <input name="reviewer" maxlength="120" required /></label
+          ><label
+            >Observation start (UTC)
+            <input name="start" type="date" required /></label
+          ><label
+            >Observation end (UTC)
+            <input name="end" type="date" required /></label
+          ><label
+            >Scope, denominator, coverage and limitations
+            <textarea name="scope" maxlength="2000" required></textarea></label
+          ><label
+            >Reason for this assessment or revision
+            <textarea name="reason" maxlength="1500" required></textarea>
+          </label>
+          <div id="score-fields"></div>
+          <button class="primary-button" type="submit">
+            Save draft & preview
+          </button>
+        </form>
+        <div id="publish-controls" class="panel intake-panel" hidden>
+          <h2>Publish the saved preview</h2>
+          <label
+            >Public profile
+            <select id="score-profile"></select
+          ></label>
+          <p>
+            <label
+              ><input type="checkbox" id="score-confirm" /> I reviewed every
+              scored criterion, verified the scope and operator identity, and
+              checked this preview for private information.</label
+            >
+          </p>
+          <button id="score-publish" class="primary-button">
+            Publish reviewed scorecard
+          </button>
+          <p class="small muted">
+            Publication requires complete evidence, 30 observation days, recent
+            review dates and an approved operator with public profile consent.
+            No higher tier is awarded automatically.
+          </p>
+        </div>
+        <h2>Saved public preview</h2>
+      </div>
+      <section id="score-preview" class="panel intake-panel" hidden></section>
+      <section id="score-history" hidden>
+        <h2>Publication history</h2>
+        <div></div>
+      </section>
+    </main>
+  </body>
+</html>

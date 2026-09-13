@@ -42,6 +42,15 @@ async function load() {
     const d = windows[0],
       profile = d.profile;
     document.title = d.name + " · XBT Pulse";
+    const scoreLink = document.querySelector("#scorecard-link");
+    scoreLink.replaceChildren();
+    scoreLink.hidden = !d.scorecard;
+    if (d.scorecard) {
+      const a = document.createElement("a");
+      a.href = "/scorecard?pool=" + encodeURIComponent(id);
+      a.textContent = `Reviewed pilot scorecard: Decentralization ${d.scorecard.totals.decentralization}/100 · Transparency ${d.scorecard.totals.transparency}/100 →`;
+      scoreLink.append(a);
+    }
     document.querySelector("#name").textContent = d.name;
     document.querySelector("#status").textContent =
       (d.status === "live"
