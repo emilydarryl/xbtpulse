@@ -20,6 +20,8 @@ const labels = {
   website: "Website",
 };
 const id = new URL(location.href).searchParams.get("id");
+document.querySelector("#mining-map-link").href =
+  "/mining-map" + (id ? "?pool=" + encodeURIComponent(id) : "");
 async function load() {
   try {
     if (!id)

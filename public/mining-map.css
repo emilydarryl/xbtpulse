@@ -1,0 +1,135 @@
+.map-main {
+  max-width: 1440px;
+}
+.map-main h1 {
+  margin-bottom: 12px;
+}
+.map-surface {
+  background: #edf3e5;
+  border: 1px solid #bdcdb3;
+  border-top: 4px solid var(--green);
+  border-radius: 14px;
+  padding: 24px;
+  margin: 28px 0 16px;
+}
+.map-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.map-heading h2 {
+  margin: 8px 0;
+}
+.map-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 90px minmax(0, 1fr) 90px minmax(
+      0,
+      1fr
+    ) 90px minmax(0, 1fr);
+  align-items: center;
+  gap: 6px;
+  margin: 28px 0;
+}
+.map-node {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+  border: 1px solid #bdcdb3;
+  border-radius: 10px;
+  background: white;
+  padding: 18px;
+  min-height: 155px;
+  overflow-wrap: anywhere;
+}
+.map-node strong {
+  font-size: 24px;
+}
+.map-node > span:last-child {
+  font-size: 12px;
+  color: var(--muted);
+}
+.map-node .eyebrow {
+  font-size: 9px;
+  margin: 0;
+}
+.map-edge {
+  border: 1px solid #bdcdb3;
+  border-radius: 8px;
+  padding: 8px 2px;
+  background: transparent;
+}
+.map-edge > span {
+  display: block;
+  font-size: 28px;
+}
+.map-edge small {
+  display: block;
+  font-size: 10px;
+}
+.context-edge {
+  border-style: dashed;
+}
+.map-flow [aria-pressed="true"] {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+  background: #dceebc;
+}
+.map-details {
+  background: white;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--green);
+  padding: 22px 26px;
+  border-radius: 10px;
+}
+.map-details h2 {
+  margin: 8px 0;
+}
+.map-details p {
+  line-height: 1.6;
+  max-width: 1000px;
+}
+.map-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+.map-legend dt {
+  font-weight: 650;
+  margin-top: 12px;
+}
+.map-legend dd {
+  margin: 4px 0 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+@media (max-width: 1000px) {
+  .map-flow {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .map-node {
+    min-height: auto;
+    padding: 14px;
+    gap: 7px;
+  }
+  .map-edge {
+    justify-self: center;
+    width: 160px;
+  }
+  .map-edge > span {
+    transform: rotate(90deg);
+  }
+  .map-bottom {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 500px) {
+  .map-surface,
+  .map-details {
+    padding: 16px;
+  }
+}

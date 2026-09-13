@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Mining map · XBT Pulse</title>
+    <meta
+      name="description"
+      content="Explore the evidence behind XBT mining gateways, payout pools and template control."
+    />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/mining-map.css" />
+    <script type="module" src="/mining-map.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/">XBT PULSE</a
+      ><a href="/contribute">Add your operator →</a>
+    </header>
+    <main class="map-main">
+      <p class="eyebrow">FOLLOW THE RELATIONSHIPS</p>
+      <h1>Who builds the block?</h1>
+      <p class="intro">
+        Explore gateways, payout coordination, and the evidence behind template
+        control.
+      </p>
+      <p id="map-context" class="notice" hidden></p>
+      <section class="map-surface" aria-labelledby="map-title">
+        <div class="map-heading">
+          <div>
+            <p class="eyebrow">MINING MAP · FIRST EXAMPLE</p>
+            <h2 id="map-title">Soveroot → Lazarus</h2>
+          </div>
+          <span class="pill">Partial map · no network-wide coverage</span>
+        </div>
+        <p class="small muted">
+          Select an operator or a connection to inspect its evidence. Arrows
+          show relationships, not hashrate or ownership.
+        </p>
+        <div class="map-flow" aria-label="Mining relationships">
+          <button class="map-node" data-item="miners" aria-pressed="false">
+            <span class="eyebrow">MINING HARDWARE</span><strong>Miners</strong
+            ><span>Not individually mapped</span>
+          </button>
+          <button
+            class="map-edge context-edge"
+            data-item="miner-link"
+            aria-pressed="false"
+          >
+            <span aria-hidden="true">→</span><small>Context only</small>
+          </button>
+          <button class="map-node" data-item="soveroot" aria-pressed="false">
+            <span class="eyebrow">PRIVATE DATUM GATEWAY</span
+            ><strong>Soveroot</strong><span>Template role under review</span>
+          </button>
+          <button class="map-edge" data-item="upstream" aria-pressed="false">
+            <span aria-hidden="true">→</span><small>Connection inspected</small>
+          </button>
+          <button class="map-node" data-item="lazarus" aria-pressed="false">
+            <span class="eyebrow">UPSTREAM PAYOUT POOL</span
+            ><strong>Lazarus</strong><span>Separate from template control</span>
+          </button>
+          <button
+            class="map-edge context-edge"
+            data-item="network-link"
+            aria-pressed="false"
+          >
+            <span aria-hidden="true">→</span><small>Context only</small>
+          </button>
+          <button class="map-node" data-item="network" aria-pressed="false">
+            <span class="eyebrow">SHARED NETWORK</span><strong>XBT</strong
+            ><span>Blocks & coinbase payouts</span>
+          </button>
+        </div>
+        <p class="small muted">
+          The miner and network connections illustrate the workflow; they are
+          not an audited topology. The Soveroot–Lazarus connection was inspected
+          on September 13, 2026 and is not continuously verified.
+        </p>
+      </section>
+      <section
+        id="map-details"
+        class="map-details"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        <h2>Select a connection</h2>
+        <p>Evidence and limitations appear here.</p>
+      </section>
+      <noscript
+        ><p>
+          The map's evidence panels require JavaScript. Soveroot's gateway was
+          inspected connected to Lazarus on September 13, 2026. Template control
+          and common ownership remain under review.
+          <a href="/pool?id=explorer%3Asoveroot">Read Soveroot's profile</a>.
+        </p></noscript
+      >
+      <div class="map-bottom">
+        <section class="panel intake-panel">
+          <p class="eyebrow">HOW TO READ THE EVIDENCE</p>
+          <h2>Claims, measurements, review</h2>
+          <dl class="map-legend">
+            <dt>Operator-reported</dt>
+            <dd>A statement from the operator; not independently confirmed.</dd>
+            <dt>Supported by telemetry</dt>
+            <dd>
+              Reporting supports the specific measured fact. Work reports alone
+              do not establish an upstream connection or template independence.
+            </dd>
+            <dt>Reviewed</dt>
+            <dd>
+              A reviewer checked a specific claim, with its scope and date
+              recorded. This is not a blanket endorsement.
+            </dd>
+            <dt>Unknown / context only</dt>
+            <dd>
+              Evidence is missing, or the connection simply explains the
+              workflow.
+            </dd>
+          </dl>
+        </section>
+        <section class="panel intake-panel">
+          <p class="eyebrow">HELP COMPLETE THE MAP</p>
+          <h2>More names do not always mean more independence.</h2>
+          <p>
+            Operators can share owners, infrastructure, template sources or
+            payout services. We will add those relationships as evidence becomes
+            available.
+          </p>
+          <p>
+            <strong>Crypto-Eire:</strong> telemetry onboarding approved; its
+            modified RATUM setup is being assessed. Its relationships are not
+            mapped yet.
+          </p>
+          <p>No decentralization ranking is assigned by this map.</p>
+          <a href="/contribute">Submit your public or private operator →</a>
+        </section>
+      </div>
+      <footer>
+        <a href="/">← Network dashboard</a> ·
+        <a href="/ratings">Rating framework</a>
+      </footer>
+    </main>
+  </body>
+</html>

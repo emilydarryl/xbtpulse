@@ -14,6 +14,12 @@
   --green: #214c3c;
   --lime: #c8ef89;
 }
+.mining-map-nav {
+  align-self: center;
+  padding: 16px 0;
+  font-weight: 700;
+  white-space: nowrap;
+}
 * {
   box-sizing: border-box;
 }
@@ -1112,11 +1118,22 @@ dialog::backdrop {
   grid-column: 1;
   grid-row: 2;
 }
-.onboarding-card p { margin: 0; }
-.onboarding-card > .small { grid-column: 1 / -1; }
-.onboarding-card .eyebrow { grid-column: 1 / -1; font-size: 9px; }
-.onboarding-card .muted { grid-column: 1 / -1; }
-.onboarding-highlight > .small { margin: 8px 0 0; }
+.onboarding-card p {
+  margin: 0;
+}
+.onboarding-card > .small {
+  grid-column: 1 / -1;
+}
+.onboarding-card .eyebrow {
+  grid-column: 1 / -1;
+  font-size: 9px;
+}
+.onboarding-card .muted {
+  grid-column: 1 / -1;
+}
+.onboarding-highlight > .small {
+  margin: 8px 0 0;
+}
 .onboarding-card .rating-badge {
   white-space: normal;
   grid-column: 2;
@@ -1132,6 +1149,10 @@ dialog::backdrop {
   .onboarding-heading {
     align-items: center;
   }
-  .onboarding-heading h2 { font-size: 18px; }
-  .onboarding-heading .primary-button { padding: 10px; }
+  .onboarding-heading h2 {
+    font-size: 18px;
+  }
+  .onboarding-heading .primary-button {
+    padding: 10px;
+  }
 }
