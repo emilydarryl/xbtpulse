@@ -1,0 +1,12 @@
+# This VPS runs Caddy on the existing emilygaming-rt_default Docker network.
+# Only app routing is shared; XBT Pulse has its own source, config and data volume.
+services:
+  xbtpulse:
+    networks:
+      proxy:
+        aliases:
+          - xbtpulse-web
+networks:
+  proxy:
+    external: true
+    name: emilygaming-rt_default
