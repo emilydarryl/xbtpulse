@@ -1,0 +1,7 @@
+{
+  "token": "YOUR_PRIVATE_XBT_PULSE_PROVIDER_TOKEN",
+  "statsUrl": "http://127.0.0.1:YOUR_STATS_PORT/stats.json",
+  "unit": "YOUR_PRIME_SERVICE.service",
+  "expectedBuild": "COPY_EXACT_pool.version_FROM_STATS",
+  "expectedPubkey": "COPY_EXACT_pool.pubkey_FROM_STATS"
+}

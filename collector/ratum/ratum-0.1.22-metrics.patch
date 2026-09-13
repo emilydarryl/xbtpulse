@@ -1,0 +1,31 @@
+--- a/prime/src/stats.rs
++++ b/prime/src/stats.rs
+@@ -147,7 +147,7 @@
+     let operator_fee = coinbase_value.map_or(0, |v| server.payout.fee_on(v));
+ 
+     let hashrate_cutoff = unix_now().saturating_sub(HASHRATE_SPAN_SECS);
+-    let (total_work, target_work, shares, work_by_identity, tags, split, owed, recent, blocks) = {
++    let (total_work, target_work, shares, work_by_identity, tags, split, owed, recent, blocks, cumulative_work) = {
+         let l = lock(&server.ledger);
+         (
+             l.total_work(),
+@@ -159,6 +159,7 @@
+             l.owed().to_vec(),
+             l.work_since(hashrate_cutoff),
+             l.blocks().to_vec(),
++            l.cumulative_work(),
+         )
+     };
+     let payout_sats: HashMap<String, u64> = split.into_iter().collect();
+@@ -291,6 +292,11 @@
+     };
+ 
+     let snapshot = serde_json::json!({
++        "xbtpulse": {
++            "schema": 1,
++            "cumulative_share_difficulty": cumulative_work.to_string(),
++            "blocks_found": blocks.len(),
++        },
+         "pool": {
+             "motd": server.motd,
+             // The build this pool is running: the package version and the git commit.
