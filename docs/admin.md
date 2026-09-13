@@ -15,3 +15,7 @@ Sessions expire after eight hours and use Secure, HttpOnly, SameSite cookies. Mu
 ## Pool profiles
 
 Click a pool name on the dashboard to open `/pool?id=...`. Operators can submit optional public details through `/contribute`, including replacements for existing profiles. They must explicitly consent to publication. In admin, review the submitted fields and website, select **Review & publish profile**, enter the exact Pool ID shown on its public page, and confirm identity and scope. Publication replaces the profile details, records the review date, and does not approve telemetry or award ratings. Contact details and setup notes never enter the public profile.
+
+## Researched public profiles
+
+`config/researched-profiles.json` supplies dated public research when no reviewed operator profile exists. Each entry needs official source links and a last-checked date; preserve endpoint-specific fees and disclose conflicting claims. Unknown fields remain blank. Operator publications take precedence over the entire researched profile, so sources are never silently mixed. Research does not enable telemetry or award ratings. Mining observations refresh every 30 seconds; public terms are reviewed snapshots and do not automatically update.

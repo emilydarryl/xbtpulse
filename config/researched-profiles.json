@@ -1,0 +1,61 @@
+{
+  "explorer:alphapool": {
+    "provenance": "public-research",
+    "reviewedAt": "2026-09-13",
+    "fee": "2.5",
+    "payout": "PPLNS; payouts after block maturity (100 confirmations).",
+    "minimum": "0.01",
+    "regions": "US, Europe and Singapore relays listed.",
+    "template": "Pool website states its Knots node builds templates.",
+    "website": "https://knots.alphapool.tech/",
+    "setup": "https://knots.alphapool.tech/",
+    "sources": [
+      {
+        "title": "AlphaPool fees, payouts and connection guide",
+        "url": "https://knots.alphapool.tech/"
+      }
+    ]
+  },
+  "explorer:b2pool": {
+    "provenance": "public-research",
+    "reviewedAt": "2026-09-13",
+    "fee": "1.0 (shared TIDES pool)",
+    "payout": "TIDES shared mining; separate solo option. Shared rewards distribute the subsidy; transaction fees are retained by the pool.",
+    "minimum": "0.0001",
+    "protocols": "Website advertises Stratum V1, Stratum V2 with Job Declaration, and DATUM.",
+    "regions": "Frankfurt, Helsinki, Chicago, Los Angeles, Kyiv and Hong Kong listed.",
+    "website": "https://b2pool.io/",
+    "setup": "https://b2pool.io/start",
+    "sources": [
+      {
+        "title": "B2Pool shared fees and connections",
+        "url": "https://b2pool.io/"
+      },
+      {
+        "title": "B2Pool payout threshold and reward accounting",
+        "url": "https://b2pool.io/blocks"
+      }
+    ]
+  },
+  "explorer:bitcoinxor": {
+    "provenance": "public-research",
+    "reviewedAt": "2026-09-13",
+    "fee": "1% own-template DATUM; 5% pool-built-template endpoint (homepage).",
+    "payout": "Shared TIDES-style rewards paid directly through coinbase; legacy solo service also listed.",
+    "protocols": "DATUM and a pooled Stratum endpoint; legacy Stratum V1 solo is described as being wound down.",
+    "template": "Own node and gateway for DATUM; pool creates templates on its pooled Stratum endpoint.",
+    "website": "https://xorpool.com/",
+    "setup": "https://xorpool.com/datum",
+    "researchNotes": "The homepage lists 5% for the pool-built-template endpoint, while the DATUM guide also displays a general 1% pool fee. Confirm the endpoint-specific total before connecting.",
+    "sources": [
+      {
+        "title": "Bitcoin Xor endpoint-specific fee schedule",
+        "url": "https://xorpool.com/"
+      },
+      {
+        "title": "Bitcoin Xor DATUM guide",
+        "url": "https://www.xorpool.com/datum"
+      }
+    ]
+  }
+}

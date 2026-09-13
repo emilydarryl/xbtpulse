@@ -26,6 +26,9 @@ initializeAdmin(store);
 const registry = JSON.parse(
   await readFile(join(root, "config/pools.json"), "utf8"),
 );
+const researchedProfiles = JSON.parse(
+  await readFile(join(root, "config/researched-profiles.json"), "utf8"),
+);
 const keys = JSON.parse(process.env.TELEMETRY_KEYS_JSON || "{}");
 for (const [name, hash] of Object.entries(keys))
   if (!/^[a-zA-Z0-9_-]{1,80}$/.test(name) || !/^[a-f0-9]{64}$/.test(hash))
@@ -262,7 +265,8 @@ const server = http.createServer(async (req, res) => {
           updatedAt: body.updatedAt,
           evidence: known.evidence,
           rating: poolRating(known, registry, contributors),
-          profile: store.get("pool-profile:" + id),
+          profile:
+            store.get("pool-profile:" + id) || researchedProfiles[id] || null,
           telemetry: telemetry.providers.filter((p) =>
             (registry.find((r) => r.id === id)?.providerIds || []).includes(
               p.name,
