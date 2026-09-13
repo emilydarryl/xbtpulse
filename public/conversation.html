@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Private operator conversation · XBT Pulse</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script type="module" src="/conversation.js"></script>
+  </head>
+  <body>
+    <header class="topbar"><a class="brand" href="/">XBT PULSE</a></header>
+    <main class="contribute-main">
+      <p class="eyebrow">PRIVATE OPERATOR CONVERSATION</p>
+      <h1 id="title">Application messages</h1>
+      <p>
+        Bookmark this private link to return and check replies. Anyone with the
+        link can read and reply. No email or Discord notifications are sent.
+        Never post passwords, wallet keys or telemetry tokens.
+      </p>
+      <p id="status" role="status"></p>
+      <section class="panel intake-panel">
+        <div id="messages"></div>
+        <button id="refresh" class="quiet-button">Refresh messages</button>
+        <form id="reply">
+          <label
+            >Your reply<textarea
+              name="message"
+              required
+              maxlength="4000"
+              rows="5"
+            ></textarea></label
+          ><button type="submit" class="primary-button">
+            Send to XBT Pulse
+          </button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

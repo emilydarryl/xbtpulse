@@ -1,3 +1,9 @@
+import {
+  conversationLink,
+  authorizeConversation,
+  conversation,
+  addMessage,
+} from "./lib/messages.mjs";
 import { answerChallenge, publicReview } from "./lib/review.mjs";
 import { privateProfiles } from "./lib/profiles.mjs";
 import http from "node:http";
@@ -59,6 +65,8 @@ const files = {
   "/downloads/xbtpulse-datum-collector-1.0.0.zip":
     "downloads/xbtpulse-datum-collector-1.0.0.zip",
   "/downloads/SHA256SUMS.txt": "downloads/SHA256SUMS.txt",
+  "/conversation": "conversation.html",
+  "/conversation.js": "conversation.js",
   "/contribute": "contribute.html",
   "/contribute.js": "contribute.js",
   "/ratings": "ratings.html",
@@ -137,6 +145,31 @@ const server = http.createServer(async (req, res) => {
       }
       return;
     }
+    if (url.pathname === "/api/conversation") {
+      const id = url.searchParams.get("application"),
+        token = req.headers.authorization?.replace(/^Bearer /, "");
+      if (!authorizeConversation(store, id, token))
+        return send(res, 401, {
+          error:
+            "Private link is invalid or has been replaced. Contact the administrator.",
+        });
+      if (req.method === "GET") return send(res, 200, conversation(store, id));
+      if (req.method === "POST") {
+        if (
+          req.headers.origin !==
+          (process.env.ADMIN_ORIGIN || "https://xbtpulse.tech")
+        )
+          return send(res, 403, { error: "Origin not allowed" });
+        try {
+          const b = await jsonBody(req);
+          addMessage(store, id, "operator", b.id, b.message);
+          return send(res, 200, { ok: true });
+        } catch (e) {
+          return send(res, 400, { error: e.message });
+        }
+      }
+      return send(res, 405, { error: "Method not allowed" });
+    }
     if (url.pathname === "/api/telemetry/challenge" && req.method === "POST") {
       const provider = authenticate(req);
       if (!provider)
@@ -157,8 +190,16 @@ const server = http.createServer(async (req, res) => {
       if (!req.headers["content-type"]?.startsWith("application/json"))
         return send(res, 415, { error: "Use application/json" });
       try {
-        const application = validateApplication(await jsonBody(req));
+        const submitted = await jsonBody(req);
+        if (
+          submitted.conversationToken !== undefined &&
+          !/^[a-f0-9]{64}$/.test(submitted.conversationToken)
+        )
+          throw Error("Invalid private conversation token");
+        const application = validateApplication(submitted);
         const created = store.addApplication(application);
+        if (created && submitted.conversationToken)
+          conversationLink(store, application.id, submitted.conversationToken);
         return send(res, created ? 201 : 200, {
           accepted: true,
           reference: application.id,
@@ -317,6 +358,8 @@ const server = http.createServer(async (req, res) => {
       cache.set(window, { time: Date.now(), body });
       return send(res, 200, body);
     }
+    if (url.pathname === "/conversation")
+      res.setHeader("X-Robots-Tag", "noindex, nofollow");
     const file = files[url.pathname];
     if (!file) return send(res, 404, { error: "Not found" });
     res.setHeader("Content-Type", mime[file.split(".").pop()]);

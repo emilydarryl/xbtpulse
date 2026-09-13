@@ -1,3 +1,7 @@
+const conversationToken = Array.from(
+  crypto.getRandomValues(new Uint8Array(32)),
+  (v) => v.toString(16).padStart(2, "0"),
+).join("");
 const applicationId = crypto.randomUUID();
 async function post(path, body, token) {
   const response = await fetch(path, {
@@ -42,10 +46,18 @@ wire("operator-form", async (form, result) => {
   const response = await post("/api/operator-applications", {
     ...fields,
     id: applicationId,
+    conversationToken,
     consent: fields.consent === "on",
     profileConsent: fields.profileConsent === "on",
   });
   result.textContent = `Details received for review. Reference: ${response.reference}. An administrator will use your contact details to follow up; telemetry is not enabled yet.`;
+  const link = document.createElement("a");
+  link.href = "/conversation#" + applicationId + ":" + conversationToken;
+  link.textContent = "Open and bookmark your private conversation";
+  result.append(document.createElement("br"), link);
+  result.append(
+    " — Save this link to read replies. Anyone with it can access this conversation. No email or Discord notifications are sent.",
+  );
   for (const control of form.elements) control.disabled = true;
   form.dataset.complete = "true";
 });

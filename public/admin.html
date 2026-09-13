@@ -99,6 +99,44 @@
           <div id="audit"></div>
         </section>
       </section>
+      <dialog id="messages-dialog">
+        <h2 id="messages-title">Application conversation</h2>
+        <p class="small muted">
+          Messages here are visible to the operator through their private link.
+          Share the link yourself; no email or Discord messages are sent
+          automatically.
+        </p>
+        <div id="message-history"></div>
+        <p id="message-error" role="status"></p>
+        <form id="admin-reply">
+          <label
+            >Reply to operator<textarea
+              name="message"
+              required
+              maxlength="4000"
+              rows="5"
+            ></textarea></label
+          ><button class="primary-button" type="submit">Send reply</button>
+        </form>
+        <p>
+          <button id="create-message-link" class="quiet-button">
+            Create / replace operator link
+          </button>
+        </p>
+        <p class="small muted">
+          Creating a link invalidates any previous operator link. Save and share
+          the new link privately.
+        </p>
+        <textarea
+          id="operator-link"
+          readonly
+          aria-label="Private operator link"
+          hidden
+        ></textarea
+        ><button id="copy-message-link" class="quiet-button" hidden>
+          Copy private link</button
+        ><button id="close-messages" class="quiet-button">Close</button>
+      </dialog>
       <dialog id="challenge-dialog">
         <h2>Credential challenge</h2>
         <p>

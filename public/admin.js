@@ -71,7 +71,7 @@ function render() {
     ? list
         .map(
           (r) =>
-            `<article class="panel intake-panel"><p class="eyebrow">${esc(r.status)} · ${new Date(r.created).toLocaleString()}</p><h2>${esc(r.body.name)}</h2>${reviewCard(r.review)}<dl class="rating-criteria"><dt>Contact</dt><dd>${esc(r.body.contact)}</dd><dt>Website</dt><dd>${esc(r.body.website || "Not provided")}</dd><dt>Software / template role</dt><dd>${esc(r.body.software)} / ${esc(r.body.role)}</dd><dt>Setup notes</dt><dd class="admin-notes">${esc(r.body.notes || "No notes")}</dd></dl>${r.body.profileConsent ? `<h3>Public profile submission</h3><pre>${esc(JSON.stringify(r.body.profile, null, 2))}</pre><button class="quiet-button" data-action="publish-profile" data-id="${esc(r.id)}">Review & publish profile</button>` : ""}<p class="small muted">Reference: ${esc(r.id)}</p><div class="admin-actions">${r.status === "pending" ? `<button class="primary-button" data-action="approve" data-id="${esc(r.id)}">Review & approve</button><button class="quiet-button" data-action="reject" data-id="${esc(r.id)}">Decline</button>` : r.status === "declined" ? `<button class="quiet-button" data-action="reopen" data-id="${esc(r.id)}">Reopen application</button>` : ""}</div></article>`,
+            `<article class="panel intake-panel"><p class="eyebrow">${esc(r.status)} · ${new Date(r.created).toLocaleString()}</p><h2>${esc(r.body.name)}</h2><button class="quiet-button" data-conversation="${esc(r.id)}">Messages${r.unread ? ` · ${r.unread} unread` : ""}</button>${reviewCard(r.review)}<dl class="rating-criteria"><dt>Contact</dt><dd>${esc(r.body.contact)}</dd><dt>Website</dt><dd>${esc(r.body.website || "Not provided")}</dd><dt>Software / template role</dt><dd>${esc(r.body.software)} / ${esc(r.body.role)}</dd><dt>Setup notes</dt><dd class="admin-notes">${esc(r.body.notes || "No notes")}</dd></dl>${r.body.profileConsent ? `<h3>Public profile submission</h3><pre>${esc(JSON.stringify(r.body.profile, null, 2))}</pre><button class="quiet-button" data-action="publish-profile" data-id="${esc(r.id)}">Review & publish profile</button>` : ""}<p class="small muted">Reference: ${esc(r.id)}</p><div class="admin-actions">${r.status === "pending" ? `<button class="primary-button" data-action="approve" data-id="${esc(r.id)}">Review & approve</button><button class="quiet-button" data-action="reject" data-id="${esc(r.id)}">Decline</button>` : r.status === "declined" ? `<button class="quiet-button" data-action="reopen" data-id="${esc(r.id)}">Reopen application</button>` : ""}</div></article>`,
         )
         .join("")
     : '<p class="empty">No applications in this view.</p>';
@@ -224,3 +224,89 @@ setInterval(() => {
   if (csrf && !document.hidden && !document.querySelector("dialog[open]"))
     refresh().catch((e) => ($("#message").textContent = e.message));
 }, 60000);
+
+let conversationId = "",
+  replyId = crypto.randomUUID();
+async function loadMessages() {
+  const data = await api(
+    "conversation?application=" + encodeURIComponent(conversationId),
+  );
+  $("#messages-title").textContent = data.name + " · conversation";
+  $("#message-history").innerHTML =
+    data.messages
+      .map(
+        (m) =>
+          `<article><h3>${m.role === "admin" ? "XBT Pulse" : "Operator"} · ${new Date(m.time).toLocaleString()}</h3><p class="admin-notes">${esc(m.body)}</p></article>`,
+      )
+      .join("") || "<p>No messages yet.</p>";
+}
+document.addEventListener("click", async (e) => {
+  const b = e.target.closest("[data-conversation]");
+  if (!b) return;
+  conversationId = b.dataset.conversation;
+  replyId = crypto.randomUUID();
+  $("#admin-reply").reset();
+  $("#operator-link").value = "";
+  $("#operator-link").hidden = true;
+  $("#copy-message-link").hidden = true;
+  $("#message-error").textContent = "";
+  $("#messages-dialog").showModal();
+  try {
+    await loadMessages();
+  } catch (error) {
+    $("#message-error").textContent = error.message;
+  }
+});
+$("#admin-reply").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const b = e.target.querySelector("button");
+  b.disabled = true;
+  try {
+    await api("message", {
+      application: conversationId,
+      id: replyId,
+      message: e.target.elements.message.value,
+    });
+    e.target.reset();
+    replyId = crypto.randomUUID();
+    await loadMessages();
+    $("#message-error").textContent =
+      "Reply saved for the operator. Share their link if they do not have it yet.";
+  } catch (error) {
+    $("#message-error").textContent = error.message;
+  } finally {
+    b.disabled = false;
+  }
+});
+$("#create-message-link").addEventListener("click", async (e) => {
+  e.target.disabled = true;
+  try {
+    const data = await api("conversation-link", {
+      application: conversationId,
+    });
+    $("#operator-link").value = location.origin + data.link;
+    $("#operator-link").hidden = false;
+    $("#copy-message-link").hidden = false;
+  } catch (error) {
+    $("#message-error").textContent = error.message;
+  } finally {
+    e.target.disabled = false;
+  }
+});
+$("#copy-message-link").addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText($("#operator-link").value);
+    $("#message-error").textContent = "Link copied. Share it privately.";
+  } catch {
+    $("#operator-link").select();
+    $("#message-error").textContent = "Copy the selected link manually.";
+  }
+});
+$("#close-messages").addEventListener("click", () =>
+  $("#messages-dialog").close(),
+);
+$("#messages-dialog").addEventListener("close", () => {
+  $("#operator-link").value = "";
+  $("#message-history").innerHTML = "";
+  refresh().catch(() => {});
+});
