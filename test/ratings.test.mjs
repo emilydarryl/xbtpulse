@@ -1,6 +1,15 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { participation, poolRating } from "../lib/ratings.mjs";
+import { summarizeTelemetry } from '../lib/analytics.mjs';
+test('empty fresh reports do not keep recognition alive after work stops',()=>{
+  const now=Date.now();
+  const providers=summarizeTelemetry([
+    {provider:'gateway',start:now-3700000,end:now-3600000,work:100,expected:1,found:0},
+    {provider:'gateway',start:now-2000,end:now-1000,work:0,expected:0,found:0}
+  ],now).providers;
+  assert.equal(participation(providers[0],new Set(['gateway']),now),false);
+});
 test("participation needs active approval, fresh nonzero work, and no future report", () => {
   const now = Date.now(),
     p = { name: "gateway", work: 100, lastReport: now - 1000 },
