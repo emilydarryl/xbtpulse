@@ -8,18 +8,39 @@ const escape = (s) =>
       ],
   );
 const colors = [
-  "#244c3e",
-  "#81a767",
-  "#c3dc92",
-  "#d1b872",
-  "#9daeb0",
-  "#dfe5da",
+  "#0072B2", // Blue
+  "#D55E00", // Vermilion
+  "#8B4BA8", // Purple
+  "#009E73", // Teal
+  "#CC79A7",
+  "#56B4E9",
+  "#663F23",
+  "#C52F42",
+  "#4856B0",
+  "#708322",
+  "#A03E88",
+  "#255B42",
+  "#B8874D",
+  "#50316F",
+  "#3B879B",
+  "#BA5870",
+  "#7D6718",
+  "#2C4057",
+  "#8F532F",
+  "#624F59",
 ];
+let poolColors = new Map();
+function assignPoolColors(pools) {
+  poolColors = new Map();
+  pools.filter((p) => !p.unknown).forEach((p, index) => {
+    poolColors.set(p.id, colors[index] || `hsl(${(index * 137.508) % 360} 55% 42%)`);
+  });
+  // These two categories never borrow a named pool's color.
+  poolColors.set("other", "#E2B526");
+}
 function poolColor(p) {
-  if (p.unknown) return "#d5dccf";
-  let h = 0;
-  for (const c of p.id) h = (h * 31 + c.charCodeAt(0)) >>> 0;
-  return `hsl(${h % 360} 28% 48%)`;
+  if (p.unknown) return "#84919F";
+  return poolColors.get(p.id) || "#84919F";
 }
 function chartGroups(pools) {
   const known = pools.filter((p) => !p.unknown);
@@ -100,6 +121,7 @@ function render() {
   const pools = data.pools || [],
     blocks = data.blocks || [],
     chart = chartGroups(pools);
+  assignPoolColors(pools);
   $("#source-status").textContent = demo
     ? "Sample mode"
     : data.status === "live"
@@ -145,7 +167,8 @@ function render() {
         .map((p, i) => {
           const start = angle;
           angle += p.share * 360;
-          return `${poolColor(p)} ${start}deg ${angle}deg`;
+          const edge = angle - Math.min(1, (angle - start) / 8);
+          return `${poolColor(p)} ${start}deg ${edge}deg, #fff ${edge}deg ${angle}deg`;
         })
         .join(",")})`
     : "#e9eee5";
