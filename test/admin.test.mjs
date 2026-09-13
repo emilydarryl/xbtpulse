@@ -6,9 +6,12 @@ test('scorecard endpoints require login, origin and CSRF before mutations', asyn
   const {store,call}=fixture(t);
   assert.equal((await call('scorecard?application=missing')).status,401);
   assert.equal((await call('publish-scorecard',{})).status,401);
+  assert.equal((await call('assessment-checks',{})).status,401);
   const code=bootstrap(store);
   await call('setup',{code,password:'test-scorecard-password-long'});
   assert.equal((await call('save-scorecard',{}, {'x-csrf-token':''})).status,403);
+  assert.equal((await call('assessment-checks',{}, {'x-csrf-token':''})).status,403);
+  assert.equal((await call('assessment-checks',{}, {origin:'https://evil.test'})).status,403);
   assert.equal((await call('publish-scorecard',{}, {origin:'https://evil.test'})).status,403);
 });
 import {

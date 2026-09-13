@@ -43,6 +43,8 @@ await mkdir(dataDir, { recursive: true });
 const store = new Store(join(dataDir, "pulse.sqlite"));
 store.expireApplications();
 initializeAdmin(store);
+if (!store.get("assessment-history-start"))
+  store.set("assessment-history-start", Date.now());
 initializeChanges(store);
 const registry = JSON.parse(
   await readFile(join(root, "config/pools.json"), "utf8"),

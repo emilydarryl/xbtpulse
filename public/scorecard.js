@@ -184,7 +184,162 @@ function populate(d) {
         `${new Date(h.publishedAt).toLocaleString()} · D ${h.totals.decentralization}/100 · T ${h.totals.transparency}/100 · ${h.reviewer}: ${h.reason}`,
       );
   }
+  if (d.checks) renderChecks(d.checks);
 }
+function renderChecks(result) {
+  const box = $("#checks-results");
+  box.replaceChildren();
+  add(
+    box,
+    "p",
+    `Checked ${new Date(result.checkedAt).toLocaleString()} · ${result.historyComplete ? "History retained for this period" : "Incomplete retained history; coverage is a lower bound"}`,
+  );
+  for (const p of result.metrics)
+    add(
+      box,
+      "p",
+      `${p.id}: ${p.coverage.toFixed(2)}% observed time coverage · ${p.reports} reports · ${p.gaps} uncovered ranges (not necessarily downtime) · largest ${p.largestGapMinutes} minutes. ${p.overlap || p.inconsistent ? "Consistency concerns require review." : ""}`,
+    );
+  add(box, "h3", "Changes since previous check");
+  for (const change of result.differences.length
+    ? result.differences
+    : ["No detected changes in checked metrics or source hashes."])
+    add(box, "p", change);
+  const apply = (suggestion, withScore = false) => {
+    const form = $("#score-form").elements;
+    if (
+      Date.parse(form.start.value) !== result.start ||
+      form.end.value !== result.endDate
+    ) {
+      $("#checks-status").textContent =
+        "Observation dates changed. Run checks again before accepting suggestions.";
+      return;
+    }
+    const field = form[suggestion.criterion + "-evidence"];
+    const text = field.value
+      ? field.value + "\n\n" + suggestion.evidence
+      : suggestion.evidence;
+    if (text.length > 2500) {
+      $("#checks-status").textContent =
+        "This would exceed the evidence limit. Review and shorten the existing evidence first.";
+      return;
+    }
+    field.value = text;
+    if (withScore) {
+      form[suggestion.criterion + "-percent"].value =
+        suggestion.candidatePercent;
+      form[suggestion.criterion + "-checked"].value = new Date()
+        .toISOString()
+        .slice(0, 10);
+    }
+    $("#publish-controls").hidden = true;
+    $("#score-confirm").checked = false;
+    $("#checks-status").textContent =
+      "Accepted into the unsaved form. Review, then Save draft & preview.";
+  };
+  add(box, "h3", "Suggested evidence and gaps");
+  for (const suggestion of result.suggestions) {
+    const panel = add(box, "section", "");
+    const rule = rules.find((c) => c.id === suggestion.criterion);
+    add(panel, "h4", rule.label);
+    add(panel, "p", suggestion.evidence);
+    const button = add(panel, "button", "Add note to unsaved draft");
+    button.type = "button";
+    button.className = "quiet-button";
+    button.addEventListener("click", () => {
+      apply(suggestion);
+    });
+    if (suggestion.candidatePercent !== null) {
+      add(
+        panel,
+        "p",
+        `Conditional telemetry suggestion: ${suggestion.candidatePercent}% × ${rule.weight} points. Time coverage is not proof of representative work or correct accounting.`,
+      );
+      const label = add(panel, "label", "");
+      const check = document.createElement("input");
+      check.type = "checkbox";
+      label.append(
+        check,
+        document.createTextNode(
+          " I independently checked the complete reporting scope, units, resets, overlap and block accounting.",
+        ),
+      );
+      const accept = add(panel, "button", "Accept reviewed score suggestion");
+      accept.type = "button";
+      accept.className = "quiet-button";
+      accept.addEventListener("click", () => {
+        if (!check.checked) {
+          $("#checks-status").textContent =
+            "Confirm the required evidence review first.";
+          return;
+        }
+        apply(suggestion, true);
+      });
+    }
+  }
+  add(box, "h3", "Public source snapshots");
+  for (const source of result.sources) {
+    const panel = add(box, "section", "");
+    add(panel, "p", source.url);
+    add(panel, "p", source.status);
+    if (source.hash) add(panel, "p", "Content SHA-256: " + source.hash);
+    for (const excerpt of source.snippets) add(panel, "blockquote", excerpt);
+    if (source.snippets.length) {
+      const button = add(
+        panel,
+        "button",
+        "Add source excerpts to payout evidence",
+      );
+      button.type = "button";
+      button.className = "quiet-button";
+      button.addEventListener("click", () =>
+        apply({
+          criterion: "payout",
+          evidence: `Unverified public source retrieved ${new Date(source.checkedAt).toISOString()}: ${source.url}. SHA-256 ${source.hash}. Excerpts (may include navigation or unrelated text): ${source.snippets.join(" / ")}. Reviewer must confirm applicability and current terms.`,
+        }),
+      );
+    }
+  }
+  add(box, "h3", "Draft follow-up · not sent");
+  const draft = document.createElement("textarea");
+  draft.value = result.followup;
+  draft.rows = 10;
+  draft.style.width = "100%";
+  box.append(draft);
+  const copy = add(box, "button", "Copy follow-up draft");
+  copy.type = "button";
+  copy.className = "quiet-button";
+  copy.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(draft.value);
+      $("#checks-status").textContent = "Copied. Nothing has been sent.";
+    } catch {
+      draft.select();
+      $("#checks-status").textContent = "Select and copy the draft manually.";
+    }
+  });
+}
+$("#run-checks").addEventListener("click", async () => {
+  const button = $("#run-checks");
+  button.disabled = true;
+  $("#checks-status").textContent =
+    "Checking retained telemetry and public sources…";
+  try {
+    const f = $("#score-form").elements;
+    const result = await api("admin/assessment-checks", {
+      application,
+      start: f.start.value,
+      end: f.end.value,
+    });
+    renderChecks(result);
+    $("#checks-status").textContent =
+      "Checks ready. Saved scores are unchanged. Review individual suggestions below.";
+  } catch (e) {
+    $("#checks-status").textContent = e.message;
+  } finally {
+    button.disabled = false;
+  }
+});
 $("#score-form").addEventListener("input", () => {
   $("#publish-controls").hidden = true;
   $("#score-confirm").checked = false;
