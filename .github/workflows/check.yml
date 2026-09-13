@@ -13,4 +13,5 @@ jobs:
       - run: npm run check
       - run: npm test
       - run: python3 -m unittest discover -s collector -p test_datum.py
+      - run: python3 collector/package.py --check
       - run: docker build -t xbtpulse:test .

@@ -1,0 +1,6 @@
+{
+  "token": "REPLACE_WITH_YOUR_PRIVATE_PROVIDER_TOKEN",
+  "gateway": "http://127.0.0.1:7152/",
+  "unit": "datum-mainnet.service",
+  "secondaryTag": "YOUR_EXACT_MINER_TAG"
+}

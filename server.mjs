@@ -55,6 +55,10 @@ const files = {
   "/app.js": "app.js",
   "/style.css": "style.css",
   "/favicon.svg": "favicon.svg",
+  "/collector": "collector.html",
+  "/downloads/xbtpulse-datum-collector-1.0.0.zip":
+    "downloads/xbtpulse-datum-collector-1.0.0.zip",
+  "/downloads/SHA256SUMS.txt": "downloads/SHA256SUMS.txt",
   "/contribute": "contribute.html",
   "/contribute.js": "contribute.js",
   "/ratings": "ratings.html",
@@ -64,6 +68,8 @@ const files = {
   "/admin.js": "admin.js",
 };
 const mime = {
+  zip: "application/zip",
+  txt: "text/plain; charset=utf-8",
   html: "text/html; charset=utf-8",
   js: "text/javascript; charset=utf-8",
   css: "text/css; charset=utf-8",
@@ -314,6 +320,11 @@ const server = http.createServer(async (req, res) => {
     const file = files[url.pathname];
     if (!file) return send(res, 404, { error: "Not found" });
     res.setHeader("Content-Type", mime[file.split(".").pop()]);
+    if (file.endsWith(".zip"))
+      res.setHeader(
+        "Content-Disposition",
+        'attachment; filename="xbtpulse-datum-collector-1.0.0.zip"',
+      );
     res.setHeader("Cache-Control", "no-cache");
     res.end(
       req.method === "HEAD"
