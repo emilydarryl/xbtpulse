@@ -79,6 +79,31 @@ button {
   font-weight: 400;
   margin-left: 4px;
 }
+.main-site-link {
+  margin-left: auto;
+  flex-shrink: 0;
+  border: 1px solid #d7a66c;
+  border-radius: 6px;
+  background: #fff0dc;
+  color: var(--bitcoin-ink);
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 650;
+  text-decoration: none;
+}
+.main-site-link:hover { background: #ffe2b9; }
+@media (max-width: 640px) {
+  .topbar:has(.main-site-link) {
+    height: auto;
+    min-height: 88px;
+    flex-wrap: wrap;
+    gap: 12px 16px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+  .topbar:has(.main-site-link) .brand { flex-shrink: 0; }
+  .topbar:has(.main-site-link) > a:not(.brand):not(.main-site-link) { order: 3; }
+}
 .network-label {
   font-size: 10px;
   letter-spacing: 1.2px;
