@@ -1495,6 +1495,6 @@ dialog::backdrop {
 .recipient-full { overflow-wrap: anywhere; white-space: normal; max-width: 650px; }
 
 .profile-activity-scroll { max-height: 500px; overflow-y: scroll; scrollbar-gutter: stable; scrollbar-color: #8b9b90 #f0f3ec; }
-.profile-activity-scroll tbody td { height: 46px; box-sizing: border-box; padding: 12px 18px; }
+.profile-activity-scroll tbody td { white-space: nowrap; height: 46px; box-sizing: border-box; padding: 12px 18px; }
 .profile-activity-scroll thead th { position: sticky; top: 0; z-index: 2; background: #fafbf8; box-shadow: inset 0 -1px var(--line); }
 .profile-activity-scroll:focus-visible { outline: 2px solid var(--bitcoin-ink); outline-offset: -2px; }
