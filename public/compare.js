@@ -7,19 +7,27 @@ const add=(parent,tag,text)=>{const node=document.createElement(tag);if(text!==u
 const text=v=>v===null||v===undefined||v===''?'Not provided':String(v);
 const percent=v=>v===null||v===undefined?'Not available':(v*100).toFixed(1)+'%';
 const date=v=>v ? (/^\d{4}-\d{2}-\d{2}$/.test(String(v)) ? String(v)+' (UTC date)' : new Date(v).toLocaleString()) : 'Not reviewed';
+const names=new Map();
+function renderSelected(){
+ const root=$('#selected-pools');root.replaceChildren();
+ for(const id of ids){const button=add(root,'button',(names.get(id)||id)+' ×');button.type='button';button.className='selected-pool-chip';button.setAttribute('aria-label','Remove '+(names.get(id)||id));button.addEventListener('click',()=>{ids=ids.filter(value=>value!==id);updateUrl();renderSelected();load();search();$('#compare-query').focus();});}
+}
 function updateUrl(){const p=new URLSearchParams();ids.forEach(id=>p.append('pool',id));p.set('window',$('#compare-window').value);history.replaceState(null,'','/compare?'+p);}
 async function search(){
  const request=++searchRequest;
+ const term=$('#compare-query').value.trim();
+ $('#compare-results').hidden=true;$('#compare-pagination').hidden=true;
+ if(!term){$('#compare-results').replaceChildren();$('#search-status').textContent=ids.length>=3?'Three pools selected. Remove one to add another.':'Type a pool name to see matches.';return;}
  $('#search-status').textContent='Searching…';
  $('#results-prev').disabled=true;$('#results-next').disabled=true;
  try {
-  const r=await fetch('/api/pools?'+new URLSearchParams({q:$('#compare-query').value,page:String(searchPage)}),{signal:AbortSignal.timeout(15000)});
+  const r=await fetch('/api/pools?'+new URLSearchParams({q:term,page:String(searchPage)}),{signal:AbortSignal.timeout(15000)});
   if(!r.ok)throw Error();const d=await r.json();if(request!==searchRequest)return;
-  $('#compare-results').replaceChildren();
+  $('#compare-results').replaceChildren();$('#compare-results').hidden=false;$('#compare-pagination').hidden=d.pages<=1;
   for(const p of d.rows){
    const button=add($('#compare-results'),'button',(ids.includes(p.id)?'Selected: ':'Add: ')+p.name+(p.profileUrl?'':' (profile not published)'));
    button.className='quiet-button';button.type='button';button.disabled=!p.profileUrl||ids.includes(p.id)||ids.length>=3;
-   button.addEventListener('click',()=>{if(ids.length>=3||ids.includes(p.id))return;ids.push(p.id);updateUrl();load();search();});
+   button.addEventListener('click',()=>{if(ids.length>=3||ids.includes(p.id))return;ids.push(p.id);names.set(p.id,p.name);$('#compare-query').value='';searchPage=1;updateUrl();renderSelected();load();search();$('#compare-query').focus();});
   }
   $('#search-status').textContent=d.total?`${d.total} matching listings · Page ${d.page} of ${d.pages}${ids.length>=3?' · Remove a selected pool to add another.':''}`:'No matching pools. Try a shorter name.';
   $('#results-prev').disabled=searchPage<=1;$('#results-next').disabled=searchPage>=d.pages;
@@ -32,10 +40,11 @@ async function load(){
  $('#compare-status').textContent='Loading comparison…';
  const results=await Promise.all(selected.map(async id=>{try{const r=await fetch('/api/pool?'+new URLSearchParams({id,window}),{signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error();return await r.json();}catch{return {id,name:id,unavailable:true};}}));
  if(request!==comparisonRequest)return;
+ for(const d of results)if(!d.unavailable)names.set(d.id,d.name);renderSelected();
  const root=$('#comparison');root.replaceChildren();const table=add(root,'table');table.className='comparison-table';
  add(table,'caption',`Pool comparison — last ${Number(window).toLocaleString()} network blocks`);
  const header=add(add(table,'thead'),'tr');add(header,'th','Metric').scope='col';
- for(const d of results){const cell=add(header,'th');cell.scope='col';if(!d.unavailable){const a=add(cell,'a',d.name);a.href='/pool?id='+encodeURIComponent(d.id);}else add(cell,'span',d.name);const button=add(cell,'button','Remove');button.className='quiet-button';button.setAttribute('aria-label','Remove '+d.name);button.addEventListener('click',()=>{ids=ids.filter(id=>id!==d.id);updateUrl();load();search();});}
+ for(const d of results){const cell=add(header,'th');cell.scope='col';if(!d.unavailable){const a=add(cell,'a',d.name);a.href='/pool?id='+encodeURIComponent(d.id);}else add(cell,'span',d.name);}
  const body=add(table,'tbody');
  const rows=[
  ['Pool type',d=>d.profile?.poolType==='private'?'Private — not accepting miners':text(d.profile?.poolType)],
@@ -67,4 +76,4 @@ $('#compare-search').addEventListener('submit',e=>{e.preventDefault();clearTimeo
 $('#compare-query').addEventListener('input',()=>{clearTimeout(timer);searchRequest++;timer=setTimeout(()=>{searchPage=1;search();},300);});
 $('#results-prev').addEventListener('click',()=>{searchPage--;search();});$('#results-next').addEventListener('click',()=>{searchPage++;search();});
 $('#compare-window').addEventListener('change',()=>{updateUrl();load();});$('#compare-refresh').addEventListener('click',load);
-updateUrl();search();load();setInterval(()=>{if(!document.hidden)load();},30000);
+updateUrl();renderSelected();search();load();setInterval(()=>{if(!document.hidden)load();},30000);

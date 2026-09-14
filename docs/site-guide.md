@@ -43,3 +43,5 @@ Pool pages include an attribution section. Where a reviewed map exists, it shows
 Pool pages show evidence freshness for attribution, profile terms and published scorecards, plus each reviewed linked telemetry provider. Reviews are due after 30 days; assessment age uses the oldest criterion check or observation end. Reports older than 30 minutes are stale. These are notices, not automatic rating/attribution changes. Operators can follow the correction link to submit updated evidence.
 
 Comparison links are available on the homepage navigation, directory and pool profiles. Selection and window are shareable URL parameters (`pool` repeated up to three times, `window=144/576/2016`). Private commercial terms remain not applicable; missing scores are not zero. Each profile is fetched separately, with a notice if snapshot timestamps/sample sizes differ. No automatic winner is selected.
+
+The comparison picker shows suggestions only after a pool name is entered. Adding a pool clears suggestions; removable selected-pool chips sit above the comparison.
