@@ -95,6 +95,8 @@ const files = {
   "/contribute.js": "contribute.js",
   "/ratings": "ratings.html",
   "/pools": "pools.html",
+  "/compare": "compare.html",
+  "/compare.js": "compare.js",
   "/pools.js": "pools.js",
   "/scorecard": "scorecard.html",
   "/scoring-rules": "scorecard.html",

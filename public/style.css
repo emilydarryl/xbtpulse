@@ -1350,3 +1350,11 @@ dialog::backdrop {
 .freshness-grid p { margin:8px 0; }
 .freshness-due { color:var(--bitcoin-ink); font-weight:600; }
 @media(max-width:600px) { .freshness-grid { grid-template-columns:1fr; } }
+
+.compare-options { display:flex; flex-wrap:wrap; gap:8px; }
+.comparison-table { table-layout:fixed; min-width:650px; }
+.comparison-table th, .comparison-table td { white-space:normal; overflow-wrap:anywhere; vertical-align:top; min-width:170px; }
+.comparison-table thead th { font-size:15px; }
+.comparison-table thead button { display:block; margin-top:10px; }
+.comparison-table tbody th { text-align:left; font-weight:600; background:#f5f7f2; }
+.comparison-table caption { text-align:left; padding:14px 0; font-weight:600; }

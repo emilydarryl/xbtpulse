@@ -47,6 +47,9 @@ async function load() {
       if (p.profileUrl) {
         const a = add(title, "a", p.name);
         a.href = p.profileUrl;
+        const compare = add(card, "a", "Compare this pool →");
+        compare.href = "/compare?pool=" + encodeURIComponent(p.id);
+        compare.className = "quiet-button";
       } else title.textContent = p.name;
       add(card, "p", p.participation);
       add(
