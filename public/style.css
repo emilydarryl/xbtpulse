@@ -1453,3 +1453,34 @@ dialog::backdrop {
 
 #sim-dialog { width: min(960px,92vw); max-height: 90vh; overflow: auto; border: 1px solid var(--line); border-radius: 12px; }
 #sim-image canvas { width: 100%; height: auto; display: block; margin-top: 12px; }
+
+/* Shared site navigation; dashboard controls stay separate. */
+.topbar.site-header { height: auto; min-height: 64px; gap: 20px; flex-wrap: wrap; padding-top: 12px; padding-bottom: 12px; }
+.site-navigation { margin-left: auto; position: relative; }
+.site-nav-links { display: flex; align-items: center; gap: 24px; }
+.site-nav-links a, .site-tools > summary { font-size: 14px; text-decoration: none; font-weight: 600; }
+.site-nav-links a[aria-current="page"], .site-tools > .current-tool { color: var(--bitcoin-ink); text-decoration: underline; text-underline-offset: 6px; }
+.site-tools { position: relative; }
+.site-tools > summary { cursor: pointer; padding: 8px 0; }
+.site-tool-links { position: absolute; top: 100%; left: -16px; min-width: 230px; z-index: 30; padding: 8px; background: white; border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 8px 24px #163a3120; }
+.site-tool-links a { display: block; padding: 12px; border-radius: 5px; }
+.site-nav-links a:hover, .site-tool-links a:focus-visible { color: var(--bitcoin-ink); background: #fff7eb; }
+.site-menu-toggle { display: none; }
+.site-header .header-right { margin-left: 0; gap: 12px; }
+.home-page .tabs { overflow: visible; flex-wrap: wrap; gap: 20px; }
+@media(max-width: 1100px){
+ .site-header .network-label, .site-header #source-status { display: none; }
+ .site-header .header-right { width: auto; }
+ .site-nav-links { gap: 16px; }
+}
+@media(max-width: 800px){
+ .site-navigation { order: 2; }
+ .site-header .header-right { order: 3; margin-left: auto; }
+ .site-menu-toggle { display: block; }
+ .nav-enhanced:not(.menu-open) .site-nav-links { display: none; }
+ .site-nav-links { position: absolute; right: 0; top: 100%; width: min(300px,85vw); display: flex; flex-direction: column; align-items: stretch; gap: 0; background: white; border: 1px solid var(--line); border-radius: 10px; padding: 10px; z-index: 40; box-shadow: 0 8px 24px #163a3120; }
+ .site-nav-links > a, .site-tools > summary { padding: 12px; }
+ .site-tool-links { position: static; min-width: 0; border: 0; box-shadow: none; padding: 0 0 0 12px; }
+ .home-page .tabs { gap: 4px 14px; }
+ .home-page .tabs button { padding: 12px 0; }
+}

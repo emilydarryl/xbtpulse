@@ -1,3 +1,4 @@
+import {siteNavigation} from './lib/site-navigation.mjs';
 import {initializePoolHistory,capturePoolHistory,poolHistory} from './lib/pool-history.mjs';
 import { evidenceFreshness } from "./lib/evidence-freshness.mjs";
 import { onboardingFeed } from "./lib/onboarding-feed.mjs";
@@ -100,6 +101,7 @@ const files = {
   "/contribute.js": "contribute.js",
   "/ratings": "ratings.html",
   "/pools": "pools.html",
+  "/site-navigation.js": "site-navigation.js",
   "/simulator": "simulator.html",
   "/simulator.js": "simulator.js",
   "/simulator-model.js": "simulator-model.js",
@@ -512,7 +514,7 @@ const server = http.createServer(async (req, res) => {
     res.end(
       req.method === "HEAD"
         ? undefined
-        : await readFile(join(root, "public", file)),
+        : file.endsWith(".html") ? siteNavigation(await readFile(join(root,"public",file),"utf8"),url.pathname) : await readFile(join(root, "public", file)),
     );
   } catch (e) {
     console.error("Request failed:", e.message);
