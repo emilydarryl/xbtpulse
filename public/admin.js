@@ -76,7 +76,7 @@ function render() {
         .join("")
     : '<p class="empty">No applications in this view.</p>';
   $("#providers").innerHTML = providers.length
-    ? `<div class="table-scroll"><table><thead><tr><th>Provider</th><th>Status</th><th>Manage access</th></tr></thead><tbody>${providers.map((p) => `<tr><td>${esc(p.id)}</td><td>${p.active ? "Active" : "Revoked"}</td><td><button class="quiet-button" data-action="rotate" data-id="${esc(p.id)}">Issue new token</button> ${p.active ? `<button class="quiet-button" data-action="revoke" data-id="${esc(p.id)}">Revoke</button>` : ""}</td></tr>`).join("")}</tbody></table></div>`
+    ? `<div class="table-scroll"><table><thead><tr><th>Provider</th><th>Status</th><th>Manage access</th></tr></thead><tbody>${providers.map((p) => `<tr><td>${esc(p.id)}</td><td>${p.active ? "Active" : "Revoked"}</td><td><button class="quiet-button" data-action="rotate" data-id="${esc(p.id)}">Issue new token</button> ${p.active ? `<button class="quiet-button" data-action="token-claim" data-id="${esc(p.id)}">Create token claim link</button> <button class="quiet-button" data-action="revoke" data-id="${esc(p.id)}">Revoke</button>` : ""}</td></tr>`).join("")}</tbody></table></div>`
     : '<p class="small muted">No database-managed providers yet.</p>';
 }
 async function refresh() {
@@ -137,12 +137,14 @@ document.addEventListener("click", (e) => {
     reopen: "Reopen application",
     revoke: "Revoke provider access",
     rotate: "Issue replacement token",
+    "token-claim": "Create a private token claim link",
   }[action.type];
   $("#action-info").textContent = ["rotate", "revoke"].includes(action.type)
     ? "This changes access for " +
       action.id +
       ". Existing tokens will stop working."
     : "Review this application before changing its status. Declined applications can be reopened.";
+  if (action.type === "token-claim") $("#action-info").textContent = "Creates a one-use link valid for 24 hours for this approved provider. Share it privately with the operator. Their existing token changes only when they claim the new one. A new link replaces any earlier unclaimed link.";
   $("#pool-label").hidden = action.type !== "publish-profile";
   $("#pool-label input").required = false;
   $("#provider-label").hidden = action.type !== "approve";
@@ -171,8 +173,11 @@ $("#action-form").addEventListener("submit", async (e) => {
           : action.id,
     });
     $("#action-dialog").close();
-    if (result.token) {
-      $("#token-value").textContent = result.token;
+    if (result.token || result.claimLink) {
+      $("#token-dialog h2").textContent = result.claimLink ? "Send this private claim link" : "Save this provider token";
+      $("#token-dialog .small").textContent = result.claimLink ? "One use, expires in 24 hours. Share only with this operator through a private channel. Anyone with the link can claim the token. No message has been sent." : "Shown once. Send privately to the reviewed operator; it cannot be recovered after closing.";
+      $("#copy-token").textContent = result.claimLink ? "Copy private link" : "Copy token";
+      $("#token-value").textContent = result.claimLink ? new URL(result.claimLink, location.origin).href : result.token;
       $("#copy-status").textContent = "";
       $("#token-dialog").showModal();
     }

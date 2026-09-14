@@ -56,3 +56,9 @@ The [adapter kit](https://xbtpulse.tech/adapter) provides local validation and d
 `found` remains required, but may explicitly be JSON `null` when block outcomes are not measured reliably. Numeric zero means measured zero, never unknown. Existing numeric reports remain supported. For example, use `"found": null` with genuine measured work segments and interval timestamps. Work-only reports count toward work totals and reporting coverage; they do not establish block outcomes or template control.
 
 Public summary `found` is null if any included interval lacks outcomes. No partial found total is compared against the full expected total. Reviewer views follow the same rule; this does not award or publish a score. The original signed adapter kit v0.1.0 validator still requires numeric found and cannot transport work-only reports unchanged. Use the updated RATUM preview or an operator-owned client against a server with this change deployed; do not replace missing outcomes with zero to satisfy an older validator.
+
+## Private token claim links
+
+Admins can select **Create token claim link** beside an approved active provider in Admin. Share that one-use private link with the intended operator through their existing private contact channel. It expires after 24 hours; a newer link supersedes the previous link. Creating or opening it does not change the current token.
+
+The operator confirms replacement, generates the token and downloads `token.txt`. Only claiming replaces the previous token. Tokens are never placed in application conversations or stored in recoverable form; the server stores hashes. Revocation, loss of approval or an intervening token rotation blocks the claim. Anyone holding the private link can claim it, so never publish it. No message is sent automatically. A lost response or lost download requires a new admin-issued link; do not assume the old token still works.

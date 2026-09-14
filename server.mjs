@@ -20,6 +20,7 @@ import {
 } from "./lib/messages.mjs";
 import { answerChallenge, publicReview } from "./lib/review.mjs";
 import { privateProfiles } from "./lib/profiles.mjs";
+import { inspectTokenClaim, redeemTokenClaim } from "./lib/token-claims.mjs";
 import http from "node:http";
 import { readFile, mkdir } from "node:fs/promises";
 import { resolve, join } from "node:path";
@@ -75,6 +76,8 @@ const retention = Math.max(
 const collector = new Collector(store, source, { retention }),
   pollSeconds = Math.max(10, Number(process.env.POLL_SECONDS) || 30);
 const files = {
+  "/token-claim": "token-claim.html",
+  "/token-claim.js": "token-claim.js",
   "/": "index.html",
   "/app.js": "app.js",
   "/style.css": "style.css",
@@ -190,6 +193,21 @@ const server = http.createServer(async (req, res) => {
         });
       }
       return;
+    }
+    if (url.pathname === "/api/token-claim") {
+      res.setHeader("X-Robots-Tag", "noindex, nofollow");
+      if (!["GET", "POST"].includes(req.method)) return send(res, 405, {error:"Method not allowed"});
+      if (req.method === "POST" && req.headers.origin !== (process.env.ADMIN_ORIGIN || "https://xbtpulse.tech"))
+        return send(res, 403, {error:"Origin not allowed"});
+      const provider = url.searchParams.get("provider"), secret = req.headers.authorization?.replace(/^Bearer /, "");
+      try {
+        if (req.method === "GET") return send(res, 200, inspectTokenClaim(store, provider, secret));
+        const body = await jsonBody(req);
+        if (body.confirm !== true) return send(res, 400, {error:"Confirm token replacement first."});
+        const result = redeemTokenClaim(store, provider, secret);
+        cache.clear();
+        return send(res, 200, result);
+      } catch { return send(res, 400, {error:"Link unavailable. It may be expired, used or superseded. Ask XBT Pulse for a new claim link."}); }
     }
     if (url.pathname === "/api/conversation") {
       const id = url.searchParams.get("application"),

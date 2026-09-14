@@ -49,3 +49,9 @@ Accepting a suggested telemetry percentage requires explicit confirmation that t
 Listing consent permits a pending name/status listing; profile consent permits reviewed publication and approved onboarding visibility. The directory includes approved consenting listings as well as public block attributions and profiles. Similar names are not automatically merged. Contact details, conversations and draft assessments remain private. The public change feed records observed participation-status changes, not historical approval dates or scorecard revisions.
 
 Public operators can have reviewed profiles before any attributed blocks. In Admin, use Review & publish profile and leave Pool ID blank to create a stable operator profile (or reuse that application's existing profile). Publication requires profile consent and identity/scope review. It does not establish block attribution, link telemetry, or award a rating. Existing attributed pool IDs should only be selected after verifying the relationship.
+
+## Private token claim links
+
+Admins can select **Create token claim link** beside an approved active provider in Admin. Share that one-use private link with the intended operator through their existing private contact channel. It expires after 24 hours; a newer link supersedes the previous link. Creating or opening it does not change the current token.
+
+The operator confirms replacement, generates the token and downloads `token.txt`. Only claiming replaces the previous token. Tokens are never placed in application conversations or stored in recoverable form; the server stores hashes. Revocation, loss of approval or an intervening token rotation blocks the claim. Anyone holding the private link can claim it, so never publish it. No message is sent automatically. A lost response or lost download requires a new admin-issued link; do not assume the old token still works.

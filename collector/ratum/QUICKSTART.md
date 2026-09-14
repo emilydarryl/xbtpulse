@@ -48,7 +48,7 @@ This uses Liam's stated difficulty units and persistence semantics. Work and net
 
 ## 4. Enable with the privately issued provider token
 
-After the local check passes, put the approved Crypto-Éire pool-wide provider token in `token.txt` using your local editor. Do not put it in a command, screenshot or message. If it is not available, obtain it through the existing private onboarding process; do not create a second provider for the same pool work.
+After the local check passes, put the approved Crypto-Éire pool-wide provider token in `token.txt` using your local editor. Do not put it in a command, screenshot or message. If it is not available, ask XBT Pulse for a private token claim link. Open it, confirm replacement and download token.txt; place that file beside ratum.py on the Prime host. The link expires after 24 hours and can be used once. Do not create a second provider for the same pool work.
 
 ```sh
 chmod 600 token.txt

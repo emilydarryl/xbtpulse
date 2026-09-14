@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Get your telemetry token · XBT Pulse</title><link rel="stylesheet" href="/style.css"><script type="module" src="/token-claim.js"></script></head>
+<body><header class="topbar"><a class="brand" href="/" aria-label="XBT Pulse home"><img src="/favicon.svg" width="34" height="34" alt=""><span>XBT<span class="brand-light">PULSE</span></span></a></header><main class="contribute-main">
+<p class="eyebrow">PRIVATE OPERATOR ACCESS</p><h1>Get your telemetry token</h1>
+<p>This token lets your adapter send aggregate work reports to XBT Pulse. It does not give XBT Pulse access to your miners, gateway or wallet.</p>
+<p id="claim-status" role="status">Checking your private link…</p>
+<section id="claim-controls" class="panel intake-panel" hidden>
+<p id="claim-provider"></p><p>Generating a token replaces this provider’s previous token. Update any running adapter with the new file. This link expires after 24 hours and works once.</p>
+<label><input type="checkbox" id="claim-confirm"> I understand that the previous token will stop working.</label>
+<p><button id="claim-create" class="primary-button" disabled>Generate my token</button></p></section>
+<section id="claim-result" class="panel intake-panel" hidden><h2>Save your token now</h2>
+<p>Download <code>token.txt</code> and place it beside your Prime adapter’s <code>ratum.py</code> on the operator host. Keep it private; on Linux use <code>chmod 600 token.txt</code>. Then follow your adapter’s submit instructions.</p>
+<p><button id="claim-download" class="primary-button">Download token.txt</button> <button id="claim-clear" class="quiet-button">Clear from this page</button></p>
+<p>The token is held only in this page’s memory until you leave or clear it. XBT Pulse stores only its hash. If you leave without saving, ask for a new claim link.</p></section>
+<p>Never post the private link or token in a public channel or application message. A forwarded link lets its recipient claim the token.</p>
+<a href="https://github.com/emilydarryl/xbtpulse/blob/main/collector/ratum/QUICKSTART.md">Prime adapter setup guide →</a>
+</main></body></html>

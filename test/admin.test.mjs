@@ -153,3 +153,17 @@ test("expired bootstrap and excessive login attempts fail closed", async (t) => 
     429,
   );
 });
+
+test('creating token claims requires admin authentication and CSRF', async t => {
+  const {store,call}=fixture(t);
+  assert.equal((await call('token-claim',{provider:'p'})).status,401);
+  const code=bootstrap(store);
+  await call('setup',{code,password:'long-test-claim-password'});
+  store.addApplication({id:'claim-app'});store.approveApplication('claim-app','p',digest('original'));
+  assert.equal((await call('token-claim',{provider:'p'},{'x-csrf-token':''})).status,403);
+  assert.equal((await call('token-claim',{provider:'p'},{origin:'https://evil.test'})).status,403);
+  const result=await call('token-claim',{provider:'p'});
+  assert.equal(result.status,201);
+  assert.match(result.data.claimLink,/^\/token-claim#/);
+  assert.equal(store.providerForHash(digest('original')),'p');
+});
