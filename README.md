@@ -55,6 +55,8 @@ See [deployment](docs/deployment.md), [telemetry contract](docs/telemetry.md), a
 
 ## Documentation index
 
+- [Codex / maintainer handoff and current project state](docs/HANDOFF.md)
+
 - [For operators: benefits, privacy, requirements and custom adapters](docs/operators.md)
 
 - [Visitor guide and page navigation](docs/site-guide.md)
