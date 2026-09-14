@@ -1430,3 +1430,11 @@ dialog::backdrop {
 @media (max-width: 600px) {
   .homepage-walkthrough > summary span { display: block; margin: 5px 0 0 18px; }
 }
+
+.home-page > .topbar { height: 64px; }
+.home-page .page-heading { padding: 22px 0 12px; }
+.home-page .page-heading h1 { font-size: clamp(25px, 2.2vw, 32px); letter-spacing: -1px; }
+.home-page .page-heading .intro { margin: 10px 0 0; line-height: 1.5; }
+.home-page .home-search { margin: 8px 0 12px; }
+.home-page .tabs { margin-top: 8px; }
+.home-page #participating-pools { scroll-margin-top: 20px; margin-top: 22px; }

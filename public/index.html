@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/style.css" />
     <script type="module" src="/app.js"></script>
   </head>
-  <body>
+  <body class="home-page">
     <header class="topbar">
       <a class="brand" href="/" aria-label="XBT Pulse home"
         ><img src="/favicon.svg" width="34" height="34" alt="" /><span
@@ -30,15 +30,10 @@
       <div id="notice" class="notice" role="status" hidden></div>
       <section class="page-heading">
         <div>
-          <p class="eyebrow">THE NETWORK, IN PERSPECTIVE</p>
           <h1>
-            Follow the work.<br /><span>Understand the concentration.</span>
+            Follow the work. <span>Understand the concentration.</span>
           </h1>
-          <p class="intro">
-            <strong>Making XBT mining decentralization visible.</strong><br />
-            Explore pool concentration, template control, and
-            transparency—backed by evidence.
-          </p>
+          <p class="intro">Making XBT mining decentralization visible. <a href="#participating-pools">Meet participating pools ↓</a> · <a href="/contribute">Get your pool assessed →</a></p>
         </div>
 
       </section>
@@ -53,42 +48,6 @@
         /><button class="primary-button" type="submit">Search →</button
         ><a href="/pools">Browse all pools</a>
       </form>
-      <section class="onboarding-highlight" aria-labelledby="onboarding-title">
-        <div class="onboarding-heading">
-          <div>
-            <h2 id="onboarding-title">Recently joined & onboarding</h2>
-            <p class="small muted" style="margin: 6px 0 0">
-              Show your commitment to decentralization and transparency.
-            </p>
-          </div>
-          <a class="primary-button" href="/contribute"
-            >Get your pool assessed →</a
-          >
-        </div>
-        <div id="onboarding-cards" class="onboarding-cards">
-          <p>Loading participating operators…</p>
-        </div>
-        <p class="small muted">
-          Public & private operators welcome. Start with telemetry
-          participation; higher ratings require reviewed evidence and are not
-          yet awarded.
-          <a href="/ratings">See the rating framework →</a>
-        </p>
-      </section>
-      <details class="panel homepage-walkthrough">
-        <summary><strong>Explore how XBT Pulse works</strong><span class="small muted">Soveroot · private-pool example</span></summary>
-        <div class="walkthrough-content">
-        <p class="eyebrow">REAL PRIVATE-POOL EXAMPLE · NOT ACCEPTING MINERS</p>
-        <p>Follow a participating private DATUM gateway through its public profile, reported work, and reviewed connection snapshot.</p>
-        <p id="example-status" class="small muted" aria-live="polite">Checking current reporting…</p>
-        <div class="directory-actions">
-          <a class="primary-button" href="/pool?id=explorer%3Asoveroot">1. Explore Soveroot →</a>
-          <a class="quiet-button" href="/?view=templates#templates">2. See reported work →</a>
-          <a class="quiet-button" href="/mining-map?pool=explorer%3Asoveroot">3. Follow the connection →</a>
-        </div>
-        <p class="small muted">Real observations, not sample data. Reporting is not proof of template independence or a rating. The Lazarus connection is a dated inspection, not a live network map.</p>
-        </div>
-      </details>
       <nav class="tabs" aria-label="Dashboard views">
         <a class="mining-map-nav" href="/miner-checker">Who builds my block? ↗</a>
         <a class="mining-map-nav" href="/watchlist">My watchlist ☆</a>
@@ -184,6 +143,42 @@
             </p>
           </section>
         </div>
+      <section class="onboarding-highlight" id="participating-pools" aria-labelledby="onboarding-title">
+        <div class="onboarding-heading">
+          <div>
+            <h2 id="onboarding-title">Recently joined & onboarding</h2>
+            <p class="small muted" style="margin: 6px 0 0">
+              Show your commitment to decentralization and transparency.
+            </p>
+          </div>
+          <a class="primary-button" href="/contribute"
+            >Get your pool assessed →</a
+          >
+        </div>
+        <div id="onboarding-cards" class="onboarding-cards">
+          <p>Loading participating operators…</p>
+        </div>
+        <p class="small muted">
+          Public & private operators welcome. Start with telemetry
+          participation; higher ratings require reviewed evidence and are not
+          yet awarded.
+          <a href="/ratings">See the rating framework →</a>
+        </p>
+      </section>
+      <details class="panel homepage-walkthrough">
+        <summary><strong>Explore how XBT Pulse works</strong><span class="small muted">Soveroot · private-pool example</span></summary>
+        <div class="walkthrough-content">
+        <p class="eyebrow">REAL PRIVATE-POOL EXAMPLE · NOT ACCEPTING MINERS</p>
+        <p>Follow a participating private DATUM gateway through its public profile, reported work, and reviewed connection snapshot.</p>
+        <p id="example-status" class="small muted" aria-live="polite">Checking current reporting…</p>
+        <div class="directory-actions">
+          <a class="primary-button" href="/pool?id=explorer%3Asoveroot">1. Explore Soveroot →</a>
+          <a class="quiet-button" href="/?view=templates#templates">2. See reported work →</a>
+          <a class="quiet-button" href="/mining-map?pool=explorer%3Asoveroot">3. Follow the connection →</a>
+        </div>
+        <p class="small muted">Real observations, not sample data. Reporting is not proof of template independence or a rating. The Lazarus connection is a dated inspection, not a live network map.</p>
+        </div>
+      </details>
         <section class="panel pool-panel">
           <div class="panel-heading">
             <div>
