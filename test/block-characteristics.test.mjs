@@ -1,0 +1,9 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {sourceCharacteristics,characterize} from '../lib/block-characteristics.mjs';
+import {Collector} from '../lib/collector.mjs';
+import {Store} from '../lib/store.mjs';
+import {forkHeight} from '../lib/source.mjs';
+test('characteristics preserve partial coverage and count distinct positive recipients',()=>{const d=characterize([{txCount:1,weight:400,sizeBytes:100,outputs:[{address:'a',sats:1},{address:'a',sats:2},{address:'z',sats:0}]},{outputs:[{address:'b',sats:1},{address:'c',sats:2}]}]);assert.equal(d.transactions.observations,1);assert.equal(d.coinbaseOnly.share,1);assert.equal(d.recipients.average,1.5);assert.equal(d.recipients.single,1);assert.equal(d.recipients.multiple,1);assert.equal(characterize([]).weight.average,null);assert.equal(characterize([{}]).coinbaseOnly.count,null);});
+test('source field mapping rejects missing or invalid numeric metadata',()=>{assert.equal(sourceCharacteristics({tx_count:3,size:100,weight:400}).txCount,3);assert.equal(sourceCharacteristics({tx:[{},{}]},true).txCount,2);assert.equal(sourceCharacteristics({tx_count:'3',weight:NaN}).weight,null);assert.equal(sourceCharacteristics({}).txCount,null);});
+test('metadata backfill replaces blocks without duplicate heights or reset',async()=>{const s=new Store(':memory:'),hash='a'.repeat(64),b={height:forkHeight,hash,previousHash:'b'.repeat(64),time:1,difficulty:1,tag:'',outputs:[{address:'a',sats:1}]};s.saveBlocks([b],2016);let calls=0;const source={supportsCharacteristics:true,name:'test',verify:async()=>{},tip:async()=>forkHeight,hash:async()=>hash,range:async()=>{calls++;return [{...b,characteristicsVersion:1,txCount:1}];}};await new Collector(s,source).poll();assert.equal(s.blocks().length,1);assert.equal(s.blocks()[0].txCount,1);await new Collector(s,source).poll();assert.equal(calls,1);s.db.close();});

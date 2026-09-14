@@ -10,6 +10,8 @@ The sample UI is explicitly illustrative. Live data starts only when `EXPLORER_A
 
 ## What is implemented
 
+- Pool-versus-network block characteristics: average transaction count, size/weight, coinbase-only blocks and positive-value recipient patterns across 144/576/2,016-block windows. Per-metric coverage is explicit; no operator telemetry required.
+
 - `/simulator`: hypothetical observed-share shifts to one pool or equally among other named pools, before/after bars, concentration watch levels, shareable choices and a dated PNG scenario card. Unknown attribution remains unchanged; no hashrate forecast or independence claim.
 
 - Persistent “What changed?” history on pool profiles: dated baselines, before/after public terms and assessment changes, linked telemetry states, source links and observation-gap notices. Latest 50 events shown from 90-day retention.

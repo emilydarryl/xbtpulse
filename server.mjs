@@ -1,3 +1,4 @@
+import {characterize} from './lib/block-characteristics.mjs';
 import {addressDetails} from './lib/address-details.mjs';
 import {siteNavigation} from './lib/site-navigation.mjs';
 import {initializePoolHistory,capturePoolHistory,poolHistory} from './lib/pool-history.mjs';
@@ -474,6 +475,7 @@ const server = http.createServer(async (req, res) => {
           return {name,active:activeIds.has(name),...row};
         });
         return send(res, 200, {
+          characteristics: {pool:characterize(measured),network:characterize(store.blocks(window))},
           history: poolHistory(store,id,researchedProfiles),
           freshness: evidenceFreshness({attribution:review,profile:visibleProfile,scorecard:card,providers:linkedProviders}),
           id,
