@@ -90,4 +90,4 @@ Custom gateway operators can use the [adapter kit and compatibility checklist](h
 
 ## Accepted-work-only telemetry
 
-Reports may explicitly use `found: null` when block outcomes are unavailable. Accepted work and expected blocks remain usable; public and reviewer views suppress found/expected comparisons for any window containing missing outcomes. The RATUM preview supports the operator-reported `cumulative_accepted_work` field. This change needs deployment and operator validation before live use.
+Reports may explicitly use `found: null` when block outcomes are unavailable. Accepted work and expected blocks remain usable; public and reviewer views suppress found/expected comparisons for any window containing missing outcomes. The RATUM preview supports the operator-reported `cumulative_accepted_work` field. Server support is deployed; Crypto-Eire still requires operator validation before its reports go live.

@@ -7,8 +7,8 @@ Prepared September 14, 2026. Read this before continuing work from another compu
 - Live site: https://xbtpulse.tech
 - Public repository: https://github.com/emilydarryl/xbtpulse
 - Branch: `main`.
-- Last deployed application revision: `26cffe365ae03b9a017827512c8385c8d51c7f42`. Later documentation-only commits do not require a service rebuild.
-- Last completed validation: `npm run check`, 51 passing Node tests, and live browser inspection of the new pool-history baseline. Working tree was clean before this handoff was written.
+- Last deployed application revision: `ba863f5cd892c07083fabeac66c4a25a1bb839f4` (September 14, 2026). Later documentation-only commits do not require a service rebuild.
+- Last completed validation: `npm run check`, 52 passing Node tests, 4 RATUM Python tests, packaging/signature checks, local missing-outcome browser checks and live post-deployment browser/health/readiness checks. Working tree was clean before this handoff was written.
 - No active feature request remains unfinished. The owner requested this handoff to continue on another computer. Do not invent a previously approved next feature.
 
 The mission is **Making XBT mining decentralization visible.** This is a public network observatory, not the owner's private mining pool. Preserve that separation.
@@ -108,8 +108,8 @@ The owner prefers action and concise progress updates. Preserve the compact layo
 
 Update the README feature list, visitor/operator/API guides as appropriate with each feature. Use real browser checks for visible changes and tests for substantive logic. Keep reversible local work moving; do not repeatedly ask for permission already granted. Never assume a new machine has the old machine's tools, SSH keys or signing secrets.
 
-## Local continuation: work-only telemetry
+## Deployed continuation: work-only telemetry
 
-The owner requested reducing Crypto-Eire integration work. Local changes add explicit `found: null` ingestion and incomplete-outcome handling throughout public and reviewer summaries. RATUM preview mode `prime-cumulative` consumes Liam's new top-level counter and sends unknown outcomes, so a new block counter is no longer required. These changes are not deployed; the deployed application revision above remains unchanged. Validate fresh operator schema/build, units and process/reset assumptions before activation. Signed downloads remain unchanged; adapter kit v0.1.0 does not accept null outcomes.
+The owner requested reducing Crypto-Eire integration work. Deployed changes add explicit `found: null` ingestion and incomplete-outcome handling throughout public and reviewer summaries. RATUM preview mode `prime-cumulative` consumes Liam's new top-level counter and sends unknown outcomes, so a new block counter is no longer required. Deployed September 14 at the application revision above; `/healthz` and `/readyz` passed. Existing telemetry and current network collection were verified in the live browser. Crypto-Eire remains awaiting reports; no operator installation or message was performed. Validate fresh operator schema/build, units and process/reset assumptions before activation. Signed downloads remain unchanged; adapter kit v0.1.0 does not accept null outcomes.
 
-Local validation: 52 Node tests and 4 RATUM Python tests passed, syntax checks passed, and real-browser checks with isolated synthetic data confirmed unavailable outcomes on dashboard and pool profile. No live operator data, production configuration or signed archive was changed.
+Local validation: 52 Node tests and 4 RATUM Python tests passed, syntax checks passed, and real-browser checks with isolated synthetic data confirmed unavailable outcomes on dashboard and pool profile. No synthetic reports were stored in production. Production configuration and signed archives were preserved.
