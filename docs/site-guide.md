@@ -89,3 +89,5 @@ Mining-map links from other pool profiles open that operator's own view with pub
 Directory cards provide a View pool button and a separate Compare action below the pool name; actions wrap when space is limited.
 
 Soveroot is featured as a real private-pool walkthrough: homepage links lead to its profile, reported work and dated Lazarus connection. Current reporting status is derived from the dashboard response, with missing/delayed and sample states explicit. The example does not imply accepting miners, independent templates or an awarded rating.
+
+Pool profiles show a prominent Pool scores panel below the name, above mining statistics and navigation. Decentralization and Transparency each show the published score out of 100 or Not assessed. The panel links to the evidence and scoring rules, dates published assessments, and flags historical observation periods. Private drafts are never displayed; comparisons continue to use published scores only.

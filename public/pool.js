@@ -65,12 +65,19 @@ async function load() {
     watchProfile=d;document.querySelector('#watch-pool').disabled=false;updateWatchButton();
     document.title = d.name + " · XBT Pulse";
     const scoreLink = document.querySelector("#scorecard-link");
+    for (const axis of ["decentralization", "transparency"]) {
+      const score = d.scorecard?.totals?.[axis];
+      document.querySelector("#pool-" + axis).textContent = score == null ? "Not assessed" : `${score} / 100`;
+    }
+    document.querySelector("#pool-score-status").textContent = d.scorecard
+      ? `Published ${new Date(d.scorecard.publishedAt).toLocaleDateString()} · Observation period: ${d.scorecard.start} to ${d.scorecard.end}. ${Date.now() - Date.parse(d.scorecard.end) > 30 * 86400000 ? "Historical assessment — review due. " : ""}Scores are scoped reviewer assessments, not mining-share rankings.`
+      : "No published assessment yet. Not assessed does not mean zero. Telemetry participation and profile publication do not automatically award scores.";
     scoreLink.replaceChildren();
     scoreLink.hidden = !d.scorecard;
     if (d.scorecard) {
       const a = document.createElement("a");
       a.href = "/scorecard?pool=" + encodeURIComponent(id);
-      a.textContent = `Reviewed pilot scorecard: Decentralization ${d.scorecard.totals.decentralization}/100 · Transparency ${d.scorecard.totals.transparency}/100 →`;
+      a.textContent = "Read the assessment and evidence →";
       scoreLink.append(a);
     }
     document.querySelector("#name").textContent = d.name;
@@ -94,6 +101,9 @@ async function load() {
           "",
         )}</dl>${profile?.sources?.length ? `<p class="small">Sources: ${profile.sources.map((source) => `<a href="${esc(source.url)}" rel="noopener noreferrer">${esc(source.title)}</a>`).join(" · ")}</p>` : ""}<a href="/contribute">Submit or update this pool’s details ↗</a></section><section class="panel intake-panel"><p class="eyebrow">TRANSPARENCY & DECENTRALIZATION</p><h2>${esc(d.rating.status)}</h2><p>${esc(d.rating.evidence)}</p><p class="small muted">Publishing a profile does not award a rating. Template telemetry requires reviewed provider mappings and reporting participation.</p><h3>Template telemetry</h3>${d.telemetry.length ? d.telemetry.map((p) => `<p>${esc(p.name)} · ${esc(p.participationBadge)}<br>Last report: ${esc(new Date(p.lastReport).toLocaleString())}<br>Expected blocks: ${p.expected.toFixed(2)} · Reported found: ${p.found == null ? "Not available" : p.found} · Found / expected: ${p.found != null && p.expected > 0 ? (p.found / p.expected).toFixed(2) : "Not available"}</p>`).join("") : "<p>No reports from reviewed, linked providers in the last 24 hours.</p>"}<p class="small muted">Telemetry is operator-reported and covers participating providers only.</p><a href="/ratings">Read the rating criteria ↗</a></section><section class="panel intake-panel"><h2>Recent attributed blocks</h2><p class="small muted">Up to 24 matching blocks from the latest ${d.sample} network blocks.</p>${d.recent.length ? d.recent.map((b) => `<p><strong>#${b.height}</strong> · ${esc(new Date(b.time * 1000).toLocaleString())}<br><span class="mono">${esc(b.hash)}</span></p>`).join("") : "<p>No attributed blocks available in this window. Unlinked attribution does not imply zero mining activity.</p>"}</section><section class="panel intake-panel"><h2>Coinbase payout recipients</h2><p class="small muted">Recipients in this pool’s attributed blocks within the latest ${d.sample} network blocks. Addresses do not establish pool ownership or template control. Amounts are observed rewards, not wallet balances.</p><div class="table-scroll"><table><thead><tr><th>Address</th><th>Blocks</th><th>Received XBT</th></tr></thead><tbody>${d.addresses.map((a) => `<tr><td class="mono">${esc(a.address)}</td><td>${a.blocks}</td><td>${a.amount.toFixed(8)}</td></tr>`).join("") || '<tr><td colspan="3">No recipients in this window.</td></tr>'}</tbody></table></div></section>`;
   } catch (e) {
+    for (const axis of ["decentralization", "transparency"]) document.querySelector("#pool-" + axis).textContent = "Unavailable";
+    document.querySelector("#pool-score-status").textContent = "Unable to load the published assessment. Please try again.";
+    document.querySelector("#scorecard-link").hidden = true;
     document.querySelector("#status").textContent = e.message;
     document.querySelector("#name").textContent = "Pool profile unavailable";
   }

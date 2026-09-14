@@ -21,6 +21,17 @@
       <p class="eyebrow">POOL PROFILE</p>
       <h1 id="name">Loading pool…</h1>
       <p id="status" role="status"></p>
+      <section class="panel intake-panel" aria-labelledby="pool-scores-title">
+        <p class="eyebrow">PILOT ASSESSMENT</p>
+        <h2 id="pool-scores-title">Pool scores</h2>
+        <div class="pool-score-grid">
+          <div><h3>Decentralization</h3><strong id="pool-decentralization">Loading…</strong></div>
+          <div><h3>Transparency</h3><strong id="pool-transparency">Loading…</strong></div>
+        </div>
+        <p id="pool-score-status" class="small muted">Checking published assessment…</p>
+        <p id="scorecard-link" hidden></p>
+        <a href="/scoring-rules">How scoring works →</a>
+      </section>
       <section id="soveroot-example" class="panel intake-panel" hidden>
         <p class="eyebrow">WORKING EXAMPLE · PRIVATE POOL · NOT ACCEPTING MINERS</p>
         <h2>Follow the evidence</h2>
@@ -39,7 +50,6 @@
       <p><a class="primary-button" id="compare-pool-link" href="/compare">Compare this pool →</a></p>
       <p><button id="watch-pool" class="quiet-button" disabled aria-pressed="false">☆ Watch this pool</button> <a href="/watchlist">My watchlist →</a></p><p id="watch-note" class="small muted" role="status"></p>
       <p><a id="miner-checker-link" href="/miner-checker">Who builds my block? →</a></p><div id="content"></div>
-      <p id="scorecard-link" hidden></p>
       <footer>
         <a href="/">← Network dashboard</a> ·
         <a href="/ratings">Ratings framework</a>

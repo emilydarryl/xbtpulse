@@ -1406,3 +1406,17 @@ dialog::backdrop {
   margin: 0;
   text-decoration: none;
 }
+.pool-score-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 16px;
+  margin: 16px 0;
+}
+.pool-score-grid > div {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #f5f7f2;
+}
+.pool-score-grid h3 { margin: 0 0 12px; }
+.pool-score-grid strong { font-size: 24px; }

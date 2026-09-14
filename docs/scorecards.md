@@ -9,3 +9,5 @@ Publishing requires an approved application, profile publication consent, a link
 Pool profiles link to published scorecards. The scorecard shows its scope, reviewer, dates, evidence and totals. Observations older than 30 days are labeled historical and due for re-review. Formal higher-tier badges remain disabled. The existing participation badges and block-production ranks retain their distinct meanings.
 
 Soveroot has an unsaved starter example when no draft exists: its dated gateway connection inspection, limitations and remaining ownership/template checks. No criterion receives points by default. The admin must save and review this example; the known inspection alone is insufficient for publishing a numerical score.
+
+Pool profiles show a prominent Pool scores panel below the name, above mining statistics and navigation. Decentralization and Transparency each show the published score out of 100 or Not assessed. The panel links to the evidence and scoring rules, dates published assessments, and flags historical observation periods. Private drafts are never displayed; comparisons continue to use published scores only.
