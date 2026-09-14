@@ -91,3 +91,5 @@ Directory cards provide a View pool button and a separate Compare action below t
 Soveroot is featured as a real private-pool walkthrough: homepage links lead to its profile, reported work and dated Lazarus connection. Current reporting status is derived from the dashboard response, with missing/delayed and sample states explicit. The example does not imply accepting miners, independent templates or an awarded rating.
 
 Pool profiles show a prominent Pool scores panel below the name, above mining statistics and navigation. Decentralization and Transparency each show the published score out of 100 or Not assessed. The panel links to the evidence and scoring rules, dates published assessments, and flags historical observation periods. Private drafts are never displayed; comparisons continue to use published scores only.
+
+The homepage Soveroot walkthrough is collapsed into a compact **Explore how XBT Pulse works** row. Expand it to see the real-example explanation, current reporting status and the three profile/work/map links. It starts closed to keep dashboard statistics closer to the top.

@@ -1420,3 +1420,13 @@ dialog::backdrop {
 }
 .pool-score-grid h3 { margin: 0 0 12px; }
 .pool-score-grid strong { font-size: 24px; }
+
+.homepage-walkthrough { margin: 16px 0; padding: 0; }
+.homepage-walkthrough > summary { cursor: pointer; padding: 14px 20px; }
+.homepage-walkthrough > summary strong { margin-right: 16px; }
+.homepage-walkthrough > summary:focus-visible { outline: 2px solid #a64b00; outline-offset: 3px; }
+.walkthrough-content { padding: 0 20px 16px; }
+.walkthrough-content > p { margin: 12px 0; }
+@media (max-width: 600px) {
+  .homepage-walkthrough > summary span { display: block; margin: 5px 0 0 18px; }
+}
