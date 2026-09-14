@@ -83,3 +83,5 @@ When accepted-work telemetry lacks block outcomes for any interval in the displa
 Directory name search ignores letter case and accents, so Crypto-Éire also matches Crypto-Eire. This affects search only; listings and pool identities remain separate.
 
 Public operators can have reviewed profiles before any attributed blocks. In Admin, use Review & publish profile and leave Pool ID blank to create a stable operator profile (or reuse that application's existing profile). Publication requires profile consent and identity/scope review. It does not establish block attribution, link telemetry, or award a rating. Existing attributed pool IDs should only be selected after verifying the relationship.
+
+Mining-map links from other pool profiles open that operator's own view with published claims and explicitly unmapped connections. They no longer select the unrelated Soveroot–Lazarus example. New operators do not receive inferred connection arrows.

@@ -86,10 +86,57 @@ const selected =
     : pool === "explorer:lazarus"
       ? "lazarus"
       : "upstream";
-if (pool && !["explorer:soveroot", "explorer:lazarus"].includes(pool)) {
+async function showPublishedOperator(id) {
+  const surface = document.querySelector(".map-surface");
   const notice = document.querySelector("#map-context");
+  surface.hidden = true;
+  panel.replaceChildren();
   notice.hidden = false;
-  notice.textContent =
-    "This operator is not mapped yet. Showing the Soveroot–Lazarus example; no relationship is implied for the operator you came from.";
+  notice.textContent = "Loading this operator’s published details…";
+  try {
+    const response = await fetch("/api/pool?" + new URLSearchParams({id}));
+    if (!response.ok) throw Error("Profile unavailable");
+    const data = await response.json();
+    const profile = data.profile;
+    notice.textContent = "Operator view · connections have not been independently mapped.";
+    const section = document.createElement("section");
+    section.className = "map-surface";
+    const heading = document.createElement("h2");
+    heading.textContent = data.name;
+    section.append(heading);
+    const node = document.createElement("button");
+    node.className = "map-node";
+    node.dataset.item = "published-operator";
+    node.setAttribute("aria-pressed", "true");
+    for (const text of [data.name, profile?.poolType === "private" ? "Private operator" : "Pool operator", "Connections not yet mapped"]) {
+      const line = document.createElement("span");
+      line.textContent = text;
+      node.append(line);
+    }
+    section.append(node);
+    const explanation = document.createElement("p");
+    explanation.className = "small muted";
+    explanation.textContent = "No connection arrows are drawn without reviewed relationship evidence. An unmapped connection does not mean the operator is inactive.";
+    section.append(explanation);
+    surface.after(section);
+    const claims = profile
+      ? ["Published operator claims", profile.reviewedAt ? "Reviewed for publication: " + new Date(profile.reviewedAt).toLocaleDateString() : "Review date unavailable", "Protocols: " + (profile.protocols || "Not provided"), "Template role: " + (profile.template || "Not provided"), "Payout method: " + (profile.payout || "Not provided")].join(" · ")
+      : "No published operator claims are available yet.";
+    items["published-operator"] = [data.name, "Operator profile · relationships unverified", claims,
+      "These submitted details do not verify template construction, upstream connections or ownership. Telemetry and block attribution are separate evidence.",
+      "/pool?" + new URLSearchParams({id})];
+    node.addEventListener("click", () => select("published-operator"));
+    select("published-operator");
+  } catch {
+    notice.textContent = "This operator’s details are unavailable. No unrelated example has been selected.";
+    const link = document.createElement("a");
+    link.href = "/pools";
+    link.textContent = "Find an operator in the directory →";
+    panel.append(link);
+  }
 }
-select(selected);
+if (pool && !["explorer:soveroot", "explorer:lazarus"].includes(pool)) {
+  showPublishedOperator(pool);
+} else {
+  select(selected);
+}
