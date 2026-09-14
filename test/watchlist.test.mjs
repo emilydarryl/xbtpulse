@@ -1,0 +1,5 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readWatch,saveWatch,snapshot,changes} from '../public/watch-store.js';
+test('watch storage deduplicates and persists without an account',()=>{let raw=null;const storage={getItem:()=>raw,setItem:(k,v)=>{raw=v;}};assert.deepEqual(readWatch(storage),[]);saveWatch([{id:'a',name:'A'},{id:'a',name:'duplicate'},{id:'b',name:'B'}],storage);assert.equal(readWatch(storage).length,2);raw='broken';assert.throws(()=>readWatch(storage));});
+test('watch changes preserve missing scores and separate telemetry from mining',()=>{const before=snapshot({profile:{fee:'1'}});assert.equal(before.decentralization,null);assert.deepEqual(changes(null,before),[]);const after=snapshot({profile:{fee:'3'},freshness:{telemetry:[{name:'Gateway',status:'Stale'}]},scorecard:{totals:{decentralization:0,transparency:70},publishedAt:123}});assert.equal(changes(before,after).length,5);assert.ok(changes(before,after).some(x=>x.includes('Not assessed → 0')));assert.equal(snapshot({profile:{poolType:'private',fee:'3'}}).fee,'N/A — private pool');assert.deepEqual(changes(before,{...before,seenAt:999}),[]);});

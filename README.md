@@ -10,6 +10,8 @@ The sample UI is explicitly illustrative. Live data starts only when `EXPLORER_A
 
 ## What is implemented
 
+- Browser-local `/watchlist`: save up to 20 pools, see mining share and published scores, highlight fee/telemetry/assessment changes since the previous visit, and compare two or three selections. No account or notifications.
+
 - Pilot reviewer scorecards: separate decentralization and transparency scores out of 100, private drafts, public preview, explicit publication and revision history. Missing criteria remain Not assessed; higher-tier awards remain disabled. `/ratings` explains the framework and `/scoring-rules` publishes the pilot rubric.
 - Assessment assistant: telemetry coverage/gaps, bounded public-source retrieval, dated excerpts and content-change checks, conditional suggestions, follow-up drafts and automatic prefilling of empty form fields. Existing scores are preserved; saving, publishing and sending require separate action.
 - Searchable `/pools` directory for retained block attributions, published profiles and approved consenting listings, including small/private operators. Homepage search links directly to it.

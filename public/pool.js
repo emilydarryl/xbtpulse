@@ -1,3 +1,5 @@
+import {readWatch,saveWatch,snapshot} from '/watch-store.js';
+let watchProfile;
 const esc = (s) =>
   String(s ?? "").replace(
     /[&<>"']/g,
@@ -58,6 +60,7 @@ async function load() {
     );
     const d = windows[0],
       profile = d.profile;
+    watchProfile=d;document.querySelector('#watch-pool').disabled=false;updateWatchButton();
     document.title = d.name + " · XBT Pulse";
     const scoreLink = document.querySelector("#scorecard-link");
     scoreLink.replaceChildren();
@@ -98,3 +101,7 @@ load();
 setInterval(() => {
   if (!document.hidden) load();
 }, 30000);
+
+function updateWatchButton(){try{const active=readWatch().some(p=>p.id===id);document.querySelector('#watch-pool').textContent=active?'★ Watching · remove':'☆ Watch this pool';document.querySelector('#watch-pool').setAttribute('aria-pressed',String(active));}catch{document.querySelector('#watch-note').textContent='Browser storage is unavailable or the saved watchlist is invalid.';}}
+document.querySelector('#watch-pool').addEventListener('click',()=>{try{let rows=readWatch();if(rows.some(p=>p.id===id))rows=rows.filter(p=>p.id!==id);else{if(rows.length>=20)throw Error('Your watchlist holds up to 20 pools. Remove one before adding another.');rows.push({id,name:watchProfile.name,last:snapshot(watchProfile)});}saveWatch(rows);updateWatchButton();document.querySelector('#watch-note').textContent='Watchlist saved in this browser.';}catch(e){document.querySelector('#watch-note').textContent=e.message||'Unable to save watchlist.';}});
+window.addEventListener('storage',updateWatchButton);

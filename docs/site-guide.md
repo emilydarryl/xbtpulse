@@ -5,6 +5,7 @@ Mission: **Making XBT mining decentralization visible.** Explore pool concentrat
 | Page | What to use it for |
 | --- | --- |
 | `/` | Current observed distribution, concentration signals, recipients, template telemetry, recent blocks and onboarding listings |
+| `/watchlist` | Browser-saved favorite pools, changes since the previous visit and comparison shortcuts |
 | `/compare` | Compare up to three pools by common observation window, sourced terms, evidence freshness and published scores; download a PNG share card |
 | `/pools` | Search named pools of every size; filter public/private/unspecified type; find older block observations and published profiles |
 | `/pool?id=...` | One pool's observation windows, recipients, public terms, linked telemetry and any published scorecard |
@@ -51,3 +52,11 @@ Comparison links are available on the homepage navigation, directory and pool pr
 The comparison picker shows suggestions only after a pool name is entered. Adding a pool clears suggestions; removable selected-pool chips sit above the comparison.
 
 On the comparison page, select two or three pools and choose **Share comparison card** to preview and download a PNG for Discord. **Copy comparison link** supplies the live URL to post alongside the image. Cards include their creation time, observation window, source freshness, sourced terms and separate published scores. Missing scores remain unassessed. The preview stays a fixed snapshot while the page refreshes; reopen it for a newer image. Long fields can be shortened, so consult the included profile/source links for full details.
+
+## My watchlist
+
+Open a pool profile and choose **Watch this pool**, then follow **My watchlist** (also linked from the homepage and directory). Up to 20 pools are saved only in this browser; clearing site data removes the list and it does not sync across devices.
+
+The page shows the latest 144-block share, chain source status, sourced fees, telemetry status and separate published scores. Select two or three checkboxes to compare. Remove buttons stop watching a pool. Data refreshes every 30 seconds while visible.
+
+Fee, telemetry-status and published-assessment changes are compared with the saved observation from your previous visit (or when you first watched the pool). That baseline stays fixed during the current visit. Successful observations are saved for the next visit; failed requests preserve previous data. This is a browser snapshot comparison, not a complete event log: changes between visits can be missed. Mining-share movements are displayed in current stats, not listed as change events. No email, Discord or push notifications are sent. Storage errors are shown rather than claiming the list was saved.

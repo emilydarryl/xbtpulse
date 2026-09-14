@@ -1,0 +1,20 @@
+import {readWatch,saveWatch,snapshot,changes} from '/watch-store.js';
+const $=s=>document.querySelector(s),add=(parent,tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;parent.append(n);return n;};
+let baseline=new Map(),selected=new Set(),request=0;
+const score=v=>v===null?'Not assessed':v+'/100';
+try{baseline=new Map(readWatch().map(p=>[p.id,p.last]));}catch{}
+function selection(){ $('#compare-watch').disabled=selected.size<2||selected.size>3; }
+async function load(){const run=++request;let rows;try{rows=readWatch();}catch{$('#watch-status').textContent='Unable to read browser storage. Enable storage for this site or clear an invalid saved watchlist in browser settings.';return;}
+ $('#watch-status').textContent=rows.length?'Loading watched pools…':'No watched pools yet. Open a pool profile and choose Watch this pool.';
+ const results=[];for(let i=0;i<rows.length;i+=4){results.push(...await Promise.all(rows.slice(i,i+4).map(async row=>{try{const r=await fetch('/api/pool?'+new URLSearchParams({id:row.id,window:'144'}),{signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error();return {row,p:await r.json()};}catch{return {row};}})));if(run!==request)return;}
+ const root=$('#watch-rows');root.replaceChildren();const updates=new Map();
+ for(const {row,p} of results){const card=add(root,'section');card.className='panel intake-panel';const a=add(add(card,'h2'),'a',p?.name||row.name);a.href='/pool?id='+encodeURIComponent(row.id);
+ const remove=add(card,'button','Remove from watchlist');remove.className='quiet-button';remove.addEventListener('click',()=>{try{saveWatch(readWatch().filter(x=>x.id!==row.id));selected.delete(row.id);selection();load();}catch{$('#watch-status').textContent='Could not save removal.';}});
+ if(!p){selected.delete(row.id);add(card,'p','Profile unavailable. Previous observations retained; this does not mean the pool is offline.');continue;}
+ const label=add(card,'label');const check=add(label,'input');check.type='checkbox';check.checked=selected.has(row.id);label.append(document.createTextNode(' Compare '+p.name));check.addEventListener('change',()=>{if(check.checked&&selected.size>=3){check.checked=false;$('#watch-status').textContent='Select at most three pools.';return;}check.checked?selected.add(row.id):selected.delete(row.id);selection();});
+ const now=snapshot(p);updates.set(row.id,{name:p.name,last:now});add(card,'p','Observed share: '+(p.share==null?'Not available':(p.share*100).toFixed(1)+'%')+' · '+(p.blocks??'Unattributed')+' / '+p.sample+' blocks');add(card,'p','Chain source: '+p.status+' · '+new Date(p.updatedAt).toLocaleString());add(card,'p','Fees (%): '+now.fee);add(card,'p','Telemetry: '+now.telemetry);add(card,'p','Decentralization: '+score(now.decentralization)+' · Transparency: '+score(now.transparency));
+ const before=baseline.get(row.id),diff=changes(before,now);add(card,'h3',before?'Changes since '+new Date(before.seenAt).toLocaleString():'First observation');if(diff.length){const ul=add(card,'ul');diff.forEach(t=>add(ul,'li',t));}else add(card,'p',before?'No fee, telemetry status or assessment changes observed.':'Saved a baseline for your next visit.');add(card,'p','Terms and protocols are sourced claims. Block share is not a decentralization score.').className='small muted';}
+ selection();try{saveWatch(readWatch().map(row=>updates.has(row.id)?{...row,...updates.get(row.id)}:row));$('#watch-status').textContent=rows.length?rows.length+' watched pools · Refreshes every 30 seconds while visible.':'';}catch{$('#watch-status').textContent='Displayed current data, but could not save this visit in browser storage.';}
+}
+$('#refresh-watch').addEventListener('click',load);$('#compare-watch').addEventListener('click',()=>{if(selected.size<2||selected.size>3)return;const q=new URLSearchParams({window:'144'});selected.forEach(id=>q.append('pool',id));location.href='/compare?'+q;});
+window.addEventListener('storage',()=>{$('#watch-status').textContent='Watchlist updated in another tab. Refresh to see changes.';});load();setInterval(()=>{if(!document.hidden)load();},30000);
