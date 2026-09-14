@@ -5,6 +5,7 @@ Mission: **Making XBT mining decentralization visible.** Explore pool concentrat
 | Page | What to use it for |
 | --- | --- |
 | `/` | Current observed distribution, concentration signals, recipients, template telemetry, recent blocks and onboarding listings |
+| `/simulator` | Model hypothetical share shifts and export a dated scenario card |
 | `/miner-checker` | Examine hosted or own-DATUM-gateway paths, sourced terms and missing setup evidence |
 | `/watchlist` | Browser-saved favorite pools, changes since the previous visit and comparison shortcuts |
 | `/compare` | Compare up to three pools by common observation window, sourced terms, evidence freshness and published scores; download a PNG share card |
@@ -95,3 +96,11 @@ Pool profiles show a prominent Pool scores panel below the name, above mining st
 The homepage Soveroot walkthrough is collapsed into a compact **Explore how XBT Pulse works** row. Expand it to see the real-example explanation, current reporting status and the three profile/work/map links. It starts closed to keep dashboard statistics closer to the top.
 
 Homepage layout: a compact header and headline lead into search, navigation and network statistics. Participating-pool cards and the collapsed Soveroot walkthrough sit below the main charts; the introductory line provides direct participation and assessment links.
+
+## What if miners moved?
+
+Open `/simulator` from the homepage. Choose the observation window, a source pool, destination, and percentage of the **source pool's share** to move. For example, moving 20% of a pool with 50% observed share shifts 10 network percentage points. You can target one named pool or split evenly among all other named pools. Unknown attribution is never a destination or source and stays fixed.
+
+The page shows all before/after shares, the largest named pool and groups at or above the 25%, 33% and 50% watch levels. The baseline stays fixed until reloaded or the window changes, so edits do not race a live refresh. Stale source status and partial observation counts remain visible. This assumes observed block share as a proxy for a hypothetical redistribution; it is not a hashrate forecast, recommendation to join a pool, or proof of independent ownership/template control.
+
+Use **Preview scenario card** or **Download scenario PNG**, then **Copy scenario link** for Discord. The image records dated observations and assumptions. The link preserves choices but loads current observations, so later results can differ. PNG charts retain selected/unknown groups and the largest groups, aggregating remaining groups into Other named groups; the page lists every group. No real mining settings change and no messages are sent automatically.

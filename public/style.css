@@ -1438,3 +1438,18 @@ dialog::backdrop {
 .home-page .home-search { margin: 8px 0 12px; }
 .home-page .tabs { margin-top: 8px; }
 .home-page #participating-pools { scroll-margin-top: 20px; margin-top: 22px; }
+
+.sim-controls { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,230px),1fr)); gap: 16px; }
+.sim-controls select,.sim-controls input { width: 100%; margin-top: 6px; }
+.sim-row { margin: 20px 0; }
+.sim-row > span { float: right; }
+.sim-bars { clear: both; padding-top: 8px; }
+.sim-bars > div { height: 10px; min-width: 0; margin: 4px 0; border-radius: 2px; }
+.sim-before { background: #0072b2; }
+.sim-after { background: #e87500; }
+.sim-before-key { color: #0072b2; }
+.sim-after-key { color: #a64b00; }
+#sim-link { width: 100%; }
+
+#sim-dialog { width: min(960px,92vw); max-height: 90vh; overflow: auto; border: 1px solid var(--line); border-radius: 12px; }
+#sim-image canvas { width: 100%; height: auto; display: block; margin-top: 12px; }
