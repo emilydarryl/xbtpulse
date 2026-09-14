@@ -9,7 +9,7 @@ Base URL: `https://xbtpulse.tech`. Public read endpoints return JSON and require
 | GET path | Parameters | Main response fields |
 | --- | --- | --- |
 | `/api/dashboard` | `window=144` (default), `576` or `2016` | `sample`, `pools`, `blocks`, `addresses`, `telemetry`, `onboarding`, `privatePools`, `status`, `source`, `updatedAt` |
-| `/api/pool` | Required `id`; same optional `window` | `id`, `name`, `sample`, `requested`, `blocks`, `share`, `interval`, `recent`, `addresses`, `status`, `updatedAt`, `evidence`, `rating`, `profile`, `assessment`, `scorecard`, `telemetry` |
+| `/api/pool` | Required `id`; same optional `window` | `id`, `name`, `sample`, `requested`, `blocks`, `share`, `interval`, `recent`, `addresses`, `status`, `updatedAt`, `evidence`, `rating`, `profile`, `assessment`, `scorecard`, `telemetry`, `attributionReview`, `freshness` |
 | `/api/pools` | `q` pool-name substring, `type=all/public/private/unspecified`, `page=1` | `rows`, `total`, `page`, `pages`, `lastSuccess` |
 | `/api/trends` | None | `oldest`, `windows`, `daily`, `lastSuccess`, `stale`, `changesStarted`, `changes` |
 | `/api/scoring-rules` | None | `rubric`, `criteria` |
@@ -65,10 +65,14 @@ Dashboard `status` can be `live`, `stale`, `connecting` or `unconfigured`; sampl
 
 Errors use `{ "error": "message" }`. Invalid observation windows return 400; missing profiles/scorecards return 404. Handle non-200 responses and retry with backoff rather than tight loops. `/healthz` establishes process responsiveness, not source accuracy. `/readyz` checks source freshness.
 
-## Submitting telemetry
-
-`POST /api/telemetry` requires a reviewed provider's bearer token. `POST /api/telemetry/challenge` answers a one-time credential challenge with that same token. See [telemetry contract](telemetry.md) and [collector installation](../collector/INSTALL.md). Approval, profile publication, participation badges and scorecard publication are separate actions.
+## Pool evidence and comparison clients
 
 Pool responses include `attributionReview` (null if unavailable): curated public address/tag evidence, dated range, snapshot counts and source links. These counts do not refresh with the requested block window and are not template-control measurements.
 
 Pool `freshness` includes `checkedAt` (Unix milliseconds), `reviewPeriodDays`, review objects (`status`, `reviewedAt`, `dueAt` as ISO timestamps or null) for attribution/profile/assessment, and reviewed linked provider telemetry (`name`, `status`, `lastReport`, `lastWorkReport` in Unix milliseconds or null). Missing retained reports differ from a known stale report. Current credentials determine inactive status. Review age does not change score values or attribution rules.
+
+The comparison page uses `/api/pools` for selection and one `/api/pool` request per selected ID with the same `window`. There is no separate comparison or PNG API endpoint. Responses can have different timestamps or sample sizes; preserve that distinction. PNG cards are rendered locally in the browser from the loaded public comparison and include a creation timestamp and source links.
+
+## Submitting telemetry
+
+`POST /api/telemetry` requires a reviewed provider's bearer token. `POST /api/telemetry/challenge` answers a one-time credential challenge with that same token. See [telemetry contract](telemetry.md) and [collector installation](../collector/INSTALL.md). Approval, profile publication, participation badges and scorecard publication are separate actions.

@@ -14,12 +14,18 @@ The sample UI is explicitly illustrative. Live data starts only when `EXPLORER_A
 - Assessment assistant: telemetry coverage/gaps, bounded public-source retrieval, dated excerpts and content-change checks, conditional suggestions, follow-up drafts and automatic prefilling of empty form fields. Existing scores are preserved; saving, publishing and sending require separate action.
 - Searchable `/pools` directory for retained block attributions, published profiles and approved consenting listings, including small/private operators. Homepage search links directly to it.
 - `/pool?id=...` profiles show block statistics, sourced terms, participation and published scorecard links where available.
+- Side-by-side `/compare` views for two or three pools: compact name search, removable selections, a shared observation window and shareable comparison URLs.
+- Downloadable comparison PNG cards for Discord: preview a dated snapshot with block statistics, sourced fees, telemetry status, separate published scores and source links; copy the live comparison link alongside it.
+- Evidence freshness on pool profiles and comparisons: dated terms, attribution and assessment reviews, plus reporting/stale/inactive telemetry states. Missing evidence remains visible without automatically changing scores.
+- Reviewed attribution maps on pool profiles, with tag groups, documented collection addresses, dated counts and reproducible source evidence where available.
 - `/trends`: 24-hour / 7-day / 30-day windows, daily operator charts and persistent public onboarding/status observations. Partial history and stale sources remain visible.
 - `/mining-map`: selectable operators and relationships with scoped evidence labels. Soveroot–Lazarus is a dated inspected example; illustrative links and unknown relationships are explicit.
 - Donut and legend ordered largest first. Clicking Other attributed groups opens a graph and statistics with tied block-production ranks, network share and within-group share. These ranks are not decentralization scores.
 
 - Public operator registration at `/contribute`, private application conversations, profile publication and approved-token report submission. Optional listing consent controls pending homepage visibility; contact details remain private. No email or Discord notifications are sent automatically.
 - Operator-installed DATUM collector at `/collector`; separate RATUM compatibility preview in `collector/ratum`. The collector uploads telemetry; it is not the public read API.
+- Operator-controlled adapter starter kit at `/adapter`, with payload validation and durable retry delivery for custom measurement integrations. It does not measure gateways itself.
+- Signed checksums for both download packages, a pinned release-key fingerprint and `/verify-downloads` instructions.
 - Public JSON endpoints for dashboard, profiles, directory, trends, rubric and published scorecards. See [API reference](docs/api.md).
 
 - 144 / 576 / 2,016-block observation windows; pool block share and Wilson intervals.
@@ -46,6 +52,7 @@ See [deployment](docs/deployment.md), [telemetry contract](docs/telemetry.md), a
 - [For operators: benefits, privacy, requirements and custom adapters](docs/operators.md)
 
 - [Visitor guide and page navigation](docs/site-guide.md)
+- [Pool comparisons and Discord share cards](docs/comparisons.md)
 - [Public API reference and examples](docs/api.md)
 - [Operator onboarding and telemetry](docs/telemetry.md)
 - [Administration and conversations](docs/admin.md)
@@ -54,6 +61,9 @@ See [deployment](docs/deployment.md), [telemetry contract](docs/telemetry.md), a
 - [Assessment assistant and prefilling](docs/assessment-checks.md)
 - [Historical trends and change feed](docs/trends.md)
 - [Attribution rules](docs/attribution.md)
+- [Reviewed AlphaPool attribution and reproduction](docs/alphapool-attribution.md)
+- [Signed downloads and signing-key recovery](docs/release-signing.md)
+- [Custom adapter kit](collector/adapter-kit/README.md)
 - [Deployment, retention and recovery](docs/deployment.md)
 - [DATUM installation](collector/INSTALL.md) and [RATUM preview](collector/ratum/README.md)
 - [Crypto-Eire compatibility findings](docs/crypto-eire-compatibility.md)

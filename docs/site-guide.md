@@ -5,7 +5,7 @@ Mission: **Making XBT mining decentralization visible.** Explore pool concentrat
 | Page | What to use it for |
 | --- | --- |
 | `/` | Current observed distribution, concentration signals, recipients, template telemetry, recent blocks and onboarding listings |
-| `/compare` | Compare up to three pools by common observation window, sourced terms, evidence freshness and published scores |
+| `/compare` | Compare up to three pools by common observation window, sourced terms, evidence freshness and published scores; download a PNG share card |
 | `/pools` | Search named pools of every size; filter public/private/unspecified type; find older block observations and published profiles |
 | `/pool?id=...` | One pool's observation windows, recipients, public terms, linked telemetry and any published scorecard |
 | `/trends` | 24-hour, 7-day and 30-day shares; daily operator bars; public status-change feed |
@@ -41,6 +41,10 @@ For data integrations, use the [public API](api.md). For contributing, follow th
 Pool pages include an attribution section. Where a reviewed map exists, it shows observed tag groups flowing to a collection address and the pool grouping, with dated snapshot counts, source links and limitations. Unmapped pools explicitly state that no reviewed map is published.
 
 Pool pages show evidence freshness for attribution, profile terms and published scorecards, plus each reviewed linked telemetry provider. Reviews are due after 30 days; assessment age uses the oldest criterion check or observation end. Reports older than 30 minutes are stale. These are notices, not automatic rating/attribution changes. Operators can follow the correction link to submit updated evidence.
+
+## Compare and share pools
+
+See the [comparison and sharing guide](comparisons.md) for step-by-step instructions.
 
 Comparison links are available on the homepage navigation, directory and pool profiles. Selection and window are shareable URL parameters (`pool` repeated up to three times, `window=144/576/2016`). Private commercial terms remain not applicable; missing scores are not zero. Each profile is fetched separately, with a notice if snapshot timestamps/sample sizes differ. No automatic winner is selected.
 

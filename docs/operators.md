@@ -8,6 +8,7 @@ Start at [Contribute](https://xbtpulse.tech/contribute). You can submit a profil
 
 - Publish a reviewed profile with your consent, describing your setup and sourced terms. Private pools can identify themselves as not accepting miners without publishing fees or connection details.
 - Help miners find you in the searchable directory, even when you have no blocks in the current window.
+- Let miners compare your published profile alongside other pools and share a dated PNG with source links. See [comparisons and share cards](comparisons.md).
 - Earn Telemetry Contributor recognition through approved, recent positive reporting. A pool badge also requires a reviewed link between pool and provider.
 - Request separate evidence-based decentralization and transparency assessments, each out of 100. Joining or reporting does not automatically earn a score.
 
@@ -77,3 +78,7 @@ Do not infer independent template control from public Stratum jobs or hashrate. 
 Both download packages now have detached checksum signatures. Follow the [verification guide](release-signing.md), pin the release-key fingerprint through an established channel, then verify the signature and archive checksum.
 
 The [adapter starter kit](https://xbtpulse.tech/adapter) now provides local validation and durable single-report delivery. Read its compatibility checklist before implementing your measurement layer. It is transport only, not a ready-made Lazarus or RATUM integration.
+
+## Keeping your public evidence current
+
+Profiles and comparisons show review dates for terms, attribution and published assessments, alongside linked telemetry status. Reviews become due after 30 days; reports older than 30 minutes are stale. These notices do not automatically remove ratings or establish that a pool is offline. Use your private application conversation to report fee, software, upstream or ownership changes and supply updated evidence. Previously downloaded PNG cards remain dated snapshots; the shared comparison link opens current data.
