@@ -11,6 +11,6 @@
     "start": "node --env-file-if-exists=.env server.mjs",
     "dev": "node --env-file-if-exists=.env --watch server.mjs",
     "test": "node --test test/*.test.mjs",
-    "check": "node --check server.mjs && node --check ops.mjs && node --check public/app.js && node --check public/contribute.js && node --check public/admin.js && node --check public/pool.js && node --check public/conversation.js && node --check public/mining-map.js && node --check public/trends.js && node --check public/scorecard.js && node --check public/pools.js && node --check public/compare.js"
+    "check": "node --check server.mjs && node --check ops.mjs && node --check public/app.js && node --check public/contribute.js && node --check public/admin.js && node --check public/pool.js && node --check public/conversation.js && node --check public/mining-map.js && node --check public/trends.js && node --check public/scorecard.js && node --check public/pools.js && node --check public/compare.js && node --check public/share-card.js"
   }
 }

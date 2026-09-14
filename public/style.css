@@ -1375,3 +1375,8 @@ dialog::backdrop {
  .compare-picker #compare-search { flex-wrap:wrap; gap:8px; }
  .compare-picker #compare-search label { flex-basis:100%; }
 }
+
+#share-card-dialog { width:min(960px,92vw); max-height:90vh; overflow:auto; border:1px solid var(--line); border-radius:12px; padding:24px; }
+#share-card-dialog::backdrop { background:#102a2280; }
+#share-card-preview canvas { display:block; width:100%; height:auto; }
+#share-card-link { width:100%; box-sizing:border-box; }

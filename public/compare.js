@@ -1,7 +1,9 @@
+import { cardSnapshot, renderCard } from "/share-card.js";
 const $=s=>document.querySelector(s);
 const query=new URL(location.href).searchParams;
 let ids=[...new Set(query.getAll('pool').filter(id=>id&&id.length<=200))].slice(0,3);
 let searchPage=1,searchRequest=0,comparisonRequest=0,timer;
+let exportData=null,exportCanvas=null,exportUrl="";
 $('#compare-window').value=['144','576','2016'].includes(query.get('window'))?query.get('window'):'144';
 const add=(parent,tag,text)=>{const node=document.createElement(tag);if(text!==undefined)node.textContent=text;parent.append(node);return node;};
 const text=v=>v===null||v===undefined||v===''?'Not provided':String(v);
@@ -35,6 +37,7 @@ async function search(){
 }
 function terms(d,key){return d.profile?.poolType==='private'&&['fee','payout','minimum','withdrawal','setup'].includes(key)?'Not applicable — private pool':text(d.profile?.[key]);}
 async function load(){
+ exportData=null;$("#share-card").disabled=true;
  const request=++comparisonRequest,selected=[...ids],window=$('#compare-window').value;
  if(!selected.length){$('#comparison').replaceChildren();$('#compare-status').textContent='Select two or three pools above to compare.';return;}
  $('#compare-status').textContent='Loading comparison…';
@@ -69,6 +72,7 @@ async function load(){
   for(const source of d.profile?.sources||[]){try{if(new URL(source.url).protocol!=='https:')continue;}catch{continue;}add(td,'br');const a=add(td,'a',source.title||'Source');a.href=source.url;a.rel='noopener noreferrer';a.target='_blank';}
   if(d.scorecard){add(td,'br');const a=add(td,'a','Read scored evidence');a.href='/scorecard?pool='+encodeURIComponent(d.id);}
  }
+ if(results.length>=2&&!results.some(p=>p.unavailable)){exportData={pools:results,window};$('#share-card').disabled=false;}
  const snapshots=new Set(results.filter(d=>!d.unavailable).map(d=>`${d.sample}:${d.updatedAt}`));
  $('#compare-status').textContent=`${selected.length} pool${selected.length===1?' selected — add another to compare':'s compared'}. Auto-refreshes every 30 seconds.${results.some(d=>d.unavailable)?' Some profiles could not be loaded.':''}${snapshots.size>1?' Source snapshots differ; refresh before comparing close results.':''}`;
 }
@@ -77,3 +81,27 @@ $('#compare-query').addEventListener('input',()=>{clearTimeout(timer);searchRequ
 $('#results-prev').addEventListener('click',()=>{searchPage--;search();});$('#results-next').addEventListener('click',()=>{searchPage++;search();});
 $('#compare-window').addEventListener('change',()=>{updateUrl();load();});$('#compare-refresh').addEventListener('click',load);
 updateUrl();renderSelected();search();load();setInterval(()=>{if(!document.hidden)load();},30000);
+
+$('#share-card').addEventListener('click',()=>{
+ try {
+  if(!exportData)return;
+  const snapshot=cardSnapshot(exportData.pools,exportData.window);
+  exportUrl=snapshot.url;exportCanvas=renderCard(snapshot);
+  $('#share-card-preview').replaceChildren(exportCanvas);
+  $('#share-card-link').value=exportUrl;
+  $('#share-card-note').textContent='Dated snapshot. Download the PNG and attach it to Discord; paste the comparison link alongside it.';
+  $('#share-card-dialog').showModal();
+ }catch {$('#compare-status').textContent='Unable to prepare the image. Try refreshing the comparison.';}
+});
+$('#close-share-card').addEventListener('click',()=>$('#share-card-dialog').close());
+$('#download-share-card').addEventListener('click',()=>{
+ if(!exportCanvas)return;
+ exportCanvas.toBlob(blob=>{
+  if(!blob){$('#share-card-note').textContent='Image export failed. Please try again.';return;}
+  const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='xbtpulse-comparison-'+new Date().toISOString().slice(0,10)+'.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
+ },'image/png');
+});
+$('#copy-share-card-link').addEventListener('click',async()=>{
+ try{await navigator.clipboard.writeText(exportUrl);$('#share-card-note').textContent='Comparison link copied. Attach the PNG separately.';}
+ catch{$('#share-card-link').focus();$('#share-card-link').select();$('#share-card-note').textContent='Copy the selected link manually.';}
+});

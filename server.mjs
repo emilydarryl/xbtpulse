@@ -97,6 +97,7 @@ const files = {
   "/pools": "pools.html",
   "/compare": "compare.html",
   "/compare.js": "compare.js",
+  "/share-card.js": "share-card.js",
   "/pools.js": "pools.js",
   "/scorecard": "scorecard.html",
   "/scoring-rules": "scorecard.html",
