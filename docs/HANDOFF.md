@@ -7,7 +7,7 @@ Prepared September 14, 2026. Read this before continuing work from another compu
 - Live site: https://xbtpulse.tech
 - Public repository: https://github.com/emilydarryl/xbtpulse
 - Branch: `main`.
-- Last deployed application revision: `5c9806dffafb3a863a1eb92f54f68008d9448265` (September 14, 2026). Later documentation-only commits do not require a service rebuild.
+- Last deployed application revision: `5a9743a8b2d9b30a92b9d42e004f3f3aee20b06f` (September 14, 2026). Later documentation-only commits do not require a service rebuild.
 - Last completed validation: `npm run check`, 52 passing Node tests, 4 RATUM Python tests, packaging/signature checks, local missing-outcome browser checks and live post-deployment browser/health/readiness checks. Working tree was clean before this handoff was written.
 - No active feature request remains unfinished. The owner requested this handoff to continue on another computer. Do not invent a previously approved next feature.
 
@@ -127,3 +127,5 @@ Mining-map operator links now load the requested public profile as an operator v
 Directory card spacing and View pool action deployed: heading separated from a wrapping action row, with primary View pool and secondary Compare. Syntax, collector package, local screenshot and live browser/health/readiness checks passed.
 
 Soveroot private-pool walkthrough deployed September 14: homepage and profile navigation connect real profile, telemetry and dated connection evidence. Current feed verified live; missing reports and sample mode checked locally, syntax/package and production health/readiness checks passed. No rating or independence claim added.
+
+Prominent Pool scores panel deployed below profile names; published totals, observation dates, evidence link and unassessed/error states are explicit. Local and live browser, syntax/package and health/readiness checks passed. Soveroot private draft version 1 saved at owner request for September 13–14 with all eight percentages null, evidence notes and remaining checks. No public scorecard was published. Draft is accessible via Admin → Soveroot → Assessment scorecard.
