@@ -1484,3 +1484,10 @@ dialog::backdrop {
  .home-page .tabs { gap: 4px 14px; }
  .home-page .tabs button { padding: 12px 0; }
 }
+
+.pool-distribution-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+.pool-distribution-actions a { font-size: 13px; }
+.pool-distribution-scroll { max-height: 510px; overflow-y: scroll; scrollbar-gutter: stable; scrollbar-width: auto; scrollbar-color: #8b9b90 #f0f3ec; }
+.pool-distribution-scroll thead th { position: sticky; top: 0; z-index: 2; background: #fafbf8; box-shadow: inset 0 -1px var(--line); }
+.pool-distribution-scroll:focus-visible { outline: 2px solid var(--bitcoin-ink); outline-offset: -2px; }
+@media(max-width: 600px) { .pool-distribution-scroll { max-height: 420px; } }
