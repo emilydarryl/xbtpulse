@@ -1,3 +1,4 @@
+import {initializePoolHistory,capturePoolHistory,poolHistory} from './lib/pool-history.mjs';
 import { evidenceFreshness } from "./lib/evidence-freshness.mjs";
 import { onboardingFeed } from "./lib/onboarding-feed.mjs";
 import { poolDirectory } from "./lib/directory.mjs";
@@ -47,6 +48,7 @@ initializeAdmin(store);
 if (!store.get("assessment-history-start"))
   store.set("assessment-history-start", Date.now());
 initializeChanges(store);
+initializePoolHistory(store);
 const registry = JSON.parse(
   await readFile(join(root, "config/pools.json"), "utf8"),
 );
@@ -437,6 +439,7 @@ const server = http.createServer(async (req, res) => {
           return {name,active:activeIds.has(name),...row};
         });
         return send(res, 200, {
+          history: poolHistory(store,id,researchedProfiles),
           freshness: evidenceFreshness({attribution:review,profile:visibleProfile,scorecard:card,providers:linkedProviders}),
           id,
           name: known.name,
@@ -502,10 +505,12 @@ server.listen(port, process.env.HOST || "127.0.0.1", () =>
 );
 await collector.poll();
 captureChanges(store);
+capturePoolHistory(store,registry,researchedProfiles,Date.now(),Math.max(180000,pollSeconds*3000));
 const timer = setInterval(async () => {
   store.expireApplications();
   await collector.poll();
   captureChanges(store);
+capturePoolHistory(store,registry,researchedProfiles,Date.now(),Math.max(180000,pollSeconds*3000));
   cache.clear();
 }, pollSeconds * 1000);
 for (const signal of ["SIGTERM", "SIGINT"])

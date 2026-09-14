@@ -69,3 +69,11 @@ Open **Who builds my block?** from the homepage or a pool profile. Search a publ
 The illustrated path describes your chosen setup, not a detected connection. The checker displays published template-role, payout, protocol and fee claims with provenance, review dates and source links. It does not automatically assign an endpoint fee, payout coordinator or verified template builder. Private operators are educational examples and are marked as not accepting miners. The existing Soveroot–Lazarus connection is a dated inspection, not continuous verification.
 
 Use the suggested evidence questions to establish transaction selection, template node, fallback behavior, gateway control and payout dependencies. Submit corrections through Contribute. No credentials, equipment access or new numerical rating are involved. Reload to retrieve newer public profile information.
+
+## Pool change history
+
+Each eligible pool profile has a **What changed?** section. Expand an observation to see previous and current fee/payout terms, template/protocol claims, publication/review dates, published assessment totals, linked telemetry status or source changes. The first entry is a baseline, not a claim that the operator just changed its setup.
+
+Tracking runs on server collection cycles even without visitors. The latest 50 events are shown from 90-day retention; the total and tracking start are visible. A gap longer than three minutes (or three configured collection intervals, if longer) is labeled when observation resumes. Times are observation times, not exact operator change times. Changes between samples may be missed. History does not backfill events before tracking began, and does not send notifications. Unpublished or nonconsenting operator profiles are excluded from the public history response.
+
+This persistent history differs from My watchlist, which compares only browser-saved visits. Public claims remain claims, and a telemetry transition does not establish an outage or template independence.

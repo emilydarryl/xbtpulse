@@ -76,3 +76,7 @@ The comparison page uses `/api/pools` for selection and one `/api/pool` request 
 ## Submitting telemetry
 
 `POST /api/telemetry` requires a reviewed provider's bearer token. `POST /api/telemetry/challenge` answers a one-time credential challenge with that same token. See [telemetry contract](telemetry.md) and [collector installation](../collector/INSTALL.md). Approval, profile publication, participation badges and scorecard publication are separate actions.
+
+## Pool change history
+
+`/api/pool` includes `history` (null when no eligible public profile exists). Fields: `startedAt`, `lastObserved` (Unix milliseconds or null), `retentionDays` (90), `total`, `limit` (50), and newest-first `events`. Each event contains `time`, `kind` (`baseline` or `change`), `changes` (`field`, `before`, `after`), source provenance/review date/links, and optional `gap` (`from`, `to`). Baselines have no previously observed values. A gap-only event can have an empty changes array. No per-block or hashrate changes are recorded here. API values describe observations, not operator-confirmed event times. Events use an explicit public-field allowlist; private applications and conversations are excluded.
