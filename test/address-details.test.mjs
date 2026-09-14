@@ -1,0 +1,4 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {addressDetails} from '../lib/address-details.mjs';
+test('address details count each block once while summing repeated outputs',()=>{const blocks=[{height:3,hash:'3',time:30,tag:'',outputs:[{address:'a',sats:10},{address:'a',sats:20}]},{height:2,hash:'2',time:20,tag:'',outputs:[{address:'b',sats:40}]},{height:1,hash:'1',time:10,tag:'',outputs:[{address:'a',sats:50}]}];const d=addressDetails(blocks,'a',[],2);assert.equal(d.window.blocks,1);assert.equal(d.window.outputs,2);assert.equal(d.window.sats,30);assert.equal(d.retained.blocks,2);assert.equal(d.retained.sats,80);assert.equal(d.retained.first,10);assert.equal(d.retained.last,30);assert.equal(d.groups[0].unknown,true);assert.equal(d.recent[0].height,3);assert.equal(addressDetails(blocks,'missing'),null);assert.equal(d.roles.length,0);});

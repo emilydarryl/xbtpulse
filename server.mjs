@@ -1,3 +1,4 @@
+import {addressDetails} from './lib/address-details.mjs';
 import {siteNavigation} from './lib/site-navigation.mjs';
 import {initializePoolHistory,capturePoolHistory,poolHistory} from './lib/pool-history.mjs';
 import { evidenceFreshness } from "./lib/evidence-freshness.mjs";
@@ -369,6 +370,14 @@ const server = http.createServer(async (req, res) => {
             !store.get("lastError"),
         );
       return send(res, ready ? 200 : 503, { ready });
+    }
+    if(url.pathname==='/api/address'){
+      const address=url.searchParams.get('address'),window=Number(url.searchParams.get('window')||144);
+      if(!address||address.length>20000||![144,576,2016].includes(window))return send(res,400,{error:'Provide a recipient and a supported observation window.'});
+      const details=addressDetails(store.blocks(retention),address,registry,window);
+      if(!details)return send(res,404,{error:'Recipient not found in retained observations.'});
+      const last=store.get('lastSuccess');
+      return send(res,200,{...details,updatedAt:last?new Date(last).toISOString():null,source:store.get('source')||null,stale:!last||Date.now()-last>Math.max(120000,pollSeconds*3000)||!!store.get('lastError')});
     }
     if (["/api/dashboard", "/api/pool"].includes(url.pathname)) {
       const window = Number(url.searchParams.get("window") || 144);

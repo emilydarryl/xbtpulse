@@ -38,7 +38,7 @@ The sample UI is explicitly illustrative. Live data starts only when `EXPLORER_A
 
 - 144 / 576 / 2,016-block observation windows; pool block share and Wilson intervals.
 - Explicit unknown attribution; local evidence registry plus labeled explorer attribution.
-- Coinbase recipient search and detail, integer-satoshi accounting, no balance or ownership inference.
+- Coinbase recipient search and expanded details: full address copy, selected/retained history totals, first/last appearances, documented role sources, paying-block attribution context and recent block tags/hashes. Integer-satoshi accounting; no balance or ownership inference.
 - Concentration watch levels at 25%, 33%, and 50% in the dashboard.
 - Canonical-chain checks and reorg/window reset observations; no unsupported reorg-depth claims.
 - Authenticated, opt-in telemetry ingestion, replay/overlap protection, and difficulty-weighted expected-block accounting.

@@ -84,3 +84,7 @@ The comparison page uses `/api/pools` for selection and one `/api/pool` request 
 ### Missing telemetry outcomes
 
 Telemetry provider summaries return `found: null` if any included interval has unavailable block outcomes. `expected`, `work` and `workShare` still summarize accepted work across all included intervals. Clients must suppress found/expected ratios for null outcomes; do not coerce null to zero. Historical numeric reports retain their meaning.
+
+## Recipient details
+
+`GET /api/address?address=URL_ENCODED_RECIPIENT&window=144` (also 576/2016) returns observed coinbase receipts for an exact address/script from the local retained chain. Fields: `window` and `retained` aggregates (`blocks`, `outputs`, `sats`, `first`, `last`, `sample`), reviewed `roles`, block-attribution `groups`, latest 20 `recent` matching blocks, `updatedAt`, `source`, and `stale`. First/last/block times are Unix seconds; updatedAt is ISO. Repeated outputs sum amounts but each block is counted once. Missing recipients return 404. This endpoint does not query wallet balances or infer ownership, spending or maturity.

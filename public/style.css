@@ -1491,3 +1491,5 @@ dialog::backdrop {
 .pool-distribution-scroll thead th { position: sticky; top: 0; z-index: 2; background: #fafbf8; box-shadow: inset 0 -1px var(--line); }
 .pool-distribution-scroll:focus-visible { outline: 2px solid var(--bitcoin-ink); outline-offset: -2px; }
 @media(max-width: 600px) { .pool-distribution-scroll { max-height: 420px; } }
+
+.recipient-full { overflow-wrap: anywhere; white-space: normal; max-width: 650px; }
