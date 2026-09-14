@@ -82,3 +82,7 @@ The [adapter starter kit](https://xbtpulse.tech/adapter) now provides local vali
 ## Keeping your public evidence current
 
 Profiles and comparisons show review dates for terms, attribution and published assessments, alongside linked telemetry status. Reviews become due after 30 days; reports older than 30 minutes are stale. These notices do not automatically remove ratings or establish that a pool is offline. Use your private application conversation to report fee, software, upstream or ownership changes and supply updated evidence. Previously downloaded PNG cards remain dated snapshots; the shared comparison link opens current data.
+
+## Participation with accepted work only
+
+An integration can report reliable accepted difficulty-work without a found-block counter using explicit `found: null`. Block outcomes and found/expected comparisons then remain unavailable; work reporting does not establish template control or automatically award a score. A second development request for immutable block history is not required for this mode. XBT Pulse can adapt the measurement client; the operator still validates scope, units and reset behavior locally. See the telemetry contract for client-version compatibility.

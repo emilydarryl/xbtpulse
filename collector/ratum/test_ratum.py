@@ -12,6 +12,24 @@ class AdapterTests(unittest.TestCase):
         with self.assertRaises(ValueError):normalize(self.data,self.config,2000000)
         self.data['pool']['version']='other'
         with self.assertRaises(ValueError):normalize(self.data,self.config,1000000)
+    def test_prime_cumulative_ignores_mutable_block_history(self):
+        self.config['counterSource']='prime-cumulative'
+        self.data.pop('xbtpulse')
+        self.data['cumulative_accepted_work']=str(2**80)
+        self.data['blocks']={'found':12}
+        a=normalize(self.data,self.config,1000000);a['process']='same'
+        self.data['cumulative_accepted_work']=str(2**80+123)
+        self.data['generated_at']=1060
+        self.data['blocks']['found']=11
+        b=normalize(self.data,self.config,1060000);b['process']='same'
+        report=interval(a,b)
+        self.assertEqual(report['segments'][0]['shareDifficultySum'],123)
+        self.assertIsNone(report['found'])
+        for change in [dict(work=0),dict(process='restart'),dict(difficulty=101),dict(counterSource='xbtpulse-v1'),dict(work=a['work']+2**53)]:
+            self.assertIsNone(interval(a,dict(b,**change)))
+        for raw in [str(2**128),'-1',123,'1.5',None]:
+            self.data['cumulative_accepted_work']=raw
+            with self.assertRaises(ValueError):normalize(self.data,self.config,1060000)
     def test_exact_deltas_and_reset_guards(self):
         a=normalize(self.data,self.config,1000000);a['process']='same'
         b=dict(a,time=1060000,work=1300,found=5)

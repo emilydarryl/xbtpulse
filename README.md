@@ -87,3 +87,7 @@ Operators can review the code without installing the scraper, or implement the [
 The public repository contains source and examples, not production databases, operator conversations or credentials. Both download packages have signed checksum files. See [release verification and key fingerprint](docs/release-signing.md).
 
 Custom gateway operators can use the [adapter kit and compatibility checklist](https://xbtpulse.tech/adapter). Source lives in `collector/adapter-kit`; reproducible packaging uses `python collector/package-adapter.py`. The kit uploads operator-supplied measurements and is separate from the DATUM scraper.
+
+## Accepted-work-only telemetry
+
+Reports may explicitly use `found: null` when block outcomes are unavailable. Accepted work and expected blocks remain usable; public and reviewer views suppress found/expected comparisons for any window containing missing outcomes. The RATUM preview supports the operator-reported `cumulative_accepted_work` field. This change needs deployment and operator validation before live use.

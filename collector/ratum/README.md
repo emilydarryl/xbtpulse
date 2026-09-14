@@ -23,7 +23,7 @@ The values here are illustrative, not Crypto-Eire measurements. This is a propos
 
 ## What the adapter does
 
-`ratum.py` runs on the Prime host, reads its loopback stats URL, checks the exact configured build string and public key, and calculates cumulative-counter deltas. It refuses stock JSON without the extension. It rejects stale snapshots, counter decreases, process restarts, retarget boundaries, backward heights, changed network difficulty, and intervals longer than 15 minutes. It persists pending reports for identical retries and supports the existing credential challenge.
+`ratum.py` runs on the Prime host, reads its loopback stats URL, checks the exact configured build string and public key, and calculates cumulative-counter deltas. The default mode refuses stock JSON without the extension; the optional prime-cumulative mode below reads the operator-added top-level counter. It rejects stale snapshots, counter decreases, process restarts, retarget boundaries, backward heights, changed network difficulty, and intervals longer than 15 minutes. It persists pending reports for identical retries and supports the existing credential challenge.
 
 Only numeric interval aggregates reach XBT Pulse. The per-miner identities, balances, gateway lists, public key and version used for local validation are not uploaded. The configuration must be private (0600 in a 0700 directory). No SSH access is needed by XBT Pulse.
 
@@ -40,3 +40,11 @@ The counter is **whole Prime-pool accepted work**, spanning its connected gatewa
 ## Tests
 
 `python3 -m unittest discover -s collector/ratum -p test_ratum.py` checks schema refusal, identity checks, stale timestamps, exact deltas and reset boundaries. These fixtures are not evidence about the live Crypto-Eire pool. This preview is intentionally separate from the public v1.0.0 DATUM download until compatibility is confirmed.
+
+## Work-only mode for Liam's counter
+
+Add `"counterSource": "prime-cumulative"` to private config.json to read top-level string-u128 `cumulative_accepted_work`. This mode deliberately ignores `blocks.found` and sends `found: null`. It requires the work-only API update to be deployed first. It does not require the proposed source patch or another block counter.
+
+Exact configured build/public-key checks remain local, as do systemd process checks. Supply the new build string locally; do not send credentials or miner identities. Work is subtracted as Python integers before serialization, with deltas above JavaScript's safe integer limit omitted. Restarts, decreasing counters, difficulty/retarget changes and intervals outside existing limits start a new baseline. Counter-source changes also start a baseline. Confirm ledger replacement requires a process restart; otherwise reset detection needs adjustment.
+
+Validate a fresh sample, unit normalization and local process supervision with the operator before enabling. This is synthetic-fixture-tested preview support, not live integration approval. The legacy proposed extension uses mutable block history; do not enable its numeric outcomes on a build allowing undetectable record removal. Work-only mode avoids that dependency. Signed public packages are unchanged.

@@ -50,3 +50,9 @@ The [DATUM download](https://xbtpulse.tech/collector) is one compatible uploader
 ## Operator-owned upload transport
 
 The [adapter kit](https://xbtpulse.tech/adapter) provides local validation and durable single-pending-report upload without gateway scraping. Operators still implement and verify their measurement layer. Its [compatibility checklist](../collector/adapter-kit/COMPATIBILITY.md) covers scope, units and reset handling. Its checksum has a detached signature; it does not automate credential challenges or assessments.
+
+## Accepted-work-only reports
+
+`found` remains required, but may explicitly be JSON `null` when block outcomes are not measured reliably. Numeric zero means measured zero, never unknown. Existing numeric reports remain supported. For example, use `"found": null` with genuine measured work segments and interval timestamps. Work-only reports count toward work totals and reporting coverage; they do not establish block outcomes or template control.
+
+Public summary `found` is null if any included interval lacks outcomes. No partial found total is compared against the full expected total. Reviewer views follow the same rule; this does not award or publish a score. The original signed adapter kit v0.1.0 validator still requires numeric found and cannot transport work-only reports unchanged. Use the updated RATUM preview or an operator-owned client against a server with this change deployed; do not replace missing outcomes with zero to satisfy an older validator.

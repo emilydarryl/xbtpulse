@@ -77,3 +77,5 @@ Each eligible pool profile has a **What changed?** section. Expand an observatio
 Tracking runs on server collection cycles even without visitors. The latest 50 events are shown from 90-day retention; the total and tracking start are visible. A gap longer than three minutes (or three configured collection intervals, if longer) is labeled when observation resumes. Times are observation times, not exact operator change times. Changes between samples may be missed. History does not backfill events before tracking began, and does not send notifications. Unpublished or nonconsenting operator profiles are excluded from the public history response.
 
 This persistent history differs from My watchlist, which compares only browser-saved visits. Public claims remain claims, and a telemetry transition does not establish an outage or template independence.
+
+When accepted-work telemetry lacks block outcomes for any interval in the displayed window, Reported found shows Not available and the found/expected comparison is suppressed. Expected blocks and work share remain available. Missing outcomes never mean zero found blocks.

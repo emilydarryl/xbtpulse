@@ -1,4 +1,4 @@
-"""RATUM Prime adapter preview. Requires the explicit xbtpulse metrics extension.
+"""RATUM Prime adapter preview. Supports exact cumulative work counters.
 No scraping of payout-window work or estimated hashrate is permitted.
 """
 import json, math, os, re, subprocess, time, uuid, urllib.request
@@ -16,22 +16,32 @@ def normalize(data,config,now):
     stamp=data['generated_at']*1000
     if not isinstance(stamp,int) or abs(stamp-now)>60000: raise ValueError('Stale source clock')
     metrics=data.get('xbtpulse',{})
-    if metrics.get('schema')!=1: raise ValueError('Exact telemetry counters missing; stock stats.json is insufficient')
-    raw=metrics.get('cumulative_share_difficulty')
+    source=config.get('counterSource','xbtpulse-v1')
+    if source=='prime-cumulative':
+        raw=data.get('cumulative_accepted_work');found=None
+    elif source=='xbtpulse-v1':
+        if metrics.get('schema')!=1: raise ValueError('Exact telemetry counters missing; stock stats.json is insufficient')
+        raw=metrics.get('cumulative_share_difficulty');found=metrics.get('blocks_found')
+    else: raise ValueError('Unknown counter source')
     if not isinstance(raw,str) or not re.fullmatch(r'[0-9]{1,39}',raw): raise ValueError('Invalid work counter')
-    found=metrics.get('blocks_found');network=data['network'];difficulty=network['difficulty'];height=network['tip_height']
-    if type(found)is not int or found<0 or type(height)is not int or height<961640 or network.get('chain') not in ('main','mainnet'):
+    if int(raw)>2**128-1: raise ValueError('Work counter exceeds u128')
+    network=data['network'];difficulty=network['difficulty'];height=network['tip_height']
+    if (source=='xbtpulse-v1' and (type(found)is not int or found<0)) or type(height)is not int or height<961640 or network.get('chain') not in ('main','mainnet'):
         raise ValueError('Invalid chain or block counter')
     if type(difficulty) not in (int,float) or not math.isfinite(difficulty) or difficulty<=0: raise ValueError('Invalid difficulty')
-    return dict(time=stamp,work=int(raw),found=found,difficulty=difficulty,height=height,build=data['pool']['version'],pool=data['pool']['pubkey'])
+    return dict(time=stamp,work=int(raw),found=found,difficulty=difficulty,height=height,build=data['pool']['version'],pool=data['pool']['pubkey'],counterSource=source)
 
 def interval(old,new):
     if not 10000<=new['time']-old['time']<=900000: return None
     if any(old[k]!=new[k] for k in ('process','build','pool','difficulty')): return None
+    if old.get('counterSource')!=new.get('counterSource'): return None
     if new['height']<old['height'] or new['height']//2016!=old['height']//2016: return None
-    if new['work']<old['work'] or new['found']<old['found']: return None
-    work=new['work']-old['work'];found=new['found']-old['found']
-    if work>1e30 or found>10000 or (found and not work): return None
+    if new['work']<old['work']: return None
+    if (old['found'] is None)!=(new['found'] is None): return None
+    if new['found'] is not None and new['found']<old['found']: return None
+    work=new['work']-old['work'];found=None if new['found'] is None else new['found']-old['found']
+    # Keep integer counter subtraction exact through JSON/JavaScript ingestion.
+    if work>2**53-1 or (found is not None and (found>10000 or (found and not work))): return None
     return dict(id=str(uuid.uuid4()),start=old['time'],end=new['time'],found=found,segments=[dict(shareDifficultySum=work,networkDifficulty=new['difficulty'])])
 
 def snapshot(config):
