@@ -1351,7 +1351,7 @@ dialog::backdrop {
 .freshness-due { color:var(--bitcoin-ink); font-weight:600; }
 @media(max-width:600px) { .freshness-grid { grid-template-columns:1fr; } }
 
-.compare-options { display:flex; flex-wrap:wrap; gap:8px; }
+.compare-options { display:flex; flex-wrap:wrap; gap:8px; max-height:180px; overflow-y:auto; }
 .comparison-table { table-layout:fixed; min-width:650px; }
 .comparison-table th, .comparison-table td { white-space:normal; overflow-wrap:anywhere; vertical-align:top; min-width:170px; }
 .comparison-table thead th { font-size:15px; }

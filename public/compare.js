@@ -1,12 +1,12 @@
 const $=s=>document.querySelector(s);
 const query=new URL(location.href).searchParams;
-let ids=[...new Set(query.getAll('pool').filter(id=>id.length<=200))].slice(0,3);
+let ids=[...new Set(query.getAll('pool').filter(id=>id&&id.length<=200))].slice(0,3);
 let searchPage=1,searchRequest=0,comparisonRequest=0,timer;
 $('#compare-window').value=['144','576','2016'].includes(query.get('window'))?query.get('window'):'144';
 const add=(parent,tag,text)=>{const node=document.createElement(tag);if(text!==undefined)node.textContent=text;parent.append(node);return node;};
 const text=v=>v===null||v===undefined||v===''?'Not provided':String(v);
 const percent=v=>v===null||v===undefined?'Not available':(v*100).toFixed(1)+'%';
-const date=v=>v?new Date(v).toLocaleString():'Not reviewed';
+const date=v=>v ? (/^\d{4}-\d{2}-\d{2}$/.test(String(v)) ? String(v)+' (UTC date)' : new Date(v).toLocaleString()) : 'Not reviewed';
 function updateUrl(){const p=new URLSearchParams();ids.forEach(id=>p.append('pool',id));p.set('window',$('#compare-window').value);history.replaceState(null,'','/compare?'+p);}
 async function search(){
  const request=++searchRequest;
