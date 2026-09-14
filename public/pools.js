@@ -47,7 +47,12 @@ async function load() {
       if (p.profileUrl) {
         const a = add(title, "a", p.name);
         a.href = p.profileUrl;
-        const compare = add(card, "a", "Compare this pool →");
+        const actions = add(card, "div", "");
+        actions.className = "directory-actions";
+        const view = add(actions, "a", "View pool →");
+        view.href = p.profileUrl;
+        view.className = "primary-button";
+        const compare = add(actions, "a", "Compare this pool →");
         compare.href = "/compare?pool=" + encodeURIComponent(p.id);
         compare.className = "quiet-button";
       } else title.textContent = p.name;
