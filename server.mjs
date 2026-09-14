@@ -1,7 +1,7 @@
 import {initializePoolHistory,capturePoolHistory,poolHistory} from './lib/pool-history.mjs';
 import { evidenceFreshness } from "./lib/evidence-freshness.mjs";
 import { onboardingFeed } from "./lib/onboarding-feed.mjs";
-import { poolDirectory } from "./lib/directory.mjs";
+import { poolDirectory, directorySearchText } from "./lib/directory.mjs";
 import {
   publicScorecard,
   criteria as scoreCriteria,
@@ -281,10 +281,9 @@ const server = http.createServer(async (req, res) => {
     }
     if (url.pathname === "/healthz") return send(res, 200, { ok: true });
     if (url.pathname === "/api/pools") {
-      const q = (url.searchParams.get("q") || "")
+      const q = directorySearchText((url.searchParams.get("q") || "")
           .trim()
-          .slice(0, 100)
-          .toLowerCase(),
+          .slice(0, 100)),
         type = url.searchParams.get("type") || "all";
       const page = Math.max(
         1,
@@ -300,7 +299,7 @@ const server = http.createServer(async (req, res) => {
       }
       const rows = snapshot.rows.filter(
         (p) =>
-          (!q || p.name.toLowerCase().includes(q)) &&
+          (!q || directorySearchText(p.name).includes(q)) &&
           (type === "all" || p.poolType === type),
       );
       return send(res, 200, {

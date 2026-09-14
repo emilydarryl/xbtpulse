@@ -79,3 +79,5 @@ Tracking runs on server collection cycles even without visitors. The latest 50 e
 This persistent history differs from My watchlist, which compares only browser-saved visits. Public claims remain claims, and a telemetry transition does not establish an outage or template independence.
 
 When accepted-work telemetry lacks block outcomes for any interval in the displayed window, Reported found shows Not available and the found/expected comparison is suppressed. Expected blocks and work share remain available. Missing outcomes never mean zero found blocks.
+
+Directory name search ignores letter case and accents, so Crypto-Éire also matches Crypto-Eire. This affects search only; listings and pool identities remain separate.

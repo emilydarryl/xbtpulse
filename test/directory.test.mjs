@@ -1,7 +1,18 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { Store } from "../lib/store.mjs";
-import { poolDirectory } from "../lib/directory.mjs";
+import { poolDirectory, directorySearchText } from "../lib/directory.mjs";
+
+test("directory search matches accented and decomposed names without merging identities", () => {
+  const rows = [
+    { id: "listing:a", name: "Crypto-Eire" },
+    { id: "listing:b", name: "Crypto-Éire" },
+    { id: "listing:c", name: "Unrelated" },
+  ];
+  for (const query of ["Crypto-Éire", "CRYPTO-EIRE", "Crypto-E\u0301ire", "Éire"])
+    assert.deepEqual(rows.filter(p => directorySearchText(p.name).includes(directorySearchText(query))).map(p => p.id), ["listing:a", "listing:b"]);
+  assert.equal(rows[1].name, "Crypto-Éire");
+});
 test("directory includes older small pools, excludes unknown, and counts latest window separately", () => {
   const s = new Store(":memory:");
   try {
