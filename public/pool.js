@@ -22,6 +22,7 @@ const labels = {
   website: "Website",
 };
 const id = new URL(location.href).searchParams.get("id");
+document.querySelector("#miner-checker-link").href="/miner-checker"+(id?"?pool="+encodeURIComponent(id):"");
 document.querySelector("#compare-pool-link").href = "/compare" + (id ? "?pool=" + encodeURIComponent(id) : "");
 document.querySelector("#mining-map-link").href =
   "/mining-map" + (id ? "?pool=" + encodeURIComponent(id) : "");

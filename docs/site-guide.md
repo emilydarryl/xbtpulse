@@ -5,6 +5,7 @@ Mission: **Making XBT mining decentralization visible.** Explore pool concentrat
 | Page | What to use it for |
 | --- | --- |
 | `/` | Current observed distribution, concentration signals, recipients, template telemetry, recent blocks and onboarding listings |
+| `/miner-checker` | Examine hosted or own-DATUM-gateway paths, sourced terms and missing setup evidence |
 | `/watchlist` | Browser-saved favorite pools, changes since the previous visit and comparison shortcuts |
 | `/compare` | Compare up to three pools by common observation window, sourced terms, evidence freshness and published scores; download a PNG share card |
 | `/pools` | Search named pools of every size; filter public/private/unspecified type; find older block observations and published profiles |
@@ -60,3 +61,11 @@ Open a pool profile and choose **Watch this pool**, then follow **My watchlist**
 The page shows the latest 144-block share, chain source status, sourced fees, telemetry status and separate published scores. Select two or three checkboxes to compare. Remove buttons stop watching a pool. Data refreshes every 30 seconds while visible.
 
 Fee, telemetry-status and published-assessment changes are compared with the saved observation from your previous visit (or when you first watched the pool). That baseline stays fixed during the current visit. Successful observations are saved for the next visit; failed requests preserve previous data. This is a browser snapshot comparison, not a complete event log: changes between visits can be missed. Mining-share movements are displayed in current stats, not listed as change events. No email, Discord or push notifications are sent. Storage errors are shown rather than claiming the list was saved.
+
+## Who builds my block?
+
+Open **Who builds my block?** from the homepage or a pool profile. Search a published pool, then select **Hosted mining / Stratum service** or **My own DATUM gateway**. The URL preserves the pool and mode for sharing. Search shows up to 30 results; refine your query for a smaller set.
+
+The illustrated path describes your chosen setup, not a detected connection. The checker displays published template-role, payout, protocol and fee claims with provenance, review dates and source links. It does not automatically assign an endpoint fee, payout coordinator or verified template builder. Private operators are educational examples and are marked as not accepting miners. The existing Soveroot–Lazarus connection is a dated inspection, not continuous verification.
+
+Use the suggested evidence questions to establish transaction selection, template node, fallback behavior, gateway control and payout dependencies. Submit corrections through Contribute. No credentials, equipment access or new numerical rating are involved. Reload to retrieve newer public profile information.

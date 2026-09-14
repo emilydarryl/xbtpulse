@@ -10,6 +10,8 @@ The sample UI is explicitly illustrative. Live data starts only when `EXPLORER_A
 
 ## What is implemented
 
+- `/miner-checker`: “Who builds my block?” explains hosted versus own-gateway paths using published template, payout and protocol claims, source dates and clear evidence gaps. No endpoint fee or template-independence verification is inferred from selection.
+
 - Browser-local `/watchlist`: save up to 20 pools, see mining share and published scores, highlight fee/telemetry/assessment changes since the previous visit, and compare two or three selections. No account or notifications.
 
 - Pilot reviewer scorecards: separate decentralization and transparency scores out of 100, private drafts, public preview, explicit publication and revision history. Missing criteria remain Not assessed; higher-tier awards remain disabled. `/ratings` explains the framework and `/scoring-rules` publishes the pilot rubric.
