@@ -7,7 +7,7 @@ Prepared September 14, 2026. Read this before continuing work from another compu
 - Live site: https://xbtpulse.tech
 - Public repository: https://github.com/emilydarryl/xbtpulse
 - Branch: `main`.
-- Last deployed application revision: `ba863f5cd892c07083fabeac66c4a25a1bb839f4` (September 14, 2026). Later documentation-only commits do not require a service rebuild.
+- Last deployed application revision: `f1f349395840fa8e3256e995a231c77c966cbdcc` (September 14, 2026). Later documentation-only commits do not require a service rebuild.
 - Last completed validation: `npm run check`, 52 passing Node tests, 4 RATUM Python tests, packaging/signature checks, local missing-outcome browser checks and live post-deployment browser/health/readiness checks. Working tree was clean before this handoff was written.
 - No active feature request remains unfinished. The owner requested this handoff to continue on another computer. Do not invent a previously approved next feature.
 
@@ -117,3 +117,5 @@ Local validation: 52 Node tests and 4 RATUM Python tests passed, syntax checks p
 ## Operator-ready adapter follow-through
 
 The owner requested proceeding with the information already supplied, without another operator questionnaire. See `collector/ratum/QUICKSTART.md`: local setup pins identity automatically and supports systemd or a maintained PID file; the default two-snapshot check never uploads; explicit `--submit` uses the existing provider token. No new stats sample or block counter is requested. The remaining step is Liam running the local setup/check and enabling delivery. We have not run it on his host or sent him a message. Eight RATUM tests pass, including setup, no-upload checks, process races, counter boundaries and redirect refusal. Signed public downloads and the web application are unchanged by this client-only follow-through.
+
+Directory search correction deployed September 14: accented and unaccented names now match without merging identities. All 53 Node tests, syntax and packaging checks passed. Live browser search for Crypto-Éire finds its approved listing; its public profile remains unpublished. Public health/readiness checks passed.
