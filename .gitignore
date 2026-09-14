@@ -31,3 +31,5 @@ collector/adapter-kit/token.txt
 
 xbtpulse-signing-backup*.json
 portable-recovery-code.txt
+
+collector/ratum/token.txt

@@ -1,6 +1,6 @@
 # RATUM Prime adapter — compatibility preview
 
-**Not yet approved for installation on Crypto-Eire.** This adapter is tested with synthetic source-schema fixtures, not their running service. No code or configuration has been changed on their machines. No telemetry has been submitted on their behalf. The existing DATUM status-page collector is not the appropriate adapter for Prime's JSON API.
+**Ready for an operator-run local check; live compatibility is not yet verified.** This adapter is tested with synthetic source-schema fixtures, not their running service. No code or configuration has been changed on their machines. No telemetry has been submitted on their behalf. The existing DATUM status-page collector is not the appropriate adapter for Prime's JSON API.
 
 ## Source inspection
 
@@ -29,7 +29,9 @@ Only numeric interval aggregates reach XBT Pulse. The per-miner identities, bala
 
 The counter is **whole Prime-pool accepted work**, spanning its connected gateways. It does not establish who built each template, and must not be combined with child gateway work as if those sources were disjoint. Pool SV1 access on port 3380 does not identify the stats port or prove this schema exists. `blocks_found` is the ledger's recorded accepted-block count; later orphaning is a separate chain outcome. Difficulty is sampled from the node snapshot, so boundary ambiguity is omitted rather than reconstructed.
 
-## Before enabling Crypto-Eire
+## Historical preview checklist (superseded for Crypto-Éire)
+
+For Crypto-Éire, use [the quickstart](QUICKSTART.md). It captures identity locally and requires no further sample or block-counter development. The checklist below documents the original extension review, not a new request to Liam.
 
 1. Obtain their full `--version` / pool.version build string, repo/fork or commit, and an optional public stats.json URL. Do not request RPC credentials, wallet keys, a full configuration or SSH access.
 2. Confirm whether their build already exports equivalent cumulative counters. If so, adapt the schema directly rather than asking them to patch.
@@ -48,3 +50,7 @@ Add `"counterSource": "prime-cumulative"` to private config.json to read top-lev
 Exact configured build/public-key checks remain local, as do systemd process checks. Supply the new build string locally; do not send credentials or miner identities. Work is subtracted as Python integers before serialization, with deltas above JavaScript's safe integer limit omitted. Restarts, decreasing counters, difficulty/retarget changes and intervals outside existing limits start a new baseline. Counter-source changes also start a baseline. Confirm ledger replacement requires a process restart; otherwise reset detection needs adjustment.
 
 Validate a fresh sample, unit normalization and local process supervision with the operator before enabling. This is synthetic-fixture-tested preview support, not live integration approval. The legacy proposed extension uses mutable block history; do not enable its numeric outcomes on a build allowing undetectable record removal. Work-only mode avoids that dependency. Signed public packages are unchanged.
+
+## Operator-ready work-only setup
+
+Follow [QUICKSTART.md](QUICKSTART.md). `--setup` captures build/identity locally, `--check` samples twice without uploads, and `--submit` explicitly enables the existing durable delivery flow. Normal invocation is now check-only. A maintained Prime PID file can replace the systemd service lookup. Proxy inheritance and redirects are disabled for local reads and authenticated uploads.

@@ -1,4 +1,9 @@
 import unittest
+import tempfile
+from pathlib import Path
+from unittest.mock import patch
+from types import SimpleNamespace
+import ratum
 from ratum import normalize,interval
 
 class AdapterTests(unittest.TestCase):
@@ -30,6 +35,37 @@ class AdapterTests(unittest.TestCase):
         for raw in [str(2**128),'-1',123,'1.5',None]:
             self.data['cumulative_accepted_work']=raw
             with self.assertRaises(ValueError):normalize(self.data,self.config,1060000)
+    def test_setup_pins_identity_locally_and_refuses_overwrite(self):
+        data=dict(self.data,cumulative_accepted_work='1234')
+        args=SimpleNamespace(stats_url='http://127.0.0.1:1234/stats.json',unit='prime.service',pid_file=None)
+        with tempfile.TemporaryDirectory() as folder, patch.object(ratum,'ROOT',Path(folder)), patch.object(ratum,'read_stats',return_value=data), patch.object(ratum,'snapshot') as snap, patch.object(ratum,'post') as post:
+            ratum.setup(args)
+            config=ratum.json.loads((Path(folder)/'config.json').read_text())
+            self.assertEqual(config['counterSource'],'prime-cumulative')
+            self.assertEqual(config['expectedBuild'],self.data['pool']['version'])
+            self.assertNotIn('token',config)
+            snap.assert_called_once()
+            post.assert_not_called()
+            with self.assertRaises(ValueError):ratum.setup(args)
+    def test_check_never_posts_or_changes_reporting_state(self):
+        a=dict(time=1000000,work=100,found=None,difficulty=100,height=970000,build='test',pool='test',process='same',counterSource='prime-cumulative')
+        b=dict(a,time=1010000,work=200)
+        with tempfile.TemporaryDirectory() as folder, patch.object(ratum,'ROOT',Path(folder)), patch.dict('sys.modules',{'fcntl':SimpleNamespace()}), patch.object(ratum,'snapshot',side_effect=[a,b]), patch.object(ratum.time,'sleep'), patch.object(ratum,'post') as post:
+            (Path(folder)/'config.json').write_text('{}')
+            (Path(folder)/'state.json').write_text('{"pending":{"id":"keep"}}')
+            ratum.run(check=True)
+            post.assert_not_called()
+            self.assertEqual((Path(folder)/'state.json').read_text(),'{"pending":{"id":"keep"}}')
+    def test_default_cli_is_check_and_process_race_fails_closed(self):
+        with patch('sys.argv',['ratum.py']), patch.object(ratum,'run') as run:
+            self.assertEqual(ratum.main(),0)
+            run.assert_called_once_with(check=True)
+        with patch.object(ratum,'process_identity',side_effect=['before','after']), patch.object(ratum,'read_stats',return_value=self.data), patch.object(ratum.time,'time',return_value=1000):
+            with self.assertRaises(ValueError):ratum.snapshot(self.config)
+    def test_redirects_and_remote_stats_are_refused(self):
+        with self.assertRaises(ValueError):ratum.NoRedirect().redirect_request(None,None,None,None,None,None)
+        for url in ['https://example.com/stats.json','http://user:pass@127.0.0.1/stats.json']:
+            with self.assertRaises(ValueError):ratum.read_stats({'statsUrl':url})
     def test_exact_deltas_and_reset_guards(self):
         a=normalize(self.data,self.config,1000000);a['process']='same'
         b=dict(a,time=1060000,work=1300,found=5)
