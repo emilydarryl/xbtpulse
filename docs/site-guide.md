@@ -81,3 +81,5 @@ This persistent history differs from My watchlist, which compares only browser-s
 When accepted-work telemetry lacks block outcomes for any interval in the displayed window, Reported found shows Not available and the found/expected comparison is suppressed. Expected blocks and work share remain available. Missing outcomes never mean zero found blocks.
 
 Directory name search ignores letter case and accents, so Crypto-Éire also matches Crypto-Eire. This affects search only; listings and pool identities remain separate.
+
+Public operators can have reviewed profiles before any attributed blocks. In Admin, use Review & publish profile and leave Pool ID blank to create a stable operator profile (or reuse that application's existing profile). Publication requires profile consent and identity/scope review. It does not establish block attribution, link telemetry, or award a rating. Existing attributed pool IDs should only be selected after verifying the relationship.

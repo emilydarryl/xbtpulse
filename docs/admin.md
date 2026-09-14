@@ -47,3 +47,5 @@ Accepting a suggested telemetry percentage requires explicit confirmation that t
 ## Public visibility
 
 Listing consent permits a pending name/status listing; profile consent permits reviewed publication and approved onboarding visibility. The directory includes approved consenting listings as well as public block attributions and profiles. Similar names are not automatically merged. Contact details, conversations and draft assessments remain private. The public change feed records observed participation-status changes, not historical approval dates or scorecard revisions.
+
+Public operators can have reviewed profiles before any attributed blocks. In Admin, use Review & publish profile and leave Pool ID blank to create a stable operator profile (or reuse that application's existing profile). Publication requires profile consent and identity/scope review. It does not establish block attribution, link telemetry, or award a rating. Existing attributed pool IDs should only be selected after verifying the relationship.

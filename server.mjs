@@ -404,7 +404,11 @@ const server = http.createServer(async (req, res) => {
       };
       if (url.pathname === "/api/pool") {
         const id = url.searchParams.get("id");
-        const published = store.get("pool-profile:" + id);
+        let published = store.get("pool-profile:" + id);
+        if (published?.applicationId) {
+          const owner = store.applications().find(a => a.id === published.applicationId);
+          if (!owner || owner.status === "declined" || owner.body.profileConsent !== true) published = null;
+        }
         const visibleProfile = published
           ? { ...published }
           : researchedProfiles[id] || null;

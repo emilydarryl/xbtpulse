@@ -144,7 +144,7 @@ document.addEventListener("click", (e) => {
       ". Existing tokens will stop working."
     : "Review this application before changing its status. Declined applications can be reopened.";
   $("#pool-label").hidden = action.type !== "publish-profile";
-  $("#pool-label input").required = action.type === "publish-profile";
+  $("#pool-label input").required = false;
   $("#provider-label").hidden = action.type !== "approve";
   $("#provider-label input").required = action.type === "approve";
   $("#review-label").hidden = !["approve", "publish-profile"].includes(

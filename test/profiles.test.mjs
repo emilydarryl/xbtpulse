@@ -6,6 +6,30 @@ import {
   privateProfiles,
 } from "../lib/profiles.mjs";
 import { Store } from "../lib/store.mjs";
+import { poolDirectory } from "../lib/directory.mjs";
+
+test("public operators publish without blocks using a stable owned identity", () => {
+  const s = new Store(":memory:");
+  try {
+    s.addApplication({id:"public-a",name:"Example",profileConsent:true,profile:{poolType:"public",fee:"1"}});
+    const request = {application:"public-a",poolId:"",reviewed:true};
+    const profile = publishProfile(s,request,new Set());
+    assert.equal(request.poolId,"operator:public-a");
+    assert.equal(profile.fee,"1");
+    const rows = poolDirectory(s,[]);
+    assert.equal(rows.length,1);
+    assert.equal(rows[0].profileUrl,"/pool?id=operator%3Apublic-a");
+    assert.equal(rows[0].lastObserved,null);
+    assert.equal(privateProfiles(s).length,0);
+    publishProfile(s,{application:"public-a",reviewed:true},new Set());
+    assert.equal(poolDirectory(s,[]).length,1);
+    s.addApplication({id:"public-b",name:"Example",profileConsent:true,profile:{poolType:"public"}});
+    assert.throws(()=>publishProfile(s,{application:"public-b",poolId:request.poolId,reviewed:true},new Set([request.poolId])),/another application/);
+    s.addApplication({id:"no-consent",profile:{poolType:"public"}});
+    assert.throws(()=>publishProfile(s,{application:"no-consent",reviewed:true},new Set()),/consent/);
+    assert.throws(()=>publishProfile(s,{application:"public-a"},new Set()),/review/);
+  } finally {s.close();}
+});
 test("private pools can publish without blocks, omit connection and fee fields, and expose only directory identity", () => {
   const s = new Store(":memory:");
   try {
