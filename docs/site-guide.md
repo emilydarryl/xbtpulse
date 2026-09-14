@@ -38,3 +38,5 @@ History grows from retained canonical blocks and can be partial during backfill 
 For data integrations, use the [public API](api.md). For contributing, follow the [operator decision guide](operators.md).
 
 Pool pages include an attribution section. Where a reviewed map exists, it shows observed tag groups flowing to a collection address and the pool grouping, with dated snapshot counts, source links and limitations. Unmapped pools explicitly state that no reviewed map is published.
+
+Pool pages show evidence freshness for attribution, profile terms and published scorecards, plus each reviewed linked telemetry provider. Reviews are due after 30 days; assessment age uses the oldest criterion check or observation end. Reports older than 30 minutes are stale. These are notices, not automatic rating/attribution changes. Operators can follow the correction link to submit updated evidence.

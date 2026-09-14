@@ -1,3 +1,4 @@
+import { evidenceFreshness } from "./lib/evidence-freshness.mjs";
 import { onboardingFeed } from "./lib/onboarding-feed.mjs";
 import { poolDirectory } from "./lib/directory.mjs";
 import {
@@ -420,7 +421,14 @@ const server = http.createServer(async (req, res) => {
             .blocks(window)
             .filter((b) => attribute(b, registry).id === id),
           details = summarize(measured, registry);
+        const review = registry.find((p) => p.id === id)?.attributionReview || null;
+        const card = publicScorecard(store, id);
+        const linkedProviders = (registry.find((p) => p.id === id)?.providerIds || []).map(name => {
+          const row = store.db.prepare("SELECT MAX(end) AS lastReport, MAX(CASE WHEN json_extract(body, '$.work') > 0 THEN end END) AS lastWorkReport FROM telemetry WHERE provider = ?").get(name);
+          return {name,active:activeIds.has(name),...row};
+        });
         return send(res, 200, {
+          freshness: evidenceFreshness({attribution:review,profile:visibleProfile,scorecard:card,providers:linkedProviders}),
           id,
           name: known.name,
           sample: summary.sample,

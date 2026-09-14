@@ -1344,3 +1344,9 @@ dialog::backdrop {
   .attribution-flow { grid-template-columns: 1fr; gap: 8px; }
   .attribution-arrow { justify-self: center; transform: rotate(90deg); }
 }
+
+.freshness-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:20px; }
+.freshness-grid > div { border-left:2px solid var(--line); padding-left:14px; }
+.freshness-grid p { margin:8px 0; }
+.freshness-due { color:var(--bitcoin-ink); font-weight:600; }
+@media(max-width:600px) { .freshness-grid { grid-template-columns:1fr; } }

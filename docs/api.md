@@ -70,3 +70,5 @@ Errors use `{ "error": "message" }`. Invalid observation windows return 400; mis
 `POST /api/telemetry` requires a reviewed provider's bearer token. `POST /api/telemetry/challenge` answers a one-time credential challenge with that same token. See [telemetry contract](telemetry.md) and [collector installation](../collector/INSTALL.md). Approval, profile publication, participation badges and scorecard publication are separate actions.
 
 Pool responses include `attributionReview` (null if unavailable): curated public address/tag evidence, dated range, snapshot counts and source links. These counts do not refresh with the requested block window and are not template-control measurements.
+
+Pool `freshness` includes `checkedAt` (Unix milliseconds), `reviewPeriodDays`, review objects (`status`, `reviewedAt`, `dueAt` as ISO timestamps or null) for attribution/profile/assessment, and reviewed linked provider telemetry (`name`, `status`, `lastReport`, `lastWorkReport` in Unix milliseconds or null). Missing retained reports differ from a known stale report. Current credentials determine inactive status. Review age does not change score values or attribution rules.
