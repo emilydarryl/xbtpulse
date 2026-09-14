@@ -61,6 +61,7 @@ async function load() {
     );
     const d = windows[0],
       profile = d.profile;
+    document.querySelector("#soveroot-example").hidden = id !== "explorer:soveroot" || profile?.poolType !== "private";
     watchProfile=d;document.querySelector('#watch-pool').disabled=false;updateWatchButton();
     document.title = d.name + " · XBT Pulse";
     const scoreLink = document.querySelector("#scorecard-link");

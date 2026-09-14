@@ -87,3 +87,5 @@ Public operators can have reviewed profiles before any attributed blocks. In Adm
 Mining-map links from other pool profiles open that operator's own view with published claims and explicitly unmapped connections. They no longer select the unrelated Soveroot–Lazarus example. New operators do not receive inferred connection arrows.
 
 Directory cards provide a View pool button and a separate Compare action below the pool name; actions wrap when space is limited.
+
+Soveroot is featured as a real private-pool walkthrough: homepage links lead to its profile, reported work and dated Lazarus connection. Current reporting status is derived from the dashboard response, with missing/delayed and sample states explicit. The example does not imply accepting miners, independent templates or an awarded rating.

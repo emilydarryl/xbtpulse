@@ -134,6 +134,12 @@ function emptyRow(n, text) {
 }
 function render() {
   if (!data) return;
+  const example = data.telemetry?.providers?.find(p => p.name === "soveroot");
+  $("#example-status").textContent = demo
+    ? "Sample mode is on. The example links open real observations; current reporting is not shown in sample mode."
+    : example
+      ? `${example.stale ? "Reporting delayed" : example.participationBadge === "Telemetry Contributor" ? "Telemetry reporting current" : "Reporting participation needs review"} · Last report: ${new Date(example.lastReport).toLocaleString()}.`
+      : "No Soveroot reports available in this dashboard window. The profile still explains the setup; missing reports do not prove downtime.";
   const pools = data.pools || [],
     blocks = data.blocks || [],
     chart = chartGroups(pools);
@@ -326,6 +332,10 @@ document.querySelectorAll("[data-view]").forEach((button) =>
     });
   }),
 );
+const requestedView = new URL(location.href).searchParams.get("view");
+if (["overview", "payouts", "templates", "method"].includes(requestedView)) {
+  document.querySelector(`[data-view="${requestedView}"]`).click();
+}
 $("#demo").addEventListener("click", () => {
   demo = !demo;
   refresh();
