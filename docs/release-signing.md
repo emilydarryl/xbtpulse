@@ -54,6 +54,19 @@ OpenSSH command reference: https://man.openbsd.org/ssh-keygen. This uses `-Y ver
 4. Run `scripts/verify-releases.py public/downloads --self-test`, commit the public artifacts, and deploy. CI verifies signatures and archive hashes, but has no private signing key.
 5. Re-download deployed files and verify again. Publish the fingerprint through an established operator communication channel for initial pinning.
 
-The private key is Windows-user-protected encrypted data in `%LOCALAPPDATA%/XbtPulse/release-signing`, restricted to that account and SYSTEM. A second encrypted recovery copy was verified locally. It is tied to the same Windows account/machine protection; **it is not a portable offline backup and does not protect against losing that machine/account**. Preserve the Windows account recovery material or arrange a separately encrypted offline export before replacing the workstation. Never commit encrypted or plaintext private-key material to this repository, upload it to the VPS, or put it in CI secrets.
+The private key is Windows-user-protected encrypted data in `%LOCALAPPDATA%/XbtPulse/release-signing`, restricted to that account and SYSTEM. A second encrypted recovery copy was verified locally. It is tied to the same Windows account/machine protection; **it is not a portable offline backup and does not protect against losing that machine/account**. A separate portable AES-256-GCM export is now available to the maintainer, protected by a randomly generated 256-bit recovery code. It was independently restored and its public identity verified. Store that export on disconnected media and its recovery code separately; a local copy alone is not an offline backup. The code and encrypted export together grant signing authority. Never commit encrypted or plaintext private-key material to this repository, upload it to the VPS, or put it in CI secrets.
 
 If the key is lost or suspected compromised, stop signing. Announce revocation and replacement through established channels; cross-sign a replacement only while the old key is still trusted. Reviewers must explicitly approve a new fingerprint. The verifier and documentation must be updated intentionally for a key rotation.
+
+## Portable recovery
+
+The portable export uses authenticated AES-256-GCM with a random nonce and 256-bit recovery key. Its format, algorithm, fingerprint and public key are authenticated metadata. The export is independent of Windows DPAPI. Never commit the export or recovery code. Keep the code in a password manager separately from backup media.
+
+In a private directory on a recovery machine with Node.js and OpenSSH, save the recovery code temporarily in a user-only text file, then run:
+
+```sh
+node scripts/restore-signing-key.mjs xbtpulse-signing-backup-v1.json recovery-code.txt restored-signing.key
+ssh-keygen -lf restored-signing.key
+```
+
+The tool refuses to overwrite an existing file, authenticates before writing, and checks the recovered public key. It removes its output on verification failure. The recovered key is **unencrypted**: protect its directory/permissions, re-encrypt or import it into protected signing storage promptly, and remove the temporary recovery-code file when finished. On Windows, restrict the output directory to your account and SYSTEM before restoring; POSIX output files are created mode 0600. Loss of the recovery code makes this export unusable.

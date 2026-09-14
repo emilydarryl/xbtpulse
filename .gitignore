@@ -28,3 +28,6 @@ collector/adapter-kit/token.txt
 
 # Private signing material never belongs in source
 *.dpapi
+
+xbtpulse-signing-backup*.json
+portable-recovery-code.txt
