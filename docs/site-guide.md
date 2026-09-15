@@ -123,3 +123,7 @@ Click a recipient in Payout-address activity to inspect its full address/script,
 Pool profiles now include **Block characteristics**, comparing the pool with all network observations (including that pool) in matching 144/576/2,016-block windows. Counts show available coverage for transaction count, bytes, weight units and coinbase-only blocks. Recipients are distinct positive-value addresses/scripts, not people. Missing metadata is not zero, and coinbase-only blocks do not establish misconduct. The newest 2,016 retained blocks are gradually enriched without resetting observations; busy periods can delay backfilling.
 
 Pool-profile Recent attributed blocks and Coinbase payout recipients use scrollable tables showing approximately ten rows at once, with sticky headings. Recent blocks remain newest first (up to 24 matches); scrolling reveals the remaining blocks and recipient rows without expanding the page.
+
+### Researched profiles before operator onboarding
+
+Public website research can appear in the directory before a pool applies. OmegaPool was added on September 15, 2026 with sourced, endpoint-specific fees, payout terms and template-role claims. These profiles are marked researched public data, carry no telemetry approval or score, and leave block activity unlinked rather than inferring attribution from names or addresses. Fee terms are dated snapshots, not live feeds. Operator submission and evidence review remain separate.

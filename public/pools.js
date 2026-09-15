@@ -68,7 +68,7 @@ async function load() {
       add(
         card,
         "p",
-        `${p.retainedBlocks} retained blocks · ${p.recentBlocks ? p.recentBlocks + " in the latest 144 network blocks" : "No blocks in the latest 144 network observations"}`,
+        p.retainedBlocks == null ? "Block attribution not linked; activity is not measured for this listing." : `${p.retainedBlocks} retained blocks · ${p.recentBlocks ? p.recentBlocks + " in the latest 144 network blocks" : "No blocks in the latest 144 network observations"}`,
       );
       if (!p.profileUrl) add(card, "p", "Public profile not published yet.");
     }

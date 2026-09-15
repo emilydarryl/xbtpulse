@@ -57,5 +57,29 @@
         "url": "https://www.xorpool.com/datum"
       }
     ]
+  },
+  "research:omegapool": {
+    "name": "OmegaPool",
+    "poolType": "public",
+    "provenance": "public-research",
+    "reviewedAt": "2026-09-15",
+    "website": "https://omegapool.tech/",
+    "setup": "https://omegapool.tech/connect",
+    "fee": "0% own gateway; 10% on public-gateway work. 75% of that charge is redistributed to own-gateway miners; 25% stays with the pool.",
+    "payout": "Website states proportional work-window payouts directly in coinbase, with an 8x network-difficulty window. Public-gateway charges and redistribution affect the split.",
+    "minimum": "0.00000546 (546 sats per split; below-threshold work stays in the window for a later block).",
+    "protocols": "DATUM: pool.iohzrd.tech:28915 (gateway connections). Public Stratum V1: gateway.iohzrd.tech:23334 (BLAKE2b hardware).",
+    "template": "Own node and DATUM gateway: operator claims miner-selected templates. Public gateway: operator selects transactions. Neither path has been independently assessed by XBT Pulse.",
+    "researchNotes": "Public website snapshot, not an operator submission or telemetry approval. Advertises RATUM Prime 0.1.38. Public gateway refuses new connections above its configured 10% network-share threshold; existing miners continue, so this is not a hard pool-size cap. No block attribution has been linked to this researched profile.",
+    "sources": [
+      {
+        "title": "OmegaPool public dashboard and fee terms",
+        "url": "https://omegapool.tech/"
+      },
+      {
+        "title": "OmegaPool connection guide, template roles and payout threshold",
+        "url": "https://omegapool.tech/connect"
+      }
+    ]
   }
 }

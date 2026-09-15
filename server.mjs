@@ -342,7 +342,7 @@ const server = http.createServer(async (req, res) => {
       if (!snapshot || Date.now() - snapshot.time > 10000) {
         snapshot = {
           time: Date.now(),
-          rows: poolDirectory(store, registry, retention),
+          rows: poolDirectory(store, registry, retention, Date.now(), researchedProfiles),
         };
         cache.set("directory", snapshot);
       }
@@ -482,7 +482,9 @@ const server = http.createServer(async (req, res) => {
                 name: published.name || id,
                 evidence: "Published profile; block attribution not linked",
               }
-            : null);
+            : researchedProfiles[id]?.name
+              ? { id, name: researchedProfiles[id].name, evidence: "Researched public profile; block attribution not linked" }
+              : null);
         const attributed = !!observed || registry.some((p) => p.id === id);
         if (!known)
           return send(res, 404, {

@@ -73,3 +73,19 @@ test("directory merges explicit profiles and omits nonconsenting and pending ope
     s.close();
   }
 });
+
+ test("research listings remain unlinked and do not imply telemetry or observed zero blocks", () => {
+  const s = new Store(":memory:");
+  try {
+    const rows = poolDirectory(s, [], 30000, Date.now(), {
+      "research:omega": { name: "OmegaPool", poolType: "public" },
+      "explorer:old": { fee: "1" },
+    });
+    assert.equal(rows.length, 1);
+    assert.equal(rows[0].retainedBlocks, null);
+    assert.equal(rows[0].recentBlocks, null);
+    assert.equal(rows[0].lastObserved, null);
+    assert.match(rows[0].participation, /Not operator-confirmed/);
+    assert.equal(rows[0].profileUrl, "/pool?id=research%3Aomega");
+  } finally { s.close(); }
+});
