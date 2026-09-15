@@ -2,6 +2,18 @@
 
 Prepared September 14, 2026. Read this before continuing work from another computer.
 
+## September 15 update — profile linking and optional block reports
+
+This update supersedes older deployment and Crypto-Eire reporting notes below. Deployed application revision: `eed2db6c40ff20c85f02e39aca8e11655e07020b`; recorded in `/opt/xbtpulse/DEPLOYED_COMMIT`.
+
+- Crypto-Eire's approved application owns `crypto-eire-prime`. Positive work is arriving, and the profile now resolves application-owned providers for telemetry, freshness and history (`49ee599`). No collector reinstall or token change was needed.
+- Pool profiles now show **Operator-reported block finds**, with chain match status separate from finder claims and existing chain attribution. No reports are added to block-production totals, work-only outcomes, or scores. Crypto-Eire currently has no individual block reports; Liam must supply the actual hash and height.
+- `/report-blocks` provides an optional manual form and feed instructions. Authenticated `POST /api/block-reports` reuses existing provider tokens and supports report/withdraw actions. The downloadable Python sender validates locally by default; `--submit` sends a saved event. It does not discover mining events or install an automatic feed. See [block reporting](block-reporting.md).
+- Reports require an approved, consenting published profile. Duplicates, withdrawals, ownership, consent, source gaps/replacements and rate limits have tests. The database change only adds block-report and rate-limit tables; existing mining data was preserved.
+- Validation: 74 Node tests, 3 Python sender tests, syntax checks, signed collector packaging verification, isolated synthetic browser submission, live health/readiness, public profile fields, unauthenticated submission rejection, and exact deployed sender-source comparison passed. Live browser verified the new section and reporting-page link. No synthetic report was submitted to production and no message was sent to an operator.
+
+The sections below describe earlier state and historical context.
+
 ## Current state
 
 - Live site: https://xbtpulse.tech
