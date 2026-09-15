@@ -1,3 +1,4 @@
+import {coverageLabel,outcomeLabel,coverageExplanation} from "/telemetry-context.js";
 import { cardSnapshot, renderCard } from "/share-card.js";
 const $=s=>document.querySelector(s);
 const query=new URL(location.href).searchParams;
@@ -60,6 +61,8 @@ async function load(){
  ['Terms last reviewed',d=>d.profile?date(d.profile.reviewedAt):'Not reviewed'],
  ['Terms review status',d=>d.freshness?.profile.status??'Not reviewed'],
  ['Linked telemetry',d=>d.freshness?.telemetry.length?d.freshness.telemetry.map(p=>`${p.name}: ${p.status}`).join('; '):'No reviewed provider link'],
+ ['Reporting coverage — last 24h',d=>d.telemetry?.length?d.telemetry.map(p=>p.name+': '+coverageLabel(p)).join('; '):'No intervals available'],
+ ['Reported measurements',d=>d.telemetry?.length?d.telemetry.map(p=>p.name+': '+outcomeLabel(p)).join('; '):'Not available'],
  ['Last linked report',d=>d.freshness?.telemetry.some(p=>p.lastReport)?date(Math.max(...d.freshness.telemetry.map(p=>p.lastReport||0))):'No retained reports'],
  ['Decentralization / 100',d=>d.scorecard?.totals.decentralization??'Not assessed'],['Transparency / 100',d=>d.scorecard?.totals.transparency??'Not assessed'],
  ['Assessment review status',d=>d.freshness?.assessment.status??'Not assessed'],
@@ -73,6 +76,7 @@ async function load(){
   if(d.scorecard){add(td,'br');const a=add(td,'a','Read scored evidence');a.href='/scorecard?pool='+encodeURIComponent(d.id);}
  }
  if(results.length>=2&&!results.some(p=>p.unavailable)){exportData={pools:results,window};$('#share-card').disabled=false;}
+ add(root,'p',coverageExplanation).className='small muted';
  const snapshots=new Set(results.filter(d=>!d.unavailable).map(d=>`${d.sample}:${d.updatedAt}`));
  $('#compare-status').textContent=`${selected.length} pool${selected.length===1?' selected — add another to compare':'s compared'}. Auto-refreshes every 30 seconds.${results.some(d=>d.unavailable)?' Some profiles could not be loaded.':''}${snapshots.size>1?' Source snapshots differ; refresh before comparing close results.':''}`;
 }

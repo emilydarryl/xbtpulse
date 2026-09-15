@@ -86,6 +86,7 @@ const files = {
   "/token-claim.js": "token-claim.js",
   "/": "index.html",
   "/app.js": "app.js",
+  "/telemetry-context.js": "telemetry-context.js",
   "/style.css": "style.css",
   "/favicon.svg": "favicon.svg",
   "/collector": "collector.html",

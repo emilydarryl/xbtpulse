@@ -2,6 +2,10 @@
 
 Prepared September 14, 2026. Read this before continuing work from another computer.
 
+## September 15 public evidence audit
+
+See [audit findings](audit-2026-09-15.md). Added 24-hour reporting coverage/count and explicit outcome availability to dashboard, profiles and comparisons; clearer setup paths and delivery diagnostics; explorer links for reported blocks; sourced-claim labels; and suppression of misleading zero-block characteristics on unlinked profiles. No schema, token, score or attribution changes. Validate with 76 Node tests, syntax and collector package checks. Read `/opt/xbtpulse/DEPLOYED_COMMIT` for the deployed revision; older revision references below are historical.
+
 ## September 15 update — profile linking and optional block reports
 
 - Mission clarified with the owner: an independent, evidence-based resource for informed pool choices, assessing decentralization and transparency separately. Statistics and optional feeds support these assessments; participation is not proof of decentralization. See the README mission section.

@@ -1,3 +1,4 @@
+import {coverageLabel,outcomeLabel,coverageExplanation} from "/telemetry-context.js";
 const $ = (s) => document.querySelector(s);
 const escape = (s) =>
   String(s ?? "").replace(
@@ -279,13 +280,13 @@ function renderAddresses() {
 function renderTelemetry() {
   const providers = data?.telemetry?.providers || [];
   $("#telemetry-title").textContent = providers.length
-    ? "Reported template work"
-    : "Template telemetry is not connected";
+    ? "Reported accepted work"
+    : "Accepted-work telemetry is not connected";
   $("#telemetry-description").textContent = providers.length
     ? "Authenticated operator reports for the last 24 hours. Shares below are within reporting coverage only, not percentages of the entire network. Operator identities are not independently proven."
-    : "Winning blocks do not reveal every attempted template. We need participating operators to measure template-control share and actual versus expected blocks.";
+    : "No accepted-work reports are available in this window. This does not mean pools are offline.";
   $("#telemetry-data").innerHTML = providers.length
-    ? `<div class="table-scroll"><table><thead><tr><th>Provider</th><th>Reported work share</th><th>Expected blocks</th><th>Reported found</th><th>Found / expected</th></tr></thead><tbody>${providers.map((p) => `<tr><td>${escape(p.name)}${p.stale ? " · report delayed" : ""}<br><a href="/ratings" class="rating-badge ${p.participationBadge === "Telemetry Contributor" ? "contributor" : ""}">${escape(p.participationBadge || "Not assessed")}</a></td><td>${pct(p.workShare)}</td><td>${p.expected.toFixed(2)}</td><td>${p.found == null ? "Not available" : p.found}</td><td>${p.found != null && p.expected > 0 ? ((p.found / p.expected) * 100).toFixed(1) + "%" : "—"}</td></tr>`).join("")}</tbody></table></div>`
+    ? `<div class="table-scroll"><table><thead><tr><th>Provider</th><th>Reporting coverage</th><th>Reported work share</th><th>Expected blocks</th><th>Reported found</th><th>Found / expected</th></tr></thead><tbody>${providers.map((p) => `<tr><td>${escape(p.name)}${p.stale ? " · report delayed" : ""}<br><a href="/ratings" class="rating-badge ${p.participationBadge === "Telemetry Contributor" ? "contributor" : ""}">${escape(p.participationBadge || "Not assessed")}</a><br>${escape(outcomeLabel(p))}<br>Last report: ${escape(new Date(p.lastReport).toLocaleString())}</td><td>${escape(coverageLabel(p))}</td><td>${pct(p.workShare)}</td><td>${p.expected.toFixed(2)}</td><td>${p.found == null ? "Not available" : p.found}</td><td>${p.found != null && p.expected > 0 ? ((p.found / p.expected) * 100).toFixed(1) + "%" : "—"}</td></tr>`).join("")}</tbody></table></div><p class="small muted">${escape(coverageExplanation)}</p>`
     : "";
 }
 async function refresh() {
