@@ -75,6 +75,8 @@ The comparison page uses `/api/pools` for selection and one `/api/pool` request 
 
 ## Submitting telemetry
 
+Published profiles resolve telemetry providers from both curated registry links and their approved, consenting application. This links work, reporting freshness and profile history without creating block attribution. Revoked providers remain linked so their freshness can show inactive status.
+
 `POST /api/telemetry` requires a reviewed provider's bearer token. `POST /api/telemetry/challenge` answers a one-time credential challenge with that same token. See [telemetry contract](telemetry.md) and [collector installation](../collector/INSTALL.md). Approval, profile publication, participation badges and scorecard publication are separate actions.
 
 ## Pool change history

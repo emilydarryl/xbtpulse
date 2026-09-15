@@ -3,6 +3,7 @@ import {addressDetails} from './lib/address-details.mjs';
 import {siteNavigation} from './lib/site-navigation.mjs';
 import {initializePoolHistory,capturePoolHistory,poolHistory} from './lib/pool-history.mjs';
 import { evidenceFreshness } from "./lib/evidence-freshness.mjs";
+import { profileProviderIds } from "./lib/profile-providers.mjs";
 import { onboardingFeed } from "./lib/onboarding-feed.mjs";
 import { poolDirectory, directorySearchText } from "./lib/directory.mjs";
 import {
@@ -470,7 +471,8 @@ const server = http.createServer(async (req, res) => {
           details = summarize(measured, registry);
         const review = registry.find((p) => p.id === id)?.attributionReview || null;
         const card = publicScorecard(store, id);
-        const linkedProviders = (registry.find((p) => p.id === id)?.providerIds || []).map(name => {
+        const providerIds = profileProviderIds(store, registry, id);
+        const linkedProviders = providerIds.map(name => {
           const row = store.db.prepare("SELECT MAX(end) AS lastReport, MAX(CASE WHEN json_extract(body, '$.work') > 0 THEN end END) AS lastWorkReport FROM telemetry WHERE provider = ?").get(name);
           return {name,active:activeIds.has(name),...row};
         });
@@ -497,14 +499,12 @@ const server = http.createServer(async (req, res) => {
           updatedAt: body.updatedAt,
           evidence: known.evidence,
           attributionReview: registry.find((p) => p.id === id)?.attributionReview || null,
-          rating: poolRating(known, registry, contributors),
+          rating: poolRating(known, [{ id, providerIds }], contributors),
           profile: visibleProfile,
           assessment: publicReview(store, published),
           scorecard: publicScorecard(store, id),
           telemetry: telemetry.providers.filter((p) =>
-            (registry.find((r) => r.id === id)?.providerIds || []).includes(
-              p.name,
-            ),
+            providerIds.includes(p.name),
           ),
         });
       }
