@@ -2,6 +2,10 @@
 
 Prepared September 14, 2026. Read this before continuing work from another computer.
 
+## September 15 mission and voice
+
+The homepage now leads with "Know your pool. Make your own choice." `/about` explains the mission, fair evidence standards, corrections and shared ownership with Soveroot. It is linked from shared navigation, the homepage introduction and footer. No scoring or operator data changes. Validation: 76 tests, syntax and collector package checks.
+
 ## September 15 public evidence audit
 
 Deployed application: `bd156f4` (full revision in `/opt/xbtpulse/DEPLOYED_COMMIT`). Live health/readiness and browser checks passed for dashboard telemetry, Crypto-Eire profile, two-provider comparison and contribution guidance. Explorer briefly returned an inconsistent block range after startup; it recovered without code changes and readiness returned true. Crypto-Eire retained its one reported block and unknown interval outcomes.

@@ -4,6 +4,8 @@
 
 ## Mission and main goal
 
+Read the public [mission and standards](https://xbtpulse.tech/about). The homepage leads with miner choice; the mission page explains our approach, correction process and shared ownership with Soveroot.
+
 XBT Pulse is an independent, evidence-based resource that helps miners understand which pools support decentralization, how transparently they operate, and what evidence supports their claims. The main goal is informed pool selection and a consistent way for operators to demonstrate their practices.
 
 We assess decentralization (template construction, transaction selection and miner control) separately from transparency (disclosed policies, fees, payouts, scope and checkable reporting). A transparent pool can still be centrally operated. Published criteria, dated sources, visible unknowns and corrections support independence; participation or a relationship with XBT Pulse does not automatically earn a favourable assessment.
