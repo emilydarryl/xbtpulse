@@ -4,6 +4,7 @@ import {siteNavigation} from './lib/site-navigation.mjs';
 import {initializePoolHistory,capturePoolHistory,poolHistory} from './lib/pool-history.mjs';
 import { evidenceFreshness } from "./lib/evidence-freshness.mjs";
 import { profileProviderIds } from "./lib/profile-providers.mjs";
+import { initializeBlockReports, pruneBlockReports, submitBlockReport, publicBlockReports } from "./lib/block-reports.mjs";
 import { onboardingFeed } from "./lib/onboarding-feed.mjs";
 import { poolDirectory, directorySearchText } from "./lib/directory.mjs";
 import {
@@ -48,6 +49,7 @@ const root = fileURLToPath(new URL(".", import.meta.url)),
 const dataDir = resolve(root, process.env.DATA_DIR || "data");
 await mkdir(dataDir, { recursive: true });
 const store = new Store(join(dataDir, "pulse.sqlite"));
+initializeBlockReports(store);
 store.expireApplications();
 initializeAdmin(store);
 if (!store.get("assessment-history-start"))
@@ -102,6 +104,10 @@ const files = {
   "/conversation.js": "conversation.js",
   "/contribute": "contribute.html",
   "/contribute.js": "contribute.js",
+  "/report-blocks": "report-blocks.html",
+  "/report-blocks.js": "report-blocks.js",
+  "/block-report-view.js": "block-report-view.js",
+  "/downloads/xbtpulse-block-reporter.py": "downloads/xbtpulse-block-reporter.py",
   "/ratings": "ratings.html",
   "/pools": "pools.html",
   "/site-navigation.js": "site-navigation.js",
@@ -133,6 +139,7 @@ const files = {
   "/admin.js": "admin.js",
 };
 const mime = {
+  py: "text/plain; charset=utf-8",
   zip: "application/zip",
   txt: "text/plain; charset=utf-8",
   html: "text/html; charset=utf-8",
@@ -281,6 +288,20 @@ const server = http.createServer(async (req, res) => {
         return send(res, e.message.includes("busy") ? 429 : 400, {
           error: e.message,
         });
+      }
+    }
+    if (url.pathname === "/api/block-reports" && req.method === "POST") {
+      const provider = authenticate(req);
+      if (!provider) return send(res, 401, { error: "Provider token required" });
+      if (!req.headers["content-type"]?.startsWith("application/json"))
+        return send(res, 415, { error: "Use application/json" });
+      try {
+        const result = submitBlockReport(store, registry, provider, await jsonBody(req));
+        cache.clear();
+        return send(res, result.duplicate ? 200 : 201, result);
+      } catch (e) {
+        if (e.status === 429) res.setHeader("Retry-After", "3600");
+        return send(res, e.status || 400, { error: e.message });
       }
     }
     if (url.pathname === "/api/telemetry" && req.method === "POST") {
@@ -506,6 +527,7 @@ const server = http.createServer(async (req, res) => {
           telemetry: telemetry.providers.filter((p) =>
             providerIds.includes(p.name),
           ),
+          blockReports: publicBlockReports(store, registry, id),
         });
       }
       cache.set(window, { time: Date.now(), body });
@@ -545,6 +567,7 @@ captureChanges(store);
 capturePoolHistory(store,registry,researchedProfiles,Date.now(),Math.max(180000,pollSeconds*3000));
 const timer = setInterval(async () => {
   store.expireApplications();
+  pruneBlockReports(store);
   await collector.poll();
   captureChanges(store);
 capturePoolHistory(store,registry,researchedProfiles,Date.now(),Math.max(180000,pollSeconds*3000));

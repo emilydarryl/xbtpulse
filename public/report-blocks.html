@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Report block finds · XBT Pulse</title>
+  <link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/style.css">
+  <script type="module" src="/report-blocks.js"></script>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/">XBT PULSE</a></header>
+  <main class="contribute-main">
+    <p class="eyebrow">OPTIONAL BLOCK REPORTING</p><h1>Share the blocks you find</h1>
+    <p>Already contributing work? Use your existing provider token to report individual block finds. Your work collector can keep running unchanged.</p>
+    <p>Reports appear on your approved public profile as <strong>operator-reported finds</strong>. We compare the hash and height with our collected XBT chain data. A match establishes chain inclusion, not who found the block. Reported finds do not change attributed block totals, scores or work-only outcomes.</p>
+    <section class="panel intake-panel">
+      <h2>Report a block</h2>
+      <p>Use a block from your own mining records. You need an active provider token and a linked, approved profile with publication consent. <a href="/contribute">New operator? Register here.</a></p>
+      <form id="block-report-form">
+        <label>Provider token<input name="token" type="password" autocomplete="off" required maxlength="512"></label>
+        <label>Block height<input name="height" type="number" min="961640" max="100000000" step="1" required inputmode="numeric"></label>
+        <label>Block hash<input name="hash" type="text" pattern="[a-fA-F0-9]{64}" minlength="64" maxlength="64" required spellcheck="false" autocomplete="off"></label>
+        <label>Action<select name="action"><option value="report">Publish a block-find report</option><option value="withdraw">Withdraw my report</option></select></label>
+        <label class="checkbox-label"><input name="confirm" type="checkbox" required> I represent this provider and intend to publish or withdraw this public report.</label>
+        <button class="primary-button" type="submit">Submit block report</button>
+      </form>
+      <p id="block-report-result" role="status" tabindex="-1"></p>
+      <p class="small muted">The token is used only for this request and is not saved by this page. Retrying the same report does not create another entry. Withdrawals remove it from the public list.</p>
+    </section>
+    <section class="panel intake-panel" id="feed">
+      <h2>Connect your own block feed</h2>
+      <p>When your software records a block find, save its real height and hash, then send one report. No public stats URL, worker identities, addresses or private mining configuration are needed.</p>
+      <p><code>POST https://xbtpulse.tech/api/block-reports</code><br><code>Authorization: Bearer YOUR_EXISTING_PROVIDER_TOKEN</code><br><code>Content-Type: application/json</code></p>
+      <pre class="block-report-code"><code>{
+  "height": YOUR_BLOCK_HEIGHT,
+  "hash": "YOUR_64_CHARACTER_BLOCK_HASH"
+}</code></pre>
+      <p>The placeholders are deliberately invalid. Fill them from real mining records. A successful response means the report was stored; the profile shows the separate chain check as collection catches up.</p>
+      <h3>Optional Python sender</h3>
+      <p>Download the <a href="/downloads/xbtpulse-block-reporter.py" download>block-report sender</a> and save each real event as a JSON file. It uses Python 3.9+ with no extra packages.</p>
+      <pre class="block-report-code"><code>python3 xbtpulse-block-reporter.py block.json
+python3 xbtpulse-block-reporter.py block.json --submit --token-file /path/to/token.txt</code></pre>
+      <p>The first command checks locally. The second sends the saved report. Keep your JSON file until the sender confirms acceptance; on a temporary failure, retry that same file. A hook or scheduler can invoke this command for each event in your own queue.</p>
+      <p>Keep the token file private (<code>chmod 600 /path/to/token.txt</code> on Linux). The existing Prime <code>token.txt</code> can be used. This sender does not read DATUM logs or discover blocks for you.</p>
+      <h3>Retries and corrections</h3>
+      <p>The provider and block hash identify a report. Identical retries return HTTP 200; new reports return 201. Wait at least a minute after a network or server error. HTTP 429 requires a one-hour wait. Other errors need correction before retrying.</p>
+      <p>To retract an incorrect report, send its original height and hash with <code>"action": "withdraw"</code>. You can then submit corrected details. An old retry cannot restore an unchanged withdrawn report; contact XBT Pulse if you withdrew it by mistake. Reports are retained for 90 days; up to 50 appear on the profile. Each provider can make 60 changes per hour.</p>
+      <p><a href="https://github.com/emilydarryl/xbtpulse/blob/main/docs/block-reporting.md">Full feed contract and integration guidance →</a></p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,5 +1,7 @@
 # Considering XBT Pulse? An operator guide
 
+**Optional block finds:** approved operators with a published profile can [report individual finds](https://xbtpulse.tech/report-blocks) using their existing provider token, manually or from their own event feed. Chain inclusion and finder claims are labelled separately. Work-only reporting continues unchanged. See [block reporting](block-reporting.md).
+
 **Making XBT mining decentralization visible.** XBT Pulse helps miners understand observed block production, template control and the evidence operators share. Public pools, private pools and individual DATUM gateway operators can participate.
 
 Start at [Contribute](https://xbtpulse.tech/contribute). You can submit a profile before telemetry compatibility is established. You do not need to give XBT Pulse SSH access to your machines.
