@@ -4,6 +4,9 @@ Prepared September 14, 2026. Read this before continuing work from another compu
 
 ## September 15 update — profile linking and optional block reports
 
+- Mission clarified with the owner: an independent, evidence-based resource for informed pool choices, assessing decentralization and transparency separately. Statistics and optional feeds support these assessments; participation is not proof of decentralization. See the README mission section.
+- Awoken Lazarus confirmed `totals.lifetime_work` as persistent accepted pool-split difficulty-work across connected DATUM gateways and house Stratum, excluding solo work, rejects and duplicates. Counter-definition questions are resolved; live delivery remains to be validated. Use work-only reports and the operator's own adapter, not the stock scraper or unchanged v0.1.0 uploader. See [Lazarus Prime compatibility](lazarus-prime-compatibility.md) for exact scope, reset/retarget handling and the next validation step.
+
 This update supersedes older deployment and Crypto-Eire reporting notes below. Deployed application revision: `eed2db6c40ff20c85f02e39aca8e11655e07020b`; recorded in `/opt/xbtpulse/DEPLOYED_COMMIT`.
 
 - Crypto-Eire's approved application owns `crypto-eire-prime`. Positive work is arriving, and the profile now resolves application-owned providers for telemetry, freshness and history (`49ee599`). No collector reinstall or token change was needed.

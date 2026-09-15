@@ -16,12 +16,21 @@ Mission: **Making XBT mining decentralization visible.** Explore pool concentrat
 | `/ratings` and `/scoring-rules` | Understand badges, proposed tiers, the numerical pilot rubric and review requirements |
 | `/scorecard?pool=...` | A published reviewer scorecard; absent/unpublished assessments are unavailable |
 | `/contribute` | Register a public/private operator, update details or submit authorized telemetry |
+| `/report-blocks` | Report a block hash and height with an existing provider token, or connect an optional event feed |
 | `/verify-downloads` | Pinned signing-key fingerprint, detached signatures and archive verification instructions |
 | `/adapter` | Operator-controlled upload kit, download, compatibility checklist and scope guidance |
 | `/collector` | Install the compatible DATUM telemetry collector; it is an uploader, not the read API |
 | `/admin` | Private operator review, token management, conversations and assessment tools |
 
 Every page uses the coin-and-pulse logo. Secondary pages provide an explicit Main site link. The homepage has a compact Find a pool search and links to the directory, map and history. The observation-window selector sits immediately above dashboard statistics, beside the source update timestamp.
+
+## Operator-reported block finds
+
+On a pool profile, **Operator-reported block finds** appears below the block-production windows. A direct profile link ending in `#reported-blocks` opens this section. Empty reports say **Not reported**, not zero finds.
+
+Each entry separates the operator's finder claim, the match against collected chain data, and existing chain attribution. A different payout pool can appear in the attribution column. Chain matches do not independently prove who found a block, and optional reports are not added to production totals or found/expected calculations.
+
+The **Report a block or connect an optional feed** link opens `/report-blocks`. Approved operators can reuse their provider token for the manual form or API, with a downloadable Python sender for saved events. The sender does not discover blocks or install an automated feed. See [block reporting](block-reporting.md) for setup, retries and withdrawals.
 
 ## Smaller pools and production ranking
 

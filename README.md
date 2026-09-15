@@ -2,6 +2,14 @@
 
 **Making XBT mining decentralization visible.** Independent Bitcoin Blake2b network observatory for **xbtpulse.tech**. Public source code, dashboard and read API. Requires Node.js 24, with no third-party runtime dependencies. Node's built-in SQLite provides persistent storage.
 
+## Mission and main goal
+
+XBT Pulse is an independent, evidence-based resource that helps miners understand which pools support decentralization, how transparently they operate, and what evidence supports their claims. The main goal is informed pool selection and a consistent way for operators to demonstrate their practices.
+
+We assess decentralization (template construction, transaction selection and miner control) separately from transparency (disclosed policies, fees, payouts, scope and checkable reporting). A transparent pool can still be centrally operated. Published criteria, dated sources, visible unknowns and corrections support independence; participation or a relationship with XBT Pulse does not automatically earn a favourable assessment.
+
+Pool comparisons and understandable evidence are the core experience. Network statistics and optional operator feeds support it. We can verify particular observations, but a found block, hashrate reading or installed collector does not prove decentralization.
+
 ## Start locally
 
 Copy `.env.example` to `.env`, then run `npm start`. Open http://127.0.0.1:4317. Run `npm test` and `npm run check` for validation.
@@ -9,6 +17,9 @@ Copy `.env.example` to `.env`, then run `npm start`. Open http://127.0.0.1:4317.
 The sample UI is explicitly illustrative. Live data starts only when `EXPLORER_API` or `RPC_URL` is configured. The example config uses the public mempool.guide API; **its pool labels are third-party attribution, not independently verified ownership**. Public visitors query a cached local database, never directly trigger source requests. The collector fetches up to 24 blocks per cycle and gradually backfills the configured retention (30,000 by default and on the VPS). Dashboard windows remain 144 / 576 / 2,016 blocks. History coverage is labeled while indexing.
 
 ## What is implemented
+
+- Optional [block-find reporting](https://xbtpulse.tech/report-blocks): manual submission or an operator-owned event feed using the existing provider token. Pool profiles show **Operator-reported block finds**, with chain-match status separate from finder claims and chain attribution. Missing reports say **Not reported**; these entries do not change attributed block totals, work-only outcomes or scores. Includes duplicate protection, withdrawals and a Python sender. See [the feed contract](docs/block-reporting.md).
+- Published profiles resolve approved, consenting application-owned telemetry providers as well as curated provider links. Work, freshness and profile history appear under the correct operator without creating block attribution.
 
 - Pool-versus-network block characteristics: average transaction count, size/weight, coinbase-only blocks and positive-value recipient patterns across 144/576/2,016-block windows. Per-metric coverage is explicit; no operator telemetry required.
 
@@ -67,6 +78,8 @@ See [deployment](docs/deployment.md), [telemetry contract](docs/telemetry.md), a
 - [Pool comparisons and Discord share cards](docs/comparisons.md)
 - [Public API reference and examples](docs/api.md)
 - [Operator onboarding and telemetry](docs/telemetry.md)
+- [Optional block finds: manual reporting, API feed and Python sender](docs/block-reporting.md)
+- [Lazarus Prime: operator-confirmed accepted-work counters and integration scope](docs/lazarus-prime-compatibility.md)
 - [Administration and conversations](docs/admin.md)
 - [Ratings, badges and rankings](docs/ratings.md)
 - [Scorecards and publication requirements](docs/scorecards.md)
@@ -94,11 +107,11 @@ Custom gateway operators can use the [adapter kit and compatibility checklist](h
 
 ## Accepted-work-only telemetry
 
-Reports may explicitly use `found: null` when block outcomes are unavailable. Accepted work and expected blocks remain usable; public and reviewer views suppress found/expected comparisons for any window containing missing outcomes. The RATUM preview supports the operator-reported `cumulative_accepted_work` field. Server support is deployed; Crypto-Eire still requires operator validation before its reports go live.
+Reports may explicitly use `found: null` when block outcomes are unavailable. Accepted work and expected blocks remain usable; public and reviewer views suppress found/expected comparisons for any window containing missing outcomes. The RATUM preview supports the operator-reported `cumulative_accepted_work` field. On September 15, positive Crypto-Eire reports and their profile linkage were verified live. This verifies delivery, not independent counter accuracy or template control.
 
 Crypto-Éire can use the [Prime work-only quickstart](collector/ratum/QUICKSTART.md) to capture identity locally, check without uploading, and explicitly enable reporting with its existing provider token. No additional Prime block counter is required.
 
-Public operators can have reviewed profiles before any attributed blocks. In Admin, use Review & publish profile and leave Pool ID blank to create a stable operator profile (or reuse that application's existing profile). Publication requires profile consent and identity/scope review. It does not establish block attribution, link telemetry, or award a rating. Existing attributed pool IDs should only be selected after verifying the relationship.
+Public operators can have reviewed profiles before any attributed blocks. In Admin, use Review & publish profile and leave Pool ID blank to create a stable operator profile (or reuse that application's existing profile). Publication requires profile consent and identity/scope review. Approved application-owned providers are linked for telemetry; publication does not establish block attribution or award a numerical rating. Existing attributed pool IDs should only be selected after verifying the relationship.
 
 Mining-map links from other pool profiles open that operator's own view with published claims and explicitly unmapped connections. They no longer select the unrelated Soveroot–Lazarus example. New operators do not receive inferred connection arrows.
 
