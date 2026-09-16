@@ -2,6 +2,10 @@
 
 Prepared September 14, 2026. Read this before continuing work from another computer.
 
+## September 16 endpoint observation pilot
+
+Added `/endpoint-checks` and static `/endpoint-report.json`, linked from Tools and the homepage. Two bounded rounds tested seven confirmed endpoints among a frozen top ten: six supplied short work commitments, PyBLOCK's LOTTO endpoint had connection errors, and three groups lacked sufficient endpoint/mapping evidence. No full coinbase payouts were decoded, so no proxy comparison was established. No scores, telemetry semantics, credentials or chain attribution changed. Operators are invited through `/contribute`; no messages were sent. See [method and findings](endpoint-inspection.md). There is no automatic probe schedule. Read `/opt/xbtpulse/DEPLOYED_COMMIT` for the current deployed revision.
+
 ## September 15 mission and voice
 
 The homepage now leads with "Know your pool. Make your own choice." `/about` explains the mission, fair evidence standards, corrections and shared ownership with Soveroot. It is linked from shared navigation, the homepage introduction and footer. No scoring or operator data changes. Validation: 76 tests, syntax and collector package checks.

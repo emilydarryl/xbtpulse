@@ -20,6 +20,8 @@ The sample UI is explicitly illustrative. Live data starts only when `EXPLORER_A
 
 ## What is implemented
 
+- [Public endpoint observations](https://xbtpulse.tech/endpoint-checks): a dated top-ten pilot, seven documented endpoints attempted in two rounds, with evidence limits and an operator submission invitation. Short work commitments are not decoded as payout transactions; no proxy verdict or score change is inferred. See [method and findings](docs/endpoint-inspection.md).
+
 - Optional [block-find reporting](https://xbtpulse.tech/report-blocks): manual submission or an operator-owned event feed using the existing provider token. Pool profiles show **Operator-reported block finds**, with chain-match status separate from finder claims and chain attribution. Missing reports say **Not reported**; these entries do not change attributed block totals, work-only outcomes or scores. Includes duplicate protection, withdrawals and a Python sender. See [the feed contract](docs/block-reporting.md).
 - Published profiles resolve approved, consenting application-owned telemetry providers as well as curated provider links. Work, freshness and profile history appear under the correct operator without creating block attribution.
 

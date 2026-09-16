@@ -1,0 +1,117 @@
+{
+  "title": "Top ten attributed groups: public endpoint pilot",
+  "selection": {
+    "requested": 2016,
+    "sample": 2016,
+    "updatedAt": "2026-09-16T15:55:21.769Z",
+    "tip": 972445,
+    "source": "Public explorer: mempool.guide",
+    "ranking": "Largest attributed block counts in a frozen 2,016-block snapshot; unknown blocks remain in the share denominator. Attribution groups are not independently verified operators."
+  },
+  "pools": [
+    {
+      "rank": 1,
+      "id": "explorer:alphapool",
+      "name": "AlphaPool",
+      "blocks": 749,
+      "share": 0.3715277777777778,
+      "host": "us1.alphapool.tech",
+      "port": 5555,
+      "source": "https://knots.alphapool.tech/",
+      "scope": "One published US public SV1 endpoint"
+    },
+    {
+      "rank": 2,
+      "id": "explorer:lazarus",
+      "name": "Lazarus",
+      "blocks": 311,
+      "share": 0.15426587301587302,
+      "host": "stratum.awokenlazarus.xyz",
+      "port": 23334,
+      "source": "https://pool.awokenlazarus.xyz/stratum-protocol.md",
+      "scope": "Public pool-operated gateway; separate own-gateway DATUM path not tested"
+    },
+    {
+      "rank": 3,
+      "id": "explorer:bitcoinxor",
+      "name": "Bitcoin Xor",
+      "blocks": 288,
+      "share": 0.14285714285714285,
+      "host": "datum.xorpool.com",
+      "port": 23335,
+      "source": "https://xorpool.com/",
+      "scope": "Public pool-operated gateway; separate own-gateway DATUM path not tested"
+    },
+    {
+      "rank": 4,
+      "id": "explorer:ratum",
+      "name": "RATUM",
+      "blocks": 198,
+      "share": 0.09821428571428571,
+      "source": "https://pool.iohzrd.tech/connect",
+      "scope": "Not probed: RATUM is an explorer attribution label. A current, unambiguous public SV1 endpoint and its relationship to this label need operator confirmation; gateway availability statements conflict with prior operator material."
+    },
+    {
+      "rank": 5,
+      "id": "explorer:convoy",
+      "name": "CONVOY",
+      "blocks": 138,
+      "share": 0.06845238095238096,
+      "host": "mine.convoy.xyz",
+      "port": 3333,
+      "source": "https://convoy.xyz/getstarted",
+      "scope": "Published SV1 failover endpoint; primary own-gateway DATUM path not tested"
+    },
+    {
+      "rank": 6,
+      "id": "explorer:b2pool",
+      "name": "B2Pool",
+      "blocks": 93,
+      "share": 0.046130952380952384,
+      "host": "de.b2pool.io",
+      "port": 3333,
+      "source": "https://b2pool.io/start",
+      "scope": "One published regional ASIC SV1 endpoint; DATUM and SV2 paths not tested"
+    },
+    {
+      "rank": 7,
+      "id": "explorer:riptide",
+      "name": "RIPTIDE",
+      "blocks": 30,
+      "share": 0.01488095238095238,
+      "host": "sv1.riptide.maveth.ca",
+      "port": 23337,
+      "source": "https://riptide.maveth.ca/",
+      "scope": "Public SV1 endpoint; separate own-gateway DATUM path not tested"
+    },
+    {
+      "rank": 8,
+      "id": "explorer:quainetwork",
+      "name": "Quai Network",
+      "blocks": 21,
+      "share": 0.010416666666666666,
+      "source": "https://mempool.guide/mining",
+      "scope": "Not probed: no operator-confirmed XBT endpoint linked to this explorer label. The name alone is insufficient to select a service."
+    },
+    {
+      "rank": 9,
+      "id": "explorer:pyblock",
+      "name": "PyBLOCK",
+      "blocks": 20,
+      "share": 0.00992063492063492,
+      "host": "pool.pyblock.xyz",
+      "port": 23110,
+      "source": "https://github.com/GaltRanch/pyblock-miner",
+      "scope": "Published LOTTO SV1 endpoint only; does not represent all PyBLOCK services or establish linkage to every attributed block"
+    },
+    {
+      "rank": 10,
+      "id": "explorer:miningdutch",
+      "name": "Mining-Dutch",
+      "blocks": 18,
+      "share": 0.008928571428571428,
+      "source": "https://www.mining-dutch.nl/",
+      "scope": "Not probed: a complete current XBT host/port and permitted worker format were not established from the public page inspected. No account was created or credentials used."
+    }
+  ]
+}

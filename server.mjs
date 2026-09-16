@@ -86,6 +86,9 @@ const files = {
   "/token-claim.js": "token-claim.js",
   "/": "index.html",
   "/about": "about.html",
+  "/endpoint-checks": "endpoint-checks.html",
+  "/endpoint-checks.js": "endpoint-checks.js",
+  "/endpoint-report.json": "endpoint-report.json",
   "/app.js": "app.js",
   "/telemetry-context.js": "telemetry-context.js",
   "/style.css": "style.css",
@@ -141,6 +144,7 @@ const files = {
   "/admin.js": "admin.js",
 };
 const mime = {
+  json: "application/json; charset=utf-8",
   py: "text/plain; charset=utf-8",
   zip: "application/zip",
   txt: "text/plain; charset=utf-8",

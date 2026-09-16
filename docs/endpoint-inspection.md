@@ -1,0 +1,40 @@
+# Public endpoint inspection pilot
+
+Published at [/endpoint-checks](https://xbtpulse.tech/endpoint-checks). This is a dated observation, not a pool rating, whitelist or proxy verdict. No scores, chain attribution or telemetry outcomes are changed.
+
+## September 16, 2026 findings
+
+Selection was frozen from the site's 2,016-block dashboard snapshot at 15:55:21 UTC. The manifest records ranks, attributed block counts, shares, endpoint sources and connection scope. These explorer labels do not independently establish operator ownership. Unknown blocks remain in the share denominator.
+
+Two rounds ran from 16:01:16 to 16:03:26 UTC. AlphaPool, Lazarus, Bitcoin Xor, CONVOY, B2Pool and RIPTIDE supplied jobs in both rounds. The documented PyBLOCK LOTTO endpoint returned connection errors from our test host in both rounds. That is not a pool-wide availability finding.
+
+RATUM, Quai Network and Mining-Dutch were not connected: a sufficiently clear, current XBT endpoint or attribution mapping was missing. The manifest explains each gap; these are not failing grades.
+
+All retained jobs from the six responding endpoints had short BLAKE2b work-commitment layouts, not decodable full coinbase transactions. Therefore no payout-script comparisons could be established. An empty matches array does not mean the pools are independent or that no proxies exist.
+
+The public SV1 gateway, regional, LOTTO or failover endpoints tested do not represent every service a pool offers. In particular, this test cannot assess miners using their own DATUM gateways, identify who chose transactions, or establish an upstream relationship.
+
+## Method and evidence
+
+- [Reviewed manifest](../config/endpoint-pilot.json) fixes ten targets and sources. Only seven have an eligible host and port.
+- [Dated results](../public/endpoint-report.json) contain start/end times, subscription and authorization results, retained job field lengths and digests, and any decoded outputs.
+- [Runner](../scripts/inspect-endpoints.mjs) resolves a public IPv4 address using the test host's resolver, pins that address for the connection, and sends subscribe/authorize only. It creates a throwaway protocol identifier; it never submits work, creates an account, supplies private credentials or requests payouts.
+- There are two rounds, separated by 30 seconds after the first completes. Connections last at most 50 seconds, with bounded input and the latest twelve distinct sampled jobs retained per run. No port scan or DATUM handshake is performed.
+- [Decoder](../lib/endpoint-inspection.mjs) recognizes short commitment layouts and parses only bounded, complete supported coinbase encodings. Unsupported layouts remain unknown. A digest identifies sampled content; it is not a proxy signal or proof of origin. Raw packets are not retained, so the report is an observation record, not a packet capture that independently reconstructs every historical job.
+- Even when payout scripts can be decoded, a shared script within one round is only a shared-script observation. Common chain tips, job digests, payout patterns or tags alone do not prove proxying, ownership or template control.
+
+The first local attempt failed DNS resolution before pool connections; it was discarded after fixing the resolver. Only the completed subsequent run is published. No automatic schedule is installed, and page views never trigger probes.
+
+## Run a new snapshot
+
+Review endpoint sources and update the selection/manifest first. From Node.js 24:
+
+```sh
+node scripts/inspect-endpoints.mjs config/endpoint-pilot.json public/endpoint-report.json
+```
+
+This performs real outbound connections and replaces the local report. Inspect results and run tests before publishing. Re-running samples new jobs; it does not recreate the old network state.
+
+## Operator participation
+
+Operators are invited to [submit evidence or corrections](https://xbtpulse.tech/contribute): current endpoints, who builds templates on each connection path, upstream/failover arrangements, payout rules and optional telemetry scope. Submitting a feed is evidence of reporting, not proof of decentralization or automatic approval. No operator outreach was sent as part of this pilot.

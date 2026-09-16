@@ -1,0 +1,685 @@
+{
+  "title": "Top ten attributed groups: public endpoint pilot",
+  "selection": {
+    "requested": 2016,
+    "sample": 2016,
+    "updatedAt": "2026-09-16T15:55:21.769Z",
+    "tip": 972445,
+    "source": "Public explorer: mempool.guide",
+    "ranking": "Largest attributed block counts in a frozen 2,016-block snapshot; unknown blocks remain in the share denominator. Attribution groups are not independently verified operators."
+  },
+  "pools": [
+    {
+      "rank": 1,
+      "id": "explorer:alphapool",
+      "name": "AlphaPool",
+      "blocks": 749,
+      "share": 0.3715277777777778,
+      "host": "us1.alphapool.tech",
+      "port": 5555,
+      "source": "https://knots.alphapool.tech/",
+      "scope": "One published US public SV1 endpoint",
+      "runs": [
+        {
+          "round": 1,
+          "startedAt": "2026-09-16T16:01:16.424Z",
+          "jobs": [
+            {
+              "observedAt": "2026-09-16T16:01:16.539Z",
+              "jobDigest": "25b440ee4576ae4dffd3e57631dae808141111931b31cb8a0c8a4c08c5f552b6",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:01:30.046Z",
+              "jobDigest": "328412430d874f9974cae091349d7eceab65f30dc6ac9060503dd5b8d86ffdd2",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:01:42.318Z",
+              "jobDigest": "2e9da65bdb91c797b3316c87fe0f51038134b070fde484a17cf2e687f49de225",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:01:52.037Z",
+              "jobDigest": "7bd6730d9d9d975446194d0db09d4d7abd71ace1b0be7217d2d831bc7c884cd2",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:02:00.631Z",
+              "jobDigest": "5103b9d50940c5d1b13d185b5550f2126a5a3b6faa2eb97c626334b447e552cc",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            }
+          ],
+          "authorized": true,
+          "subscribed": true,
+          "status": "jobs-observed",
+          "finishedAt": "2026-09-16T16:02:06.472Z"
+        },
+        {
+          "round": 2,
+          "startedAt": "2026-09-16T16:02:36.570Z",
+          "jobs": [
+            {
+              "observedAt": "2026-09-16T16:02:36.664Z",
+              "jobDigest": "72904a78406ca404f1505339d59f7ec591a661b94673f287314eb91cc7ef1909",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:02:38.123Z",
+              "jobDigest": "e372127ddb8eabe3addaed64ce3b91442532afd8a2c205b1f46040586373aef7",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:02:48.321Z",
+              "jobDigest": "743e525611969391c87251d1647e3b07cddea1a1f872ab9e3e2954b06c6002b7",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:02:58.533Z",
+              "jobDigest": "cf2581edc6eaa2cfee38f1eb48bd9b1ffe1b6fffdb97968ce5fa44540002b5e4",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:03:08.788Z",
+              "jobDigest": "f27c5391731c61d84f7a97e6c5e4a65e518cf3a7b34305bbbd5004b634e4cbc4",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:03:18.983Z",
+              "jobDigest": "c1e162f32205249facb9c86b14856fe701e542feac1ba4c8d8b80df490e8b201",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            }
+          ],
+          "authorized": true,
+          "subscribed": true,
+          "status": "jobs-observed",
+          "finishedAt": "2026-09-16T16:03:26.583Z"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "id": "explorer:lazarus",
+      "name": "Lazarus",
+      "blocks": 311,
+      "share": 0.15426587301587302,
+      "host": "stratum.awokenlazarus.xyz",
+      "port": 23334,
+      "source": "https://pool.awokenlazarus.xyz/stratum-protocol.md",
+      "scope": "Public pool-operated gateway; separate own-gateway DATUM path not tested",
+      "runs": [
+        {
+          "round": 1,
+          "startedAt": "2026-09-16T16:01:16.427Z",
+          "jobs": [
+            {
+              "observedAt": "2026-09-16T16:01:20.716Z",
+              "jobDigest": "dfba0c75cf28f6a90667f237f6ff4584154412f2019663313602f4f8076feac8",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:01:39.076Z",
+              "jobDigest": "0eb89bd3dbedf109ea50d1d15de5c4f4eb05085af1af301de4df7765cc1ace36",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:01:59.384Z",
+              "jobDigest": "7f89fbbfe6d70accf802009ddf888e5581912a411bf515822576455beaefb93f",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            }
+          ],
+          "authorized": true,
+          "subscribed": true,
+          "status": "jobs-observed",
+          "finishedAt": "2026-09-16T16:02:06.473Z"
+        },
+        {
+          "round": 2,
+          "startedAt": "2026-09-16T16:02:36.571Z",
+          "jobs": [
+            {
+              "observedAt": "2026-09-16T16:02:36.771Z",
+              "jobDigest": "cdcfc22ee43e09d3f6a00e78489ef1eec0140dfa0b1abfd30ddd63fd4933d0d4",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:02:40.596Z",
+              "jobDigest": "dc5dc919a90dba4d3d73ac31bcc28a41c9f130697ae584525bc77c1e9092e7f8",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:03:00.924Z",
+              "jobDigest": "69918d7648e1d213f786249da2fd82e6691fb16b4bd6a01c30894a020b934eb3",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:03:21.249Z",
+              "jobDigest": "8a5d98074f60fc055ca1b8ee57d62fba5b69f3135ac6dc6abdbec7013d533b6a",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            }
+          ],
+          "authorized": true,
+          "subscribed": true,
+          "status": "jobs-observed",
+          "finishedAt": "2026-09-16T16:03:26.583Z"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "id": "explorer:bitcoinxor",
+      "name": "Bitcoin Xor",
+      "blocks": 288,
+      "share": 0.14285714285714285,
+      "host": "datum.xorpool.com",
+      "port": 23335,
+      "source": "https://xorpool.com/",
+      "scope": "Public pool-operated gateway; separate own-gateway DATUM path not tested",
+      "runs": [
+        {
+          "round": 1,
+          "startedAt": "2026-09-16T16:01:16.429Z",
+          "jobs": [
+            {
+              "observedAt": "2026-09-16T16:01:16.654Z",
+              "jobDigest": "82de7f00e17b9fedbac109b4268e96b6a6781d756af4fec4828486aff52f217c",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 35,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:01:51.975Z",
+              "jobDigest": "b0be5357da4bcdfa6c69b6f164836c7a0d163c80db9ab55dc12f3fe0e71be12e",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 35,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            }
+          ],
+          "authorized": true,
+          "subscribed": true,
+          "status": "jobs-observed",
+          "finishedAt": "2026-09-16T16:02:06.502Z"
+        },
+        {
+          "round": 2,
+          "startedAt": "2026-09-16T16:02:36.571Z",
+          "jobs": [
+            {
+              "observedAt": "2026-09-16T16:02:36.770Z",
+              "jobDigest": "0727d242c3f0dd64ab29015e88c09a46218ead4a68f5f04d32d51fdb2d42160a",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 35,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:03:11.997Z",
+              "jobDigest": "82135bad0fdc886453870dcd776cb508111de3ca6a4abcf0974fb3ecb98f0d97",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 35,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            }
+          ],
+          "authorized": true,
+          "subscribed": true,
+          "status": "jobs-observed",
+          "finishedAt": "2026-09-16T16:03:26.584Z"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "id": "explorer:ratum",
+      "name": "RATUM",
+      "blocks": 198,
+      "share": 0.09821428571428571,
+      "source": "https://pool.iohzrd.tech/connect",
+      "scope": "Not probed: RATUM is an explorer attribution label. A current, unambiguous public SV1 endpoint and its relationship to this label need operator confirmation; gateway availability statements conflict with prior operator material.",
+      "runs": []
+    },
+    {
+      "rank": 5,
+      "id": "explorer:convoy",
+      "name": "CONVOY",
+      "blocks": 138,
+      "share": 0.06845238095238096,
+      "host": "mine.convoy.xyz",
+      "port": 3333,
+      "source": "https://convoy.xyz/getstarted",
+      "scope": "Published SV1 failover endpoint; primary own-gateway DATUM path not tested",
+      "runs": [
+        {
+          "round": 1,
+          "startedAt": "2026-09-16T16:01:16.429Z",
+          "jobs": [
+            {
+              "observedAt": "2026-09-16T16:01:16.656Z",
+              "jobDigest": "bf7332ab37fd1fae75fe9979f0ec9bc5d452745c31a1fe6a953405a9a6ed5817",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:01:47.575Z",
+              "jobDigest": "598a0eebf2ea067a498199fe17d61fa5a552953cdbc98c4e383eb7d6d7849b79",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            }
+          ],
+          "authorized": true,
+          "subscribed": true,
+          "status": "jobs-observed",
+          "finishedAt": "2026-09-16T16:02:06.549Z"
+        },
+        {
+          "round": 2,
+          "startedAt": "2026-09-16T16:02:36.571Z",
+          "jobs": [
+            {
+              "observedAt": "2026-09-16T16:02:36.707Z",
+              "jobDigest": "1a30d109e9a4e8c4b8aac89b31b20f8c64b3547209965c6a02a17e6c669dfbf7",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:03:09.616Z",
+              "jobDigest": "d33deea7abe49c2d1e09ebf4a40baf6cc04d1ca0e136a56214b46dfe0f71520e",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            }
+          ],
+          "authorized": true,
+          "subscribed": true,
+          "status": "jobs-observed",
+          "finishedAt": "2026-09-16T16:03:26.585Z"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "id": "explorer:b2pool",
+      "name": "B2Pool",
+      "blocks": 93,
+      "share": 0.046130952380952384,
+      "host": "de.b2pool.io",
+      "port": 3333,
+      "source": "https://b2pool.io/start",
+      "scope": "One published regional ASIC SV1 endpoint; DATUM and SV2 paths not tested",
+      "runs": [
+        {
+          "round": 1,
+          "startedAt": "2026-09-16T16:01:16.429Z",
+          "jobs": [
+            {
+              "observedAt": "2026-09-16T16:01:16.783Z",
+              "jobDigest": "72eaff48546183e9111f60fe96698d9932d60f0141f4ee4fb9007673d6b57122",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:01:21.482Z",
+              "jobDigest": "237abee77ae48baf2920c36b30cf5ee94c45cda831274461e410be9b179d19a6",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:01:41.514Z",
+              "jobDigest": "3aa3732e434f82442b61b5c813d1970d06ffd9bbd8752612d27efcea9068531e",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:02:01.464Z",
+              "jobDigest": "23f8ac518834a8c83501a5eb3b8118f301f5e94ae966d30c0c046d94a020e963",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            }
+          ],
+          "authorized": true,
+          "subscribed": true,
+          "status": "jobs-observed",
+          "finishedAt": "2026-09-16T16:02:06.518Z"
+        },
+        {
+          "round": 2,
+          "startedAt": "2026-09-16T16:02:36.571Z",
+          "jobs": [
+            {
+              "observedAt": "2026-09-16T16:02:36.860Z",
+              "jobDigest": "d6c9a3785abf20946f9bad19f5d98e2f9661a2831c25adc1312f894957381a85",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:02:41.408Z",
+              "jobDigest": "52c0c1aa24e93050fb4fc668d3975694521fa7b362ae493a8e2070f07247a350",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:03:01.446Z",
+              "jobDigest": "c3884bb105c34a60dc3dd69a669a6782f9867954492f4be84980774e1c952a20",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:03:21.578Z",
+              "jobDigest": "c908e0d911d6902b72a868e7d0c95d455ea1a87a47fcb822553e157621be80a6",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            }
+          ],
+          "authorized": true,
+          "subscribed": true,
+          "status": "jobs-observed",
+          "finishedAt": "2026-09-16T16:03:26.585Z"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "id": "explorer:riptide",
+      "name": "RIPTIDE",
+      "blocks": 30,
+      "share": 0.01488095238095238,
+      "host": "sv1.riptide.maveth.ca",
+      "port": 23337,
+      "source": "https://riptide.maveth.ca/",
+      "scope": "Public SV1 endpoint; separate own-gateway DATUM path not tested",
+      "runs": [
+        {
+          "round": 1,
+          "startedAt": "2026-09-16T16:01:16.429Z",
+          "jobs": [
+            {
+              "observedAt": "2026-09-16T16:01:16.705Z",
+              "jobDigest": "7978bd47f2690315d59143156b8e2cbe0550ed4fd788aa531a79f9653640c72e",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            }
+          ],
+          "authorized": true,
+          "subscribed": true,
+          "status": "jobs-observed",
+          "finishedAt": "2026-09-16T16:02:06.565Z"
+        },
+        {
+          "round": 2,
+          "startedAt": "2026-09-16T16:02:36.571Z",
+          "jobs": [
+            {
+              "observedAt": "2026-09-16T16:02:36.729Z",
+              "jobDigest": "a2ed8a5847f632c66cb87f27b0eca968cb3dcca58cec4150c144c9a2baa20460",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            },
+            {
+              "observedAt": "2026-09-16T16:02:48.297Z",
+              "jobDigest": "ab51dab3e46147ee45151d143207fd6fdc8449c68d13d93fac5ce8d440e7be12",
+              "previousField": "0000000000005f5342c2ebc418620ab77a8638a336df38493e940928c808abf9",
+              "part1Bytes": 39,
+              "part2Bytes": 0,
+              "timeBytes": 8,
+              "branchCount": 0,
+              "format": "blake2b-commitment",
+              "payoutVisibility": "Unavailable: job exposes a short work commitment, not the payout transaction"
+            }
+          ],
+          "authorized": true,
+          "subscribed": true,
+          "status": "jobs-observed",
+          "finishedAt": "2026-09-16T16:03:26.585Z"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "id": "explorer:quainetwork",
+      "name": "Quai Network",
+      "blocks": 21,
+      "share": 0.010416666666666666,
+      "source": "https://mempool.guide/mining",
+      "scope": "Not probed: no operator-confirmed XBT endpoint linked to this explorer label. The name alone is insufficient to select a service.",
+      "runs": []
+    },
+    {
+      "rank": 9,
+      "id": "explorer:pyblock",
+      "name": "PyBLOCK",
+      "blocks": 20,
+      "share": 0.00992063492063492,
+      "host": "pool.pyblock.xyz",
+      "port": 23110,
+      "source": "https://github.com/GaltRanch/pyblock-miner",
+      "scope": "Published LOTTO SV1 endpoint only; does not represent all PyBLOCK services or establish linkage to every attributed block",
+      "runs": [
+        {
+          "round": 1,
+          "startedAt": "2026-09-16T16:01:16.429Z",
+          "jobs": [],
+          "authorized": null,
+          "subscribed": false,
+          "status": "connection-error",
+          "finishedAt": "2026-09-16T16:01:16.761Z"
+        },
+        {
+          "round": 2,
+          "startedAt": "2026-09-16T16:02:36.571Z",
+          "jobs": [],
+          "authorized": null,
+          "subscribed": false,
+          "status": "connection-error",
+          "finishedAt": "2026-09-16T16:02:36.897Z"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "id": "explorer:miningdutch",
+      "name": "Mining-Dutch",
+      "blocks": 18,
+      "share": 0.008928571428571428,
+      "source": "https://www.mining-dutch.nl/",
+      "scope": "Not probed: a complete current XBT host/port and permitted worker format were not established from the public page inspected. No account was created or credentials used.",
+      "runs": []
+    }
+  ],
+  "startedAt": "2026-09-16T16:01:16.423Z",
+  "probeVersion": 1,
+  "method": "Two bounded rounds, 30 seconds apart after completion; up to 50 seconds per endpoint, one public IPv4 address per hostname. Subscribe and authorize only. No shares submitted. Latest 12 distinct sampled jobs retained per run. No port scanning or DATUM handshake.",
+  "matches": [],
+  "updatedAt": "2026-09-16T16:03:26.585Z",
+  "finishedAt": "2026-09-16T16:03:26.587Z"
+}
