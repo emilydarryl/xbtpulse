@@ -1,0 +1,2162 @@
+{
+  "observedAt": "2026-09-16T16:15:42.595Z",
+  "method": "Same ten groups as the endpoint pilot. Latest up to 24 attributed blocks returned per group; select the fewest and most distinct positive recipients (up to two examples). Check height/hash and fetch coinbase transaction from mempool.guide. Same explorer source, not independent node verification. Deliberate contrasting examples, not a random sample.",
+  "pools": [
+    {
+      "id": "explorer:alphapool",
+      "name": "AlphaPool",
+      "examples": [
+        {
+          "height": 972446,
+          "hash": "00000000000000010ff47382b6a4b2bd77f849ad33c313370a518e18e59932cb",
+          "blockUrl": "https://mempool.guide/block/00000000000000010ff47382b6a4b2bd77f849ad33c313370a518e18e59932cb",
+          "outputs": [
+            {
+              "script": "0014f8f720a10fcd243bec4496d68c69a90b47ad4030",
+              "address": "bc1qlrmjpgg0e5jrhmzyjmtgc6dfpdr66sps8vjl2q",
+              "sats": 312678724
+            },
+            {
+              "script": "6a24aa21a9edcb6cf48308ab9c3539051158ac4d4f31d86afce4e746ed4afe21f50433b41279",
+              "address": null,
+              "sats": 0
+            }
+          ],
+          "totalSats": 312678724,
+          "positiveScripts": 1,
+          "largestRecipientShare": 1,
+          "txid": "5eddf89ee94cbd9cb9829c3bf1a16bc6912833441d4be704e7711949f5448220",
+          "transactionUrl": "https://mempool.guide/api/tx/5eddf89ee94cbd9cb9829c3bf1a16bc6912833441d4be704e7711949f5448220",
+          "status": "explorer-checked"
+        },
+        {
+          "height": 972376,
+          "hash": "000000000000000046b20e1d7dbf425ed046f9d60d92fe4e2a65d6d72da81027",
+          "blockUrl": "https://mempool.guide/block/000000000000000046b20e1d7dbf425ed046f9d60d92fe4e2a65d6d72da81027",
+          "outputs": [
+            {
+              "script": "0014f8f720a10fcd243bec4496d68c69a90b47ad4030",
+              "address": "bc1qlrmjpgg0e5jrhmzyjmtgc6dfpdr66sps8vjl2q",
+              "sats": 312869724
+            },
+            {
+              "script": "6a24aa21a9ed869b88c96377b94d86373d8038f1e0714f0f4808863a92e0549b630c84cb2da2",
+              "address": null,
+              "sats": 0
+            }
+          ],
+          "totalSats": 312869724,
+          "positiveScripts": 1,
+          "largestRecipientShare": 1,
+          "txid": "abae82aea9ccad1591cdb32ed67f537a6fa29f4107ef5a8770f79a46c10ee7cc",
+          "transactionUrl": "https://mempool.guide/api/tx/abae82aea9ccad1591cdb32ed67f537a6fa29f4107ef5a8770f79a46c10ee7cc",
+          "status": "explorer-checked"
+        }
+      ],
+      "sourceUpdatedAt": "2026-09-16T16:15:22.817Z",
+      "networkSample": 2016,
+      "characteristics": {
+        "blocks": 750,
+        "transactions": {
+          "observations": 750,
+          "average": 155.536
+        },
+        "sizeBytes": {
+          "observations": 750,
+          "average": 59901.628
+        },
+        "weight": {
+          "observations": 750,
+          "average": 157286.664
+        },
+        "coinbaseOnly": {
+          "observations": 750,
+          "count": 1,
+          "share": 0.0013333333333333333
+        },
+        "recipients": {
+          "observations": 750,
+          "average": 1.156,
+          "single": 745,
+          "multiple": 5
+        }
+      },
+      "availableRecent": 24
+    },
+    {
+      "id": "explorer:lazarus",
+      "name": "Lazarus",
+      "examples": [
+        {
+          "height": 972429,
+          "hash": "00000000000000013eea7458d241c0e28b8c417f74c2d5009263c81df3f435e7",
+          "blockUrl": "https://mempool.guide/block/00000000000000013eea7458d241c0e28b8c417f74c2d5009263c81df3f435e7",
+          "outputs": [
+            {
+              "script": "0014d8be79d0d85b9f62c5c66709ec4b6348679e17f4",
+              "address": "bc1qmzl8n5xctw0k93wxvuy7cjmrfpneu9l50dxumm",
+              "sats": 312762709
+            },
+            {
+              "script": "6a24aa21a9edd12fae6a939c8081e185be66df8722a1ba412db526ec464087405b1046bcbe0c",
+              "address": null,
+              "sats": 0
+            }
+          ],
+          "totalSats": 312762709,
+          "positiveScripts": 1,
+          "largestRecipientShare": 1,
+          "txid": "c40c9725477b346ad19b4b91b5746f4155f4c031e7f8476ae768c07bf349444e",
+          "transactionUrl": "https://mempool.guide/api/tx/c40c9725477b346ad19b4b91b5746f4155f4c031e7f8476ae768c07bf349444e",
+          "status": "explorer-checked"
+        },
+        {
+          "height": 972332,
+          "hash": "0000000000000000dc80790af3fcfab43fc5c437b831f8770c9c46fe7a8362d0",
+          "blockUrl": "https://mempool.guide/block/0000000000000000dc80790af3fcfab43fc5c437b831f8770c9c46fe7a8362d0",
+          "outputs": [
+            {
+              "script": "0014a53916fd548f13e8c6b0df381c039c7eb3673fbc",
+              "address": "bc1q55u3dl253uf7334smuupcquu06ekw0auhp9d5z",
+              "sats": 41977303
+            },
+            {
+              "script": "00147fdf9be70e4c9543b1a4122ea2ddacc1858a4a62",
+              "address": "bc1q0l0ehecwfj258vdyzgh29hdvcxzc5jnz233gk2",
+              "sats": 27480863
+            },
+            {
+              "script": "76a914e708658a5d516aea6431bf3de304ad45c0fe0f4b88ac",
+              "address": "1N4b9is4SLRe8DbKfjkykGyaVRZAWepXWt",
+              "sats": 21483323
+            },
+            {
+              "script": "76a91495637aefc6b843b479056f73069ace0a8912081188ac",
+              "address": "1EctrbCg23Gpd83jb4xEpDpby3foVrqATW",
+              "sats": 17115176
+            },
+            {
+              "script": "76a914516fa1571efc65c43b0b3456224bd4ecea70ed0688ac",
+              "address": "18RbTk6V784Zj1YWKeBW83psZiXfDvymUr",
+              "sats": 16414771
+            },
+            {
+              "script": "76a91434baf6ba95d3c3c57742d1d7c8de0b0702dd239b88ac",
+              "address": "15op7Suc1BtzYcwE74QtBCHeBDTYtgSmck",
+              "sats": 16620787
+            },
+            {
+              "script": "0014e060469e6e1077bd3ecd5739ff8945b62db190e4",
+              "address": "bc1qupsyd8nwzpmm60kd2uullz29kckmry8ywlk679",
+              "sats": 12868953
+            },
+            {
+              "script": "76a914369e23c6c5a4000a8c64956593cc78a404cb0b7888ac",
+              "address": "15ynw6tBzPpqHRej3uju4E9E28v5dD1Gxe",
+              "sats": 14590287
+            },
+            {
+              "script": "00148b8bd8fb5c6f9f9adab74538d66bdaafd4ccfe91",
+              "address": "bc1q3w9a376ud70e4k4hg5udv6764l2vel53vnh3a8",
+              "sats": 8611025
+            },
+            {
+              "script": "76a914fc3d02416b91615c8e24515f1d38ea4606b7cbb588ac",
+              "address": "1PziNJrGdSRxJii3JdkUp4mTnSVm1iQF71",
+              "sats": 7675229
+            },
+            {
+              "script": "76a914a433ed085c13f39ea91aca7d4cb74210ae84ea5c88ac",
+              "address": "1FyE2LTuJKZyusr9LjnAGLN6bwWPN2ZcVR",
+              "sats": 5960123
+            },
+            {
+              "script": "0014d2798a96759d42490b3e0fd9185e46ec72a87b3f",
+              "address": "bc1q6fuc49n4n4pyjze7plv3shjxa3e2s7ely6y6zr",
+              "sats": 5814126
+            },
+            {
+              "script": "00148d1a4e95a434420d26608d6dea5bcc12c6421c65",
+              "address": "bc1q35dya9dyx3pq6fnq34k75k7vztryy8r9vmzjuz",
+              "sats": 5829856
+            },
+            {
+              "script": "0014f35164df01496060fd51ceeedd27991f1cd1bb25",
+              "address": "bc1q7dgkfhcpf9sxpl23emhd6fueruwdrwe92emrfw",
+              "sats": 3950433
+            },
+            {
+              "script": "00147b96d833e5472cb1ed83b8f1a06b271aaa029005",
+              "address": "bc1q0wtdsvl9guktrmvrhrc6q6e8r24q9yq9a80sld",
+              "sats": 3904817
+            },
+            {
+              "script": "76a914d716715f68dfb72d9bc48dc2145ebdabe95c2d7088ac",
+              "address": "1LcHAbrYhBrN42xxqZtgdj5B9vgaj2RSh5",
+              "sats": 3818719
+            },
+            {
+              "script": "001421836a0a9ceab43ffd99337099138377aab7f45d",
+              "address": "bc1qyxpk5z5ua26rllvexdcfjyurw74t0aza3v5dgc",
+              "sats": 4463163
+            },
+            {
+              "script": "00146b94a6fee0724af9d0df11df84406d3aec53ddac",
+              "address": "bc1qdw22dlhqwf90n5xlz80cgsrd8tk98hdvra5w80",
+              "sats": 3952534
+            },
+            {
+              "script": "00145512dc0dc79f7535b649c498f3e9dbefa6af8504",
+              "address": "bc1q25fdcrw8na6ntdjfcjv086wma7n2lpgylhcm79",
+              "sats": 3458108
+            },
+            {
+              "script": "00142b1d3abff9c53227a244bc74c905b209e3f3acb5",
+              "address": "bc1q9vwn40lec5ez0gjyh36vjpdjp83l8t94ts0fs7",
+              "sats": 3177962
+            },
+            {
+              "script": "00144f0705b549fb79b1902c7f6674ce4a0cf95a3c80",
+              "address": "bc1qfurstd2fldumrypv0an8fnj2pnu450yq4utmeu",
+              "sats": 2463443
+            },
+            {
+              "script": "00147ec815a21574342aa4e66cc3969cd9d3178d1085",
+              "address": "bc1q0myptgs4ws6z4f8xdnped8xe6vtc6yy9yzgllm",
+              "sats": 2856530
+            },
+            {
+              "script": "76a9140870d63feb40269ed6e54553744717b604f8cd4d88ac",
+              "address": "1mdaagnSJX7hA41gHNtpY6EARx5ywY7bk",
+              "sats": 2240575
+            },
+            {
+              "script": "76a9144d34d6b79cccfce318a7e082d19b3af316c6338a88ac",
+              "address": "183EL57XJuxa3FHdR5JosQB1xj9Ze1nkzM",
+              "sats": 2500679
+            },
+            {
+              "script": "00141bc5e51852a55312fa5a8338638f41a520749ce1",
+              "address": "bc1qr0z72xzj54f397j6svux8r6p55s8f88prnrvus",
+              "sats": 2302584
+            },
+            {
+              "script": "001497831011fee2a8e73221aa4a5dcd35f125511b96",
+              "address": "bc1qj7p3qy07u25wwv3p4f99mnf47yj4zxukygzw5e",
+              "sats": 2166525
+            },
+            {
+              "script": "76a9145165eff9e9f7d62ee370f115d496b713dc4c209a88ac",
+              "address": "18RPrGrzJLXgRa3BvD1mnspWsUq7Kk5BxD",
+              "sats": 1622087
+            },
+            {
+              "script": "0014678b32411166ac7e15f548cd970c9f56d4bf3b90",
+              "address": "bc1qv79nysg3v6k8u904frxewryl2m2t7wuswsv9xh",
+              "sats": 2015052
+            },
+            {
+              "script": "76a91477b2eab6ad43b3b4602fba03967bb25d93753bd988ac",
+              "address": "1BuukBw5WuHMvACjc5tffsFGk8LXtqvY9f",
+              "sats": 1605768
+            },
+            {
+              "script": "76a9142d3af5fc0ca5457f0d8feca00c43a1e4af399e7788ac",
+              "address": "158A3JkB5yf95EiRXkQvf1czxuKQF7gupU",
+              "sats": 1576709
+            },
+            {
+              "script": "0014bce54423e617b5954f1276bc6af381dead8d85a2",
+              "address": "bc1qhnj5gglxz76e2ncjw67x4uupm6kcmpdzjflkn3",
+              "sats": 1966050
+            },
+            {
+              "script": "76a914dac540fab98846d4045b3dca8e9af63ffcb4fea388ac",
+              "address": "1LwkcFoDUQ6esJzGTbHB3MzCe1C42To6fh",
+              "sats": 1571535
+            },
+            {
+              "script": "002027f573da1c80be58c7d69ce45281a0e2e447e76ce62224a5132075eccc6028db",
+              "address": "bc1qyl6h8ksuszl9337knnj99qdqutjy0emvuc3zffgnyp67enrq9rds94sdan",
+              "sats": 1805383
+            },
+            {
+              "script": "0014390754a63dd21b3c99739f389859a1840e88be3b",
+              "address": "bc1q8yr4ff3a6gdnextnnuufskdpss8g303mkqetv7",
+              "sats": 1671309
+            },
+            {
+              "script": "0014d0cb8b6399596d7892216e4568573b3cd4cbadc8",
+              "address": "bc1q6r9ckcuet9kh3y3pdezks4em8n2vhtwgmun6yw",
+              "sats": 1548504
+            },
+            {
+              "script": "0014c35dbace666421a072047de8448c6a1e86852479",
+              "address": "bc1qcdwm4nnxvss6qusy0h5yfrr2r6rg2fre3rdzqv",
+              "sats": 1545853
+            },
+            {
+              "script": "001480bc5b40f98470973441bcce5d7c09c426bd6bdf",
+              "address": "bc1qsz79ks8es3cfwdzphn896lqfcsnt667lx7r8sh",
+              "sats": 1216515
+            },
+            {
+              "script": "0014a500e9f08dd828cb74e9b329919cf7213392fb23",
+              "address": "bc1q55qwnuydmq5vka8fkv5er88hyyee97erxx49un",
+              "sats": 1159117
+            },
+            {
+              "script": "76a9148feb94bff8ebe854ed771cb4d1585b1f25a24d1e88ac",
+              "address": "1E7yqteAg5h62iZAPRzSuvZWL5BUHSrWrd",
+              "sats": 1113818
+            },
+            {
+              "script": "76a914a85f39660a1a280b4b1ca112971d618f8b1994ed88ac",
+              "address": "1GMGbXGTwfcTuhExXMwDMzWE4G6sVcDBmM",
+              "sats": 1086791
+            },
+            {
+              "script": "00146cfc4176e5b91f51a363a100c7680c4ddde54998",
+              "address": "bc1qdn7yzah9hy04rgmr5yqvw6qvfhw72jvc30px8l",
+              "sats": 1274024
+            },
+            {
+              "script": "00145057ebfa78e4e3d2687ea28ac48ba172db0968ec",
+              "address": "bc1q2pt7h7ncun3ay6r7529vfzapwtdsj68vf74hk7",
+              "sats": 1253507
+            },
+            {
+              "script": "76a9147a745046410dcda5bc9ab788841347340832832d88ac",
+              "address": "1CAUn1hH9ahhUpHhbbxz8KvmhPEPAG7AL2",
+              "sats": 975019
+            },
+            {
+              "script": "0014823aad984ef6fce55b0af6c4b13867e0c29e3ad5",
+              "address": "bc1qsga2mxzw7m7w2kc27mztzwr8urpfuwk42cgpyc",
+              "sats": 1175242
+            },
+            {
+              "script": "00141251f3dc9a4167cf7bb124fc27a1f9f65ec8b842",
+              "address": "bc1qzfgl8hy6g9nu77a3yn7z0g0e7e0v3wzzt7gcxq",
+              "sats": 899071
+            },
+            {
+              "script": "76a9145be6f9c8a14a45822a3869d6c35a6b7e2d26b88388ac",
+              "address": "19NwBvz8oCzUE5W9nD4BjgKUkogjBDaeUu",
+              "sats": 862491
+            },
+            {
+              "script": "0014d6e173182e89b5c6d55be1e53e89338e688c65bf",
+              "address": "bc1q6mshxxpw3x6ud42mu8jnazfn3e5gcedlff4fme",
+              "sats": 846291
+            },
+            {
+              "script": "76a91450bc4f5e43d65e951ada36aad8adff294b30537488ac",
+              "address": "18MteMhRRMYeFP46iAqvFrZ2vTHSKG8fid",
+              "sats": 831960
+            },
+            {
+              "script": "00147be5cc725a6fbf9c94b2066b7aebb9803c8f3b77",
+              "address": "bc1q00jucuj6d7lee99jqe4h46aesq7g7wmh3ksqk9",
+              "sats": 1028076
+            },
+            {
+              "script": "76a9141c2625ed22867039d073ab5321573f535859131688ac",
+              "address": "13ZqcxAh4gbg7T7S6SBzt7ZWE9t8cyY1XH",
+              "sats": 818944
+            },
+            {
+              "script": "76a914c9e51922cb3975dc7cd256970a7aff120dff4c6b88ac",
+              "address": "1KQXGaapkgRyzDAxzLkjNkrDhgBAc4Jfv5",
+              "sats": 805450
+            },
+            {
+              "script": "0014ef81e025d80607432492d05f87e9e619db3a35d3",
+              "address": "bc1qa7q7qfwcqcr5xfyj6p0c060xr8dn5dwnhkn7e5",
+              "sats": 760352
+            },
+            {
+              "script": "00148760e81b05fe7ab323228c8c7d13c615f354486d",
+              "address": "bc1qsaswsxc9leatxgez3jx86y7xzhe4gjrd77emq8",
+              "sats": 884227
+            },
+            {
+              "script": "0014e0e10130c7b8a39aded65b7f8617bb337b41ed9e",
+              "address": "bc1qursszvx8hz3e4hkktdlcv9amxda5rmv70txpys",
+              "sats": 703470
+            },
+            {
+              "script": "76a91468f00d7a8c05af2b64c406b88b188d9f4e6662c888ac",
+              "address": "1AZrr6rfqpe7yfD3a1MgCgtppCyxaYucb3",
+              "sats": 695828
+            },
+            {
+              "script": "00141b2ffbb9dd968f5736512fb4cfebf46fb1fce190",
+              "address": "bc1qrvhlhwwaj684wdj3976vl6l5d7clecvszgyxpf",
+              "sats": 695470
+            },
+            {
+              "script": "0014b45f2b1b3de3a8424d878faec4f8eab7d6dff676",
+              "address": "bc1qk30jkxeauw5yynv837hvf782kltdlankak2ddr",
+              "sats": 768788
+            },
+            {
+              "script": "0014c8716bbfca8d39ec76cbc907290519478d3980c0",
+              "address": "bc1qepckh07235u7cakteyrjjpgeg7xnnqxq0ftgcc",
+              "sats": 754419
+            },
+            {
+              "script": "00142eee1dd2c1c0e8fce3454ee4b55ba32f8052a8ee",
+              "address": "bc1q9mhpm5kpcr50ec69fmjt2kar97q9928wy7xr8n",
+              "sats": 720719
+            },
+            {
+              "script": "00142e804a724392db490f2369e96c2acfa1e9c69281",
+              "address": "bc1q96qy5ujrjtd5jrerd85kc2k0585udy5pmu38wk",
+              "sats": 685614
+            },
+            {
+              "script": "76a91440e6bb2736c7d182619d3a3115c2acf486eb27bb88ac",
+              "address": "16vAekfDe3k5uq8SnkTvWjFyYKwdGoZxJx",
+              "sats": 974891
+            },
+            {
+              "script": "76a914a38302a279c18c13e0e395b31d3363e735754b7c88ac",
+              "address": "1Fua62LPpwEHX55QXVXAicS1suCNCdugAv",
+              "sats": 969159
+            },
+            {
+              "script": "0014a1218f0fbdaba80fe7ac72ebe9a436afd746ab0a",
+              "address": "bc1q5ysc7raa4w5qleavwt47nfpk4lt5d2c2d50tzu",
+              "sats": 594375
+            },
+            {
+              "script": "76a9143dc4c2c6dc235bcb5129e9967ccc83859c00c26888ac",
+              "address": "16dbvtL2mv6ZQeHnhFXCtwzy35qHwkjmDG",
+              "sats": 832259
+            },
+            {
+              "script": "0014addae57c91ae2534c1e767f05077dc2f94ee523b",
+              "address": "bc1q4hdw2ly34cjnfs08vlc9qa7u972wu53m7qr52n",
+              "sats": 500910
+            },
+            {
+              "script": "00149d0594f5a3fba92b99729b7539d2f2e99656ea0f",
+              "address": "bc1qn5zefadrlw5jhxtjnd6nn5hjaxt9d6s0jva6yr",
+              "sats": 783654
+            },
+            {
+              "script": "76a91433955a9b99a7f1371ca0ff70c328bf080e3d4e7688ac",
+              "address": "15hkP5TNTufjEnLtZP8JrWGoKn7SkacXuk",
+              "sats": 780152
+            },
+            {
+              "script": "0014be4d96afa2aa903f0545fa9dbf2f1c1184612170",
+              "address": "bc1qhexedtaz42gr7p29l2wm7tcuzxzxzgtsk6pst6",
+              "sats": 969842
+            },
+            {
+              "script": "00143f22c524520a938ff785afd444e8ef6e6791ab82",
+              "address": "bc1q8u3v2fzjp2fclau94l2yf680dener2uz58uw7l",
+              "sats": 969238
+            },
+            {
+              "script": "0014e75712498e5c338a9f5225947fbdff9d97dfcbb2",
+              "address": "bc1quat3yjvwtsec486jyk28l00lnktaljajlh9gln",
+              "sats": 954003
+            },
+            {
+              "script": "0014d1b6b4b8990517ee535cd61fee87ea63bf0372ef",
+              "address": "bc1q6xmtfwyeq5t7u56u6c07apl2vwlsxuh07u5mqj",
+              "sats": 943137
+            },
+            {
+              "script": "0014cc181ad5966cf7d5058946c27a0e1de6342143e9",
+              "address": "bc1qesvp44vkdnma2pvfgmp85rsauc6zzslfcwut3q",
+              "sats": 924656
+            },
+            {
+              "script": "76a9148171ef0b3d29fbad0e7dace3bbb4007ce559fa8088ac",
+              "address": "1CoSf1AoeeAiWf461fkmjp8fkywDQjstDQ",
+              "sats": 731346
+            },
+            {
+              "script": "00148ce09e574a45088554cc87ed8ad36e9ba01bd09b",
+              "address": "bc1q3nsfu462g5yg24xvslkc45mwnwsph5ymjq333l",
+              "sats": 889145
+            },
+            {
+              "script": "76a9141590d3873c234f26cc526af46772e70add6a254e88ac",
+              "address": "12y2gjdM2KH84Ct42ReLuaLcYyVxy2wu3r",
+              "sats": 878559
+            },
+            {
+              "script": "0014dd106e6de79b0b887af766b567ce755fc9b29acc",
+              "address": "bc1qm5gxum08nv9cs7hhv66k0nn4tlym9xkvc8qq4y",
+              "sats": 702444
+            },
+            {
+              "script": "0014a28cab216e8ddc4ba7d8455d07eb57591d50d954",
+              "address": "bc1q52x2kgtw3hwyhf7cg4ws066htyw4pk250p9dth",
+              "sats": 646246
+            },
+            {
+              "script": "0014849d644e889f753a612e05182918d9113b104d0f",
+              "address": "bc1qsjwkgn5gna6n5cfwq5vzjxxezya3qng0hcr59k",
+              "sats": 634742
+            },
+            {
+              "script": "76a914430cd89dcf328833e149190d5eccff0633a8c46c88ac",
+              "address": "177XfRKfiSYQN5R7GN7MxWcQqQxQfwNQj7",
+              "sats": 740854
+            },
+            {
+              "script": "0014a54c23693139d59c7eaa874e0a6b19fe42f2caf6",
+              "address": "bc1q54xzx6f3882ecl42sa8q56celep09jhkuhmet4",
+              "sats": 727080
+            },
+            {
+              "script": "0014b46c682fef55c13b926e599e2743dbc8dda24f8b",
+              "address": "bc1qk3kxstl02hqnhynwtx0zws7merw6ynut52vtzs",
+              "sats": 575406
+            },
+            {
+              "script": "001446381bd16d76d70ea146a337e77c36bbce0e5ffe",
+              "address": "bc1qgcuph5tdwmtsag2x5vm7wlpkh08quhl7l4kpp3",
+              "sats": 687636
+            },
+            {
+              "script": "76a914e40c04c6114e733eeb2d498d96d0324950f25aa488ac",
+              "address": "1MnoToqj658Cm3J9CT6iRDxNCqNmSZSZHs",
+              "sats": 672989
+            },
+            {
+              "script": "00142511165bcead83b00e6cc37914fd1c35d7af9a36",
+              "address": "bc1qy5g3vk7w4kpmqrnvcdu3flguxht6lx3km7glf5",
+              "sats": 588307
+            },
+            {
+              "script": "5120ad8f6684428fc6d314d139fba6e659a34c87b49b09ebdaea4b2fe049d9ce53b5",
+              "address": "bc1p4k8kdpzz3lrdx9x388a6deje5dxg0dymp84a46jt9lsynkww2w6sexplfc",
+              "sats": 580902
+            },
+            {
+              "script": "51200d4e152770ed14a3bcea2ca5fe8e8f10116f9608c9181b6823eabcc5499c14f5",
+              "address": "bc1pp48p2fmsa52280829jjlar50zqgkl9sgeyvpk6pra27v2jvuzn6s9k2sgx",
+              "sats": 565327
+            },
+            {
+              "script": "0014cc0c2683eda6b01e28dacf875c157a5e154ab659",
+              "address": "bc1qesxzdqld56cpu2x6e7r4c9t6tc254djelc025a",
+              "sats": 561832
+            },
+            {
+              "script": "00142384f087325479ffb04b9c74f3f094c34e848cb5",
+              "address": "bc1qywz0ppej23ullvztn3608uy5cd8gfr9484yq2d",
+              "sats": 661363
+            },
+            {
+              "script": "001462bb2fa682bb0fa9efe026c4b41eccde0cd9c4b7",
+              "address": "bc1qv2ajlf5zhv86nmlqymztg8kvmcxdn39hvl458q",
+              "sats": 640440
+            },
+            {
+              "script": "00142f4bc628570766200d64827183648bcfb0c5698b",
+              "address": "bc1q9a9uv2zhqanzqrtysfccxeyte7cv26vt759h6h",
+              "sats": 617979
+            },
+            {
+              "script": "00140fd940d568e28e7354c1a7816e9db7eb2b90614b",
+              "address": "bc1qplv5p4tgu288x4xp57qka8dhav4eqc2tatfg63",
+              "sats": 593110
+            },
+            {
+              "script": "76a91472f1535c59af4511b9af7d1eb56c5d86eaf6115788ac",
+              "address": "1BUm8U6q9ySBjFHWLg5AjesK5ouxAF5Jt5",
+              "sats": 594617
+            },
+            {
+              "script": "0014a66c726cf13eb0a0b1566283b51f46f0a0f6e463",
+              "address": "bc1q5ek8ym8386c2pv2kv2pm286x7zs0derrhy5xu6",
+              "sats": 558843
+            },
+            {
+              "script": "0014391efbad851703ea2d54a28d3c8a8aeab508305b",
+              "address": "bc1q8y00htv9zup75t2552xnez52a26ssvzmq9f39f",
+              "sats": 515919
+            },
+            {
+              "script": "76a914066d3977369161da74875ca5444b8fd6b48cb26488ac",
+              "address": "1ayuCdirVJQ3pcVLVwJiyH1KDwCZbNkyH",
+              "sats": 530382
+            },
+            {
+              "script": "00140f31937ed84a810bdaabf18f79586bb9d3ad29c0",
+              "address": "bc1qpucexlkcf2qshk4t7x8hjkrth8f662wq6htsry",
+              "sats": 501783
+            },
+            {
+              "script": "0014d8be79d0d85b9f62c5c66709ec4b6348679e17f4",
+              "address": "bc1qmzl8n5xctw0k93wxvuy7cjmrfpneu9l50dxumm",
+              "sats": 4317407
+            },
+            {
+              "script": "6a24aa21a9ed6a3fbc76907fe8441067189be9cec5f3f371e7969a896322e6bb6b9f838ae878",
+              "address": null,
+              "sats": 0
+            }
+          ],
+          "totalSats": 312552281,
+          "positiveScripts": 97,
+          "largestRecipientShare": 0.13430490049759067,
+          "txid": "cc53d0d8ef9885ea4ba30429b4a901cf106b9920cb12f84b9321d8a91f565040",
+          "transactionUrl": "https://mempool.guide/api/tx/cc53d0d8ef9885ea4ba30429b4a901cf106b9920cb12f84b9321d8a91f565040",
+          "status": "explorer-checked"
+        }
+      ],
+      "sourceUpdatedAt": "2026-09-16T16:15:22.817Z",
+      "networkSample": 2016,
+      "characteristics": {
+        "blocks": 311,
+        "transactions": {
+          "observations": 311,
+          "average": 183.7202572347267
+        },
+        "sizeBytes": {
+          "observations": 311,
+          "average": 83825.59807073955
+        },
+        "weight": {
+          "observations": 311,
+          "average": 216770.45337620578
+        },
+        "coinbaseOnly": {
+          "observations": 311,
+          "count": 2,
+          "share": 0.006430868167202572
+        },
+        "recipients": {
+          "observations": 311,
+          "average": 106.29581993569131,
+          "single": 6,
+          "multiple": 305
+        }
+      },
+      "availableRecent": 24
+    },
+    {
+      "id": "explorer:bitcoinxor",
+      "name": "Bitcoin Xor",
+      "examples": [
+        {
+          "height": 972436,
+          "hash": "00000000000000003e5ccf71648051ba94e124a8e930511a53b25a8bd5c76bea",
+          "blockUrl": "https://mempool.guide/block/00000000000000003e5ccf71648051ba94e124a8e930511a53b25a8bd5c76bea",
+          "outputs": [
+            {
+              "script": "76a91499cbd9b2429336b531ec16a6241d828052c1bb9b88ac",
+              "address": "1F2Cb877Nu1S3JWRoHVQgdKEHUu3rfgHTY",
+              "sats": 306820266
+            },
+            {
+              "script": "0014fc54a65dcedabbd342e142431c3a46219c7ad442",
+              "address": "bc1ql322vhwwm2aaxshpgfp3cwjxyxw844zzalgt90",
+              "sats": 6261638
+            },
+            {
+              "script": "6a24aa21a9ede3ae8710caaba1065e1da39a794bd5d50ad36e72dc27a184da507cfe29df4393",
+              "address": null,
+              "sats": 0
+            }
+          ],
+          "totalSats": 313081904,
+          "positiveScripts": 2,
+          "largestRecipientShare": 0.9800000002555241,
+          "txid": "7e5e9d38b2ac85700a0f94b6e888c26246e55825672ecb5339314100e9f84ddf",
+          "transactionUrl": "https://mempool.guide/api/tx/7e5e9d38b2ac85700a0f94b6e888c26246e55825672ecb5339314100e9f84ddf",
+          "status": "explorer-checked"
+        },
+        {
+          "height": 972299,
+          "hash": "0000000000000000f68669fa3ccdc7dcee9e80e0355b82ae74db3baa1b95810c",
+          "blockUrl": "https://mempool.guide/block/0000000000000000f68669fa3ccdc7dcee9e80e0355b82ae74db3baa1b95810c",
+          "outputs": [
+            {
+              "script": "76a914aa0e5cf8da4d2b23a3fea20f20077ac64c929f3c88ac",
+              "address": "1GWB5akQycY7AnARjFYRyZyLRxVn1MCFF7",
+              "sats": 134798382
+            },
+            {
+              "script": "0014d2798a96759d42490b3e0fd9185e46ec72a87b3f",
+              "address": "bc1q6fuc49n4n4pyjze7plv3shjxa3e2s7ely6y6zr",
+              "sats": 65833050
+            },
+            {
+              "script": "76a9148390330bf31c4ef908b36feeeeb06728ec51c18288ac",
+              "address": "1CzeGHEKF2LfQLM5YsVTbfcT4Pf89cZJzv",
+              "sats": 57839516
+            },
+            {
+              "script": "76a9146e43a98a9e3fc859a973f7523f36965006f7f92188ac",
+              "address": "1B42PMnbVGvPQzwR65oEXKMkSnVmEaCdBS",
+              "sats": 10271867
+            },
+            {
+              "script": "00146a0a57b1a6e1a241f770a42b032c9dbd7b4b159f",
+              "address": "bc1qdg990vdxux3yrams5s4sxtyah4a5k9vlu5nrtu",
+              "sats": 9219330
+            },
+            {
+              "script": "001471ea10358f71d41ae7a811f2892f7a4586e7d9d3",
+              "address": "bc1qw84pqdv0w82p4eagz8egjtm6gkrw0kwncq745t",
+              "sats": 8754894
+            },
+            {
+              "script": "0014a622caa2713363ef20a8e1fbe6bb8a2cdeed30ab",
+              "address": "bc1q5c3v4gn3xd377g9gu8a7dwu29n0w6v9td5dclv",
+              "sats": 5951676
+            },
+            {
+              "script": "76a91499f7ad909c842058dee2580d8dad494a742067e688ac",
+              "address": "1F376KTuZp9d2uTvRCG2w4TawY2AFXxAfu",
+              "sats": 3580116
+            },
+            {
+              "script": "00149a13aeb173049de1b4c3476637d61c7b3232eb97",
+              "address": "bc1qngf6avtnqjw7rdxrganr04su0ver96uhn64e8m",
+              "sats": 3274890
+            },
+            {
+              "script": "76a914c5e63f4a1e6878cca91d2a5b8ae43f372c35199288ac",
+              "address": "1K3PwebdsGXmmow6r8ukfmNFthSVNaAziD",
+              "sats": 2041858
+            },
+            {
+              "script": "76a91450bff8378848cd7b8a2fa7d7b857bb676b2186c788ac",
+              "address": "18My2dREbQXo7EcLLmaVa7TQq1uoGD9kvH",
+              "sats": 1568056
+            },
+            {
+              "script": "00143b642ed91ed69f74f4f8d76733d643c31332c598",
+              "address": "bc1q8djzakg7660hfa8c6ann84jrcvfn93vcktu688",
+              "sats": 1099576
+            },
+            {
+              "script": "0014cf2d19e5219d05be789cf180ff1459d2cf16c2fc",
+              "address": "bc1qeuk3nefpn5zmu7yu7xq079ze6t83dshu5csldd",
+              "sats": 1057645
+            },
+            {
+              "script": "0014bce54423e617b5954f1276bc6af381dead8d85a2",
+              "address": "bc1qhnj5gglxz76e2ncjw67x4uupm6kcmpdzjflkn3",
+              "sats": 1025293
+            },
+            {
+              "script": "76a914c5a2bd9045157fc9c69a1108b7eba104ce58990188ac",
+              "address": "1K215CTayWScADToEgpRAXeXyddNuuSZXs",
+              "sats": 939089
+            },
+            {
+              "script": "00141922e6f3ddb9357e44a68ddace403bc27e16d3b0",
+              "address": "bc1qry3wdu7ahy6hu39x3hdvuspmcflpd5ash55wpd",
+              "sats": 922700
+            },
+            {
+              "script": "0014e59167c50d80550d0024eb22e0c024d0b5ef14f5",
+              "address": "bc1qukgk03gdsp2s6qpyav3wpspy6z677984nrxrz9",
+              "sats": 614069
+            },
+            {
+              "script": "00143f22c524520a938ff785afd444e8ef6e6791ab82",
+              "address": "bc1q8u3v2fzjp2fclau94l2yf680dener2uz58uw7l",
+              "sats": 503387
+            },
+            {
+              "script": "76a914eb6412508376413cf297a95a35a2e5f4a8953f0f88ac",
+              "address": "1NTdgB21wk8y1aEMtMQ81djx6yqZDZwaun",
+              "sats": 114300
+            },
+            {
+              "script": "00149d7046429499fdf9cd24ae6d3932923a7479d32c",
+              "address": "bc1qn4cyvs55n87lnnfy4eknjv5j8f68n5ev7h3rm6",
+              "sats": 67473
+            },
+            {
+              "script": "76a914d3a99caa305b241a8ad1bcc9bdc291b21d73951888ac",
+              "address": "1LJAmKiKMKy24YBRmPPUFykK3366FoXoLz",
+              "sats": 53638
+            },
+            {
+              "script": "0014fc54a65dcedabbd342e142431c3a46219c7ad442",
+              "address": "bc1ql322vhwwm2aaxshpgfp3cwjxyxw844zzalgt90",
+              "sats": 27670
+            },
+            {
+              "script": "76a9144c3a1335bc9f5bc5ae94f2c4b339252b4fb156c388ac",
+              "address": "17x3vhoiTX344c1a1bnS2mwdsVCUqJc2Gc",
+              "sats": 14262
+            },
+            {
+              "script": "76a914e051ac123c1767fa7ca63fab7a616f90888537b888ac",
+              "address": "1MT6CejyLu1UAVntdaEWbFLthzXghVA2PJ",
+              "sats": 1703
+            },
+            {
+              "script": "0014b31bd37bb27df7dcbf8ce644080758b596b98f9f",
+              "address": "bc1qkvdax7aj0hmae0uvuezqsp6ckkttnrul9z3mwg",
+              "sats": 3127014
+            },
+            {
+              "script": "6a24aa21a9ed2e6f9048bf4bcc39f659f3b8a1c83079f53b3e411424e7ea782fafc153c5cb5e",
+              "address": null,
+              "sats": 0
+            }
+          ],
+          "totalSats": 312701454,
+          "positiveScripts": 25,
+          "largestRecipientShare": 0.43107692745170284,
+          "txid": "985a84714aca4db6088005141c359b188cfa9fe6627c292772a4ba0a78e1c4fe",
+          "transactionUrl": "https://mempool.guide/api/tx/985a84714aca4db6088005141c359b188cfa9fe6627c292772a4ba0a78e1c4fe",
+          "status": "explorer-checked"
+        }
+      ],
+      "sourceUpdatedAt": "2026-09-16T16:15:22.817Z",
+      "networkSample": 2016,
+      "characteristics": {
+        "blocks": 288,
+        "transactions": {
+          "observations": 288,
+          "average": 132.65625
+        },
+        "sizeBytes": {
+          "observations": 288,
+          "average": 51281.288194444445
+        },
+        "weight": {
+          "observations": 288,
+          "average": 133885.31944444444
+        },
+        "coinbaseOnly": {
+          "observations": 288,
+          "count": 5,
+          "share": 0.017361111111111112
+        },
+        "recipients": {
+          "observations": 288,
+          "average": 3.8333333333333335,
+          "single": 0,
+          "multiple": 288
+        }
+      },
+      "availableRecent": 24
+    },
+    {
+      "id": "explorer:ratum",
+      "name": "RATUM",
+      "examples": [
+        {
+          "height": 972432,
+          "hash": "00000000000000001babc2f6caaad0e73315021c4e331eee3c22359b22dcfe36",
+          "blockUrl": "https://mempool.guide/block/00000000000000001babc2f6caaad0e73315021c4e331eee3c22359b22dcfe36",
+          "outputs": [
+            {
+              "script": "6a24aa21a9edf555ebfecd5eddbb9a4d5b1559b921486e8e6ede1e1fb5332100cd9f6e7294ab",
+              "address": null,
+              "sats": 0
+            },
+            {
+              "script": "00147c519ee0b1f063a1350895761739ce7c31b36f45",
+              "address": "bc1q03geac937p36zdggj4mpwwww0scmxm697j3exf",
+              "sats": 312703641
+            }
+          ],
+          "totalSats": 312703641,
+          "positiveScripts": 1,
+          "largestRecipientShare": 1,
+          "txid": "524cd4d69457144c0609602c0ccc4f76c37257823c53a9650b678818778d3f11",
+          "transactionUrl": "https://mempool.guide/api/tx/524cd4d69457144c0609602c0ccc4f76c37257823c53a9650b678818778d3f11",
+          "status": "explorer-checked"
+        },
+        {
+          "height": 972314,
+          "hash": "0000000000000000249903b2d9b5e04596e6c2612761386caa5fb6ee10dff5af",
+          "blockUrl": "https://mempool.guide/block/0000000000000000249903b2d9b5e04596e6c2612761386caa5fb6ee10dff5af",
+          "outputs": [
+            {
+              "script": "6a24aa21a9edb5fc074a5315cc2e9ad4977dbe4ecbb50c10a5415c2dc14bda5521dd81b4cbec",
+              "address": null,
+              "sats": 0
+            },
+            {
+              "script": "00147c519ee0b1f063a1350895761739ce7c31b36f45",
+              "address": "bc1q03geac937p36zdggj4mpwwww0scmxm697j3exf",
+              "sats": 312701545
+            }
+          ],
+          "totalSats": 312701545,
+          "positiveScripts": 1,
+          "largestRecipientShare": 1,
+          "txid": "ddf428917014c19cd0862902393a06cf45be7865f75d7b54eee7eebe409a61f4",
+          "transactionUrl": "https://mempool.guide/api/tx/ddf428917014c19cd0862902393a06cf45be7865f75d7b54eee7eebe409a61f4",
+          "status": "explorer-checked"
+        }
+      ],
+      "sourceUpdatedAt": "2026-09-16T16:15:22.817Z",
+      "networkSample": 2016,
+      "characteristics": {
+        "blocks": 198,
+        "transactions": {
+          "observations": 198,
+          "average": 158.24242424242425
+        },
+        "sizeBytes": {
+          "observations": 198,
+          "average": 63185.70202020202
+        },
+        "weight": {
+          "observations": 198,
+          "average": 167646.2626262626
+        },
+        "coinbaseOnly": {
+          "observations": 198,
+          "count": 3,
+          "share": 0.015151515151515152
+        },
+        "recipients": {
+          "observations": 198,
+          "average": 1,
+          "single": 198,
+          "multiple": 0
+        }
+      },
+      "availableRecent": 24
+    },
+    {
+      "id": "explorer:convoy",
+      "name": "CONVOY",
+      "examples": [
+        {
+          "height": 972444,
+          "hash": "00000000000000009a98ecd1b1b91b58c9ac3d068195f1f6fb56b4c3c4ddfb34",
+          "blockUrl": "https://mempool.guide/block/00000000000000009a98ecd1b1b91b58c9ac3d068195f1f6fb56b4c3c4ddfb34",
+          "outputs": [
+            {
+              "script": "001441363fc4be97d6003d0512a1c02d17fa4628905b",
+              "address": "bc1qgymrl397jltqq0g9z2suqtghlfrz3yzm0m2xjw",
+              "sats": 312881918
+            },
+            {
+              "script": "6a0e9e0f000000000000000000000000",
+              "address": null,
+              "sats": 0
+            },
+            {
+              "script": "6a0100",
+              "address": null,
+              "sats": 0
+            },
+            {
+              "script": "6a24aa21a9ed30a27d8096ccb98dc30d8b5deabe81540517195054ae346f50335cb439b6b3cd",
+              "address": null,
+              "sats": 0
+            }
+          ],
+          "totalSats": 312881918,
+          "positiveScripts": 1,
+          "largestRecipientShare": 1,
+          "txid": "2c17efe7eb251df481d7264c2dfe5d2e6b93658bcb764e8f1a6429e0eb10d305",
+          "transactionUrl": "https://mempool.guide/api/tx/2c17efe7eb251df481d7264c2dfe5d2e6b93658bcb764e8f1a6429e0eb10d305",
+          "status": "explorer-checked"
+        },
+        {
+          "height": 971963,
+          "hash": "00000000000000000e8bfc01ac5aa1a6e83500a190445a35c0f5cf096395f9da",
+          "blockUrl": "https://mempool.guide/block/00000000000000000e8bfc01ac5aa1a6e83500a190445a35c0f5cf096395f9da",
+          "outputs": [
+            {
+              "script": "6a00",
+              "address": null,
+              "sats": 0
+            },
+            {
+              "script": "6a0ea6a0000000000000000000000000",
+              "address": null,
+              "sats": 0
+            },
+            {
+              "script": "001441363fc4be97d6003d0512a1c02d17fa4628905b",
+              "address": "bc1qgymrl397jltqq0g9z2suqtghlfrz3yzm0m2xjw",
+              "sats": 312589918
+            },
+            {
+              "script": "6a24aa21a9ed1ad82870555fe754f0dc6426297ca2ea52aca8ac7447becb7ea6f189bed528f2",
+              "address": null,
+              "sats": 0
+            }
+          ],
+          "totalSats": 312589918,
+          "positiveScripts": 1,
+          "largestRecipientShare": 1,
+          "txid": "766b299d71b844b09dd09a0f62e6aad603ce7e4334bccdcb41beb76f6af26b9b",
+          "transactionUrl": "https://mempool.guide/api/tx/766b299d71b844b09dd09a0f62e6aad603ce7e4334bccdcb41beb76f6af26b9b",
+          "status": "explorer-checked"
+        }
+      ],
+      "sourceUpdatedAt": "2026-09-16T16:15:22.817Z",
+      "networkSample": 2016,
+      "characteristics": {
+        "blocks": 138,
+        "transactions": {
+          "observations": 138,
+          "average": 121.95652173913044
+        },
+        "sizeBytes": {
+          "observations": 138,
+          "average": 52501.137681159424
+        },
+        "weight": {
+          "observations": 138,
+          "average": 131664.1811594203
+        },
+        "coinbaseOnly": {
+          "observations": 138,
+          "count": 2,
+          "share": 0.014492753623188406
+        },
+        "recipients": {
+          "observations": 138,
+          "average": 1,
+          "single": 138,
+          "multiple": 0
+        }
+      },
+      "availableRecent": 24
+    },
+    {
+      "id": "explorer:b2pool",
+      "name": "B2Pool",
+      "examples": [
+        {
+          "height": 972410,
+          "hash": "0000000000000000ffa1c83f72618aaeaa46ab64a9869251d1def2cdec1ff559",
+          "blockUrl": "https://mempool.guide/block/0000000000000000ffa1c83f72618aaeaa46ab64a9869251d1def2cdec1ff559",
+          "outputs": [
+            {
+              "script": "0014388124cb21290666d97e25e666891d2d3a2816e3",
+              "address": "bc1q8zqjfjep9yrxdkt7yhnxdzga95azs9hrw3vty4",
+              "sats": 312588475
+            },
+            {
+              "script": "6a24aa21a9edd125603bb3aaf45fe7114c296301d7db3ca8be3e4bd56cb0fbf9c9e6b364306c",
+              "address": null,
+              "sats": 0
+            }
+          ],
+          "totalSats": 312588475,
+          "positiveScripts": 1,
+          "largestRecipientShare": 1,
+          "txid": "23ba525d0fb601703f6ffc6e17a2513b968592df88a095116eaaa5bf2397e34d",
+          "transactionUrl": "https://mempool.guide/api/tx/23ba525d0fb601703f6ffc6e17a2513b968592df88a095116eaaa5bf2397e34d",
+          "status": "explorer-checked"
+        },
+        {
+          "height": 972074,
+          "hash": "0000000000000000de639c3136608fb59efe73239b14b44f71f9426398cb4506",
+          "blockUrl": "https://mempool.guide/block/0000000000000000de639c3136608fb59efe73239b14b44f71f9426398cb4506",
+          "outputs": [
+            {
+              "script": "0014388124cb21290666d97e25e666891d2d3a2816e3",
+              "address": "bc1q8zqjfjep9yrxdkt7yhnxdzga95azs9hrw3vty4",
+              "sats": 312556123
+            },
+            {
+              "script": "6a24aa21a9ed86f85e41223fc0ef0d674f731e400008b3c5992911777db4a350a6f272af4625",
+              "address": null,
+              "sats": 0
+            }
+          ],
+          "totalSats": 312556123,
+          "positiveScripts": 1,
+          "largestRecipientShare": 1,
+          "txid": "86afaca680688171f296caf6afbc42109c1abf77ce09b6a4733fc474fc2a5269",
+          "transactionUrl": "https://mempool.guide/api/tx/86afaca680688171f296caf6afbc42109c1abf77ce09b6a4733fc474fc2a5269",
+          "status": "explorer-checked"
+        }
+      ],
+      "sourceUpdatedAt": "2026-09-16T16:15:22.817Z",
+      "networkSample": 2016,
+      "characteristics": {
+        "blocks": 92,
+        "transactions": {
+          "observations": 92,
+          "average": 177.70652173913044
+        },
+        "sizeBytes": {
+          "observations": 92,
+          "average": 85215.5
+        },
+        "weight": {
+          "observations": 92,
+          "average": 217601.6847826087
+        },
+        "coinbaseOnly": {
+          "observations": 92,
+          "count": 0,
+          "share": 0
+        },
+        "recipients": {
+          "observations": 92,
+          "average": 1.1521739130434783,
+          "single": 85,
+          "multiple": 7
+        }
+      },
+      "availableRecent": 24
+    },
+    {
+      "id": "explorer:riptide",
+      "name": "RIPTIDE",
+      "examples": [
+        {
+          "height": 971698,
+          "hash": "0000000000000003bcf83b06d7ebd5c6772843ee661951ad0feb0ef6cf81c6b6",
+          "blockUrl": "https://mempool.guide/block/0000000000000003bcf83b06d7ebd5c6772843ee661951ad0feb0ef6cf81c6b6",
+          "outputs": [
+            {
+              "script": "0014141f8ac00bfd9745485f69368e97c1b700b923c5",
+              "address": "bc1qzs0c4sqtlkt52jzldymga97pkuqtjg79rmkwh7",
+              "sats": 99552316
+            },
+            {
+              "script": "00143857909459f03e389ba7972b63c2dec534a9421e",
+              "address": "bc1q8ptep9ze7qlr3xa8ju4k8sk7c562jss7xtad98",
+              "sats": 32264142
+            },
+            {
+              "script": "76a9148390330bf31c4ef908b36feeeeb06728ec51c18288ac",
+              "address": "1CzeGHEKF2LfQLM5YsVTbfcT4Pf89cZJzv",
+              "sats": 32239310
+            },
+            {
+              "script": "76a9142d38020f6f9e6b658e1e9ce66ce1e172b69db26088ac",
+              "address": "1586W97BcuwadaNHermux8rgYLXfpbnQos",
+              "sats": 24105497
+            },
+            {
+              "script": "001421770d25af4dd6546955e86aa77e7ee2e9a0e063",
+              "address": "bc1qy9ms6fd0fht9g624ap42wln7ut56pcrrksxhvt",
+              "sats": 22775118
+            },
+            {
+              "script": "00148bb504d87f073cd17a523ccc541695069b57882e",
+              "address": "bc1q3w6sfkrlqu7dz7jj8nx9g954q6d40zpwhw56cx",
+              "sats": 19257742
+            },
+            {
+              "script": "0020bab3aa5cb337476de4fd178de3528cbbaaa2bda3e37eabc60093d0eb232f289d",
+              "address": "bc1qh2e65h9nxarkme8az7x7x55vhw4290drudl2h3sqj0gwkge09zws9ys53x",
+              "sats": 13298291
+            },
+            {
+              "script": "0014152cc4016974111403ef9afede3aa71c68aeef33",
+              "address": "bc1qz5kvgqtfwsg3gql0ntlduw48r352amenwpm3gm",
+              "sats": 11146299
+            },
+            {
+              "script": "0014d5602e6611e6f18096dfa8e76f7b78557d2d93f0",
+              "address": "bc1q64szues3umccp9kl4rnk77mc247jmylsmkensf",
+              "sats": 10255797
+            },
+            {
+              "script": "0014ef87be214e58872e728a5a7a0dbe22d5e562416e",
+              "address": "bc1qa7rmug2wtzrjuu52tfaqm03z6hjkystw6y88nf",
+              "sats": 6687057
+            },
+            {
+              "script": "76a9140b053878a748d76daef515f42389a5421c4c92ac88ac",
+              "address": "121GgquPHYpksRu4eYzaNh8nWaacvXA5MU",
+              "sats": 4974881
+            },
+            {
+              "script": "76a9147fefefb9f63de146924ac2f71bee138dd7f03a1088ac",
+              "address": "1CfUFSQLwzihWSNCEz75cNZXmzVyhs6pq2",
+              "sats": 3862761
+            },
+            {
+              "script": "0014cf1c6b6c1121347407204ba1ef38807421ac57d2",
+              "address": "bc1qeuwxkmq3yy68gpeqfws77wyqwss6c47jhcl8wc",
+              "sats": 3542610
+            },
+            {
+              "script": "0014945e9762348db2be466edbfe07a05bd911ca8275",
+              "address": "bc1qj30fwc353ketu3nwm0lq0gzmmygu4qn4nh5h8m",
+              "sats": 3190267
+            },
+            {
+              "script": "00147c58c8121e4080c79ec880b58bc0a3f55623d54a",
+              "address": "bc1q03vvsys7gzqv08kgsz6chs9r74tz84225mf76r",
+              "sats": 3109206
+            },
+            {
+              "script": "0014848a633f172eacd03b6e7095de0c3553fa8ec732",
+              "address": "bc1qsj9xx0ch96kdqwmwwz2aurp420aga3ejt9m7fk",
+              "sats": 2744722
+            },
+            {
+              "script": "00148be5d8ee9be014635b89558c4ac97abd3d04bd8f",
+              "address": "bc1q30ja3m5muq2xxkuf2kxy4jt6h57sf0v0q6lv3k",
+              "sats": 2626396
+            },
+            {
+              "script": "0014d7bb61b5cc054153edd58d5d6d4be5aad52033a5",
+              "address": "bc1q67akrdwvq4q48mw434wk6jl94t2jqva9tv64ny",
+              "sats": 2610739
+            },
+            {
+              "script": "0014cc0c2683eda6b01e28dacf875c157a5e154ab659",
+              "address": "bc1qesxzdqld56cpu2x6e7r4c9t6tc254djelc025a",
+              "sats": 2034229
+            },
+            {
+              "script": "0014b784302424af21e719d0e418f072ae538e936afe",
+              "address": "bc1qk7zrqfpy4us7wxwsusv0qu4w2w8fx6h7nh3g8l",
+              "sats": 1540672
+            },
+            {
+              "script": "76a914909558522ec64913bffc73fbd6a776da2805e5fb88ac",
+              "address": "1EBVDJC1AxWakZevX4xtCW8vPbt4fmuUPd",
+              "sats": 1510668
+            },
+            {
+              "script": "0020c432509fb656594c91928b3c6bc53f7b8deccb537d003095ac7fdb5a818126a4",
+              "address": "bc1qcse9p8ak2ev5eyvj3v7xh3fl0wx7ej6n05qrp9dv0ld44qvpy6jq6ah2w5",
+              "sats": 1432494
+            },
+            {
+              "script": "0014b35c44585f9935c9d10be825c0902cc47daab36a",
+              "address": "bc1qkdwygkzlny6un5gtaqjupypvc3764vm24qpr62",
+              "sats": 1424252
+            },
+            {
+              "script": "0014f35e04ee943e79c189257db6eed4fe791ec3e201",
+              "address": "bc1q7d0qfm558euurzf90kmwa4870y0v8cspjueum0",
+              "sats": 1292895
+            },
+            {
+              "script": "0014106caf18ed871a34e34c1cc8b3487811e86987ca",
+              "address": "bc1qzpk27x8dsudrfc6vrnytxjrcz85xnp72ydgz6f",
+              "sats": 1261734
+            },
+            {
+              "script": "00142dd0f759aca64f12da836350138c3c9b939ebed6",
+              "address": "bc1q9hg0wkdv5e839k5rvdgp8rpunwfea0kk3zm7ne",
+              "sats": 775139
+            },
+            {
+              "script": "00141e33a52743a6caf4db5b83a9a032dadfcf6a50a9",
+              "address": "bc1qrce62f6r5m90fk6msw56qvk6ml8k559fwvnlec",
+              "sats": 709323
+            },
+            {
+              "script": "00148d1cd8a1452f61321b88d8579cc7f459901c1f9f",
+              "address": "bc1q35wd3g299asnyxugmptee3l5txgpc8ulzwwdc5",
+              "sats": 545272
+            },
+            {
+              "script": "00140e875fde841f8167440cfe64f4331061361a71bd",
+              "address": "bc1qp6r4lh5yr7qkw3qvlej0gvcsvymp5udazqtedp",
+              "sats": 458128
+            },
+            {
+              "script": "00148fde0f6addbe67adc6756fbadb4015d9b6ce2c93",
+              "address": "bc1q3l0q76kahen6m3n4d7adksq4mxmvutyndqd5f9",
+              "sats": 455835
+            },
+            {
+              "script": "0014737a2845e8f9604940979f72cbe28248e9ceb6d5",
+              "address": "bc1qwdazs30gl9syjsyhnaevhc5zfr5uadk4t4882v",
+              "sats": 415255
+            },
+            {
+              "script": "00140c30830dfdbc0bff8a343740cc270ba401f3ad39",
+              "address": "bc1qpscgxr0ahs9llz35xaqvcfct5sql8tfe4fhwrk",
+              "sats": 249534
+            },
+            {
+              "script": "00143364a3d2c8e009d6af7efef51b62fc6e9bca56f1",
+              "address": "bc1qxdj285kguqyadtm7lm63kchud6du54h3nlg0wv",
+              "sats": 152785
+            },
+            {
+              "script": "6a0100",
+              "address": null,
+              "sats": 0
+            },
+            {
+              "script": "6a24aa21a9ed5567107b12beaa85322231caa54cf0b6031d49785ceeed29f0f2a5abe7336e09",
+              "address": null,
+              "sats": 0
+            }
+          ],
+          "totalSats": 312501366,
+          "positiveScripts": 33,
+          "largestRecipientShare": 0.31856601868421913,
+          "txid": "af7e6fe482f34df705e55a479527a4b2582f70f6c20be812aff9c70f18df0f37",
+          "transactionUrl": "https://mempool.guide/api/tx/af7e6fe482f34df705e55a479527a4b2582f70f6c20be812aff9c70f18df0f37",
+          "status": "explorer-checked"
+        },
+        {
+          "height": 972372,
+          "hash": "0000000000000000401fb355b044eb64bb44e9a71e247ac41bc69a7f07b7fce2",
+          "blockUrl": "https://mempool.guide/block/0000000000000000401fb355b044eb64bb44e9a71e247ac41bc69a7f07b7fce2",
+          "outputs": [
+            {
+              "script": "00147b52237571c4206585f4540e1a334d6952bb086c",
+              "address": "bc1q0dfzxat3cssxtp052s8p5v6dd9ftkzrveml2c0",
+              "sats": 74644553
+            },
+            {
+              "script": "76a9148390330bf31c4ef908b36feeeeb06728ec51c18288ac",
+              "address": "1CzeGHEKF2LfQLM5YsVTbfcT4Pf89cZJzv",
+              "sats": 67119173
+            },
+            {
+              "script": "0014141f8ac00bfd9745485f69368e97c1b700b923c5",
+              "address": "bc1qzs0c4sqtlkt52jzldymga97pkuqtjg79rmkwh7",
+              "sats": 62808467
+            },
+            {
+              "script": "001421770d25af4dd6546955e86aa77e7ee2e9a0e063",
+              "address": "bc1qy9ms6fd0fht9g624ap42wln7ut56pcrrksxhvt",
+              "sats": 17961300
+            },
+            {
+              "script": "0014945e9762348db2be466edbfe07a05bd911ca8275",
+              "address": "bc1qj30fwc353ketu3nwm0lq0gzmmygu4qn4nh5h8m",
+              "sats": 12408460
+            },
+            {
+              "script": "0014152cc4016974111403ef9afede3aa71c68aeef33",
+              "address": "bc1qz5kvgqtfwsg3gql0ntlduw48r352amenwpm3gm",
+              "sats": 10826057
+            },
+            {
+              "script": "76a9142d5d01d454ed32a281a878cc5294aecbc1a6637488ac",
+              "address": "158rptAe86LM9qSjygdjdVVDXAnVvHyv9o",
+              "sats": 9007985
+            },
+            {
+              "script": "76a9142d38020f6f9e6b658e1e9ce66ce1e172b69db26088ac",
+              "address": "1586W97BcuwadaNHermux8rgYLXfpbnQos",
+              "sats": 8216051
+            },
+            {
+              "script": "00148bb504d87f073cd17a523ccc541695069b57882e",
+              "address": "bc1q3w6sfkrlqu7dz7jj8nx9g954q6d40zpwhw56cx",
+              "sats": 5719173
+            },
+            {
+              "script": "0020bab3aa5cb337476de4fd178de3528cbbaaa2bda3e37eabc60093d0eb232f289d",
+              "address": "bc1qh2e65h9nxarkme8az7x7x55vhw4290drudl2h3sqj0gwkge09zws9ys53x",
+              "sats": 5108837
+            },
+            {
+              "script": "76a9142017464a4535ac3d03408a053db774f97a9eb0bc88ac",
+              "address": "13vgWHUibAb4noeLBPhWejikQLNfhhGMWr",
+              "sats": 4287626
+            },
+            {
+              "script": "00147c58c8121e4080c79ec880b58bc0a3f55623d54a",
+              "address": "bc1q03vvsys7gzqv08kgsz6chs9r74tz84225mf76r",
+              "sats": 3975717
+            },
+            {
+              "script": "0014cf1c6b6c1121347407204ba1ef38807421ac57d2",
+              "address": "bc1qeuwxkmq3yy68gpeqfws77wyqwss6c47jhcl8wc",
+              "sats": 3222686
+            },
+            {
+              "script": "0014d7bb61b5cc054153edd58d5d6d4be5aad52033a5",
+              "address": "bc1q67akrdwvq4q48mw434wk6jl94t2jqva9tv64ny",
+              "sats": 2941776
+            },
+            {
+              "script": "00143857909459f03e389ba7972b63c2dec534a9421e",
+              "address": "bc1q8ptep9ze7qlr3xa8ju4k8sk7c562jss7xtad98",
+              "sats": 2387861
+            },
+            {
+              "script": "0014fa6e25f1a38756e54d534b80cc5aede4a3478cea",
+              "address": "bc1qlfhztudrsatw2n2nfwqvckhduj350r826h6fvz",
+              "sats": 2323250
+            },
+            {
+              "script": "00148be5d8ee9be014635b89558c4ac97abd3d04bd8f",
+              "address": "bc1q30ja3m5muq2xxkuf2kxy4jt6h57sf0v0q6lv3k",
+              "sats": 2234502
+            },
+            {
+              "script": "0020c432509fb656594c91928b3c6bc53f7b8deccb537d003095ac7fdb5a818126a4",
+              "address": "bc1qcse9p8ak2ev5eyvj3v7xh3fl0wx7ej6n05qrp9dv0ld44qvpy6jq6ah2w5",
+              "sats": 2122920
+            },
+            {
+              "script": "76a9140b053878a748d76daef515f42389a5421c4c92ac88ac",
+              "address": "121GgquPHYpksRu4eYzaNh8nWaacvXA5MU",
+              "sats": 1682676
+            },
+            {
+              "script": "0014674347292d1eac0567696a3705117aa7bd4ff04e",
+              "address": "bc1qvap5w2fdr6kq2emfdgms2yt65775luzwleayk6",
+              "sats": 1298846
+            },
+            {
+              "script": "0014cc0c2683eda6b01e28dacf875c157a5e154ab659",
+              "address": "bc1qesxzdqld56cpu2x6e7r4c9t6tc254djelc025a",
+              "sats": 1280264
+            },
+            {
+              "script": "0014ef87be214e58872e728a5a7a0dbe22d5e562416e",
+              "address": "bc1qa7rmug2wtzrjuu52tfaqm03z6hjkystw6y88nf",
+              "sats": 1101410
+            },
+            {
+              "script": "76a9147fefefb9f63de146924ac2f71bee138dd7f03a1088ac",
+              "address": "1CfUFSQLwzihWSNCEz75cNZXmzVyhs6pq2",
+              "sats": 855462
+            },
+            {
+              "script": "0014d5602e6611e6f18096dfa8e76f7b78557d2d93f0",
+              "address": "bc1q64szues3umccp9kl4rnk77mc247jmylsmkensf",
+              "sats": 821356
+            },
+            {
+              "script": "0014b35c44585f9935c9d10be825c0902cc47daab36a",
+              "address": "bc1qkdwygkzlny6un5gtaqjupypvc3764vm24qpr62",
+              "sats": 818155
+            },
+            {
+              "script": "0014d72c96beebd5e7ab8325ea27178028595a85b3ae",
+              "address": "bc1q6ukfd0ht6hn6hqe9agn30qpgt9dgtvawtwz7zy",
+              "sats": 803253
+            },
+            {
+              "script": "00142dd0f759aca64f12da836350138c3c9b939ebed6",
+              "address": "bc1q9hg0wkdv5e839k5rvdgp8rpunwfea0kk3zm7ne",
+              "sats": 795075
+            },
+            {
+              "script": "0014848a633f172eacd03b6e7095de0c3553fa8ec732",
+              "address": "bc1qsj9xx0ch96kdqwmwwz2aurp420aga3ejt9m7fk",
+              "sats": 782351
+            },
+            {
+              "script": "0014b5e0aca7a9686ca9aa27094abffe2928f1ab3e1f",
+              "address": "bc1qkhs2efafdpk2n238p99tll3f9rc6k0slqc2fqq",
+              "sats": 757440
+            },
+            {
+              "script": "0014106caf18ed871a34e34c1cc8b3487811e86987ca",
+              "address": "bc1qzpk27x8dsudrfc6vrnytxjrcz85xnp72ydgz6f",
+              "sats": 556053
+            },
+            {
+              "script": "76a914909558522ec64913bffc73fbd6a776da2805e5fb88ac",
+              "address": "1EBVDJC1AxWakZevX4xtCW8vPbt4fmuUPd",
+              "sats": 492059
+            },
+            {
+              "script": "0014f35e04ee943e79c189257db6eed4fe791ec3e201",
+              "address": "bc1q7d0qfm558euurzf90kmwa4870y0v8cspjueum0",
+              "sats": 304190
+            },
+            {
+              "script": "0014b1412015dc06646fed607043b4256d9085fee40e",
+              "address": "bc1qk9qjq9wuqejxlmtqwppmgftdjzzlaeqw8jkkku",
+              "sats": 303675
+            },
+            {
+              "script": "00141e33a52743a6caf4db5b83a9a032dadfcf6a50a9",
+              "address": "bc1qrce62f6r5m90fk6msw56qvk6ml8k559fwvnlec",
+              "sats": 293596
+            },
+            {
+              "script": "76a9145ec00ccd03670a0f02e872837fcca7a4d10c2be688ac",
+              "address": "19dzauDLb4W1NgP4ZotwcJRrCZVuHoBrf3",
+              "sats": 285833
+            },
+            {
+              "script": "51207a2e253a5eedcb6b39aa7fbe163e95a8f8685ae7f99b9fb80d9d8c449e638756",
+              "address": "bc1p0ghz2wj7ah9kkwd207lpv0544ruxskh8lxdelwqdnkxyf8nrsatqrc7nf0",
+              "sats": 242261
+            },
+            {
+              "script": "00140c30830dfdbc0bff8a343740cc270ba401f3ad39",
+              "address": "bc1qpscgxr0ahs9llz35xaqvcfct5sql8tfe4fhwrk",
+              "sats": 235226
+            },
+            {
+              "script": "0014737a2845e8f9604940979f72cbe28248e9ceb6d5",
+              "address": "bc1qwdazs30gl9syjsyhnaevhc5zfr5uadk4t4882v",
+              "sats": 221115
+            },
+            {
+              "script": "001467bacb9cc23281fdaa90d4333ca8ce7de8719dc7",
+              "address": "bc1qv7avh8xzx2qlm25s6sene2xw0h58r8w8u323d7",
+              "sats": 201815
+            },
+            {
+              "script": "0014b784302424af21e719d0e418f072ae538e936afe",
+              "address": "bc1qk7zrqfpy4us7wxwsusv0qu4w2w8fx6h7nh3g8l",
+              "sats": 197697
+            },
+            {
+              "script": "001431b413640c834f85e9b13f9d176bcdc7b947f0fb",
+              "address": "bc1qxx6pxeqvsd8ct6d387w3w67dc7u50u8mpktsp9",
+              "sats": 194848
+            },
+            {
+              "script": "00140e875fde841f8167440cfe64f4331061361a71bd",
+              "address": "bc1qp6r4lh5yr7qkw3qvlej0gvcsvymp5udazqtedp",
+              "sats": 172554
+            },
+            {
+              "script": "00148fde0f6addbe67adc6756fbadb4015d9b6ce2c93",
+              "address": "bc1q3l0q76kahen6m3n4d7adksq4mxmvutyndqd5f9",
+              "sats": 157348
+            },
+            {
+              "script": "0014d6e173182e89b5c6d55be1e53e89338e688c65bf",
+              "address": "bc1q6mshxxpw3x6ud42mu8jnazfn3e5gcedlff4fme",
+              "sats": 114521
+            },
+            {
+              "script": "0014ef843a1f4bb5d1c03000741ba5f1f1487aec61b9",
+              "address": "bc1qa7zr586tkhguqvqqwsd6tu03fpawccdehvgdle",
+              "sats": 72230
+            },
+            {
+              "script": "00143364a3d2c8e009d6af7efef51b62fc6e9bca56f1",
+              "address": "bc1qxdj285kguqyadtm7lm63kchud6du54h3nlg0wv",
+              "sats": 67874
+            },
+            {
+              "script": "001421836a0a9ceab43ffd99337099138377aab7f45d",
+              "address": "bc1qyxpk5z5ua26rllvexdcfjyurw74t0aza3v5dgc",
+              "sats": 46881
+            },
+            {
+              "script": "0014e2950f259a9e7e1ff9e10b4f100025be792dc422",
+              "address": "bc1qu22s7fv6nelpl70ppd83qqp9heujm3pz5t3ca4",
+              "sats": 24505
+            },
+            {
+              "script": "0014a7cec335ba48189d045cd595cf0795405d708019",
+              "address": "bc1q5l8vxdd6fqvf6pzu6k2u7pu4gpwhpqqet8xljn",
+              "sats": 20233
+            },
+            {
+              "script": "76a9147f4169aa611bb634e873b9edd137a831ec1df0f988ac",
+              "address": "1CbsBKavumRd5SvSDDgXJse2APauQ4ZzHt",
+              "sats": 9248
+            },
+            {
+              "script": "00148d1cd8a1452f61321b88d8579cc7f459901c1f9f",
+              "address": "bc1q35wd3g299asnyxugmptee3l5txgpc8ulzwwdc5",
+              "sats": 5468
+            },
+            {
+              "script": "76a91407b37f03c879f3c6c128b4fc72b8b9d7d96c355688ac",
+              "address": "1hikxLTTXHq4yzXbgNTuNj61qYqsRAUV3",
+              "sats": 1796
+            },
+            {
+              "script": "76a914db49dfe0bfd83af844405175eabaea46161bdd4e88ac",
+              "address": "1LzVUuMjmqGpGVm11m45w7LPchZVq7ReTj",
+              "sats": 1372
+            },
+            {
+              "script": "00148fde0f6addbe67adc6756fbadb4015d9b6ce2c93",
+              "address": "bc1q3l0q76kahen6m3n4d7adksq4mxmvutyndqd5f9",
+              "sats": 2754
+            },
+            {
+              "script": "6a24aa21a9edd37f8d920a3af513e095c038b011652163ab6757ac095f454fc56a1f9b8a5326",
+              "address": null,
+              "sats": 0
+            }
+          ],
+          "totalSats": 312537834,
+          "positiveScripts": 53,
+          "largestRecipientShare": 0.23883365429607475,
+          "txid": "3db8c0ddccdd12ac4a062877595959b4c819685ccbf2c146ddae6ce442a6efe7",
+          "transactionUrl": "https://mempool.guide/api/tx/3db8c0ddccdd12ac4a062877595959b4c819685ccbf2c146ddae6ce442a6efe7",
+          "status": "explorer-checked"
+        }
+      ],
+      "sourceUpdatedAt": "2026-09-16T16:15:22.817Z",
+      "networkSample": 2016,
+      "characteristics": {
+        "blocks": 30,
+        "transactions": {
+          "observations": 30,
+          "average": 125.66666666666667
+        },
+        "sizeBytes": {
+          "observations": 30,
+          "average": 47977.63333333333
+        },
+        "weight": {
+          "observations": 30,
+          "average": 128905.73333333334
+        },
+        "coinbaseOnly": {
+          "observations": 30,
+          "count": 0,
+          "share": 0
+        },
+        "recipients": {
+          "observations": 30,
+          "average": 37.93333333333333,
+          "single": 1,
+          "multiple": 29
+        }
+      },
+      "availableRecent": 24
+    },
+    {
+      "id": "explorer:quainetwork",
+      "name": "Quai Network",
+      "examples": [
+        {
+          "height": 972381,
+          "hash": "00000000000000000b0e545998d5a0426520438e1068fe36e5a8cd7b8eea13a7",
+          "blockUrl": "https://mempool.guide/block/00000000000000000b0e545998d5a0426520438e1068fe36e5a8cd7b8eea13a7",
+          "outputs": [
+            {
+              "script": "0014701acd31a4083e923c976f509e309865fffe205b",
+              "address": "bc1qwqdv6vdypqlfy0yhdagfuvycvhllugzmg7zjn9",
+              "sats": 312642409
+            },
+            {
+              "script": "6a24aa21a9edf434b56c4effa31fe5a22d4d1afd618ef3f4271dc25b2b02eaf96cdc50405ce2",
+              "address": null,
+              "sats": 0
+            }
+          ],
+          "totalSats": 312642409,
+          "positiveScripts": 1,
+          "largestRecipientShare": 1,
+          "txid": "9778698fc37fadec3d4956a0574e434186c127406164eb86b92de969975112a5",
+          "transactionUrl": "https://mempool.guide/api/tx/9778698fc37fadec3d4956a0574e434186c127406164eb86b92de969975112a5",
+          "status": "explorer-checked"
+        },
+        {
+          "height": 970438,
+          "hash": "0000000000000002d686f952e730a0b76410a15ca9cd7935fcb70813aee7531b",
+          "blockUrl": "https://mempool.guide/block/0000000000000002d686f952e730a0b76410a15ca9cd7935fcb70813aee7531b",
+          "outputs": [
+            {
+              "script": "0014701acd31a4083e923c976f509e309865fffe205b",
+              "address": "bc1qwqdv6vdypqlfy0yhdagfuvycvhllugzmg7zjn9",
+              "sats": 312631933
+            },
+            {
+              "script": "6a24aa21a9edad4cbcd733dfbba2efd55d2c32786e2632c28a76bf8049b5723497bf5e00e679",
+              "address": null,
+              "sats": 0
+            }
+          ],
+          "totalSats": 312631933,
+          "positiveScripts": 1,
+          "largestRecipientShare": 1,
+          "txid": "6fa22f2c49b01e3f81cd67afe205dc5ec8e8f9896494a59e4ab4a86e0dcda04d",
+          "transactionUrl": "https://mempool.guide/api/tx/6fa22f2c49b01e3f81cd67afe205dc5ec8e8f9896494a59e4ab4a86e0dcda04d",
+          "status": "explorer-checked"
+        }
+      ],
+      "sourceUpdatedAt": "2026-09-16T16:15:22.817Z",
+      "networkSample": 2016,
+      "characteristics": {
+        "blocks": 21,
+        "transactions": {
+          "observations": 21,
+          "average": 126.38095238095238
+        },
+        "sizeBytes": {
+          "observations": 21,
+          "average": 47619.28571428572
+        },
+        "weight": {
+          "observations": 21,
+          "average": 119745.14285714286
+        },
+        "coinbaseOnly": {
+          "observations": 21,
+          "count": 0,
+          "share": 0
+        },
+        "recipients": {
+          "observations": 21,
+          "average": 1,
+          "single": 21,
+          "multiple": 0
+        }
+      },
+      "availableRecent": 21
+    },
+    {
+      "id": "explorer:pyblock",
+      "name": "PyBLOCK",
+      "examples": [
+        {
+          "height": 972370,
+          "hash": "000000000000000093ddbc1cb2fa292c521ecad1a9060109acc7e96e84cbbadd",
+          "blockUrl": "https://mempool.guide/block/000000000000000093ddbc1cb2fa292c521ecad1a9060109acc7e96e84cbbadd",
+          "outputs": [
+            {
+              "script": "76a914f5e1fcc56c4c94489f9b40d3a9a20bddcc932dd088ac",
+              "address": "1PR7Gstb7dQ5kmhBpLNLpHY2Kkyh6aXBJG",
+              "sats": 306511015
+            },
+            {
+              "script": "0014ca9f885b1053431dc661ae84c07809257d5ac170",
+              "address": "bc1qe20cskcs2dp3m3np46zvq7qfy4744stslw8zmv",
+              "sats": 3127663
+            },
+            {
+              "script": "76a914fbf2b18fd92c985f8b26a309ba1a2accd705e19288ac",
+              "address": "1PyBLoCKdiaC46vD9CWcmxa3ey2VzSc5Q2",
+              "sats": 3127663
+            },
+            {
+              "script": "6a24aa21a9edccb4dbe0ff49674d9e20ecdd2dd167dc19d6cc2b00e6e98b2ee44171d6eb1c8c",
+              "address": null,
+              "sats": 0
+            }
+          ],
+          "totalSats": 312766341,
+          "positiveScripts": 3,
+          "largestRecipientShare": 0.9800000026217655,
+          "txid": "0e36c91fe346dc2b2e452fcf0d0fde168735eb47d156b6a399907159e47164c6",
+          "transactionUrl": "https://mempool.guide/api/tx/0e36c91fe346dc2b2e452fcf0d0fde168735eb47d156b6a399907159e47164c6",
+          "status": "explorer-checked"
+        },
+        {
+          "height": 972147,
+          "hash": "000000000000000094f2a211a58425e146f484c2dd4dfc7f7ca6a465a687d7b5",
+          "blockUrl": "https://mempool.guide/block/000000000000000094f2a211a58425e146f484c2dd4dfc7f7ca6a465a687d7b5",
+          "outputs": [
+            {
+              "script": "6a264348495250315eb44d9bb59c2f058c5cdb6e410e20813ebe1bba80b75bfdaedb002373cfec39",
+              "address": null,
+              "sats": 0
+            },
+            {
+              "script": "00141f0a6fd28c3d1619d1dc4b0499d71c87517bc9a1",
+              "address": "bc1qru9xl55v85tpn5wufvzfn4cusaghhjdpcwyntn",
+              "sats": 3125123
+            },
+            {
+              "script": "001442a4679ff01b816fd044127d07cfcde9c1e5103a",
+              "address": "bc1qg2jx08lsrwqkl5zyzf7s0n7da8q72yp6nqswcq",
+              "sats": 7133567
+            },
+            {
+              "script": "001441a4893b99d09b220d1f2ab4be641712d7319b64",
+              "address": "bc1qgxjgjwue6zdjyrgl926tueqhzttnrxmyke80da",
+              "sats": 7346152
+            },
+            {
+              "script": "76a9140a6cce887100bcd592403daf5638480788a3a0f788ac",
+              "address": "1x86wpb3UfnLK6sHSVNFTHyKuNLGhtVGx",
+              "sats": 3520605
+            },
+            {
+              "script": "0014e4cb93fe01ef3f8bf9ff6296d818ca083c214385",
+              "address": "bc1qun9e8lspaulch70lv2tdsxx2pq7zzsu9q23ha8",
+              "sats": 7170424
+            },
+            {
+              "script": "76a9142017464a4535ac3d03408a053db774f97a9eb0bc88ac",
+              "address": "13vgWHUibAb4noeLBPhWejikQLNfhhGMWr",
+              "sats": 8932081
+            },
+            {
+              "script": "0014d921b5b9242cd0fd22e99c0d4271d6456ee8705d",
+              "address": "bc1qmysmtwfy9ng06ghfnsx5yuwkg4hwsuzaql6svj",
+              "sats": 7424209
+            },
+            {
+              "script": "0014d0305784a4960022e88089adf7424d823093cb90",
+              "address": "bc1q6qc90p9yjcqz96yq3xklwsjdsgcf8juspjddhc",
+              "sats": 7270043
+            },
+            {
+              "script": "001454be7562f4961aae71d9080053abcdab6f5fcd5f",
+              "address": "bc1q2jl82ch5jcd2uuwepqq9827d4dh4ln2l705m40",
+              "sats": 7484698
+            },
+            {
+              "script": "0014269023a8c732910bd096c4f9d1722fecfadf225e",
+              "address": "bc1qy6gz82x8x2gsh5ykcnuazu30anad7gj7aljn86",
+              "sats": 4221614
+            },
+            {
+              "script": "00142444292a235bd69b474c8f3e7b351f421cf3da1a",
+              "address": "bc1qy3zzj23rt0tfk36v3ul8kdglggw08ks6gp3na2",
+              "sats": 7140331
+            },
+            {
+              "script": "76a914ed689cb3d047d177f52788ea4ed1638c95056e9f88ac",
+              "address": "1NeJU3Pkc2PZTk8vmGfq8KbzzP2bVpBxyR",
+              "sats": 5790621
+            },
+            {
+              "script": "001454c78401253d5ec5821a91dfdc229f3a86ca92ea",
+              "address": "bc1q2nrcgqf9840vtqs6j80acg5l82rv4yh2rdl7uu",
+              "sats": 3709947
+            },
+            {
+              "script": "0014876d2bb801e67454bdff56e83a13e87ff5b89548",
+              "address": "bc1qsakjhwqpue69f00l2m5r5ylg0l6m392gwyvh2l",
+              "sats": 7283209
+            },
+            {
+              "script": "00146640b821fa8e17a2e018054ef55b2fab976e6c20",
+              "address": "bc1qveqtsg063ct69cqcq4802ke04wtkumpqlyzvzc",
+              "sats": 3633133
+            },
+            {
+              "script": "0014557a931099471f032e5dcfb7536c2ccc9e339130",
+              "address": "bc1q24afxyyegu0sxtjae7m4xmpvej0r8yfsvd8err",
+              "sats": 4128250
+            },
+            {
+              "script": "76a91404dd56f9b73e818b38b918c93c0dd453b5eb0e7488ac",
+              "address": "1Siriusi7F2MW1qCrR2FrGN8S4vWVx1N1",
+              "sats": 7504529
+            },
+            {
+              "script": "0014812fc736cd9d771c8bfda84f4a862753e35cba45",
+              "address": "bc1qsyhuwdkdn4m3ezla4p854p382034ewj9m0nl7j",
+              "sats": 18773611
+            },
+            {
+              "script": "0014d537d061effc7d1d364753b7c45774e6e3c2c693",
+              "address": "bc1q65maqc00l3736dj82wmug4m5um3u935nrgj20s",
+              "sats": 7210258
+            },
+            {
+              "script": "00145d8ef0eefbf20b18870edd0e6be125fd767939ee",
+              "address": "bc1qtk80pmhm7g933pcwm58xhcf9l4m8jw0w8qg5pm",
+              "sats": 7485646
+            },
+            {
+              "script": "00143f5f0cc2b19f4496dacd4ec8d72c555fff0dd0e0",
+              "address": "bc1q8a0ses43nazfdkkdfmydwtz4tllsm58q8npp39",
+              "sats": 6672352
+            },
+            {
+              "script": "001422d481bdb74000afc408e813f573921c9aa96131",
+              "address": "bc1qyt2gr0dhgqq2l3qgaqfl2uujrjd2jcf37g0nlz",
+              "sats": 7073696
+            },
+            {
+              "script": "00145d52ac0e11aa5ea5ff8a0832286bd2f6cf642db3",
+              "address": "bc1qt4f2crs34f02tlu2pqezs67j7m8kgtdnkj80rt",
+              "sats": 4101713
+            },
+            {
+              "script": "001462bb2fa682bb0fa9efe026c4b41eccde0cd9c4b7",
+              "address": "bc1qv2ajlf5zhv86nmlqymztg8kvmcxdn39hvl458q",
+              "sats": 4593127
+            },
+            {
+              "script": "0014307f09f992590d0aa2ca74567ec814285f417cea",
+              "address": "bc1qxplsn7vjtyxs4gk2w3t8ajq59p05zl8227svgu",
+              "sats": 10589801
+            },
+            {
+              "script": "76a914dd9f57f897d12aaebbefe605f2159752c9c5f25588ac",
+              "address": "1MCqDnW7CU4kPLt5FqQT28fDw6U9uHAhFo",
+              "sats": 7083796
+            },
+            {
+              "script": "00149ae3fb72d73db4e2e96d1e972a47e3e0a0c1d2b6",
+              "address": "bc1qnt3lkukh8k6w96tdr6tj53lruzsvr54kkzr6f3",
+              "sats": 3658895
+            },
+            {
+              "script": "5120773bdcfed0f6e19c17666b3a57c10d72b31fbebc59030091a33390092a62baaa",
+              "address": "bc1pwuaaelks7msec9mxdva90sgdw2e3l04utypspydrxwgqj2nzh24qnm5wtl",
+              "sats": 4145581
+            },
+            {
+              "script": "0014f14f8b1906a364a49480b3cf29170fcec14022bd",
+              "address": "bc1q798ckxgx5dj2f9yqk08jj9c0emq5qg4arfl8rc",
+              "sats": 6580919
+            },
+            {
+              "script": "001449af17cb4e41ceddf5848d5ca3a6b17e47b3dc85",
+              "address": "bc1qfxh30j6wg88dmavy34w28f430erm8hy9zjqw7k",
+              "sats": 2758164
+            },
+            {
+              "script": "76a914f1db6e5dd0f2da6613ca6130aca7c4139e84b40888ac",
+              "address": "1P3piaD7i4ifeBfG9Q3fJ7fgyM6xH4KZ1a",
+              "sats": 7454555
+            },
+            {
+              "script": "001437da82506dcb3841e43e70b42854b13e9712d454",
+              "address": "bc1qxldgy5rdevuyrep7wz6zs49386t394z5x4tc8w",
+              "sats": 3189157
+            },
+            {
+              "script": "001457ef8f52f42c465bb9d3ec2642f65ac3d9f6d65b",
+              "address": "bc1q2lhc75h593r9hwwnasny9aj6c0vld4jmrm907a",
+              "sats": 4116613
+            },
+            {
+              "script": "0014835061c02a3eb81cf34dff40e1ac3a3d80e6840f",
+              "address": "bc1qsdgxrsp286upeu6dlaqwrtp68kqwdpq05966zd",
+              "sats": 4103751
+            },
+            {
+              "script": "00147141bfb9cb921614966225a21e467359105ac3e6",
+              "address": "bc1qw9qmlwwtjgtpf9nzyk3pu3nntyg94slxdd4wgy",
+              "sats": 3114781
+            },
+            {
+              "script": "00147538e70717d3a3b2cee81c56ddec743f7729d680",
+              "address": "bc1qw5uwwpch6w3m9nhgr3tdmmr58amjn45q6lteum",
+              "sats": 9558527
+            },
+            {
+              "script": "76a91407a4def67a8e26fd81fd87834a23d5ac1696ec3488ac",
+              "address": "1hREn5JH3apsPriSCfQ3zajc9DDrasd5o",
+              "sats": 4191348
+            },
+            {
+              "script": "001451504e00ce8e5c0a5042434fa8ae2e3c54c0e0b6",
+              "address": "bc1q29gyuqxw3ewq55zzgd863t3w832vpc9kpghvhh",
+              "sats": 4747264
+            },
+            {
+              "script": "76a91407e83d29ad9c6caf9b42f682efa9a18e33001b2388ac",
+              "address": "1iowayBqcywpEoxvo9P4LC8ehf62EzMCp",
+              "sats": 7367977
+            },
+            {
+              "script": "0014b632806ab4a38be60befcef80a6afd58993d5c66",
+              "address": "bc1qkcegq6455w97vzl0emuq56hatzvn6hrxvvea2t",
+              "sats": 5798857
+            },
+            {
+              "script": "76a9144d34d6b79cccfce318a7e082d19b3af316c6338a88ac",
+              "address": "183EL57XJuxa3FHdR5JosQB1xj9Ze1nkzM",
+              "sats": 8578598
+            },
+            {
+              "script": "76a914fa10f5ab131cb1cfd3cdf4fdcad2122a74535ac488ac",
+              "address": "1PoEFLP8WaPKQr6vd8bCZS54GJGNwrBBcy",
+              "sats": 3525940
+            },
+            {
+              "script": "00147100ef889b79aac8ead0406f82ff33476814ce23",
+              "address": "bc1qwyqwlzym0x4v36ksgphc9lenga5pfn3rwrjpcw",
+              "sats": 3861254
+            },
+            {
+              "script": "0014d8bd515f948362be4ba0c3b35d0ea551e170d0dd",
+              "address": "bc1qmz74zhu5sd3tujaqcwe46r4928shp5xaaqmvnl",
+              "sats": 3334896
+            },
+            {
+              "script": "76a91438cc3ffd49d663358ad1976e6283043d8844730188ac",
+              "address": "16BKXH9cgfxoxa7UCW3U83roBBb45beyEm",
+              "sats": 3174492
+            },
+            {
+              "script": "001451e2d83b1299e50a1527b0a77f87f32c7ae11be7",
+              "address": "bc1q283dswcjn8js59f8kznhlpln93awzxl87dmth3",
+              "sats": 3572658
+            },
+            {
+              "script": "76a914ee57c940d246e9a54f97ac3df031f20bd45f53e288ac",
+              "address": "1NjEz9MFKVZW5gRWUcjLWDBpk2KMghoK7w",
+              "sats": 2993133
+            },
+            {
+              "script": "001480f64649f7802f6f1027dde4fd1d90319bf2d05b",
+              "address": "bc1qsrmyvj0hsqhk7yp8mhj068vsxxdl95zmtkgqgc",
+              "sats": 3978587
+            },
+            {
+              "script": "0014f98f6f6be6eefe1e23c9f9278c3c0af96dcaf8b2",
+              "address": "bc1qlx8k76lxamlpug7flyncc0q2l9ku479jvj4np4",
+              "sats": 3103877
+            },
+            {
+              "script": "0014d16420b1d37b1e928f355ea926852151302a9cba",
+              "address": "bc1q69jzpvwn0v0f9re4t65jdpfp2ycz48965wl3gk",
+              "sats": 4159112
+            },
+            {
+              "script": "001403c50673a22ad3c8aa5b6a0f1aa44f691e34d114",
+              "address": "bc1qq0zsvuaz9tfu32jmdg834fz0dy0rf5g56ay47a",
+              "sats": 6709651
+            },
+            {
+              "script": "0014279b424e8ff9cad9bebf455a65d3834778bbc0f6",
+              "address": "bc1qy7d5yn50l89dn04lg4dxt5urgauths8kmyrpdq",
+              "sats": 4271025
+            },
+            {
+              "script": "001424652cabb465b6c497654aad48cbedead867035a",
+              "address": "bc1qy3jje2a5vkmvf9m9f2k53jldatvxwq66qge9xr",
+              "sats": 3350646
+            },
+            {
+              "script": "0014584d342575f50a35d9484b0155bd580cfa9dfe4f",
+              "address": "bc1qtpxngft4759rtk2gfvq4t02cpnafmlj0mhfdgr",
+              "sats": 3152880
+            },
+            {
+              "script": "0014d665b190d9a477f1397fa26f98a61b80c2af4940",
+              "address": "bc1q6ejmryxe53mlzwtl5fhe3fsmsrp27j2qh6609v",
+              "sats": 4462736
+            },
+            {
+              "script": "76a914fbf2b18fd92c985f8b26a309ba1a2accd705e19288ac",
+              "address": "1PyBLoCKdiaC46vD9CWcmxa3ey2VzSc5Q2",
+              "sats": 3093896
+            },
+            {
+              "script": "6a24aa21a9ed4249461a387719c726a84ce25d76e95db2baf9b95afc3cf1230ee90044ba75cf",
+              "address": null,
+              "sats": 0
+            }
+          ],
+          "totalSats": 312512306,
+          "positiveScripts": 56,
+          "largestRecipientShare": 0.060073189565853446,
+          "txid": "ea1ffee63ff0b1d584476ba4e50c2419cf73469bad17199e616996846e52b7dc",
+          "transactionUrl": "https://mempool.guide/api/tx/ea1ffee63ff0b1d584476ba4e50c2419cf73469bad17199e616996846e52b7dc",
+          "status": "explorer-checked"
+        }
+      ],
+      "sourceUpdatedAt": "2026-09-16T16:15:22.817Z",
+      "networkSample": 2016,
+      "characteristics": {
+        "blocks": 20,
+        "transactions": {
+          "observations": 20,
+          "average": 129.7
+        },
+        "sizeBytes": {
+          "observations": 20,
+          "average": 49985.15
+        },
+        "weight": {
+          "observations": 20,
+          "average": 129504.65
+        },
+        "coinbaseOnly": {
+          "observations": 20,
+          "count": 1,
+          "share": 0.05
+        },
+        "recipients": {
+          "observations": 20,
+          "average": 9.95,
+          "single": 0,
+          "multiple": 20
+        }
+      },
+      "availableRecent": 20
+    },
+    {
+      "id": "explorer:miningdutch",
+      "name": "Mining-Dutch",
+      "examples": [
+        {
+          "height": 972255,
+          "hash": "0000000000000000320c2d73b5155f96d47193b9a4e1cf30290a6b4d3ecb5b63",
+          "blockUrl": "https://mempool.guide/block/0000000000000000320c2d73b5155f96d47193b9a4e1cf30290a6b4d3ecb5b63",
+          "outputs": [
+            {
+              "script": "76a91475acb3863f7574f1f073dc9b407c95802ca40dc988ac",
+              "address": "1BjCwwSMJ718AHs478XHY5QjkYsYoCFTuU",
+              "sats": 312569841
+            },
+            {
+              "script": "6a24aa21a9edb5d12c50223205ef2f501d533c6fcf7b032cee47272dbf0b74faa1663b46731d",
+              "address": null,
+              "sats": 0
+            }
+          ],
+          "totalSats": 312569841,
+          "positiveScripts": 1,
+          "largestRecipientShare": 1,
+          "txid": "3f182c9d0675e4bc539be2b1a7c530aa1179af155ddeae0878e9f494195cf304",
+          "transactionUrl": "https://mempool.guide/api/tx/3f182c9d0675e4bc539be2b1a7c530aa1179af155ddeae0878e9f494195cf304",
+          "status": "explorer-checked"
+        },
+        {
+          "height": 970785,
+          "hash": "00000000000000014c6d3f9df929a74f5f7cd9707448ada4551dd0deb5747dc7",
+          "blockUrl": "https://mempool.guide/block/00000000000000014c6d3f9df929a74f5f7cd9707448ada4551dd0deb5747dc7",
+          "outputs": [
+            {
+              "script": "76a91475acb3863f7574f1f073dc9b407c95802ca40dc988ac",
+              "address": "1BjCwwSMJ718AHs478XHY5QjkYsYoCFTuU",
+              "sats": 312615598
+            },
+            {
+              "script": "6a24aa21a9edb4f91dc924f41215f50faa9ae442c9690fb69ee4fb8cf6e95ec0a6b778cef19d",
+              "address": null,
+              "sats": 0
+            }
+          ],
+          "totalSats": 312615598,
+          "positiveScripts": 1,
+          "largestRecipientShare": 1,
+          "txid": "1ef6beba9893dc1b4a36fdb3695883179234899cf3a61e717d3b7a93ca4bef54",
+          "transactionUrl": "https://mempool.guide/api/tx/1ef6beba9893dc1b4a36fdb3695883179234899cf3a61e717d3b7a93ca4bef54",
+          "status": "explorer-checked"
+        }
+      ],
+      "sourceUpdatedAt": "2026-09-16T16:15:22.817Z",
+      "networkSample": 2016,
+      "characteristics": {
+        "blocks": 18,
+        "transactions": {
+          "observations": 18,
+          "average": 146.61111111111111
+        },
+        "sizeBytes": {
+          "observations": 18,
+          "average": 55145.38888888889
+        },
+        "weight": {
+          "observations": 18,
+          "average": 146628.38888888888
+        },
+        "coinbaseOnly": {
+          "observations": 18,
+          "count": 0,
+          "share": 0
+        },
+        "recipients": {
+          "observations": 18,
+          "average": 1,
+          "single": 18,
+          "multiple": 0
+        }
+      },
+      "availableRecent": 18
+    }
+  ],
+  "finishedAt": "2026-09-16T16:15:54.814Z"
+}

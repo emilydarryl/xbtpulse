@@ -4,6 +4,8 @@ Prepared September 14, 2026. Read this before continuing work from another compu
 
 ## September 16 endpoint observation pilot
 
+Follow-up added `/chain-evidence.json` and claim/observation/question sections to the pilot page: 20 explorer-checked coinbase examples across the ten groups, deliberate min/max-recipient selection, positive-output concentration, explicit same-source limits and operator evidence requests. Bitcoin Xor's dated advertised pooled fee was updated to 2% from 5%; no scores or attribution mappings changed. Run `node scripts/inspect-chain-evidence.mjs` manually to refresh after reviewing scope; no schedule is installed.
+
 Added `/endpoint-checks` and static `/endpoint-report.json`, linked from Tools and the homepage. Two bounded rounds tested seven confirmed endpoints among a frozen top ten: six supplied short work commitments, PyBLOCK's LOTTO endpoint had connection errors, and three groups lacked sufficient endpoint/mapping evidence. No full coinbase payouts were decoded, so no proxy comparison was established. No scores, telemetry semantics, credentials or chain attribution changed. Operators are invited through `/contribute`; no messages were sent. See [method and findings](endpoint-inspection.md). There is no automatic probe schedule. Read `/opt/xbtpulse/DEPLOYED_COMMIT` for the current deployed revision.
 
 ## September 15 mission and voice

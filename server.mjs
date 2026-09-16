@@ -89,6 +89,8 @@ const files = {
   "/endpoint-checks": "endpoint-checks.html",
   "/endpoint-checks.js": "endpoint-checks.js",
   "/endpoint-report.json": "endpoint-report.json",
+  "/chain-evidence.json": "chain-evidence.json",
+  "/chain-evidence.js": "chain-evidence.js",
   "/app.js": "app.js",
   "/telemetry-context.js": "telemetry-context.js",
   "/style.css": "style.css",

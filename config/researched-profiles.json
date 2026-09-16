@@ -40,13 +40,13 @@
   "explorer:bitcoinxor": {
     "provenance": "public-research",
     "reviewedAt": "2026-09-13",
-    "fee": "1% own-template DATUM; 5% pool-built-template endpoint (homepage).",
+    "fee": "1% own-template DATUM; 2% pool-built-template endpoint (homepage checked September 16, 2026).",
     "payout": "Shared TIDES-style rewards paid directly through coinbase; legacy solo service also listed.",
     "protocols": "DATUM and a pooled Stratum endpoint; legacy Stratum V1 solo is described as being wound down.",
     "template": "Own node and gateway for DATUM; pool creates templates on its pooled Stratum endpoint.",
     "website": "https://xorpool.com/",
     "setup": "https://xorpool.com/datum",
-    "researchNotes": "The homepage lists 5% for the pool-built-template endpoint, while the DATUM guide also displays a general 1% pool fee. Confirm the endpoint-specific total before connecting.",
+    "researchNotes": "Fee rechecked September 16, 2026: homepage now lists 2% for the pool-built-template endpoint, replacing our older 5% snapshot. The website says historical gateway fees blend through the TIDES work window; individual block fee outputs may not equal the current advertised rate. Other profile fields retain their original review date.",
     "sources": [
       {
         "title": "Bitcoin Xor endpoint-specific fee schedule",
