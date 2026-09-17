@@ -1514,3 +1514,9 @@ dialog::backdrop {
 #shared-address-watch { scroll-margin-top: 80px; }
 .shared-watch-results { max-height: 650px; overflow: auto; }
 .shared-watch-results summary { cursor: pointer; }
+
+.distribution-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.distribution-controls button[aria-pressed="true"] { background: #fff0d7; border-color: #ef8b00; color: #713300; }
+.tag-text { overflow-wrap: anywhere; word-break: break-word; min-width: 0; white-space: normal; }
+#tag-breakdown { padding: 0 24px 16px; }
+#tag-breakdown summary { cursor: pointer; }

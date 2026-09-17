@@ -110,9 +110,9 @@
             <div class="panel-heading">
               <div>
                 <p class="eyebrow">BLOCK PRODUCTION</p>
-                <h2>Where blocks come from</h2>
+                <h2 id="distribution-title">Where blocks come from</h2>
               </div>
-              <span class="pill">Largest first · clockwise</span>
+              <div class="distribution-controls"><div role="group" aria-label="Distribution grouping"><button type="button" class="quiet-button" id="group-pools" aria-pressed="true">Pools</button><button type="button" class="quiet-button" id="group-tags" aria-pressed="false">Original tags</button></div><span class="pill">Largest first · clockwise</span></div>
             </div>
             <div class="concentration-body">
               <div class="donut-wrap">
@@ -125,7 +125,8 @@
               </div>
               <div id="legend" class="legend"></div>
             </div>
-            <div class="panel-foot">
+            <div id="tag-breakdown" hidden></div>
+            <div class="panel-foot"><p id="distribution-note">Pool attribution groups blocks using explorer labels and documented evidence.</p><a href="/endpoint-checks#shared-address-watch">Explore shared payout addresses →</a><br>
               Auto-refreshes every 30 seconds. Mining share is estimated from
               blocks in the selected observation window.
             </div>

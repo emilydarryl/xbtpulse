@@ -127,3 +127,7 @@ Pool-profile Recent attributed blocks and Coinbase payout recipients use scrolla
 ### Researched profiles before operator onboarding
 
 Public website research can appear in the directory before a pool applies. OmegaPool was added on September 15, 2026 with sourced, endpoint-specific fees, payout terms and template-role claims. These profiles are marked researched public data, carry no telemetry approval or score, and leave block activity unlinked rather than inferring attribution from names or addresses. Fee terms are dated snapshots, not live feeds. Operator submission and evidence review remain separate.
+
+## Pools / Original tags distribution
+
+The homepage chart has a Pools / Original tags switch. Exact recorded coinbase tag strings are counted over the full selected window (not the 24-block feed); missing tags remain in the denominator. All tags can be expanded below the chart. Raw tag variations can include changing coinbase data and are not distinct pool identities. The switch changes only the chart/legend; pool metrics, attribution, rankings and alerts remain unchanged. A link leads to shared-address evidence. Sample mode uses illustrative tags.

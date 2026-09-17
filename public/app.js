@@ -75,6 +75,7 @@ const pct = (n) => `${(Number(n) * 100).toFixed(1)}%`;
 const short = (s) => (s.length > 30 ? `${s.slice(0, 16)}…${s.slice(-9)}` : s);
 let data = null,
   demo = false,
+  distributionMode = "pools",
   requestId = 0;
 function sampleInterval(k, n) {
   const p = k / n,
@@ -125,6 +126,7 @@ function sampleData() {
       amount: 62.5 - i * 9.375,
       role: "Example recipient",
     })),
+    tags: [{id:"tag:Sample A",name:"Sample A",tag:"Sample A",blocks:90,share:90/144,unknown:false},{id:"tag:Sample B",name:"Sample B",tag:"Sample B",blocks:54,share:54/144,unknown:false}],
     telemetry: null,
     updatedAt: new Date().toISOString(),
     source: "Illustrative data",
@@ -137,7 +139,17 @@ function render() {
   if (!data) return;
   const pools = data.pools || [],
     blocks = data.blocks || [],
-    chart = chartGroups(pools);
+    tagMode = distributionMode === "tags",
+    groups = tagMode ? (data.tags || []) : pools,
+    chart = chartGroups(groups);
+  const chartColor = p => tagMode ? (p.unknown ? "#84919F" : p.id === "other" ? "#E2B526" : colors[groups.findIndex(g => g.id === p.id) % colors.length]) : poolColor(p);
+  $("#group-pools").setAttribute("aria-pressed", String(!tagMode));
+  $("#group-tags").setAttribute("aria-pressed", String(tagMode));
+  $("#distribution-title").textContent = tagMode ? "Original coinbase tags" : "Where blocks come from";
+  $("#distribution-note").textContent = tagMode ? "Exact recorded tag text across the full selected block window. Tags can change, be copied, or contain variable coinbase data; they are not separate pool identities. Pool statistics and alerts below still use attribution." : "Pool attribution groups blocks using explorer labels and documented evidence.";
+  $("#tag-breakdown").hidden = !tagMode;
+  const tagsOpen = $("#tag-breakdown details")?.open;
+  $("#tag-breakdown").innerHTML = tagMode ? `<details ${tagsOpen ? "open" : ""}><summary>All original tags (${groups.length})</summary><div class="table-scroll profile-activity-scroll"><table><thead><tr><th>Recorded tag</th><th>Blocks</th><th>Share</th></tr></thead><tbody>${groups.map(p=>`<tr><td class="tag-text">${escape(p.name)}</td><td>${p.blocks}</td><td>${pct(p.share)}</td></tr>`).join("")}</tbody></table></div></details>` : "";
   assignPoolColors(pools);
   $("#onboarding-cards").innerHTML = demo
     ? "<p>Return to network mode to see real participating operators.</p>"
@@ -189,21 +201,21 @@ function render() {
     ? `${data.source || "Observations"} · ${new Date(data.updatedAt).toLocaleString()}`
     : "Waiting for observations";
   let angle = 0;
-  $("#donut").style.background = pools.length
+  $("#donut").style.background = groups.length
     ? `conic-gradient(${chart
         .map((p, i) => {
           const start = angle;
           angle += p.share * 360;
           const edge = angle - Math.min(1, (angle - start) / 8);
-          return `${poolColor(p)} ${start}deg ${edge}deg, #fff ${edge}deg ${angle}deg`;
+          return `${chartColor(p)} ${start}deg ${edge}deg, #fff ${edge}deg ${angle}deg`;
         })
         .join(",")})`
     : "#e9eee5";
-  $("#legend").innerHTML = pools.length
+  $("#legend").innerHTML = groups.length
     ? chart
         .map(
           (p, i) =>
-            `<div class="legend-row"><i class="swatch" style="background:${poolColor(p)}"></i><span>${poolLink(p)}</span><strong>${pct(p.share)}</strong></div>`,
+            `<div class="legend-row"><i class="swatch" style="background:${chartColor(p)}"></i><span class="tag-text">${tagMode ? escape(p.id === "other" ? "Other recorded tags" : p.name) : poolLink(p)}</span><strong>${pct(p.share)}</strong></div>`,
         )
         .join("")
     : '<p class="small muted">Pool distribution will appear after blocks are indexed.</p>';
@@ -383,3 +395,7 @@ async function loadAddressDetails(address){const request=++addressRequest;const 
 for(const role of d.roles){try{const u=new URL(role.source);if(u.protocol!=='https:'||u.username||u.password)continue;const p=document.createElement('p'),a=document.createElement('a');a.href=u.href;a.textContent='Source for '+role.pool+' recipient role';a.target='_blank';a.rel='noopener noreferrer';p.append(a);document.querySelector('#recipient-sources').append(p);}catch{}}
 document.querySelector('#copy-recipient').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(address);document.querySelector('#copy-recipient-status').textContent='Copied.';}catch{document.querySelector('#copy-recipient-status').textContent='Select and copy the full address above.';}});
 }catch{if(request===addressRequest)root.innerHTML='<h3>Recipient details unavailable</h3><p>Close and reopen to retry.</p>';}}
+
+for (const mode of ["pools", "tags"]) {
+  document.querySelector("#group-"+mode).addEventListener("click",()=>{distributionMode=mode;render();});
+}
