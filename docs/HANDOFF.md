@@ -1,5 +1,9 @@
 # XBT Pulse — Codex handoff
 
+## September 17 layout cleanup
+
+Navigation prioritizes Pools, Compare and Network; secondary tools are under Explore. Profiles group block windows, characteristics, recent blocks and recipients into expandable public-evidence sections. Unassessed scorecards start collapsed; published ones start open. Outer detail state survives automatic profile refresh. Endpoint and chain-evidence pool cards are expandable. No measurements, ratings or attribution rules changed.
+
 ## September 17 public evidence first
 
 Pool profiles now lead with a public-evidence section above scores. It uses the existing refreshed 2,016-block API response, shows attribution and recipient coverage, and links up to 24 recent blocks with positive-recipient counts and the largest recipient's reward fraction. Repeated outputs to the same recipient are combined. Missing/malformed outputs stay unavailable, unlinked profiles are not treated as zero activity, and refresh failures remove stale summary content. No new network probes, operator submissions, score changes or database migrations are required. The explorer remains the upstream source; this is not independent-node verification or a payout fairness audit.

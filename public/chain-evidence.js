@@ -10,7 +10,7 @@ try{
  add(root,'p',`Explorer checks completed ${new Date(d.finishedAt).toLocaleString()}. These block observations were collected separately from the earlier endpoint snapshot.`);
  add(root,'p',d.method);
  for(const p of d.pools){
-  const card=add(root,'section');card.className='panel intake-panel';add(card,'h3',p.name);
+  const card=add(root,'details');card.className='panel intake-panel';add(card,'summary',p.name+' · claims, block evidence and open questions');
   const c=claims[p.id];
   add(card,'h4','Published claim');
   add(card,'p',c?c.text:'No current payout/template claim was verified in this follow-up. The explorer label alone does not establish an operator or service.');

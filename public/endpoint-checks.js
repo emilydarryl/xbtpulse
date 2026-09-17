@@ -14,7 +14,7 @@ try{
  add(summary,'p',decoded.length?`${d.matches.length} pairs shared payout scripts in the same sampling round. Such matches do not prove proxying; inspect the JSON evidence and connection scope.`:'Payout comparisons could not be established from these sampled jobs. No conclusion about proxying or independence follows.');
  const root=document.querySelector('#inspection-results');
  for(const p of pools){
-  const card=add(root,'section');card.className='panel intake-panel';
+  const card=add(root,'details');card.className='panel intake-panel';add(card,'summary',p.name+' · '+(p.runs.some(r=>r.jobs.length)?'Jobs observed':p.runs.length?'No jobs observed':'Not tested'));
   add(card,'p',`SNAPSHOT RANK ${p.rank} · ${p.blocks} attributed blocks · ${(p.share*100).toFixed(2)}% of observations`).className='eyebrow';
   const title=add(card,'h2');const link=add(title,'a',p.name);link.href='/pool?id='+encodeURIComponent(p.id);
   add(card,'p',p.scope);
