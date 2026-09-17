@@ -4,6 +4,10 @@
 
 Added sourced CONVOY and RIPTIDE fee, connection and template-role claims to existing profiles. Missing terms remain unfilled; variable RIPTIDE SV1 fees are a dated website-text observation. Lazarus source returned 403, so no new terms were inferred. See [coverage review](public-coverage-2026-09-17.md). No ratings, telemetry approvals or attribution mappings changed.
 
+## Homepage operator contributions placement
+
+Optional operator contributions now sit near the footer, below network tables and the block feed. Copy emphasizes public data, optional context/corrections/telemetry and no penalty for nonparticipation. Removed the Soveroot walkthrough and duplicate private-pool promotion; profiles remain available in search and contribution listings.
+
 ## Current plan — public data first (September 17)
 
 The owner wants XBT Pulse to remain useful without pool submissions. Prioritize automatically collected public block evidence, accurate sourced terms, clear comparisons and visible gaps. Operator telemetry adds scoped accepted-work evidence but is optional; non-participation is not a failing grade. Do not invest in running miners for broad pool testing now. Reserve controlled mining tests for a specific unresolved question.

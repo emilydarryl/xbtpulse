@@ -135,12 +135,6 @@ function emptyRow(n, text) {
 }
 function render() {
   if (!data) return;
-  const example = data.telemetry?.providers?.find(p => p.name === "soveroot");
-  $("#example-status").textContent = demo
-    ? "Sample mode is on. The example links open real observations; current reporting is not shown in sample mode."
-    : example
-      ? `${example.stale ? "Reporting delayed" : example.participationBadge === "Telemetry Contributor" ? "Telemetry reporting current" : "Reporting participation needs review"} · Last report: ${new Date(example.lastReport).toLocaleString()}.`
-      : "No Soveroot reports available in this dashboard window. The profile still explains the setup; missing reports do not prove downtime.";
   const pools = data.pools || [],
     blocks = data.blocks || [],
     chart = chartGroups(pools);
@@ -154,11 +148,7 @@ function render() {
               `<article class="onboarding-card"><p class="eyebrow">${p.poolType === "private" ? "PRIVATE POOL · NOT ACCEPTING MINERS" : p.poolType === "public" ? "PUBLIC POOL" : "POOL / GATEWAY"}</p><h3>${p.profileUrl ? `<a href="${escape(p.profileUrl)}">${escape(p.name)} ↗</a>` : escape(p.name)}</h3><p class="rating-badge ${p.status === "Telemetry Contributor" ? "contributor" : ""}">${escape(p.status)}</p><p class="small muted">Joined ${new Date(p.submittedAt).toLocaleDateString()}${p.lastReport ? "<br>Last report " + new Date(p.lastReport).toLocaleString() : ""}</p><p class="small">Rating: ${escape(p.ratingStatus)}</p></article>`,
           )
           .join("")
-      : "<p>No public onboarding listings yet. Public and private DATUM operators are welcome.</p>";
-  $("#private-pools").innerHTML =
-    !demo && data.privatePools?.length
-      ? `<h3>Participating private pool profiles</h3><p class="small muted">Not accepting miners. A listing is not a rating or proof of decentralization.</p>${data.privatePools.map((p) => `<p><a href="/pool?id=${encodeURIComponent(p.id)}">${escape(p.name)}</a> · Private pool</p>`).join("")}`
-      : "";
+      : "<p>No public contribution listings yet. Public and private operators can share details or corrections.</p>";
   $("#source-status").textContent = demo
     ? "Sample mode"
     : data.status === "live"
