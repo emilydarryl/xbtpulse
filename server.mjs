@@ -1,4 +1,5 @@
 import {characterize} from './lib/block-characteristics.mjs';
+import {profileChanges,shareChanges} from './lib/change-summary.mjs';
 import {addressDetails} from './lib/address-details.mjs';
 import {siteNavigation} from './lib/site-navigation.mjs';
 import {initializePoolHistory,capturePoolHistory,poolHistory} from './lib/pool-history.mjs';
@@ -92,6 +93,7 @@ const files = {
   "/chain-evidence.json": "chain-evidence.json",
   "/chain-evidence.js": "chain-evidence.js",
   "/public-evidence.js": "public-evidence.js",
+  "/change-summary.js": "change-summary.js",
   "/app.js": "app.js",
   "/telemetry-context.js": "telemetry-context.js",
   "/style.css": "style.css",
@@ -392,6 +394,7 @@ const server = http.createServer(async (req, res) => {
         changesStarted: store.get("changesStarted"),
         changes: changeFeed(store),
       };
+      body.summary={profiles:profileChanges(store,researchedProfiles,registry),shares:shareChanges(body.daily)};
       cache.set("trends", { time: Date.now(), body });
       return send(res, 200, body);
     }

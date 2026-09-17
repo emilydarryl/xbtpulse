@@ -20,6 +20,8 @@ The sample UI is explicitly illustrative. Live data starts only when `EXPLORER_A
 
 ## What is implemented
 
+- Homepage What changed summary surfaces substantive public profile updates and descriptive observed-share shifts from existing history, with profile evidence links, dates, minimum coverage and explicit limits. It remains live history when sample dashboard mode is selected.
+
 - Pool profiles lead with automatically collected public evidence before assessment scores: block coverage, payout-recipient patterns and up to 24 linked recent reward-concentration examples from the 2,016-block window. No operator feed is required. Repeated outputs to one recipient are combined; these observations do not establish template control or payout fairness.
 
 - [Public endpoint observations](https://xbtpulse.tech/endpoint-checks): a dated top-ten pilot, seven documented endpoints attempted in two rounds, with evidence limits and an operator submission invitation. Short work commitments are not decoded as payout transactions; no proxy verdict or score change is inferred. See [method and findings](docs/endpoint-inspection.md).

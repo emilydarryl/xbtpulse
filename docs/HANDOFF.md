@@ -1,5 +1,15 @@
 # XBT Pulse — Codex handoff
 
+## Current plan — public data first (September 17)
+
+The owner wants XBT Pulse to remain useful without pool submissions. Prioritize automatically collected public block evidence, accurate sourced terms, clear comparisons and visible gaps. Operator telemetry adds scoped accepted-work evidence but is optional; non-participation is not a failing grade. Do not invest in running miners for broad pool testing now. Reserve controlled mining tests for a specific unresolved question.
+
+Recent changes: public evidence leads pool profiles; block reward concentration and coverage are visible without a feed. Profiles group detailed tables into expandable sections, unassessed scores start collapsed, navigation prioritizes Pools / Compare / Network with secondary tools under Explore, and endpoint investigation cards are expandable.
+
+The homepage now surfaces existing history in a compact What changed summary: up to four substantive recorded profile changes from the last 30 days (fees, payout terms, protocols, template claims, assessment, attribution review or sources), plus two largest observed-share shifts of at least five percentage points between consecutive complete UTC days with at least 100 network blocks each. Initial baselines and telemetry freshness chatter are excluded. Current public-profile visibility/consent gates apply. Links lead to profile evidence and the existing Trends page; no new page, outreach or notification automation is created. Share changes are descriptive, not significance tests, hashrate measurements or misconduct alerts. No qualifying history is explicitly labeled. Public website terms are still dated reviews, not automatic live website monitoring.
+
+Next priorities: let this simpler site collect history, gather miner feedback, improve public-source coverage and corrections, and make existing evidence easier to compare. Avoid adding more tools or badges without a clear user need. Any future automated terms monitoring needs source validation and review before publishing claims. Check the live deployment marker for the current revision; historical rollout notes below are not current status.
+
 ## September 17 layout cleanup
 
 Navigation prioritizes Pools, Compare and Network; secondary tools are under Explore. Profiles group block windows, characteristics, recent blocks and recipients into expandable public-evidence sections. Unassessed scorecards start collapsed; published ones start open. Outer detail state survives automatic profile refresh. Endpoint and chain-evidence pool cards are expandable. No measurements, ratings or attribution rules changed.
