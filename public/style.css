@@ -1501,3 +1501,9 @@ dialog::backdrop {
 
 .block-report-hash { display:block; max-width:24rem; overflow-wrap:anywhere; white-space:normal; }
 .block-report-code { overflow-x:auto; padding:1rem; }
+
+.recent-changes { margin: 12px 0 16px; padding: 0; }
+.recent-changes > summary { cursor: pointer; padding: 12px 18px; }
+.recent-changes > summary span { color: var(--muted); font-size: 13px; }
+.recent-changes > summary:focus-visible { outline: 2px solid var(--bitcoin-ink); outline-offset: 2px; }
+.recent-changes-content { padding: 0 18px 18px; }

@@ -50,13 +50,15 @@
         /><button class="primary-button" type="submit">Search →</button
         ><a href="/pools">Browse all pools</a>
       </form>
-      <section class="panel intake-panel" aria-labelledby="change-summary-title">
+      <details class="panel recent-changes" aria-labelledby="change-summary-title">
+        <summary><strong id="change-summary-title">Recent changes</strong><span id="change-summary-count"> · Loading…</span></summary>
+        <div class="recent-changes-content">
         <p class="eyebrow">RECORDED LIVE HISTORY · SEPARATE FROM SAMPLE MODE</p>
-        <h2 id="change-summary-title">What changed?</h2>
         <div id="change-summary-body" role="status">Loading recorded changes…</div>
         <p class="small muted">Up to four recorded profile updates from the last 30 days and two share shifts of at least 5 percentage points between consecutive complete UTC days with 100+ blocks each. Share shifts can reflect ordinary mining variance or attribution changes. Profile dates show when we recorded a change, not when the operator made it; website terms are reviewed snapshots.</p>
         <a href="/trends">All trends &amp; changes →</a>
-      </section>
+        </div>
+      </details>
       <nav class="tabs" aria-label="Dashboard views">
         <button class="active" data-view="overview" aria-pressed="true">
           Network overview</button
