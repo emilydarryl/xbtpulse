@@ -99,3 +99,7 @@ Pool `characteristics` contains `pool` and `network` aggregates for the requeste
 ### Reporting coverage (September 15 update)
 
 Dashboard and pool telemetry providers include `coverage` (fraction of 24 hours), `coveredMs`, `reportCount`, `windowStart` and `windowEnd` (Unix milliseconds). Coverage unions retained intervals wholly within that window; boundary intervals are excluded, not prorated. It is reporting coverage, not pool uptime. Missing providers have no available intervals, not a measured zero. `found: null` remains unknown even when individual block reports exist.
+
+## Shared-address watch (September 17)
+
+`GET /api/shared-addresses` automatically compares exact positive recipients across original explorer label/tag combinations in retained canonical blocks (up to configured retention, normally 30,000). Returns coverage, source freshness, total matches and up to 100 ranked recipients; each group includes counts, first/last block timestamps, min/max reward fraction and three recent block examples. Documented collection/fee roles rank first, then sole-recipient counts and recency. Duplicate outputs to one recipient are summed. This does not infer ownership, detect unmined pools, or change attribution/ratings. Missing data remains a coverage gap. Reorganizations/retention can remove findings; no lifetime incident log or notification automation is created. The public endpoint findings page refreshes the watch every 30 seconds while visible; homepage and Explore links open it. The dated AlphaPool investigation remains separate.

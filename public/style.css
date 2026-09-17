@@ -1510,3 +1510,7 @@ dialog::backdrop {
 
 .shared-payout-callout { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; padding: 10px 16px; margin: 0 0 12px; border-left: 3px solid var(--bitcoin-ink); background: #fff7e9; font-size: 13px; }
 #shared-payout-addresses { scroll-margin-top: 90px; }
+
+#shared-address-watch { scroll-margin-top: 80px; }
+.shared-watch-results { max-height: 650px; overflow: auto; }
+.shared-watch-results summary { cursor: pointer; }
