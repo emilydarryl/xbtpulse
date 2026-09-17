@@ -1,5 +1,9 @@
 # XBT Pulse — Codex handoff
 
+## September 17 public evidence first
+
+Pool profiles now lead with a public-evidence section above scores. It uses the existing refreshed 2,016-block API response, shows attribution and recipient coverage, and links up to 24 recent blocks with positive-recipient counts and the largest recipient's reward fraction. Repeated outputs to the same recipient are combined. Missing/malformed outputs stay unavailable, unlinked profiles are not treated as zero activity, and refresh failures remove stale summary content. No new network probes, operator submissions, score changes or database migrations are required. The explorer remains the upstream source; this is not independent-node verification or a payout fairness audit.
+
 Prepared September 14, 2026. Read this before continuing work from another computer.
 
 ## September 17 AlphaPool address note

@@ -1,4 +1,5 @@
 import {coverageLabel,outcomeLabel,coverageExplanation} from "/telemetry-context.js";
+import {publicEvidenceSection} from '/public-evidence.js';
 import {blockReportSection} from '/block-report-view.js';
 import {readWatch,saveWatch,snapshot} from '/watch-store.js';
 let watchProfile;
@@ -64,6 +65,7 @@ async function load() {
     );
     const d = windows[0],
       profile = d.profile;
+    document.querySelector('#public-evidence').innerHTML=publicEvidenceSection(windows);
     document.querySelector("#soveroot-example").hidden = id !== "explorer:soveroot" || profile?.poolType !== "private";
     watchProfile=d;document.querySelector('#watch-pool').disabled=false;updateWatchButton();
     document.title = d.name + " · XBT Pulse";
@@ -106,6 +108,7 @@ async function load() {
     if (firstProfileRender && location.hash === '#reported-blocks') document.querySelector('#reported-blocks')?.scrollIntoView();
     firstProfileRender = false;
   } catch (e) {
+    document.querySelector('#public-evidence').textContent='Public observations could not be refreshed. Please try again; unavailable data does not imply zero activity.';
     for (const axis of ["decentralization", "transparency"]) document.querySelector("#pool-" + axis).textContent = "Unavailable";
     document.querySelector("#pool-score-status").textContent = "Unable to load the published assessment. Please try again.";
     document.querySelector("#scorecard-link").hidden = true;

@@ -20,6 +20,8 @@ The sample UI is explicitly illustrative. Live data starts only when `EXPLORER_A
 
 ## What is implemented
 
+- Pool profiles lead with automatically collected public evidence before assessment scores: block coverage, payout-recipient patterns and up to 24 linked recent reward-concentration examples from the 2,016-block window. No operator feed is required. Repeated outputs to one recipient are combined; these observations do not establish template control or payout fairness.
+
 - [Public endpoint observations](https://xbtpulse.tech/endpoint-checks): a dated top-ten pilot, seven documented endpoints attempted in two rounds, with evidence limits and an operator submission invitation. Short work commitments are not decoded as payout transactions; no proxy verdict or score change is inferred. See [method and findings](docs/endpoint-inspection.md).
 
 - Optional [block-find reporting](https://xbtpulse.tech/report-blocks): manual submission or an operator-owned event feed using the existing provider token. Pool profiles show **Operator-reported block finds**, with chain-match status separate from finder claims and chain attribution. Missing reports say **Not reported**; these entries do not change attributed block totals, work-only outcomes or scores. Includes duplicate protection, withdrawals and a Python sender. See [the feed contract](docs/block-reporting.md).
