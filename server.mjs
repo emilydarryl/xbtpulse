@@ -95,6 +95,7 @@ const files = {
   "/telemetry-context.js": "telemetry-context.js",
   "/style.css": "style.css",
   "/favicon.svg": "favicon.svg",
+  "/red-flag.svg": "red-flag.svg",
   "/collector": "collector.html",
   "/adapter": "adapter.html",
   "/verify-downloads": "verify-downloads.html",

@@ -24,7 +24,9 @@ try{
   }
   if(!p.examples.length&&!p.error)add(card,'p','No eligible recent block examples available.');
   if(p.id==='explorer:alphapool'){
-   add(card,'h4','Shared reward address across coinbase names');
+   const heading=add(card,'h4');
+   const flag=add(heading,'img');flag.src='/red-flag.svg';flag.alt='Red flag: finding to review';flag.width=28;flag.height=28;flag.style.verticalAlign='middle';flag.style.marginRight='0.4em';
+   heading.append(document.createTextNode('Shared reward address across coinbase names'));
    add(card,'p','Checked September 17, 2026: a scan of all 3,068 confirmed transactions returned for the address below found 1,961 coinbase transactions, spanning block heights 964368–972623. Of these, 1,877 contained AlphaPool, 42 contained CEO of LukeCoin, and 42 contained Test. All paid this same address. This address-history check was not limited to the ten groups in the endpoint pilot.');
    const recipient=add(card,'p','bc1qlrmjpgg0e5jrhmzyjmtgc6dfpdr66sps8vjl2q');recipient.className='mono recipient-full';
    const sources=add(card,'ul');
