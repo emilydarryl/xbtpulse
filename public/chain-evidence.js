@@ -23,6 +23,18 @@ try{
    if(b.transactionUrl){const tx=add(card,'a','Inspect coinbase transaction JSON →');tx.href=b.transactionUrl;}
   }
   if(!p.examples.length&&!p.error)add(card,'p','No eligible recent block examples available.');
+  if(p.id==='explorer:alphapool'){
+   add(card,'h4','Shared reward address across coinbase names');
+   add(card,'p','Checked September 17, 2026: a scan of all 3,068 confirmed transactions returned for the address below found 1,961 coinbase transactions, spanning block heights 964368–972623. Of these, 1,877 contained AlphaPool, 42 contained CEO of LukeCoin, and 42 contained Test. All paid this same address. This address-history check was not limited to the ten groups in the endpoint pilot.');
+   const recipient=add(card,'p','bc1qlrmjpgg0e5jrhmzyjmtgc6dfpdr66sps8vjl2q');recipient.className='mono recipient-full';
+   const sources=add(card,'ul');
+   for(const [label,url] of [
+    ['Address history','https://mempool.guide/address/bc1qlrmjpgg0e5jrhmzyjmtgc6dfpdr66sps8vjl2q'],
+    ['Block 971473 — CEO of LukeCoin','https://mempool.guide/block/0000000000000000b302487172487f19ff97828ed63b91c136b84d3adf5af90d'],
+    ['Block 971868 — Test','https://mempool.guide/block/0000000000000000a916b46d537522cc4e3acfba89b4f87a8855ab257ce65b73']
+   ]){const a=add(add(sources,'li'),'a',label);a.href=url;}
+   add(card,'p','The explorer attributed both linked examples to AlphaPool when checked. These are observed coinbase names, not proof of three separate pools. A shared reward destination is consistent with changing tags or shared payout infrastructure; it does not establish common ownership, miner identity or template control. This dated check covers one address on mempool.guide, not other addresses or independent node verification.');
+  }
   add(card,'h4','What remains unproven');
   add(card,'p','Recipient scripts are not people. These outputs do not establish template control, upstream routing, fee correctness or whether all miners received their promised shares. The explorer attribution can combine services.');
   add(card,'h4','Evidence requested from the operator');

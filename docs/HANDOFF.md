@@ -2,6 +2,10 @@
 
 Prepared September 14, 2026. Read this before continuing work from another computer.
 
+## September 17 AlphaPool address note
+
+Added a dated shared-reward-address note below AlphaPool's observed evidence on `/endpoint-checks`. The explorer address-history scan returned 3,068 confirmed transactions, including 1,961 coinbases at heights 964368–972623: 1,877 containing AlphaPool, 42 CEO of LukeCoin, and 42 Test. All paid `bc1qlrmjpgg0e5jrhmzyjmtgc6dfpdr66sps8vjl2q`. Linked examples for both alternate tags were attributed to AlphaPool by the explorer. This establishes a shared destination, not common ownership or separate pool identities. Scope is this address's returned history, not the top-ten endpoint sample. Syntax checks, 80 tests and collector package verification passed.
+
 ## September 16 endpoint observation pilot
 
 Follow-up added `/chain-evidence.json` and claim/observation/question sections to the pilot page: 20 explorer-checked coinbase examples across the ten groups, deliberate min/max-recipient selection, positive-output concentration, explicit same-source limits and operator evidence requests. Bitcoin Xor's dated advertised pooled fee was updated to 2% from 5%; no scores or attribution mappings changed. Run `node scripts/inspect-chain-evidence.mjs` manually to refresh after reviewing scope; no schedule is installed.
