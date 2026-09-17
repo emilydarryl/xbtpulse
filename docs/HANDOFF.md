@@ -218,3 +218,7 @@ The response bounds each recipient to its 30 largest label/tag combinations and 
 ## Pools / Original tags distribution
 
 The homepage chart has a Pools / Original tags switch. Exact recorded coinbase tag strings are counted over the full selected window (not the 24-block feed); missing tags remain in the denominator. All tags can be expanded below the chart. Raw tag variations can include changing coinbase data and are not distinct pool identities. The switch changes only the chart/legend; pool metrics, attribution, rankings and alerts remain unchanged. A link leads to shared-address evidence. Sample mode uses illustrative tags.
+
+## Readable tag chart refinement
+
+Dashboard `readableTags` uses explicit display-only text rules in `lib/readable-tags.mjs`. Recognizable names consolidate variable coinbase noise; multiple recognized names stay in a combined group, unmatched text is unclassified, and missing tags are explicit. CEO of LukeCoin, Test Test and Quai Network are never aliased to AlphaPool here. Exact `tags` remain unchanged and expandable. These heuristics are not attribution rules or proof of identity. The chart button is now Tag groups.

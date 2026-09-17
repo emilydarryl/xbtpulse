@@ -140,16 +140,16 @@ function render() {
   const pools = data.pools || [],
     blocks = data.blocks || [],
     tagMode = distributionMode === "tags",
-    groups = tagMode ? (data.tags || []) : pools,
+    groups = tagMode ? (data.readableTags || (demo ? data.tags : []) || []) : pools,
     chart = chartGroups(groups);
   const chartColor = p => tagMode ? (p.unknown ? "#84919F" : p.id === "other" ? "#E2B526" : colors[groups.findIndex(g => g.id === p.id) % colors.length]) : poolColor(p);
   $("#group-pools").setAttribute("aria-pressed", String(!tagMode));
   $("#group-tags").setAttribute("aria-pressed", String(tagMode));
-  $("#distribution-title").textContent = tagMode ? "Original coinbase tags" : "Where blocks come from";
-  $("#distribution-note").textContent = tagMode ? "Exact recorded tag text across the full selected block window. Tags can change, be copied, or contain variable coinbase data; they are not separate pool identities. Pool statistics and alerts below still use attribution." : "Pool attribution groups blocks using explorer labels and documented evidence.";
+  $("#distribution-title").textContent = tagMode ? "Readable tag groups" : "Where blocks come from";
+  $("#distribution-note").textContent = tagMode ? "Heuristic groups based on recognizable text, not verified pool identities. Multiple recognized names stay combined; other text is unclassified. Variable data and secondary text may be omitted from group names. Exact recorded strings remain below. Pool statistics and alerts still use attribution." : "Pool attribution groups blocks using explorer labels and documented evidence.";
   $("#tag-breakdown").hidden = !tagMode;
   const tagsOpen = $("#tag-breakdown details")?.open;
-  $("#tag-breakdown").innerHTML = tagMode ? `<details ${tagsOpen ? "open" : ""}><summary>All original tags (${groups.length})</summary><div class="table-scroll profile-activity-scroll"><table><thead><tr><th>Recorded tag</th><th>Blocks</th><th>Share</th></tr></thead><tbody>${groups.map(p=>`<tr><td class="tag-text">${escape(p.name)}</td><td>${p.blocks}</td><td>${pct(p.share)}</td></tr>`).join("")}</tbody></table></div></details>` : "";
+  $("#tag-breakdown").innerHTML = tagMode ? `<details ${tagsOpen ? "open" : ""}><summary>All original tags (${(data.tags || []).length})</summary><div class="table-scroll profile-activity-scroll"><table><thead><tr><th>Recorded tag</th><th>Blocks</th><th>Share</th></tr></thead><tbody>${(data.tags || []).map(p=>`<tr><td class="tag-text">${escape(p.name)}</td><td>${p.blocks}</td><td>${pct(p.share)}</td></tr>`).join("")}</tbody></table></div></details>` : "";
   assignPoolColors(pools);
   $("#onboarding-cards").innerHTML = demo
     ? "<p>Return to network mode to see real participating operators.</p>"
@@ -215,7 +215,7 @@ function render() {
     ? chart
         .map(
           (p, i) =>
-            `<div class="legend-row"><i class="swatch" style="background:${chartColor(p)}"></i><span class="tag-text">${tagMode ? escape(p.id === "other" ? "Other recorded tags" : p.name) : poolLink(p)}</span><strong>${pct(p.share)}</strong></div>`,
+            `<div class="legend-row"><i class="swatch" style="background:${chartColor(p)}"></i><span class="tag-text">${tagMode ? escape(p.id === "other" ? "Other readable groups" : p.name) : poolLink(p)}</span><strong>${pct(p.share)}</strong></div>`,
         )
         .join("")
     : '<p class="small muted">Pool distribution will appear after blocks are indexed.</p>';

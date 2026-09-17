@@ -107,3 +107,7 @@ Dashboard and pool telemetry providers include `coverage` (fraction of 24 hours)
 The response bounds each recipient to its 30 largest label/tag combinations and exposes `groupCount` for the total. Raw tag variations may include changing coinbase data rather than semantic pool-name changes.
 
 Dashboard responses include `tags`: exact recorded tag text, block counts and shares over the full selected window; empty/missing tags form an explicit group. These are not operator identities.
+
+## Readable tag chart refinement
+
+Dashboard `readableTags` uses explicit display-only text rules in `lib/readable-tags.mjs`. Recognizable names consolidate variable coinbase noise; multiple recognized names stay in a combined group, unmatched text is unclassified, and missing tags are explicit. CEO of LukeCoin, Test Test and Quai Network are never aliased to AlphaPool here. Exact `tags` remain unchanged and expandable. These heuristics are not attribution rules or proof of identity. The chart button is now Tag groups.
