@@ -92,6 +92,7 @@ const files = {
   "/endpoint-checks.js": "endpoint-checks.js",
   "/endpoint-report.json": "endpoint-report.json",
   "/chain-evidence.json": "chain-evidence.json",
+  "/shared-address-watch.js": "shared-address-watch.js",
   "/chain-evidence.js": "chain-evidence.js",
   "/public-evidence.js": "public-evidence.js",
   "/change-summary.js": "change-summary.js",
