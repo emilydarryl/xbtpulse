@@ -1507,3 +1507,6 @@ dialog::backdrop {
 .recent-changes > summary span { color: var(--muted); font-size: 13px; }
 .recent-changes > summary:focus-visible { outline: 2px solid var(--bitcoin-ink); outline-offset: 2px; }
 .recent-changes-content { padding: 0 18px 18px; }
+
+.shared-payout-callout { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; padding: 10px 16px; margin: 0 0 12px; border-left: 3px solid var(--bitcoin-ink); background: #fff7e9; font-size: 13px; }
+#shared-payout-addresses { scroll-margin-top: 90px; }

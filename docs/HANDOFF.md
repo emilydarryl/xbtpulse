@@ -8,6 +8,10 @@ Added sourced CONVOY and RIPTIDE fee, connection and template-role claims to exi
 
 Optional operator contributions now sit near the footer, below network tables and the block feed. Copy emphasizes public data, optional context/corrections/telemetry and no penalty for nonparticipation. Removed the Soveroot walkthrough and duplicate private-pool promotion; profiles remain available in search and contribution listings.
 
+## Shared payout finding discovery
+
+A compact homepage callout and Explore menu link open `/endpoint-checks#shared-payout-addresses`. The link expands the AlphaPool evidence card and focuses the dated shared-address finding after loading; it does not imply distinct pools or common ownership.
+
 ## Current plan — public data first (September 17)
 
 The owner wants XBT Pulse to remain useful without pool submissions. Prioritize automatically collected public block evidence, accurate sourced terms, clear comparisons and visible gaps. Operator telemetry adds scoped accepted-work evidence but is optional; non-participation is not a failing grade. Do not invest in running miners for broad pool testing now. Reserve controlled mining tests for a specific unresolved question.
