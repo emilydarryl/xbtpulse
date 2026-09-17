@@ -1520,3 +1520,7 @@ dialog::backdrop {
 .tag-text { overflow-wrap: anywhere; word-break: break-word; min-width: 0; white-space: normal; }
 #tag-breakdown { padding: 0 24px 16px; }
 #tag-breakdown summary { cursor: pointer; }
+
+.shared-watch-filter { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; }
+.shared-watch-filter label { display: grid; gap: 6px; flex: 1 1 190px; }
+.shared-watch-filter input, .shared-watch-filter select { min-width: 0; width: 100%; }

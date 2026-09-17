@@ -1,4 +1,4 @@
-import { sharedAddresses } from "./lib/shared-addresses.mjs";
+import { sharedAddresses, filterSharedAddresses } from "./lib/shared-addresses.mjs";
 import {characterize} from './lib/block-characteristics.mjs';
 import {profileChanges,shareChanges} from './lib/change-summary.mjs';
 import {addressDetails} from './lib/address-details.mjs';
@@ -386,11 +386,11 @@ const server = http.createServer(async (req, res) => {
     if (url.pathname === "/api/shared-addresses") {
       let snapshot=cache.get("shared-addresses");
       if(!snapshot || Date.now()-snapshot.time>30000){
-        snapshot={time:Date.now(),data:sharedAddresses(store.blocks(retention),registry)};
+        snapshot={time:Date.now(),data:sharedAddresses(store.blocks(retention),registry,Infinity)};
         cache.set("shared-addresses",snapshot);
       }
       const last=store.get("lastSuccess");
-      return send(res,200,{...snapshot.data,retention,updatedAt:last?new Date(last).toISOString():null,source:store.get("source")||null,stale:!last||Date.now()-last>Math.max(120000,pollSeconds*3000)||!!store.get("lastError")});
+      return send(res,200,{...filterSharedAddresses(snapshot.data,url.searchParams),retention,updatedAt:last?new Date(last).toISOString():null,source:store.get("source")||null,stale:!last||Date.now()-last>Math.max(120000,pollSeconds*3000)||!!store.get("lastError")});
     }
     if (url.pathname === "/api/trends") {
       const old = cache.get("trends");
