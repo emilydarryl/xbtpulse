@@ -81,5 +81,40 @@
         "url": "https://omegapool.tech/connect"
       }
     ]
+  },
+  "explorer:convoy": {
+    "provenance": "public-research",
+    "reviewedAt": "2026-09-17",
+    "poolType": "public",
+    "fee": "1% own-node DATUM gateway; 2% direct Stratum failover service.",
+    "protocols": "DATUM: datum-beta1.mine.convoy.xyz:28915. Stratum V1 failover: mine.convoy.xyz:3333.",
+    "template": "Setup guide states that the miner runs a synced node and DATUM gateway to generate templates. Direct Stratum failover gives up that template control.",
+    "website": "https://convoy.xyz/",
+    "setup": "https://convoy.xyz/getstarted",
+    "researchNotes": "Dated public setup-guide claims, not operator-confirmed telemetry or an assessment. The public Stratum endpoint is advertised as failover, not the primary connection. Payout method, minimum and withdrawal terms were not established in this review and remain unfilled.",
+    "sources": [
+      {
+        "title": "CONVOY setup guide: own-node DATUM and Stratum failover fees",
+        "url": "https://convoy.xyz/getstarted"
+      }
+    ]
+  },
+  "explorer:riptide": {
+    "provenance": "public-research",
+    "reviewedAt": "2026-09-17",
+    "poolType": "public",
+    "fee": "0% DATUM; variable public SV1 fee advertised as currently 1%. Half of the SV1 skim is credited to live DATUM miners and half to operations.",
+    "payout": "Website describes share-difficulty-weighted Ocean TIDES payouts, with a window of seven confirmed finds plus current work. It distinguishes coinbase payouts and manual payouts.",
+    "protocols": "DATUM: riptide.maveth.ca:28916. Public Stratum V1: sv1.riptide.maveth.ca:23337.",
+    "template": "Website asks DATUM miners to run their own BLAKE2b Knots node and gateway. Direct ASIC SV1 is a separate pool-hosted connection, not the miner's own DATUM gateway.",
+    "website": "https://riptide.maveth.ca/",
+    "setup": "https://riptide.maveth.ca/",
+    "researchNotes": "Dated advertised terms, not independently verified template control or a rating. SV1 fees are explicitly variable; confirm current terms before connecting. The stated fee was read from public page text, not a live fee API. Minimum payout, withdrawal fees and server regions remain unverified.",
+    "sources": [
+      {
+        "title": "RIPTIDE public fee terms, connection paths and payout-window description",
+        "url": "https://riptide.maveth.ca/"
+      }
+    ]
   }
 }
