@@ -319,6 +319,27 @@ $("#messages-dialog").addEventListener("close", () => {
   refresh().catch(() => {});
 });
 
+const tagDateFormat = new Intl.DateTimeFormat("en-US", {
+  month: "short", day: "numeric", year: "numeric",
+  hour: "numeric", minute: "2-digit", timeZone: "UTC", timeZoneName: "short",
+});
+function tagAge(time, now = Date.now()) {
+  const seconds = (now - time * 1000) / 1000;
+  if (Math.abs(seconds) < 60) return "Just now";
+  const unit = Math.abs(seconds) >= 86400 ? "day" : Math.abs(seconds) >= 3600 ? "hour" : "minute";
+  const size = { day: 86400, hour: 3600, minute: 60 }[unit];
+  const count = Math.floor(Math.abs(seconds) / size);
+  const text = `${count} ${unit}${count === 1 ? "" : "s"}`;
+  return seconds < 0 ? `In ${text}` : `${text} ago`;
+}
+function refreshTagAges() {
+  if (document.hidden || $("#desk").hidden) return;
+  document.querySelectorAll("[data-tag-time]").forEach(el => {
+    el.textContent = tagAge(Number(el.dataset.tagTime));
+  });
+}
+setInterval(refreshTagAges, 60000);
+document.addEventListener("visibilitychange", refreshTagAges);
 let tagPage = 1, tagSearchSequence = 0;
 async function searchTags(page = 1) {
   const sequence = ++tagSearchSequence;
@@ -330,7 +351,7 @@ async function searchTags(page = 1) {
     if (sequence !== tagSearchSequence || $("#desk").hidden) return;
     tagPage = d.page;
     $("#tag-search-status").textContent = `${d.total} tag matches for “${d.q}” · Page ${d.page} of ${d.pages} · ${d.searched} retained blocks${d.searched ? ` (#${d.oldest}–#${d.newest})` : ""}. Last collection: ${d.collectedAt ? new Date(d.collectedAt).toLocaleString() : "unavailable"}.`;
-    $("#tag-search-results").innerHTML = d.blocks.length ? `<table><thead><tr><th>Block</th><th>Time (UTC)</th><th>Explorer pool label</th><th>Original coinbase text</th></tr></thead><tbody>${d.blocks.map(b => `<tr><td><a href="https://mempool.guide/block/${encodeURIComponent(b.hash)}" target="_blank" rel="noopener noreferrer">#${Number(b.height)}</a></td><td>${esc(new Date(b.time * 1000).toISOString())}</td><td>${esc(b.pool)}</td><td class="recipient-full">${esc(b.tag)}</td></tr>`).join("")}</tbody></table>` : "<p>No matches in retained history.</p>";
+    $("#tag-search-results").innerHTML = d.blocks.length ? `<table><thead><tr><th>Block</th><th>Date (UTC)</th><th>Age</th><th>Explorer pool label</th><th>Original coinbase text</th></tr></thead><tbody>${d.blocks.map(b => `<tr><td><a href="https://mempool.guide/block/${encodeURIComponent(b.hash)}" target="_blank" rel="noopener noreferrer">#${Number(b.height)}</a></td><td>${esc(tagDateFormat.format(new Date(b.time * 1000)))}</td><td data-tag-time="${Number(b.time)}">${esc(tagAge(b.time))}</td><td>${esc(b.pool)}</td><td class="recipient-full">${esc(b.tag)}</td></tr>`).join("")}</tbody></table>` : "<p>No matches in retained history.</p>";
     $("#tag-prev").disabled = d.page <= 1;
     $("#tag-next").disabled = d.page >= d.pages;
   } catch (error) {
