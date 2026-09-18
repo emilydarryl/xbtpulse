@@ -167,3 +167,29 @@ test('creating token claims requires admin authentication and CSRF', async t => 
   assert.match(result.data.claimLink,/^\/token-claim#/);
   assert.equal(store.providerForHash(digest('original')),'p');
 });
+
+test("private tag search requires login and searches all retained original text", async t => {
+  const {store, call} = fixture(t);
+  assert.equal((await call("tag-search?q=SOVEROOT")).status, 401);
+  await call("setup", {code: bootstrap(store), password: "private-tag-search-test-password"});
+  store.saveBlocks(Array.from({length: 2030}, (_, i) => ({
+    height: 970533 + i, hash: String(i).padStart(64, "0"), time: 1790000000 + i,
+    tag: i === 0 || i > 2000 ? "Lazarus SOVEROOT" : "another miner",
+    reportedPool: {name: "Lazarus", slug: "lazarus"}, outputs: [],
+  })), 30000);
+  const r = await call("tag-search?q=soveroot");
+  assert.equal(r.status, 200);
+  assert.equal(r.headers["Cache-Control"], "no-store");
+  assert.equal(r.data.total, 30);
+  assert.equal(r.data.searched, 2030);
+  assert.equal(r.data.blocks.length, 25);
+  assert.equal(r.data.blocks[0].height, 972562);
+  assert.equal(r.data.blocks[0].pool, "Lazarus");
+  const second = await call("tag-search?q=SOVEROOT&page=2");
+  assert.equal(second.data.blocks.at(-1).height, 970533);
+  assert.equal((await call("tag-search?q=absent")).data.total, 0);
+  assert.equal((await call("tag-search?q=%25")).status, 400);
+  assert.equal((await call("tag-search?q=" + "a".repeat(101))).status, 400);
+  await call("logout", {});
+  assert.equal((await call("tag-search?q=SOVEROOT")).status, 401);
+});

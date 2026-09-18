@@ -55,3 +55,9 @@ Public operators can have reviewed profiles before any attributed blocks. In Adm
 Admins can select **Create token claim link** beside an approved active provider in Admin. Share that one-use private link with the intended operator through their existing private contact channel. It expires after 24 hours; a newer link supersedes the previous link. Creating or opening it does not change the current token.
 
 The operator confirms replacement, generates the token and downloads `token.txt`. Only claiming replaces the previous token. Tokens are never placed in application conversations or stored in recoverable form; the server stores hashes. Revocation, loss of approval or an intervening token rotation blocks the claim. Anyone holding the private link can claim it, so never publish it. No message is sent automatically. A lost response or lost download requires a new admin-issued link; do not assume the old token still works.
+
+## Personal coinbase tag search
+
+Open **Personal coinbase tag search** in `/admin` and search for `SOVEROOT` (prefilled) or another text fragment. This authenticated, read-only tool searches original coinbase text across all retained blocks, independently of the explorer pool label. Results show UTC timestamps, block links, explorer labels and original text, newest first, with 25 results per page and a scrollable table. The coverage range and last collection time are shown. Search again for fresh results; this is not a background notification service.
+
+`GET /api/admin/tag-search?q=SOVEROOT&page=1` requires an admin session and returns non-cacheable results. Queries are 2-100 characters and match literal text case-insensitively. The search does not persist personal queries, alter attribution or award finder credit. Coinbase tags can be copied; matches are not independent proof of who found a block. Missing older history or reorganizations can remove matches.

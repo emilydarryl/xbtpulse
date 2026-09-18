@@ -226,3 +226,8 @@ Dashboard `readableTags` uses explicit display-only text rules in `lib/readable-
 ## Shared-address search and links
 
 The watch now searches all retained overlaps before limiting output. `/api/shared-addresses` accepts `q` (address/source label/raw tag/documented pool name), `type=all|documented|unclassified`, `share=50|90|100` (at least that percentage in one observed block), exact `address`, and `page` (25 recipients per page). `allMatches` is the unfiltered total. All raw groups are searched, even beyond the 30 returned per recipient; matching text groups sort first. Direct finding links use `/endpoint-checks?address=...#shared-address-watch` and auto-expand the selected address. No ownership inference or attribution changes.
+
+## Private coinbase tag search (September 17)
+
+Admin now includes Personal coinbase tag search, default SOVEROOT. Authenticated GET /api/admin/tag-search searches all retained original tag text case-insensitively with 25-result pages, block links, UTC times, original explorer labels and coverage. Tags are matches, not verified finder credit. No background notifications or public search history. See docs/admin.md. All 92 tests passed. Includes the preceding shared-address watch search/filter update.
+

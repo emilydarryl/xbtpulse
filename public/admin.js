@@ -51,6 +51,9 @@ async function session() {
     : "new-password";
   if (s.authenticated) await refresh();
   else {
+    ++tagSearchSequence;
+    $("#tag-search-results").innerHTML = "";
+    $("#tag-search-status").textContent = "";
     records = [];
     providers = [];
     $("#applications").innerHTML = "";
@@ -314,4 +317,30 @@ $("#messages-dialog").addEventListener("close", () => {
   $("#operator-link").value = "";
   $("#message-history").innerHTML = "";
   refresh().catch(() => {});
+});
+
+let tagPage = 1, tagSearchSequence = 0;
+async function searchTags(page = 1) {
+  const sequence = ++tagSearchSequence;
+  $("#tag-prev").disabled = $("#tag-next").disabled = true;
+  $("#tag-search-results").innerHTML = "";
+  $("#tag-search-status").textContent = "Searching retained blocks…";
+  try {
+    const d = await api("tag-search?" + new URLSearchParams({ q: $("#tag-query").value.trim(), page }));
+    if (sequence !== tagSearchSequence || $("#desk").hidden) return;
+    tagPage = d.page;
+    $("#tag-search-status").textContent = `${d.total} tag matches for “${d.q}” · Page ${d.page} of ${d.pages} · ${d.searched} retained blocks${d.searched ? ` (#${d.oldest}–#${d.newest})` : ""}. Last collection: ${d.collectedAt ? new Date(d.collectedAt).toLocaleString() : "unavailable"}.`;
+    $("#tag-search-results").innerHTML = d.blocks.length ? `<table><thead><tr><th>Block</th><th>Time (UTC)</th><th>Explorer pool label</th><th>Original coinbase text</th></tr></thead><tbody>${d.blocks.map(b => `<tr><td><a href="https://mempool.guide/block/${encodeURIComponent(b.hash)}" target="_blank" rel="noopener noreferrer">#${Number(b.height)}</a></td><td>${esc(new Date(b.time * 1000).toISOString())}</td><td>${esc(b.pool)}</td><td class="recipient-full">${esc(b.tag)}</td></tr>`).join("")}</tbody></table>` : "<p>No matches in retained history.</p>";
+    $("#tag-prev").disabled = d.page <= 1;
+    $("#tag-next").disabled = d.page >= d.pages;
+  } catch (error) {
+    if (sequence === tagSearchSequence) $("#tag-search-status").textContent = error.message;
+  }
+}
+$("#tag-search-form").addEventListener("submit", e => { e.preventDefault(); searchTags(); });
+$("#tag-prev").addEventListener("click", () => searchTags(tagPage - 1));
+$("#tag-next").addEventListener("click", () => searchTags(tagPage + 1));
+$("#tag-query").addEventListener("input", () => {
+  ++tagSearchSequence;
+  $("#tag-prev").disabled = $("#tag-next").disabled = true;
 });

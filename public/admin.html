@@ -55,6 +55,18 @@
         </form>
       </section>
       <section id="desk" hidden>
+        <details class="panel intake-panel">
+          <summary><strong>Personal coinbase tag search</strong></summary>
+          <p>Find SOVEROOT or other miner text inside blocks, even when the explorer lists the pool as Lazarus. A tag match is not independent proof of who found the block.</p>
+          <form id="tag-search-form">
+            <label>Coinbase text<input id="tag-query" value="SOVEROOT" minlength="2" maxlength="100" required /></label>
+            <button class="primary-button">Search retained blocks</button>
+          </form>
+          <p id="tag-search-status" role="status"></p>
+          <div id="tag-search-results" class="table-scroll" style="max-height:480px;overflow:auto"></div>
+          <div class="admin-actions"><button id="tag-prev" class="quiet-button" disabled>← Previous</button><button id="tag-next" class="quiet-button" disabled>Next →</button></div>
+          <p class="small muted">Private admin tool. Case-insensitive text matches, newest first. Only retained blocks are searched; no match does not mean no earlier finds. Reorganized blocks may disappear. Search again to include newly collected blocks.</p>
+        </details>
         <div class="section-title">
           <div>
             <p class="eyebrow">APPLICATION QUEUE</p>
