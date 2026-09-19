@@ -150,10 +150,23 @@ function render() {
   $("#tag-breakdown").hidden = !tagMode;
   const tagsOpen = $("#tag-breakdown details")?.open;
   $("#tag-breakdown").innerHTML = tagMode ? `<details ${tagsOpen ? "open" : ""}><summary>All original tags (${(data.tags || []).length})</summary><div class="table-scroll profile-activity-scroll"><table><thead><tr><th>Recorded tag</th><th>Blocks</th><th>Share</th></tr></thead><tbody>${(data.tags || []).map(p=>`<tr><td class="tag-text">${escape(p.name)}</td><td>${p.blocks}</td><td>${pct(p.share)}</td></tr>`).join("")}</tbody></table></div></details>` : "";
+  const suggestedIds = [];
   document.querySelectorAll("[data-suggested-share]").forEach(el => {
     const pool = pools.find(p => p.id === el.dataset.suggestedShare);
-    el.textContent = demo ? "Observed share: unavailable in sample mode" : !data.sample ? "Observed share: unavailable" : pool ? `Observed share: ${pct(pool.share)} of ${data.sample} blocks${data.status === "stale" ? " (stale data)" : ""}` : `No attributed blocks in this ${data.sample}-block window${data.status === "stale" ? " (stale data)" : ""}`;
+    const eligible = !demo && data.status === "live" && data.sample > 0 && pool && Number.isFinite(pool.share) && pool.share >= 0 && pool.share < 0.15;
+    el.closest("article").hidden = !eligible;
+    if (eligible) {
+      suggestedIds.push(pool.id);
+      el.textContent = `Observed share: ${(pool.share * 100).toFixed(2)}% of ${data.sample} blocks`;
+    }
   });
+  $("#suggested-empty").hidden = suggestedIds.length > 0;
+  $("#suggested-empty").textContent = demo || data.status !== "live" ? "Fresh network observations are required to suggest pools." : "No shortlisted pools have an available observed share below 15% in this window.";
+  $("#suggested-compare").hidden = suggestedIds.length < 2;
+  const suggestedQuery = new URLSearchParams();
+  suggestedIds.forEach(id => suggestedQuery.append("pool", id));
+  suggestedQuery.set("window", $("#window").value);
+  $("#suggested-compare").href = "/compare?" + suggestedQuery;
   assignPoolColors(pools);
   $("#onboarding-cards").innerHTML = demo
     ? "<p>Return to network mode to see real participating operators.</p>"

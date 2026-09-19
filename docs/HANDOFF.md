@@ -235,3 +235,5 @@ Admin now includes Personal coinbase tag search, default SOVEROOT. Authenticated
 ## Homepage pools to consider (September 18)
 
 Compact three-card shortlist below main charts: Bitcoin Xor, CONVOY and RIPTIDE, alphabetically. Dated source links and advertised own-node DATUM paths; not rankings, verified template control or endorsements. Telemetry participation is not required. Terms are static editorial snapshots in public/index.html; review those alongside researched profiles when terms change. Observed shares follow the dashboard observation window and stale state; sample mode suppresses real-pool share claims. No matching attributed blocks is described as such, not evidence of inactivity. Compare link preselects all three. Mobile stacks cards.
+
+Shortlist eligibility now requires a matched pool with fresh live observed share strictly below 15% in the selected window. Missing, stale and sample data hide cards; compare includes eligible cards only. This is a block-share estimate, not a guarantee of actual network hashrate.
