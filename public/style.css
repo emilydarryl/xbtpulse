@@ -1552,6 +1552,8 @@ dialog::backdrop {
   font-variant-numeric: tabular-nums;
 }
 
+.data-delayed { background: #fff0d7; color: #713300; border: 1px solid #d87900; border-radius: 5px; padding: 4px 8px; font-size: 12px; font-weight: 700; }
+#data-delay-note { scroll-margin-top: 80px; }
 .home-updates { display: flex; align-items: flex-start; gap: 12px; margin: 12px 0 16px; }
 .home-updates .recent-changes { flex: 1; min-width: 0; margin: 0; }
 .home-updates .shared-payout-callout { margin: 0; padding: 13px 16px; border-radius: 8px; }

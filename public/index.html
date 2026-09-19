@@ -84,7 +84,7 @@
             <option value="144">Last 144 blocks</option>
             <option value="576">Last 576 blocks</option>
             <option value="2016">Last 2,016 blocks</option></select
-          ><span id="updated">Waiting for observations</span>
+          ><span id="updated">Waiting for observations</span><a id="data-delayed" class="data-delayed" href="#data-delay-note" hidden>Data delayed</a>
         </div>
       <section id="overview" class="view">
         <div class="metrics">
@@ -353,6 +353,7 @@
         </div>
         <a class="small" href="/contribute#participating-operators">Meet participating operators →</a>
       </section>
+      <p id="data-delay-note" class="notice" role="status" hidden>The data source is delayed. Showing the last indexed observations; check the chart’s update time before interpreting changes.</p>
       <footer>
         <a href="/endpoint-checks">Public endpoint findings →</a>
         <a href="/about">Our mission &amp; connections →</a>

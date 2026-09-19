@@ -177,11 +177,14 @@ function render() {
         : "Awaiting data";
   $("#source-status").classList.toggle("live", !demo && data.status === "live");
   $("#demo").textContent = demo ? "Return to network" : "Explore sample data";
-  $("#notice").hidden = !demo && data.status === "live";
+  const delayedWithData = !demo && data.status === "stale" && data.sample > 0;
+  $("#data-delayed").hidden = !delayedWithData;
+  $("#data-delay-note").hidden = !delayedWithData;
+  $("#notice").hidden = !demo && (data.status === "live" || delayedWithData);
   $("#notice").textContent = demo
     ? "SAMPLE DATA — Illustrative pools, addresses, and block history. These are not measurements of the XBT network."
     : data.status === "stale"
-      ? "The data source is delayed. Showing the last indexed observations; check the timestamp before interpreting changes."
+      ? "The data source is delayed and no indexed observations are available yet."
       : "Network data is not connected yet. Explore the sample to see how the observatory works.";
   $("#sample").textContent = data.sample ? data.sample.toLocaleString() : "—";
   $("#donut-count").textContent = data.sample
