@@ -36,7 +36,6 @@
             Know your pool. <span>Make your own choice.</span>
           </h1>
           <p class="intro">Independent evidence for informed XBT mining choices. Understand miner control, pool transparency and what the data can tell you.</p>
-          <p><a href="/about">Our mission &amp; standards →</a> · <a href="#participating-pools">Optional operator contributions ↓</a> · <a href="/contribute">Share pool evidence →</a></p>
         </div>
 
       </section>
@@ -54,6 +53,7 @@
         /><button class="primary-button" type="submit">Search →</button
         ><a href="/pools">Browse all pools</a>
       </form>
+      <div class="home-updates">
       <details class="panel recent-changes" aria-labelledby="change-summary-title">
         <summary><strong id="change-summary-title">Recent changes</strong><span id="change-summary-count"> · Loading…</span></summary>
         <div class="recent-changes-content">
@@ -65,8 +65,8 @@
       </details>
       <aside class="shared-payout-callout" aria-label="Shared payout address findings">
         <a href="/endpoint-checks#shared-address-watch"><strong>Shared payout addresses →</strong></a>
-        <span>Track matching reward recipients across pool labels and coinbase tags.</span>
       </aside>
+      </div>
       <nav class="tabs" aria-label="Dashboard views">
         <button class="active" data-view="overview" aria-pressed="true">
           Network overview</button
@@ -102,11 +102,6 @@
             <p>UNKNOWN BLOCK SHARE</p>
             <strong id="unknown">—</strong
             ><span>Kept visible, never redistributed</span>
-          </article>
-          <article>
-            <p>TEMPLATE TELEMETRY</p>
-            <strong id="coverage">—</strong
-            ><span id="coverage-label">No participating sources yet</span>
           </article>
         </div>
         <div class="main-grid">
@@ -183,9 +178,7 @@
                   <th>Pool / attribution</th>
                   <th>Blocks</th>
                   <th>Observed share</th>
-                  <th>95% interval</th>
-                  <th>Evidence</th>
-                  <th>Rating status</th>
+                  <th>Details</th>
                 </tr>
               </thead>
               <tbody id="pool-rows"></tbody>
@@ -246,6 +239,7 @@
         </p>
       </section>
       <section id="templates" class="view" hidden>
+        <p class="telemetry-coverage"><strong id="coverage">—</strong> · <span id="coverage-label">No participating sources yet</span></p>
         <div class="section-title">
           <div>
             <p class="eyebrow">SEPARATE POOL SIZE FROM TEMPLATE CONTROL</p>

@@ -239,15 +239,16 @@ function render() {
   $("#pool-count").textContent = data.sample
     ? `${pools.filter((p) => !p.unknown).length} attributed groups`
     : "No observations";
+  const openPoolDetails = new Set([...document.querySelectorAll("#pool-rows details[open]")].map(el => el.dataset.pool));
   $("#pool-rows").innerHTML = pools.length
     ? pools
         .map(
           (p, i) =>
-            `<tr><td><span class="pool-name"><i class="swatch" style="background:${poolColor(p)}"></i>${poolLink(p)}</span></td><td>${p.blocks}</td><td><div class="share-cell"><span>${pct(p.share)}</span><div class="bar"><span style="width:${p.share * 100}%;background:${poolColor(p)}"></span></div></div></td><td>${pct(p.interval[0])}–${pct(p.interval[1])}</td><td><span class="evidence">${escape(p.evidence)}</span></td><td><a href="/ratings" class="rating-badge ${p.rating?.status === "Telemetry Contributor" ? "contributor" : ""}" title="${escape(p.rating?.evidence || "No completed assessment; not a failing grade.")}">${demo ? "Sample only" : escape(p.rating?.status || "Not assessed")}</a></td></tr>`,
+            `<tr><td><span class="pool-name"><i class="swatch" style="background:${poolColor(p)}"></i>${poolLink(p)}</span></td><td>${p.blocks}</td><td><div class="share-cell"><span>${pct(p.share)}</span><div class="bar"><span style="width:${p.share * 100}%;background:${poolColor(p)}"></span></div></div></td><td><details data-pool="${escape(p.id)}" ${openPoolDetails.has(p.id) ? "open" : ""}><summary aria-label="Details for ${escape(p.name)}">Details</summary><p>95% interval: ${pct(p.interval[0])}–${pct(p.interval[1])}</p><p>${escape(p.evidence)}</p><a href="/ratings" class="rating-badge ${p.rating?.status === "Telemetry Contributor" ? "contributor" : ""}" title="${escape(p.rating?.evidence || "No completed assessment; not a failing grade.")}">${demo ? "Sample only" : escape(p.rating?.status || "Not assessed")}</a></details></td></tr>`,
         )
         .join("")
     : emptyRow(
-        6,
+        4,
         "No blocks indexed yet. Attribution will always include an unknown category.",
       );
   $("#block-feed").innerHTML = blocks.length
