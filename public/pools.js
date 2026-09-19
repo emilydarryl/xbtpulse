@@ -3,6 +3,7 @@ let page = 1,
   request = 0,
   timer;
 const params = new URL(location.href).searchParams;
+let statusView = params.get("view") === "status";
 $("#directory-query").value = params.get("q") || "";
 $("#directory-type").value = ["public", "private", "unspecified"].includes(
   params.get("type"),
@@ -20,6 +21,10 @@ async function load() {
   const q = $("#directory-query").value,
     type = $("#directory-type").value;
   const query = new URLSearchParams({ q, type, page: String(page) });
+  if (statusView) query.set("view", "status");
+  $("#status-explanation").hidden = !statusView;
+  $("#view-status").setAttribute("aria-pressed", String(statusView));
+  $("#view-directory").setAttribute("aria-pressed", String(!statusView));
   history.replaceState(null, "", "/pools?" + query);
   $("#directory-status").textContent = "Searching…";
   $("#directory-prev").disabled = true;
@@ -31,7 +36,34 @@ async function load() {
     if (id !== request) return;
     const results = $("#directory-results");
     results.replaceChildren();
+    results.className = statusView ? "panel table-scroll" : "directory-grid";
+    let tbody;
+    if (statusView) {
+      const table = add(results, "table", "");
+      const head = add(add(table, "thead", ""), "tr", "");
+      ["Pool", "Observed block share", "Latest attributed block", "Reported hashrate", "Reported pool tip", "Published protocols / source"].forEach(t => add(head, "th", t));
+      tbody = add(table, "tbody", "");
+    }
     for (const p of d.rows) {
+      if (statusView) {
+        const row = add(tbody, "tr", ""), st = p.status || {};
+        const name = add(row, "td", "");
+        if (p.profileUrl) add(name, "a", p.name).href = p.profileUrl;
+        else name.textContent = p.name;
+        add(row, "td", st.observedShare == null ? "Unavailable" : `${(st.observedShare * 100).toFixed(2)}% of ${st.sample} blocks`);
+        const latest = add(row, "td", "");
+        if (st.latestBlock) {
+          add(latest, "a", "#" + st.latestBlock.height).href = "https://mempool.guide/block/" + encodeURIComponent(st.latestBlock.hash);
+          add(latest, "p", new Date(st.latestBlock.time * 1000).toLocaleString());
+          const hours = Math.max(0, Math.floor((Date.now()/1000 - st.latestBlock.time)/3600));
+          add(latest, "p", hours < 1 ? "Less than an hour ago" : hours < 24 ? `${hours} hours ago` : `${Math.floor(hours/24)} days ago`);
+        } else latest.textContent = "No linked block in retained history";
+        add(row, "td", "Not available");
+        add(row, "td", "Not available");
+        const protocols = add(row, "td", st.protocols || "Not documented");
+        if (st.source && /^https?:\/\//.test(st.source.url)) add(protocols, "a", ` Source (${st.reviewedAt || "undated"})`).href = st.source.url;
+        continue;
+      }
       const card = add(results, "article", "");
       card.className = "panel intake-panel";
       add(
@@ -79,7 +111,7 @@ async function load() {
         "No matching pools. Try a shorter name or select All types.",
       );
     $("#directory-status").textContent =
-      `${d.total} matching listings · ${d.lastSuccess ? "Chain last checked " + new Date(d.lastSuccess).toLocaleString() : "Chain collection not yet available"}`;
+      `${d.total} matching listings${d.stale ? " · STALE chain data" : ""} · ${d.source || "Chain source unavailable"} · ${d.lastSuccess ? "Chain last checked " + new Date(d.lastSuccess).toLocaleString() : "Chain collection not yet available"}`;
     $("#directory-page").textContent = d.pages
       ? `Page ${d.page} of ${d.pages}`
       : "No results";
@@ -120,3 +152,7 @@ $("#directory-next").addEventListener("click", () => {
   load();
 });
 load();
+
+$("#view-status").addEventListener("click", () => { statusView = true; page = 1; load(); });
+$("#view-directory").addEventListener("click", () => { statusView = false; page = 1; load(); });
+setInterval(() => { if (statusView && !document.hidden) load(); }, 30000);

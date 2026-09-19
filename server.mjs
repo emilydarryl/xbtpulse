@@ -369,6 +369,8 @@ const server = http.createServer(async (req, res) => {
         page,
         pages: Math.ceil(rows.length / 30),
         lastSuccess: store.get("lastSuccess"),
+        stale: !store.get("lastSuccess") || Date.now() - store.get("lastSuccess") > Math.max(120000, pollSeconds * 3000) || !!store.get("lastError"),
+        source: store.get("source") || null,
       });
     }
     if (url.pathname === "/api/scoring-rules")

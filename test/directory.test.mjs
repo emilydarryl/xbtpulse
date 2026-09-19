@@ -33,6 +33,11 @@ test("directory includes older small pools, excludes unknown, and counts latest 
     const rows = poolDirectory(s, []);
     assert.equal(rows.length, 2);
     const tiny = rows.find((r) => r.name === "Tiny");
+    assert.equal(tiny.status.observedShare, 0);
+    assert.equal(tiny.status.sample, 144);
+    assert.equal(tiny.status.latestBlock.height, 56);
+    assert.equal(tiny.status.reportedHashrate, null);
+    assert.equal(rows.find(r => r.name === "Large").status.observedShare, 1);
     assert.equal(tiny.retainedBlocks, 1);
     assert.equal(tiny.recentBlocks, 0);
     assert.equal(tiny.lastObserved, 856000);
