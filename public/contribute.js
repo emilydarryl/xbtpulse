@@ -1,3 +1,26 @@
+async function loadParticipants() {
+  const root = document.querySelector("#operator-list");
+  try {
+    const response = await fetch("/api/dashboard?window=144", {signal:AbortSignal.timeout(15000)});
+    if (!response.ok) throw Error();
+    const data = await response.json();
+    root.replaceChildren();
+    for (const p of data.onboarding || []) {
+      const card = document.createElement("article"); card.className = "onboarding-card";
+      const title = document.createElement("h3");
+      if (p.profileUrl?.startsWith("/pool?")) {
+        const link = document.createElement("a"); link.href = p.profileUrl; link.textContent = p.name; title.append(link);
+      } else title.textContent = p.name;
+      card.append(title);
+      for (const text of [p.poolType === "private" ? "Private pool · Not accepting miners" : "Pool / gateway", p.status, `Rating: ${p.ratingStatus || "Not assessed"}`, p.lastReport ? `Last report: ${new Date(p.lastReport).toLocaleString()}` : "No report yet"]) {
+        const line = document.createElement("p"); line.textContent = text; line.className = "small"; card.append(line);
+      }
+      root.append(card);
+    }
+    if (!root.children.length) root.textContent = "No public contribution listings yet.";
+  } catch { root.textContent = "Unable to load participants. Refresh to try again."; }
+}
+loadParticipants();
 const conversationToken = Array.from(
   crypto.getRandomValues(new Uint8Array(32)),
   (v) => v.toString(16).padStart(2, "0"),

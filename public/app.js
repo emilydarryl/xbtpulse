@@ -168,16 +168,6 @@ function render() {
   suggestedQuery.set("window", $("#window").value);
   $("#suggested-compare").href = "/compare?" + suggestedQuery;
   assignPoolColors(pools);
-  $("#onboarding-cards").innerHTML = demo
-    ? "<p>Return to network mode to see real participating operators.</p>"
-    : data.onboarding?.length
-      ? data.onboarding
-          .map(
-            (p) =>
-              `<article class="onboarding-card"><p class="eyebrow">${p.poolType === "private" ? "PRIVATE POOL · NOT ACCEPTING MINERS" : p.poolType === "public" ? "PUBLIC POOL" : "POOL / GATEWAY"}</p><h3>${p.profileUrl ? `<a href="${escape(p.profileUrl)}">${escape(p.name)} ↗</a>` : escape(p.name)}</h3><p class="rating-badge ${p.status === "Telemetry Contributor" ? "contributor" : ""}">${escape(p.status)}</p><p class="small muted">Joined ${new Date(p.submittedAt).toLocaleDateString()}${p.lastReport ? "<br>Last report " + new Date(p.lastReport).toLocaleString() : ""}</p><p class="small">Rating: ${escape(p.ratingStatus)}</p></article>`,
-          )
-          .join("")
-      : "<p>No public contribution listings yet. Public and private operators can share details or corrections.</p>";
   $("#source-status").textContent = demo
     ? "Sample mode"
     : data.status === "live"

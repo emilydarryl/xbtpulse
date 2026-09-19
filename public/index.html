@@ -157,9 +157,9 @@
           <div class="panel-heading"><div><h2 id="suggested-pools-title">Pools to consider</h2><p class="small muted">Below 15% observed block share in the selected window. Public options advertising miner-built templates with your own node and DATUM gateway. Options to research—not ratings or endorsements.</p></div><a href="/pools">Browse all pools →</a><a href="/pools?view=status">Pool status →</a></div>
           <p id="suggested-empty" class="panel-foot" role="status">Checking network share…</p>
           <div class="suggested-pool-grid">
-            <article hidden><h3><a href="/pool?id=explorer%3Abitcoinxor">Bitcoin Xor →</a></h3><p><strong>Published fees:</strong> 1% own-template DATUM; 2% pool-built templates.</p><p class="small">Own node + gateway: miner chooses transactions, according to its guide.</p><p class="small" data-suggested-share="explorer:bitcoinxor">Observed share: loading…</p><a class="small" href="https://xorpool.com/" target="_blank" rel="noopener noreferrer">Source · checked Sep 18, 2026 ↗</a></article>
-            <article hidden><h3><a href="/pool?id=explorer%3Aconvoy">CONVOY →</a></h3><p><strong>Published fees:</strong> 1% own-node DATUM; 2% direct Stratum failover.</p><p class="small">Own node + gateway builds templates; direct failover gives up that control.</p><p class="small" data-suggested-share="explorer:convoy">Observed share: loading…</p><a class="small" href="https://convoy.xyz/getstarted" target="_blank" rel="noopener noreferrer">Source · checked Sep 17, 2026 ↗</a></article>
-            <article hidden><h3><a href="/pool?id=explorer%3Ariptide">RIPTIDE →</a></h3><p><strong>Published fees:</strong> 0% DATUM; variable public SV1 fee, last recorded at 1%.</p><p class="small">Own node + DATUM gateway requested; public SV1 uses the pool's gateway.</p><p class="small" data-suggested-share="explorer:riptide">Observed share: loading…</p><a class="small" href="https://riptide.maveth.ca/" target="_blank" rel="noopener noreferrer">Source · checked Sep 17, 2026 ↗</a></article>
+            <article hidden><h3><a href="/pool?id=explorer%3Abitcoinxor">Bitcoin Xor →</a></h3><p class="small" data-suggested-share="explorer:bitcoinxor">Observed share: loading…</p><p><strong>Fees:</strong> 1% own-template DATUM; 2% pool-built templates.</p><a class="small" href="https://xorpool.com/" target="_blank" rel="noopener noreferrer">Source · Sep 18, 2026 ↗</a></article>
+            <article hidden><h3><a href="/pool?id=explorer%3Aconvoy">CONVOY →</a></h3><p class="small" data-suggested-share="explorer:convoy">Observed share: loading…</p><p><strong>Fees:</strong> 1% own-node DATUM; 2% Stratum failover.</p><a class="small" href="https://convoy.xyz/getstarted" target="_blank" rel="noopener noreferrer">Source · Sep 17, 2026 ↗</a></article>
+            <article hidden><h3><a href="/pool?id=explorer%3Ariptide">RIPTIDE →</a></h3><p class="small" data-suggested-share="explorer:riptide">Observed share: loading…</p><p><strong>Fees:</strong> 0% DATUM; variable SV1, last recorded at 1%.</p><a class="small" href="https://riptide.maveth.ca/" target="_blank" rel="noopener noreferrer">Source · Sep 17, 2026 ↗</a></article>
           </div>
           <div class="panel-foot"><a id="suggested-compare" hidden href="/compare?pool=explorer%3Abitcoinxor&amp;pool=explorer%3Aconvoy&amp;pool=explorer%3Ariptide">Compare these pools →</a><details><summary>How these options were selected</summary><p>A starting shortlist with published public connection guides and an advertised own-node DATUM path, listed alphabetically. Telemetry participation is not required. This is not an exhaustive list, ranking or endorsement; omitted pools may also qualify. Template-control statements are operator claims, not independent assessments. Terms are dated snapshots; confirm fees and availability with the pool before connecting. Only pools with available, fresh observed block share strictly below 15% in the selected window appear. Sample data and missing attribution do not qualify. Observed block share estimates network hashrate; it cannot guarantee a pool is below 15% of actual hashrate.</p></details></div>
         </section>
@@ -351,14 +351,7 @@
             >Contribute pool information →</a
           >
         </div>
-        <div id="onboarding-cards" class="onboarding-cards">
-          <p>Loading participating operators…</p>
-        </div>
-        <p class="small muted">
-          Public and private operators are welcome. Participation is optional;
-          not contributing is not a failing grade. Contributions do not automatically earn a rating.
-          <a href="/ratings">See the rating framework →</a>
-        </p>
+        <a class="small" href="/contribute#participating-operators">Meet participating operators →</a>
       </section>
       <footer>
         <a href="/endpoint-checks">Public endpoint findings →</a>
