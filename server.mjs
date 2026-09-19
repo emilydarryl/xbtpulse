@@ -8,7 +8,7 @@ import { evidenceFreshness } from "./lib/evidence-freshness.mjs";
 import { profileProviderIds } from "./lib/profile-providers.mjs";
 import { initializeBlockReports, pruneBlockReports, submitBlockReport, publicBlockReports } from "./lib/block-reports.mjs";
 import { onboardingFeed } from "./lib/onboarding-feed.mjs";
-import { poolDirectory, directorySearchText } from "./lib/directory.mjs";
+import { poolDirectory, directorySearchText, sortDirectory } from "./lib/directory.mjs";
 import {
   publicScorecard,
   criteria as scoreCriteria,
@@ -358,11 +358,11 @@ const server = http.createServer(async (req, res) => {
         };
         cache.set("directory", snapshot);
       }
-      const rows = snapshot.rows.filter(
+      const rows = sortDirectory(snapshot.rows.filter(
         (p) =>
           (!q || directorySearchText(p.name).includes(q)) &&
           (type === "all" || p.poolType === type),
-      );
+      ), url.searchParams.get("sort") || "name", url.searchParams.get("direction") || "asc");
       return send(res, 200, {
         rows: rows.slice((page - 1) * 30, page * 30),
         total: rows.length,

@@ -94,3 +94,13 @@ test("directory merges explicit profiles and omits nonconsenting and pending ope
     assert.equal(rows[0].profileUrl, "/pool?id=research%3Aomega");
   } finally { s.close(); }
 });
+
+
+test("status sorting orders numbers across all rows and keeps missing values last", async () => {
+  const {sortDirectory} = await import("../lib/directory.mjs");
+  const rows = [{id:"a",name:"A",status:{reportedHashrate:null}}, {id:"b",name:"B",status:{reportedHashrate:2}}, {id:"c",name:"C",status:{reportedHashrate:10}}, {id:"d",name:"D",status:{reportedHashrate:0}}];
+  assert.deepEqual(sortDirectory(rows,"hashrate","desc").map(p=>p.id), ["c","b","d","a"]);
+  assert.deepEqual(sortDirectory(rows,"hashrate","asc").map(p=>p.id), ["d","b","c","a"]);
+  assert.deepEqual(sortDirectory(rows,"name","desc").map(p=>p.id), ["d","c","b","a"]);
+  assert.equal(rows[0].id,"a");
+});

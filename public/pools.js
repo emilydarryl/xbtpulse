@@ -4,6 +4,8 @@ let page = 1,
   timer;
 const params = new URL(location.href).searchParams;
 let statusView = params.get("view") === "status";
+let sortKey = ["name", "share", "latest", "hashrate", "tip", "protocols"].includes(params.get("sort")) ? params.get("sort") : "hashrate";
+let sortDirection = params.get("direction") === "asc" ? "asc" : "desc";
 $("#directory-query").value = params.get("q") || "";
 $("#directory-type").value = ["public", "private", "unspecified"].includes(
   params.get("type"),
@@ -21,7 +23,7 @@ async function load() {
   const q = $("#directory-query").value,
     type = $("#directory-type").value;
   const query = new URLSearchParams({ q, type, page: String(page) });
-  if (statusView) query.set("view", "status");
+  if (statusView) { query.set("view", "status"); query.set("sort", sortKey); query.set("direction", sortDirection); }
   $("#status-explanation").hidden = !statusView;
   $("#view-status").setAttribute("aria-pressed", String(statusView));
   $("#view-directory").setAttribute("aria-pressed", String(!statusView));
@@ -41,7 +43,17 @@ async function load() {
     if (statusView) {
       const table = add(results, "table", "");
       const head = add(add(table, "thead", ""), "tr", "");
-      ["Pool", "Observed block share", "Latest attributed block", "Reported hashrate", "Reported pool tip", "Published protocols / source"].forEach(t => add(head, "th", t));
+      [["name", "Pool"], ["share", "Observed block share"], ["latest", "Latest attributed block"], ["hashrate", "Reported hashrate"], ["tip", "Reported pool tip"], ["protocols", "Published protocols / source"]].forEach(([key, label]) => {
+        const th = add(head, "th", "");
+        th.setAttribute("aria-sort", sortKey === key ? (sortDirection === "asc" ? "ascending" : "descending") : "none");
+        const button = add(th, "button", label + (sortKey === key ? (sortDirection === "asc" ? " ↑" : " ↓") : " ↕"));
+        button.className = "quiet-button";
+        button.type = "button";
+        button.addEventListener("click", () => {
+          sortDirection = sortKey === key ? (sortDirection === "asc" ? "desc" : "asc") : ["name", "protocols"].includes(key) ? "asc" : "desc";
+          sortKey = key; page = 1; load();
+        });
+      });
       tbody = add(table, "tbody", "");
     }
     for (const p of d.rows) {

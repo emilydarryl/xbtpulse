@@ -241,3 +241,6 @@ Shortlist eligibility now requires a matched pool with fresh live observed share
 ## Pool status directory view (September 19)
 
 `/pools?view=status` adds a searchable, paginated table with observed latest-144 block share, last attributed block/date/age, and dated researched protocol descriptions/source links. Refreshes every 30 seconds while visible; API includes chain source and stale state. Homepage links to the view. Reported hashrate and pool tip remain unavailable: the external reference page is server-rendered without source timestamps/API provenance, and Crypto-Eire's public stats currently return zero counters without established reporting scope. Do not use those as verified inactivity or invent hashrate from tag share. Direct-source adapters are still needed to complete those columns. No third-party source code copied. Pending bold share badge commit is still local and accompanies this work if deployed.
+
+Pool status supports server-side sorting before pagination: name, observed share, latest block height, reported hashrate, reported tip and published protocol text. Header clicks reverse direction; URL preserves sorting. Default status sort is hashrate descending, with nulls last and alphabetical ties. Hashrate remains unavailable. All 93 tests pass.
+
