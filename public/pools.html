@@ -26,7 +26,7 @@
       </p>
       <p><a class="primary-button" href="/compare">Compare up to three pools →</a> · <a href="/watchlist">My watchlist ☆</a></p>
       <p><button id="view-directory" class="quiet-button" type="button">Directory</button> <button id="view-status" class="quiet-button" type="button">Pool status</button></p>
-      <p id="status-explanation" class="small muted" hidden>Observed share uses the latest 144 collected network blocks. Reported hashrate and pool tip are unavailable until a public source is integrated; missing values do not mean zero or offline. Protocol descriptions are dated website claims, not verified miner template control. Refreshes every 30 seconds.</p>
+      <p id="status-explanation" class="small muted" hidden>Observed block share uses the latest 144 collected blocks. Reported metrics come from public pool APIs; check each endpoint's scope and source timestamp. Reported network share divides that endpoint's hashrate by its source's network estimate, so it may cover less than the pool's attributed blocks. Missing values do not mean zero or offline. Source data older than five minutes is marked stale. Protocols are dated claims, not verified template control. Refreshes every 30 seconds; API metrics are cached for one minute.</p>
       <form class="pool-search" id="directory-search" role="search">
         <label for="directory-query">Pool name</label
         ><input
@@ -44,7 +44,7 @@
       </form>
       <p id="directory-status" role="status">Loading pools…</p>
       <p class="small muted">
-        Directory cards are alphabetical. Click a status column heading to sort all matching pools; click again to reverse. Missing values stay last, with alphabetical ties. Hashrate is the default status sort, but currently unavailable. Type comes from submitted profiles; unknown type
+        Directory cards are alphabetical. Click a status column heading to sort all matching pools; click again to reverse. Missing values stay last, with alphabetical ties. Hashrate is the default status sort; source coverage is partial. Type comes from submitted profiles; unknown type
         does not mean public. Explorer attribution is not verified ownership. No
         recent blocks does not mean offline. Private pools are not accepting
         miners.

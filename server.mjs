@@ -1,4 +1,5 @@
 import { createMarketPrices } from "./lib/market-prices.mjs";
+import { createPoolMetrics } from "./lib/pool-metrics.mjs";
 import { sharedAddresses, filterSharedAddresses } from "./lib/shared-addresses.mjs";
 import {characterize} from './lib/block-characteristics.mjs';
 import {profileChanges,shareChanges} from './lib/change-summary.mjs';
@@ -187,6 +188,7 @@ async function jsonBody(req) {
   return JSON.parse(text);
 }
 const marketPrices = createMarketPrices();
+const poolMetrics = createPoolMetrics();
 let cache = new Map();
 const server = http.createServer(async (req, res) => {
   res.setHeader("X-Content-Type-Options", "nosniff");
@@ -362,7 +364,9 @@ const server = http.createServer(async (req, res) => {
         };
         cache.set("directory", snapshot);
       }
-      const rows = sortDirectory(snapshot.rows.filter(
+      const metric = url.searchParams.get("view") === "status" ? await poolMetrics() : null;
+      const enriched = snapshot.rows.map(p => p.id === "explorer:bitcoinxor" && metric ? {...p, status:{...p.status,...metric}} : p);
+      const rows = sortDirectory(enriched.filter(
         (p) =>
           (!q || directorySearchText(p.name).includes(q)) &&
           (type === "all" || p.poolType === type),

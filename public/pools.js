@@ -4,7 +4,7 @@ let page = 1,
   timer;
 const params = new URL(location.href).searchParams;
 let statusView = params.get("view") === "status";
-let sortKey = ["name", "share", "latest", "hashrate", "tip", "protocols"].includes(params.get("sort")) ? params.get("sort") : "hashrate";
+let sortKey = ["name", "share", "latest", "hashrate", "networkShare", "tip", "protocols"].includes(params.get("sort")) ? params.get("sort") : "hashrate";
 let sortDirection = params.get("direction") === "asc" ? "asc" : "desc";
 $("#directory-query").value = params.get("q") || "";
 $("#directory-type").value = ["public", "private", "unspecified"].includes(
@@ -43,7 +43,7 @@ async function load() {
     if (statusView) {
       const table = add(results, "table", "");
       const head = add(add(table, "thead", ""), "tr", "");
-      [["name", "Pool"], ["share", "Observed block share"], ["latest", "Latest attributed block"], ["hashrate", "Reported hashrate"], ["tip", "Reported pool tip"], ["protocols", "Published protocols / source"]].forEach(([key, label]) => {
+      [["name", "Pool"], ["share", "Observed block share"], ["latest", "Latest attributed block"], ["hashrate", "Reported hashrate"], ["networkShare", "Reported network share"], ["tip", "Reported pool tip"], ["protocols", "Published protocols / source"]].forEach(([key, label]) => {
         const th = add(head, "th", "");
         th.setAttribute("aria-sort", sortKey === key ? (sortDirection === "asc" ? "ascending" : "descending") : "none");
         const button = add(th, "button", label + (sortKey === key ? (sortDirection === "asc" ? " ↑" : " ↓") : " ↕"));
@@ -70,8 +70,14 @@ async function load() {
           const hours = Math.max(0, Math.floor((Date.now()/1000 - st.latestBlock.time)/3600));
           add(latest, "p", hours < 1 ? "Less than an hour ago" : hours < 24 ? `${hours} hours ago` : `${Math.floor(hours/24)} days ago`);
         } else latest.textContent = "No linked block in retained history";
-        add(row, "td", "Not available");
-        add(row, "td", "Not available");
+        const hash = add(row, "td", st.reportedHashrate == null ? "Not available" : `${(st.reportedHashrate / 1e12).toLocaleString(undefined,{maximumFractionDigits:2})} TH/s${st.metricsStale ? " · STALE" : ""}`);
+        if (st.metricsScope) add(hash, "p", st.metricsScope).className = "small muted";
+        if (st.metricsSource) add(hash, "a", "Source API ↗").href = st.metricsSource;
+        if (st.metricsUpdatedAt) add(hash, "p", "Source updated " + new Date(st.metricsUpdatedAt).toLocaleString()).className = "small muted";
+        if (st.metricsFetchedAt) add(hash, "p", "Fetched " + new Date(st.metricsFetchedAt).toLocaleString()).className = "small muted";
+        if (st.metricsUnavailable) add(hash, "p", "Source request failed; not evidence of downtime.").className = "small muted";
+        add(row, "td", st.reportedNetworkShare == null ? "Not available" : `${(st.reportedNetworkShare * 100).toFixed(2)}%${st.metricsStale ? " · STALE" : ""} (same endpoint scope)`);
+        add(row, "td", st.reportedTip == null ? "Not available" : `${st.reportedTip.toLocaleString()}${st.metricsStale ? " · STALE" : ""}`);
         const protocols = add(row, "td", st.protocols || "Not documented");
         if (st.source && /^https?:\/\//.test(st.source.url)) add(protocols, "a", ` Source (${st.reviewedAt || "undated"})`).href = st.source.url;
         continue;
