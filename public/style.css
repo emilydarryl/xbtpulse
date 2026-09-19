@@ -1535,3 +1535,19 @@ dialog::backdrop {
 .suggested-pools summary { cursor: pointer; }
 .suggested-pools details p { max-width: 850px; }
 @media (max-width: 760px) { .suggested-pool-grid { grid-template-columns: 1fr; } }
+
+.suggested-pool-grid [data-suggested-share] {
+  display: inline-block;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 10px 0;
+  padding: 7px 11px;
+  border: 1px solid #d87900;
+  border-radius: 8px;
+  background: #fff0d7;
+  color: #713300;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
