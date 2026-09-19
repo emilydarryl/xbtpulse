@@ -244,3 +244,7 @@ Shortlist eligibility now requires a matched pool with fresh live observed share
 
 Pool status supports server-side sorting before pagination: name, observed share, latest block height, reported hashrate, reported tip and published protocol text. Header clicks reverse direction; URL preserves sorting. Default status sort is hashrate descending, with nulls last and alphabetical ties. Hashrate remains unavailable. All 93 tests pass.
 
+
+## Exchange quotes (September 19)
+
+Collapsed homepage XBT market prices panel reads `/api/market-prices`. Fixed read-only public endpoints: NeoxEX BTCB2_USDC and NonKYC BTCB2_USDT. Pair identity checked, quotes kept separate with native stablecoin units; no USD conversion/average. API cache coalesces requests for 60s with 8s timeout, redirects rejected and 32KB body limit. Failures preserve last quote flagged stale with original fetch time. NeoxEX source computed time older than 5m is stale; NonKYC has no source timestamp and this limitation is visible. No keys, trading or third-party widget code. Frontend refreshes each minute while visible. NeoxEX API docs explicitly identify BTCB2 as BLAKE2b XBT; NonKYC listing announcement and pair identity checked.

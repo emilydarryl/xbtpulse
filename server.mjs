@@ -1,3 +1,4 @@
+import { createMarketPrices } from "./lib/market-prices.mjs";
 import { sharedAddresses, filterSharedAddresses } from "./lib/shared-addresses.mjs";
 import {characterize} from './lib/block-characteristics.mjs';
 import {profileChanges,shareChanges} from './lib/change-summary.mjs';
@@ -137,6 +138,7 @@ const files = {
   "/compare.js": "compare.js",
   "/share-card.js": "share-card.js",
   "/pools.js": "pools.js",
+  "/market-prices.js": "market-prices.js",
   "/scorecard": "scorecard.html",
   "/scoring-rules": "scorecard.html",
   "/scorecard.js": "scorecard.js",
@@ -184,6 +186,7 @@ async function jsonBody(req) {
   }
   return JSON.parse(text);
 }
+const marketPrices = createMarketPrices();
 let cache = new Map();
 const server = http.createServer(async (req, res) => {
   res.setHeader("X-Content-Type-Options", "nosniff");
@@ -340,6 +343,7 @@ const server = http.createServer(async (req, res) => {
       res.setHeader("Allow", "GET, HEAD");
       return send(res, 405, { error: "Method not allowed" });
     }
+    if (url.pathname === "/api/market-prices") return send(res, 200, await marketPrices());
     if (url.pathname === "/healthz") return send(res, 200, { ok: true });
     if (url.pathname === "/api/pools") {
       const q = directorySearchText((url.searchParams.get("q") || "")
