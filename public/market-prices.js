@@ -13,7 +13,10 @@ async function refreshPrices() {
       const card = add(root, "div", "");
       card.className = `market-ticker ${row.id}`;
       const source = add(card, "div", ""); source.className = "market-ticker-source";
-      add(source, "span", row.name); add(source, "span", row.quote);
+      const link = add(source, "a", row.name);
+      link.href = row.url; link.rel = "noopener noreferrer"; link.target = "_blank";
+      link.title = `${row.pair} exchange quote · source API`;
+      add(source, "span", row.quote);
       const price = add(card, "strong", row.price == null ? "—" : `${row.price.toLocaleString(undefined,{maximumFractionDigits:2})}`);
       price.className = "market-ticker-price";
       add(card, "span", row.price == null ? "Price unavailable" : row.quote).className = "market-ticker-unit";
@@ -22,7 +25,6 @@ async function refreshPrices() {
       if (row.stale) add(card, "span", "STALE").className = "market-ticker-stale";
       const meta = add(card, "span", row.fetchedAt ? `Updated ${new Date(row.fetchedAt).toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})}` : "No recent fetch"); meta.className = "market-ticker-meta";
       if (row.unavailable) meta.textContent = "Source unavailable";
-      const link = add(card, "a", "Source API ↗"); link.href = row.url; link.rel = "noopener noreferrer"; link.target = "_blank";
     }
   } catch { root.textContent = "Exchange quotes unavailable. Please try again shortly."; }
   finally { busy = false; }

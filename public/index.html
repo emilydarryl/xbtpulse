@@ -40,11 +40,9 @@
         </div>
 
       </section>
-      <details class="panel market-prices">
-        <summary>XBT market prices <span class="small muted">· exchange quotes</span></summary>
+      <section class="panel market-prices" aria-label="Bitcoin BLAKE2b exchange quotes">
         <div id="market-prices" role="status">Loading exchange quotes…</div>
-        <p class="small muted">Bitcoin BLAKE2b is listed as BTCB2 on these exchanges. Quotes are USDC/USDT, not USD conversions. Last-trade prices may lag current bids and asks; no exchange average. NonKYC provides no source timestamp. Fetch time does not establish trade freshness. Refreshes every minute; independent of the block observation window.</p>
-      </details>
+      </section>
       <form class="pool-search home-search" action="/pools" method="get" role="search">
         <label for="find-pool">Find a pool</label
         ><input
