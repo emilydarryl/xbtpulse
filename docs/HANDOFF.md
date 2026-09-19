@@ -231,3 +231,7 @@ The watch now searches all retained overlaps before limiting output. `/api/share
 
 Admin now includes Personal coinbase tag search, default SOVEROOT. Authenticated GET /api/admin/tag-search searches all retained original tag text case-insensitively with 25-result pages, block links, UTC times, original explorer labels and coverage. Tags are matches, not verified finder credit. No background notifications or public search history. See docs/admin.md. All 92 tests passed. Includes the preceding shared-address watch search/filter update.
 
+
+## Homepage pools to consider (September 18)
+
+Compact three-card shortlist below main charts: Bitcoin Xor, CONVOY and RIPTIDE, alphabetically. Dated source links and advertised own-node DATUM paths; not rankings, verified template control or endorsements. Telemetry participation is not required. Terms are static editorial snapshots in public/index.html; review those alongside researched profiles when terms change. Observed shares follow the dashboard observation window and stale state; sample mode suppresses real-pool share claims. No matching attributed blocks is described as such, not evidence of inactivity. Compare link preselects all three. Mobile stacks cards.

@@ -1524,3 +1524,14 @@ dialog::backdrop {
 .shared-watch-filter { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; }
 .shared-watch-filter label { display: grid; gap: 6px; flex: 1 1 190px; }
 .shared-watch-filter input, .shared-watch-filter select { min-width: 0; width: 100%; }
+
+.suggested-pools .panel-heading { gap: 16px; flex-wrap: wrap; }
+.suggested-pools .panel-heading p { margin: 6px 0 0; }
+.suggested-pool-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; padding: 0 24px 20px; }
+.suggested-pool-grid article { border-left: 2px solid #ef8b00; padding-left: 14px; min-width: 0; }
+.suggested-pool-grid h3 { margin: 0 0 8px; font-size: 17px; }
+.suggested-pool-grid p { margin: 6px 0; }
+.suggested-pools .panel-foot { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: start; }
+.suggested-pools summary { cursor: pointer; }
+.suggested-pools details p { max-width: 850px; }
+@media (max-width: 760px) { .suggested-pool-grid { grid-template-columns: 1fr; } }

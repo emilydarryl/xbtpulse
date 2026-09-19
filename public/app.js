@@ -150,6 +150,10 @@ function render() {
   $("#tag-breakdown").hidden = !tagMode;
   const tagsOpen = $("#tag-breakdown details")?.open;
   $("#tag-breakdown").innerHTML = tagMode ? `<details ${tagsOpen ? "open" : ""}><summary>All original tags (${(data.tags || []).length})</summary><div class="table-scroll profile-activity-scroll"><table><thead><tr><th>Recorded tag</th><th>Blocks</th><th>Share</th></tr></thead><tbody>${(data.tags || []).map(p=>`<tr><td class="tag-text">${escape(p.name)}</td><td>${p.blocks}</td><td>${pct(p.share)}</td></tr>`).join("")}</tbody></table></div></details>` : "";
+  document.querySelectorAll("[data-suggested-share]").forEach(el => {
+    const pool = pools.find(p => p.id === el.dataset.suggestedShare);
+    el.textContent = demo ? "Observed share: unavailable in sample mode" : !data.sample ? "Observed share: unavailable" : pool ? `Observed share: ${pct(pool.share)} of ${data.sample} blocks${data.status === "stale" ? " (stale data)" : ""}` : `No attributed blocks in this ${data.sample}-block window${data.status === "stale" ? " (stale data)" : ""}`;
+  });
   assignPoolColors(pools);
   $("#onboarding-cards").innerHTML = demo
     ? "<p>Return to network mode to see real participating operators.</p>"
