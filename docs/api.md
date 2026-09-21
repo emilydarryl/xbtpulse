@@ -115,3 +115,7 @@ Dashboard `readableTags` uses explicit display-only text rules in `lib/readable-
 ## Shared-address search and links
 
 The watch now searches all retained overlaps before limiting output. `/api/shared-addresses` accepts `q` (address/source label/raw tag/documented pool name), `type=all|documented|unclassified`, `share=50|90|100` (at least that percentage in one observed block), exact `address`, and `page` (25 recipients per page). `allMatches` is the unfiltered total. All raw groups are searched, even beyond the 30 returned per recipient; matching text groups sort first. Direct finding links use `/endpoint-checks?address=...#shared-address-watch` and auto-expand the selected address. No ownership inference or attribution changes.
+
+## Reachable node observations
+
+`GET /api/nodes` returns cached, attributed aggregate observations from The BTC Network: status, source/fetch dates, counts by full advertised Knots release and network, partial/capped scan flags, and last-per-UTC-day history for 30 days. `snapshot: null` means unavailable, not zero. Requests never trigger a crawl or upstream fetch. No IP/onion addresses are exposed. See [method and field semantics](node-observations.md).

@@ -1,5 +1,15 @@
 # XBT Pulse — Codex handoff
 
+## September 21 reachable nodes and Knots versions
+
+The owner requested reachable XBT node tracking and Knots versions. Added `/nodes`, `/api/nodes`, an Explore menu entry and homepage link. Uses the existing public The BTC Network crawler feed (`https://thebtc.network/data/nodes.json`), clearly attributed as third-party P2P observations rather than an XBT Pulse crawl. No private RPC, token, miner setup or direct network scanning is involved.
+
+The background importer checks every 15 minutes; public API reads never initiate network requests. Validates schema, BLAKE2b service bit 28, endpoint uniqueness, timestamps and count consistency. Only aggregates and advertised user agents persist in SQLite. Full Satoshi release plus Knots build/RC suffix identifies version groups; user-agent comments do not split releases. IPv4/IPv6/Tor counts and last-per-UTC-day history are displayed. The source's 2,000-candidate cap is explicit even when its partial flag is false. These are endpoint observations, not unique operators or verified installed software.
+
+Two-hour-old source observations are stale; invalid/failed refreshes retain the last dated snapshot and show unavailable. History is collected here going forward, kept for 30 days plus the latest snapshot. `NODE_OBSERVATIONS_ENABLED=false` disables polling. See [method and operations](node-observations.md). Adds `node_observations` and observer metadata only; mining data, provider credentials, scores and attribution are unchanged.
+
+Validation before deployment: 102 Node tests, syntax and collector packaging checks passed; focused observer tests passed after the final history query adjustment. Real-browser local checks confirmed the observed 187-endpoint snapshot, five release/RC groups, source/cap labels and responsive table. Read `/opt/xbtpulse/DEPLOYED_COMMIT` for the final deployed revision; deployment verification is recorded below once complete.
+
 ## September 17 public coverage follow-through
 
 Added sourced CONVOY and RIPTIDE fee, connection and template-role claims to existing profiles. Missing terms remain unfilled; variable RIPTIDE SV1 fees are a dated website-text observation. Lazarus source returned 403, so no new terms were inferred. See [coverage review](public-coverage-2026-09-17.md). No ratings, telemetry approvals or attribution mappings changed.

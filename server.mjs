@@ -1,3 +1,4 @@
+import { createNodeObserver } from './lib/node-observations.mjs';
 import { createMarketPrices } from "./lib/market-prices.mjs";
 import { createPoolMetrics } from "./lib/pool-metrics.mjs";
 import { sharedAddresses, filterSharedAddresses } from "./lib/shared-addresses.mjs";
@@ -53,6 +54,7 @@ const root = fileURLToPath(new URL(".", import.meta.url)),
 const dataDir = resolve(root, process.env.DATA_DIR || "data");
 await mkdir(dataDir, { recursive: true });
 const store = new Store(join(dataDir, "pulse.sqlite"));
+const nodeObserver = createNodeObserver(store, {enabled:process.env.NODE_OBSERVATIONS_ENABLED !== 'false'});
 initializeBlockReports(store);
 store.expireApplications();
 initializeAdmin(store);
@@ -86,6 +88,8 @@ const retention = Math.max(
 const collector = new Collector(store, source, { retention }),
   pollSeconds = Math.max(10, Number(process.env.POLL_SECONDS) || 30);
 const files = {
+  "/nodes": "nodes.html",
+  "/nodes.js": "nodes.js",
   "/token-claim": "token-claim.html",
   "/token-claim.js": "token-claim.js",
   "/": "index.html",
@@ -345,6 +349,7 @@ const server = http.createServer(async (req, res) => {
       res.setHeader("Allow", "GET, HEAD");
       return send(res, 405, { error: "Method not allowed" });
     }
+    if (url.pathname === "/api/nodes") return send(res, 200, nodeObserver.view());
     if (url.pathname === "/api/market-prices") return send(res, 200, await marketPrices());
     if (url.pathname === "/healthz") return send(res, 200, { ok: true });
     if (url.pathname === "/api/pools") {
@@ -598,6 +603,8 @@ server.maxHeadersCount = 40;
 server.listen(port, process.env.HOST || "127.0.0.1", () =>
   console.log(`XBT Pulse: http://127.0.0.1:${port}`),
 );
+void nodeObserver.poll();
+const nodeTimer = setInterval(() => { void nodeObserver.poll(); }, 60000);
 await collector.poll();
 captureChanges(store);
 capturePoolHistory(store,registry,researchedProfiles,Date.now(),Math.max(180000,pollSeconds*3000));
@@ -612,6 +619,7 @@ capturePoolHistory(store,registry,researchedProfiles,Date.now(),Math.max(180000,
 for (const signal of ["SIGTERM", "SIGINT"])
   process.on(signal, () => {
     clearInterval(timer);
+    clearInterval(nodeTimer);
     server.close(() => process.exit(0));
     setTimeout(() => process.exit(0), 5000).unref();
   });
