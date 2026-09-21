@@ -18,7 +18,7 @@ function render(data) {
     : data.status === 'stale' ? 'Stale source scan. Current reachability is unknown.'
     : data.status === 'partial' ? 'Partial or degraded source scan. This count may understate reachability.'
     : 'Latest source scan available.';
-  $('node-status').textContent = `${warning} Observed ${date(s.observedAt)}.${s.partial && data.status !== 'partial' ? ' This scan was partial or degraded.' : ''}`;
+  $('node-status').textContent = `${warning} Observed ${date(s.observedAt)}.${s.resummarisedOnly ? ' The source regenerated its summary without running new probes; the observation time is unchanged.' : ''}${s.partial && data.status !== 'partial' ? ' This scan was partial or degraded.' : ''}`;
   $('node-count').textContent = s.reachable.toLocaleString();
   $('node-scan-time').textContent = `In the scan ending ${date(s.scanFinishedAt)}`;
   $('node-version-count').textContent = s.versions.filter(v => v.version.startsWith('Knots ')).length;

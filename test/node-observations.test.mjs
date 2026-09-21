@@ -74,3 +74,20 @@ test('zero observations are distinct from no snapshot and partial scans remain l
   const observer=createNodeObserver(store,{clock:()=>now,fetcher:async()=>new Response(JSON.stringify(body))});
   await observer.poll();assert.equal(observer.view().snapshot.reachable,0);assert.equal(observer.view().status,'partial');store.db.close();
 });
+
+test('regenerated summaries preserve observation age and require a matching recorded scan',async()=>{
+  const store=new Store(':memory:');let time=now,body=fixture();
+  const observer=createNodeObserver(store,{clock:()=>time,fetcher:async()=>new Response(JSON.stringify(body))});
+  await observer.poll();const previous=observer.view().snapshot;
+  time+=NODE_STALE_MS+1000;
+  body.generated_at_epoch=Math.floor(time/1000);
+  body.crawl={resummarised_only:true,raw_mtime_epoch:Math.floor(now/1000)-2};
+  assert.throws(()=>parseNodeObservations(body,time));
+  const unmatched=structuredClone(body);unmatched.crawl.raw_mtime_epoch-=3600;
+  assert.throws(()=>parseNodeObservations(unmatched,time,previous));
+  await observer.poll();const view=observer.view();
+  assert.equal(view.status,'stale');assert.equal(view.snapshot.observedAt,previous.observedAt);
+  assert.equal(view.snapshot.summaryGeneratedAt,time);assert.equal(view.snapshot.resummarisedOnly,true);
+  assert.equal(view.history.length,1);assert.equal(view.snapshot.candidateLimitReached,true);
+  store.db.close();
+});

@@ -23,3 +23,7 @@ The last snapshot is kept for failure visibility. Other snapshots have 30-day re
 `GET /api/nodes` returns source attribution, `status` (current/partial/stale/unavailable/disabled), `stale`, last attempt/fetch timestamps, refresh intervals, a nullable aggregate `snapshot`, and daily `history`. No endpoints are returned. The browser refreshes this cached response every minute while visible. Failure to load the API hides the displayed results rather than implying they are fresh.
 
 Tests cover XBT scope, full version and RC grouping, duplicate endpoints, invalid timestamps/totals, no address leakage, background fetch coalescing, persistence, stale/failed responses, oversized payloads, zero versus unknown, and partial scans. Source schema changes require a reviewed adapter update; do not relax validation merely to make the counter display.
+
+### Regenerated source summaries
+
+The source can emit `crawl.resummarised_only: true` instead of a full scan window. This is accepted only when its raw-file timestamp is within 60 seconds of an already retained scan finish and candidate/handshake/reachable totals match. All endpoint, service and timestamp validation still applies using that retained window. `summaryGeneratedAt` changes, but `observedAt`, the scan window and daily observation age do not. A resummary cannot bootstrap an empty database or masquerade as a fresh scan. The page explicitly says no new probes ran.

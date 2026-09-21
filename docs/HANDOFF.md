@@ -1,5 +1,9 @@
 # XBT Pulse — Codex handoff
 
+## September 21 source resummary compatibility
+
+A requested node refresh exposed a source metadata change: the public feed regenerated a summary with `crawl.resummarised_only`, explicitly without new probes. The importer now accepts this only against a matching retained scan (raw timestamp within 60 seconds of scan finish, same candidate/handshake/reachable totals), revalidates records, preserves the original observation time, and labels the resummary in the UI. Empty installations must wait for a full scan. This does not trigger the external crawler. Six focused observer tests, syntax and packaging checks passed.
+
 ## September 21 reachable nodes and Knots versions
 
 The owner requested reachable XBT node tracking and Knots versions. Added `/nodes`, `/api/nodes`, an Explore menu entry and homepage link. Uses the existing public The BTC Network crawler feed (`https://thebtc.network/data/nodes.json`), clearly attributed as third-party P2P observations rather than an XBT Pulse crawl. No private RPC, token, miner setup or direct network scanning is involved.
