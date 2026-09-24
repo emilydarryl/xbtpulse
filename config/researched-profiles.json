@@ -105,7 +105,7 @@
     "poolType": "public",
     "fee": "0% DATUM; variable public SV1 fee advertised as currently 1%. Half of the SV1 skim is credited to live DATUM miners and half to operations.",
     "payout": "Website describes share-difficulty-weighted Ocean TIDES payouts, with a window of seven confirmed finds plus current work. It distinguishes coinbase payouts and manual payouts.",
-    "protocols": "DATUM: riptide.maveth.ca:28916. Public Stratum V1: sv1.riptide.maveth.ca:23337.",
+    "protocols": "Connection settings checked September 24, 2026: DATUM riptide.maveth.ca:29120 (default, minimum difficulty 1024), or :29121 (8192). Public Stratum V1 sv1.riptide.maveth.ca:29128 (default), or :29129 (8192). Other terms retain their September 17 review date.",
     "template": "Website asks DATUM miners to run their own BLAKE2b Knots node and gateway. Direct ASIC SV1 is a separate pool-hosted connection, not the miner's own DATUM gateway.",
     "website": "https://riptide.maveth.ca/",
     "setup": "https://riptide.maveth.ca/",
