@@ -1,5 +1,9 @@
 # XBT Pulse — Codex handoff
 
+## Pool-choice guidance
+
+Pools to consider now explains why each shortlisted option merits research, what to check before connecting, and links to own-node setup guidance. The reasons summarize existing dated public claims, not newly verified guarantees. Recorded fees/source dates remain visible. Historical luck is moved into optional expandable context and explicitly excluded from selection criteria. The existing fresh observed-share eligibility rule and shortlist are unchanged. Focus remains miner choice, payout clarity and visible unknowns; no automatic rankings or endorsements.
+
 ## September 24 suggested-pool luck
 
 Added a dated, explicitly pool-reported seven-day luck snapshot to Bitcoin Xor in Pools to consider: 107%, observed on its public homepage September 24, shared DATUM service only. It is not live, independently verified, or necessarily the same scope as explorer attribution. CONVOY and RIPTIDE show Not available because a comparable source was not verified. Do not derive luck from observed block share or replace unknown block outcomes with zero. The card explanation separates this seven-day period from the selected block window and warns that past luck does not improve future odds. No automatic luck scraper or reporting feed has been installed. Refresh the snapshot only after rechecking the source and scope.
