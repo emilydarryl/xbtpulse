@@ -1,5 +1,9 @@
 # XBT Pulse — Codex handoff
 
+## September 24 suggested-pool luck
+
+Added a dated, explicitly pool-reported seven-day luck snapshot to Bitcoin Xor in Pools to consider: 107%, observed on its public homepage September 24, shared DATUM service only. It is not live, independently verified, or necessarily the same scope as explorer attribution. CONVOY and RIPTIDE show Not available because a comparable source was not verified. Do not derive luck from observed block share or replace unknown block outcomes with zero. The card explanation separates this seven-day period from the selected block window and warns that past luck does not improve future odds. No automatic luck scraper or reporting feed has been installed. Refresh the snapshot only after rechecking the source and scope.
+
 ## September 21 source resummary compatibility
 
 A requested node refresh exposed a source metadata change: the public feed regenerated a summary with `crawl.resummarised_only`, explicitly without new probes. The importer now accepts this only against a matching retained scan (raw timestamp within 60 seconds of scan finish, same candidate/handshake/reachable totals), revalidates records, preserves the original observation time, and labels the resummary in the UI. Empty installations must wait for a full scan. This does not trigger the external crawler. All 103 Node tests (including six focused observer tests), syntax and packaging checks passed. Deployed `b86882472f3f47b672b542d0df56f8d2bbca650c`; a one-time feed refresh succeeded. Live API/browser and health/readiness passed. Retained scan time remains September 21 16:13:02 UTC (190 endpoints; 67 advertising Knots 29.4.2 stable); the 16:45:04 UTC summary is explicitly labeled as having no new probes. Further upgrades require a newer external crawl; no external rescan was triggered.
