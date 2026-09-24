@@ -1,5 +1,9 @@
 # XBT Pulse — Codex handoff
 
+## Pool-choice intro spacing
+
+The homepage Choosing a pool paragraph now uses the section heading's 25px horizontal inset and 16px bottom spacing instead of sitting against the panel edge.
+
 ## September 24 DATUM connection details
 
 Each Pools to consider card now has an expandable DATUM connection section with the upstream host, port, 128-hex public key and dated operator source. Bitcoin Xor includes US/EU/HK hosts; CONVOY uses its published beta1 host. RIPTIDE homepage, setup script and public /api/info agree on default DATUM port 29120; its profile also corrects outdated SV1 port 23337 to 29128. Other profile terms retain their earlier review date. These are publicly advertised settings, not successful handshake tests. ASICs connect to the miner’s own gateway, not these upstream DATUM ports. Recheck keys and ports against operator guides before refreshing the static snapshots.
