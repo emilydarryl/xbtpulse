@@ -193,3 +193,14 @@ test("private tag search requires login and searches all retained original text"
   await call("logout", {});
   assert.equal((await call("tag-search?q=SOVEROOT")).status, 401);
 });
+
+test('market moderation requires admin, correct origin and CSRF',async t=>{
+ const {store,call}=fixture(t);
+ assert.equal((await call('market')).status,401);
+ assert.equal((await call('market',{id:'missing',action:'publish'})).status,401);
+ await call('setup',{code:bootstrap(store),password:'market-test-password-long'});
+ assert.equal((await call('market')).status,200);
+ assert.equal((await call('market',{id:'missing',action:'publish'},{'x-csrf-token':''})).status,403);
+ assert.equal((await call('market',{id:'missing',action:'publish'},{origin:'https://market.xbtpulse.tech'})).status,403);
+ assert.equal((await call('market',{id:'missing',action:'publish'})).status,400);
+});

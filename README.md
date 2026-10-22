@@ -20,6 +20,8 @@ The sample UI is explicitly illustrative. Live data starts only when `EXPLORER_A
 
 ## What is implemented
 
+- [XBT Market](https://market.xbtpulse.tech): a separate goods/services trading board with XBT prices, seller contact, moderated submissions and private sold/withdraw links. No custody, escrow, ratings or invented listings. See [marketplace operations](docs/marketplace.md).
+
 - [Reachable XBT nodes and Knots versions](https://xbtpulse.tech/nodes): attributed public crawler feed, full advertised release/RC breakdowns, IPv4/IPv6/Tor counts, and 30-day recorded daily history. Bounded/partial scans and stale data are explicit; counts are endpoints, not unique operators. See [method](docs/node-observations.md).
 
 - Homepage What changed summary surfaces substantive public profile updates and descriptive observed-share shifts from existing history, with profile evidence links, dates, minimum coverage and explicit limits. It remains live history when sample dashboard mode is selected.

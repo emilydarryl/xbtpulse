@@ -1,3 +1,4 @@
+import {initializeMarketplace,submitListing,marketListings,manageListing,pruneMarketplace} from './lib/marketplace.mjs';
 import { createNodeObserver } from './lib/node-observations.mjs';
 import { createMarketPrices } from "./lib/market-prices.mjs";
 import { createPoolMetrics } from "./lib/pool-metrics.mjs";
@@ -55,6 +56,7 @@ const dataDir = resolve(root, process.env.DATA_DIR || "data");
 await mkdir(dataDir, { recursive: true });
 const store = new Store(join(dataDir, "pulse.sqlite"));
 const nodeObserver = createNodeObserver(store, {enabled:process.env.NODE_OBSERVATIONS_ENABLED !== 'false'});
+initializeMarketplace(store);
 initializeBlockReports(store);
 store.expireApplications();
 initializeAdmin(store);
@@ -88,6 +90,9 @@ const retention = Math.max(
 const collector = new Collector(store, source, { retention }),
   pollSeconds = Math.max(10, Number(process.env.POLL_SECONDS) || 30);
 const files = {
+  "/market": "market.html",
+  "/market.css": "market.css",
+  "/market.js": "market.js",
   "/nodes": "nodes.html",
   "/nodes.js": "nodes.js",
   "/token-claim": "token-claim.html",
@@ -200,6 +205,10 @@ const server = http.createServer(async (req, res) => {
   res.setHeader("X-Frame-Options", "DENY");
   try {
     const url = new URL(req.url, "http://localhost");
+    const marketHost = req.headers.host?.split(':')[0] === 'market.xbtpulse.tech';
+    if (marketHost && url.pathname === '/') url.pathname='/market';
+    if (marketHost && !['/market','/market.js','/market.css','/style.css','/favicon.svg','/api/market/listings','/api/market/manage','/healthz'].includes(url.pathname)) return send(res,404,{error:'Not found'});
+
     res.setHeader(
       "Content-Security-Policy",
       "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action " + (url.pathname === "/" ? "'self'" : "'none'"),
@@ -231,6 +240,21 @@ const server = http.createServer(async (req, res) => {
         });
       }
       return;
+    }
+    if (url.pathname === '/api/market/listings' || url.pathname === '/api/market/manage') {
+      try {
+        const origins=[process.env.ADMIN_ORIGIN||'https://xbtpulse.tech',process.env.MARKET_ORIGIN||'https://market.xbtpulse.tech'];
+        if(req.method==='POST' && (!origins.includes(req.headers.origin)||!req.headers['content-type']?.startsWith('application/json'))) return send(res,403,{error:'Origin or content type not allowed.'});
+        const token=req.headers.authorization?.replace(/^Bearer /,'');
+        if(url.pathname.endsWith('/listings')) {
+          if(req.method==='GET')return send(res,200,{listings:marketListings(store)});
+          if(req.method==='POST')return send(res,201,submitListing(store,await jsonBody(req),token));
+        } else {
+          if(req.method==='GET')return send(res,200,manageListing(store,url.searchParams.get('id'),token));
+          if(req.method==='POST'){const b=await jsonBody(req);return send(res,200,manageListing(store,b.id,token,b.action));}
+        }
+        return send(res,405,{error:'Method not allowed.'});
+      }catch(e){return send(res,400,{error:e.message});}
     }
     if (url.pathname === "/api/token-claim") {
       res.setHeader("X-Robots-Tag", "noindex, nofollow");
@@ -588,7 +612,7 @@ const server = http.createServer(async (req, res) => {
     res.end(
       req.method === "HEAD"
         ? undefined
-        : file.endsWith(".html") ? siteNavigation(await readFile(join(root,"public",file),"utf8"),url.pathname) : await readFile(join(root, "public", file)),
+        : file.endsWith(".html") ? (file === "market.html" ? await readFile(join(root,"public",file),"utf8") : siteNavigation(await readFile(join(root,"public",file),"utf8"),url.pathname)) : await readFile(join(root, "public", file)),
     );
   } catch (e) {
     console.error("Request failed:", e.message);
@@ -611,6 +635,7 @@ capturePoolHistory(store,registry,researchedProfiles,Date.now(),Math.max(180000,
 const timer = setInterval(async () => {
   store.expireApplications();
   pruneBlockReports(store);
+  pruneMarketplace(store);
   await collector.poll();
   captureChanges(store);
 capturePoolHistory(store,registry,researchedProfiles,Date.now(),Math.max(180000,pollSeconds*3000));

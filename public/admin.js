@@ -58,6 +58,7 @@ async function session() {
     providers = [];
     $("#applications").innerHTML = "";
     $("#providers").innerHTML = "";
+    $("#market-review").innerHTML = "";
     $("#audit").innerHTML = "";
   }
 }
@@ -87,6 +88,7 @@ async function refresh() {
   records = data.applications;
   providers = data.providers;
   render();
+  await refreshMarket();
   $("#audit").innerHTML =
     data.audit
       .map(
@@ -365,3 +367,9 @@ $("#tag-query").addEventListener("input", () => {
   ++tagSearchSequence;
   $("#tag-prev").disabled = $("#tag-next").disabled = true;
 });
+
+async function refreshMarket(){
+ try{const data=await api('market');$('#market-review').innerHTML=data.listings.length?data.listings.map(l=>`<details><summary>${esc(l.title)} · ${esc(l.status)} · ${esc(l.price)} XBT</summary><p>${esc(l.description)}</p><p>Seller: ${esc(l.seller)} · Contact: ${esc(l.contact)}</p><p>${esc(l.category)} · ${esc(l.delivery)} · ${esc(l.region)}</p><p>Expires ${new Date(l.expires).toLocaleString()} · ID ${esc(l.id)}</p><div class="admin-actions">${l.status==='pending'?`<button class="quiet-button" data-market="publish" data-id="${esc(l.id)}">Publish listing</button><button class="quiet-button" data-market="reject" data-id="${esc(l.id)}">Reject</button>`:''}${l.status==='published'?`<button class="quiet-button" data-market="remove" data-id="${esc(l.id)}">Remove listing</button>`:''}</div></details>`).join(''):'<p>No marketplace submissions yet.</p>';
+ }catch(e){$('#market-review-status').textContent=e.message;}
+}
+$('#market-review').addEventListener('click',async e=>{const b=e.target.closest('button[data-market]');if(!b)return;if(!confirm(`${b.textContent}?`))return;b.disabled=true;try{await api('market',{id:b.dataset.id,action:b.dataset.market});$('#market-review-status').textContent='Listing updated.';await refreshMarket();}catch(e){$('#market-review-status').textContent=e.message;b.disabled=false;}});

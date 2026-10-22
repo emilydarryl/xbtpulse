@@ -1,5 +1,9 @@
 # XBT Pulse — Codex handoff
 
+## October 22 marketplace pilot
+
+Owner approved a separate XBT Market at `market.xbtpulse.tech` and added the A record to the existing VPS. Implemented in the established application: public search/category filters, exact XBT prices, delivery/region, public seller contact, pending submissions, existing-admin moderation, private capability links to view/close offers, expiry and retention. No seed listings, custody, checkout, escrow, email or pool-score changes. See [operations](marketplace.md). Browser submission and sold action were exercised only in an isolated local database. Deployment verification follows below.
+
 ## Pool-choice intro spacing
 
 The homepage Choosing a pool paragraph now uses the section heading's 25px horizontal inset and 16px bottom spacing instead of sitting against the panel edge.

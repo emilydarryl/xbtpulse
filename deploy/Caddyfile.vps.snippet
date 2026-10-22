@@ -10,3 +10,12 @@ xbtpulse.tech {
 www.xbtpulse.tech {
     redir https://xbtpulse.tech{uri} permanent
 }
+
+market.xbtpulse.tech {
+    encode zstd gzip
+    request_body {
+        max_size 32KB
+    }
+    reverse_proxy xbtpulse-web:4317
+    header Strict-Transport-Security "max-age=31536000"
+}
