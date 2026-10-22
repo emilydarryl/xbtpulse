@@ -1,8 +1,9 @@
 const $=id=>document.getElementById(id),labels={mining:'Mining & hardware',electronics:'Electronics',digital:'Digital goods',services:'Services',other:'Other goods'};
 const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
 let page=1;const pageSize=12;
+let sellerProfile=null;
 let listings=[],privateId='',privateToken='',submission=null,privateUrl='';
-async function api(path,{body,token}={}){const r=await fetch('/api/market/'+path,{method:body?'POST':'GET',headers:{...(body?{'Content-Type':'application/json'}:{}),...(token?{Authorization:'Bearer '+token}:{})},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(15000),cache:'no-store'});const d=await r.json();if(!r.ok){const e=Error(d.error||'Request failed.');e.status=r.status;throw e;}return d;}
+async function api(path,{body,token}={}){const r=await fetch('/api/market/'+path,{method:body?'POST':'GET',headers:{...(body?{'Content-Type':'application/json'}:{}),...(token?{Authorization:'Bearer '+token}:{}),...(sellerProfile&&path==='listings'&&body?{'X-Market-Seller-Key':sellerProfile.token}:{})},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(15000),cache:'no-store'});const d=await r.json();if(!r.ok){const e=Error(d.error||'Request failed.');e.status=r.status;throw e;}return d;}
 function render(){
   const f=new FormData($('filters')),q=String(f.get('q')||'').toLowerCase(),category=f.get('category');
   const rows=listings.filter(l=>(!category||l.category===category)&&[l.title,l.description,l.region,l.seller].join(' ').toLowerCase().includes(q));
@@ -15,6 +16,7 @@ function render(){
     card.append(el('p',labels[l.category],'eyebrow'),el('h3',l.title),el('p',l.price+' XBT','price'),el('p',`${l.delivery==='digital'?'Digital / remote':l.delivery==='pickup'?'Pickup':'Shipping'} · ${l.region}`));
     const details=el('details'),summary=el('summary','Offer details');details.append(summary,el('p',l.description,'description'));card.append(details);
     card.append(el('p','Seller: '+l.seller),el('p',`Listed ${new Date(l.created).toLocaleDateString()} · Expires ${new Date(l.expires).toLocaleDateString()}`,'small'));
+    if(l.profileId){const profile=el('a','Seller profile','button');profile.href='/market/profile?id='+encodeURIComponent(l.profileId);const request=el('a','Request this offer','button primary');request.href='/market/order?listing='+encodeURIComponent(l.id);card.append(profile,request);}
     const a=el('a','Contact seller ↗','button');a.href=l.contact.startsWith('https://')?l.contact:'mailto:'+encodeURIComponent(l.contact);a.rel='noopener noreferrer';if(l.contact.startsWith('https://'))a.target='_blank';card.append(a,el('p','Listing ID: '+l.id,'small'));return card;
   }));
 }
@@ -28,7 +30,7 @@ async function manage(action){
 }
 $('listing-form')?.addEventListener('submit',async e=>{
   e.preventDefault();const button=e.submitter;button.disabled=true;
-  const data=Object.fromEntries(new FormData(e.target));data.consent=e.target.elements.consent.checked;
+  const data=Object.fromEntries(new FormData(e.target));data.consent=e.target.elements.consent.checked;if(sellerProfile)data.profileId=sellerProfile.id;
   if(!submission)submission={id:crypto.randomUUID(),token:Array.from(crypto.getRandomValues(new Uint8Array(32)),v=>v.toString(16).padStart(2,'0')).join(''),body:data};
   // Keep the exact request for retries after an ambiguous network response.
   try{await api('listings',{body:{...submission.body,id:submission.id},token:submission.token});
@@ -46,3 +48,8 @@ if(fragment&&!$('manage')){location.replace('/market/manage'+location.hash);}els
 if(location.pathname==='/market'||location.pathname==='/'){const section=location.hash.slice(1);if(['browse','how','sell','rules'].includes(section))location.replace('/market/'+section);}
 load();
 setInterval(()=>{if(!document.hidden)load();},60000);
+
+const sellerFragment=location.hash.match(/^#seller=([a-f0-9-]{36}):([a-f0-9]{64})$/);
+if(sellerFragment&&$('listing-form')){sellerProfile={id:sellerFragment[1],token:sellerFragment[2]};history.replaceState(null,'',location.pathname);api('seller?id='+encodeURIComponent(sellerProfile.id),{token:sellerProfile.token}).then(d=>{$('listing-form').elements.seller.value=d.profile.name;$('listing-form').elements.seller.defaultValue=d.profile.name;for(const a of document.querySelectorAll('header a[href="/market/seller"]'))a.href='/market/seller#seller='+sellerProfile.id+':'+sellerProfile.token;$('listing-form').elements.seller.readOnly=true;$('seller-profile-note').textContent='Linked to seller profile: '+d.profile.name;}).catch(e=>{$('seller-profile-note').textContent=e.message;});}
+
+window.addEventListener('hashchange',()=>{if(/^#(seller|manage)=/.test(location.hash))location.reload();});

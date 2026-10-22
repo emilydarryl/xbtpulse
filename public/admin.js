@@ -58,7 +58,7 @@ async function session() {
     providers = [];
     $("#applications").innerHTML = "";
     $("#providers").innerHTML = "";
-    $("#market-review").innerHTML = "";
+    $("#market-review").innerHTML = "";$("#market-issues").innerHTML="";
     $("#audit").innerHTML = "";
   }
 }
@@ -369,7 +369,11 @@ $("#tag-query").addEventListener("input", () => {
 });
 
 async function refreshMarket(){
+ await refreshMarketIssues();
  try{const data=await api('market');$('#market-review').innerHTML=data.listings.length?data.listings.map(l=>`<details><summary>${esc(l.title)} · ${esc(l.status)} · ${esc(l.price)} XBT</summary><p>${esc(l.description)}</p><p>Seller: ${esc(l.seller)} · Contact: ${esc(l.contact)}</p><p>${esc(l.category)} · ${esc(l.delivery)} · ${esc(l.region)}</p><p>Expires ${new Date(l.expires).toLocaleString()} · ID ${esc(l.id)}</p><div class="admin-actions">${l.status==='pending'?`<button class="quiet-button" data-market="publish" data-id="${esc(l.id)}">Publish listing</button><button class="quiet-button" data-market="reject" data-id="${esc(l.id)}">Reject</button>`:''}${l.status==='published'?`<button class="quiet-button" data-market="remove" data-id="${esc(l.id)}">Remove listing</button>`:''}</div></details>`).join(''):'<p>No marketplace submissions yet.</p>';
  }catch(e){$('#market-review-status').textContent=e.message;}
 }
 $('#market-review').addEventListener('click',async e=>{const b=e.target.closest('button[data-market]');if(!b)return;if(!confirm(`${b.textContent}?`))return;b.disabled=true;try{await api('market',{id:b.dataset.id,action:b.dataset.market});$('#market-review-status').textContent='Listing updated.';await refreshMarket();}catch(e){$('#market-review-status').textContent=e.message;b.disabled=false;}});
+
+async function refreshMarketIssues(){try{const d=await api('market-issues');if($('#desk').hidden)return;$('#market-issues').innerHTML=d.orders.length?d.orders.map(o=>`<details><summary>${esc(o.title)} · ${esc(o.status)} · ${esc(o.id)}</summary><p>Buyer: ${esc(o.buyer)} · ${esc(o.contact)}</p><p>Seller: ${esc(o.seller)} · ${esc(o.sellerContact)}</p><p>Agreed total: ${esc(o.total)} XBT · Terms: ${esc(o.terms)}</p><p>Listing ID: ${esc(o.listingId)}</p><p>Payment reference: ${esc(o.paymentTxid||'Not reported')} · Refund reference: ${esc(o.refundTxid||'Not reported')}</p>${o.issue.messages.map(m=>`<p><strong>${esc(m.actor)}</strong> · ${new Date(m.time).toLocaleString()}<br>${esc(m.text)}</p>`).join('')}<form data-order-note="${esc(o.id)}"><label>Support note to both participants<textarea name="message" required minlength="5" maxlength="1200" rows="3"></textarea></label><button class="quiet-button">Save support note</button></form></details>`).join(''):'<p>No open marketplace order issues.</p>';}catch(e){$('#market-issue-status').textContent=e.message;}}
+$('#market-issues').addEventListener('submit',async e=>{const f=e.target.closest('form[data-order-note]');if(!f)return;e.preventDefault();const button=e.submitter;button.disabled=true;f.dataset.messageId??=crypto.randomUUID();try{await api('market-issues',{id:f.dataset.orderNote,messageId:f.dataset.messageId,message:f.elements.message.value});$('#market-issue-status').textContent='Support note saved for both participants. No email notification is sent.';await refreshMarketIssues();}catch(err){$('#market-issue-status').textContent=err.message;button.disabled=false;}});

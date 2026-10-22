@@ -65,3 +65,7 @@ Open **Personal coinbase tag search** in `/admin` and search for `SOVEROOT` (pre
 ## Marketplace review
 
 The existing desk includes **Marketplace listing review**. Pending offers can be published or rejected; live offers can be removed. Publication is an explicit action after reviewing the offer and public contact. It does not verify seller identity or change any pool score. No email alerts are sent. See [marketplace operations](marketplace.md).
+
+## Marketplace order issues
+
+The existing desk includes an open-issue queue with private order terms and participant notes. Support notes appear to both buyer and seller and are recorded in the admin audit. Check the queue manually; no notification is sent. Staff can help communicate and moderate listings, but cannot verify wallet payment, send funds, enforce refunds or arbitrate a payment release. Never ask users for their private access links or wallet keys.

@@ -204,3 +204,14 @@ test('market moderation requires admin, correct origin and CSRF',async t=>{
  assert.equal((await call('market',{id:'missing',action:'publish'},{origin:'https://market.xbtpulse.tech'})).status,403);
  assert.equal((await call('market',{id:'missing',action:'publish'})).status,400);
 });
+
+test('market order issues and support notes require admin origin and CSRF',async t=>{
+ const {store,call}=fixture(t);
+ assert.equal((await call('market-issues')).status,401);
+ assert.equal((await call('market-issues',{id:'missing',message:'Test note'})).status,401);
+ await call('setup',{code:bootstrap(store),password:'market-issues-test-password'});
+ assert.equal((await call('market-issues')).status,200);
+ assert.equal((await call('market-issues',{id:'missing',message:'Test note'},{'x-csrf-token':''})).status,403);
+ assert.equal((await call('market-issues',{id:'missing',message:'Test note'},{origin:'https://market.xbtpulse.tech'})).status,403);
+ assert.equal((await call('market-issues',{id:'missing',message:'Test note'})).status,400);
+});

@@ -1,3 +1,4 @@
+import {createSeller,sellerDashboard,publicSeller,attachListing,createOrder,accessOrder,changeOrder} from './lib/market-trades.mjs';
 import {initializeMarketplace,submitListing,marketListings,manageListing,pruneMarketplace} from './lib/marketplace.mjs';
 import { createNodeObserver } from './lib/node-observations.mjs';
 import { createMarketPrices } from "./lib/market-prices.mjs";
@@ -91,6 +92,11 @@ const collector = new Collector(store, source, { retention }),
   pollSeconds = Math.max(10, Number(process.env.POLL_SECONDS) || 30);
 const files = {
   "/market": "market.html",
+  "/market/payments": "market-payments.html",
+  "/market/help": "market-help.html",
+  "/market/order": "market-order.html",
+  "/market/profile": "market-profile.html",
+  "/market/seller": "market-seller.html",
   "/market/browse": "market-browse.html",
   "/market/how": "market-how.html",
   "/market/sell": "market-sell.html",
@@ -99,6 +105,7 @@ const files = {
 
   "/market.css": "market.css",
   "/market.js": "market.js",
+  "/market-trades.js": "market-trades.js",
   "/nodes": "nodes.html",
   "/nodes.js": "nodes.js",
   "/token-claim": "token-claim.html",
@@ -213,7 +220,7 @@ const server = http.createServer(async (req, res) => {
     const url = new URL(req.url, "http://localhost");
     const marketHost = req.headers.host?.split(':')[0] === 'market.xbtpulse.tech';
     if (marketHost && url.pathname === '/') url.pathname='/market';
-    if (marketHost && !['/market','/market/browse','/market/how','/market/sell','/market/manage','/market/rules','/market.js','/market.css','/style.css','/favicon.svg','/api/market/listings','/api/market/manage','/healthz'].includes(url.pathname)) return send(res,404,{error:'Not found'});
+    if (marketHost && !['/market/payments','/market/help','/market/seller','/market/profile','/market/order','/market-trades.js','/api/market/seller','/api/market/profile','/api/market/orders','/market','/market/browse','/market/how','/market/sell','/market/manage','/market/rules','/market.js','/market.css','/style.css','/favicon.svg','/api/market/listings','/api/market/manage','/healthz'].includes(url.pathname)) return send(res,404,{error:'Not found'});
 
     res.setHeader(
       "Content-Security-Policy",
@@ -247,6 +254,22 @@ const server = http.createServer(async (req, res) => {
       }
       return;
     }
+    if (['/api/market/seller','/api/market/profile','/api/market/orders'].includes(url.pathname)) {
+      try {
+        const token=req.headers.authorization?.replace(/^Bearer /,'');
+        if(req.method==='POST'&&(![process.env.ADMIN_ORIGIN||'https://xbtpulse.tech',process.env.MARKET_ORIGIN||'https://market.xbtpulse.tech'].includes(req.headers.origin)||!req.headers['content-type']?.startsWith('application/json')))return send(res,403,{error:'Origin or content type not allowed.'});
+        if(req.method==='GET'){
+          if(url.pathname.endsWith('/profile'))return send(res,200,publicSeller(store,url.searchParams.get('id')));
+          if(url.pathname.endsWith('/seller'))return send(res,200,sellerDashboard(store,url.searchParams.get('id'),token));
+          return send(res,200,accessOrder(store,url.searchParams.get('id'),token,url.searchParams.get('sellerId')));
+        }
+        if(req.method==='POST'){const b=await jsonBody(req);
+          if(url.pathname.endsWith('/seller'))return send(res,200,b.action==='attach'?attachListing(store,b,token):createSeller(store,b,token));
+          if(url.pathname.endsWith('/orders'))return send(res,200,b.action?changeOrder(store,b,token):createOrder(store,b,token));
+        }
+        return send(res,405,{error:'Method not allowed.'});
+      }catch(e){return send(res,400,{error:e.message});}
+    }
     if (url.pathname === '/api/market/listings' || url.pathname === '/api/market/manage') {
       try {
         const origins=[process.env.ADMIN_ORIGIN||'https://xbtpulse.tech',process.env.MARKET_ORIGIN||'https://market.xbtpulse.tech'];
@@ -254,7 +277,7 @@ const server = http.createServer(async (req, res) => {
         const token=req.headers.authorization?.replace(/^Bearer /,'');
         if(url.pathname.endsWith('/listings')) {
           if(req.method==='GET')return send(res,200,{listings:marketListings(store)});
-          if(req.method==='POST')return send(res,201,submitListing(store,await jsonBody(req),token));
+          if(req.method==='POST')return send(res,201,submitListing(store,await jsonBody(req),token,Date.now(),req.headers['x-market-seller-key']));
         } else {
           if(req.method==='GET')return send(res,200,manageListing(store,url.searchParams.get('id'),token));
           if(req.method==='POST'){const b=await jsonBody(req);return send(res,200,manageListing(store,b.id,token,b.action));}

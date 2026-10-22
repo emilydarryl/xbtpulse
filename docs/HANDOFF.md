@@ -1,5 +1,9 @@
 # XBT Pulse — Codex handoff
 
+## October 22 seller profiles, direct-payment orders and issues
+
+Added pseudonymous seller profiles, private capability-based seller desks, approved profile-linked offers, buyer requests with immutable terms, seller payment instructions, buyer-reported transaction IDs, manual seller receipt confirmation, fulfilment and buyer receipt. Private issue threads pause progression; admin can leave support notes. Seller-reported full refunds close only on buyer confirmation. No custody, escrow, independent payment verification, identity verification, ratings or automatic notifications. Dedicated Payments and Problems pages explain the complete process. State changes and actor history are atomic; private order retention is 180 days. See [marketplace operations](marketplace.md) for limits, access/recovery and privacy details. Validation: all 117 Node tests passed, with additional focused tests after the profile-publication change. HTTP checks covered origin rejection, private access, admin host isolation and the payment-to-refund lifecycle. Browser checks covered profile creation, profile-linked offers, buyer requests, payment instructions/references and the final refund view. Synthetic local tests only; no real funds moved. The owner is considering optional escrow for shipped/high-value trades; it requires separate design and XBT compatibility verification.
+
 ## October 22 marketplace page navigation
 
 Split the long marketplace into a short home, Browse, How it works, List an offer, Listing rules and private management pages. Browse shows 12 offers per page; mobile navigation remains available. Legacy section bookmarks and private capability links redirect to the appropriate page. Listing rules open separately from the form to preserve draft inputs. No API, data or moderation changes.

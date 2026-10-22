@@ -7,3 +7,7 @@ main{min-height:65vh}nav a[aria-current="page"]{text-decoration:underline;text-d
 @media(max-width:800px){body>header{flex-wrap:wrap}header nav{width:100%;flex-wrap:wrap;gap:12px 20px}header nav>a:not(.button){display:inline-block}header nav a{font-size:13px}.pagination{display:flex;flex-wrap:wrap}}
 
 .page-title{font-size:36px;line-height:1.2;letter-spacing:-1px;margin:0 0 20px}@media(max-width:520px){.page-title{font-size:28px}}
+
+.trade-form{display:grid;gap:20px;max-width:680px;background:white;border:1px solid #d8e1d7;border-radius:12px;padding:24px;margin:24px 0}.trade-record{padding:20px;border:1px solid #d8e1d7;background:white;border-radius:10px;margin:18px 0;overflow-wrap:anywhere}.trade-record p{white-space:pre-wrap}.trade-record .actions{margin:12px 0}.listing .button{margin-top:10px}#seller-desk h2{margin-top:36px}#access-box{padding:24px;background:#e7eedf;border-radius:12px;margin:24px 0}#access-box .button{margin:12px 0}#profile-details{overflow-wrap:anywhere}
+
+#order-actions{display:block}#order-actions>.button{margin:8px 10px 8px 0}#order-actions .trade-form{box-sizing:border-box;width:100%}.trade-record{white-space:normal}.trade-record .trade-record{background:#f6f7f1}.listing-grid>.pagination{grid-column:1/-1}
