@@ -1,0 +1,92 @@
+# Isolated receiving evaluation. All host-network listeners MUST bind loopback.
+# Never attach this project to the public marketplace proxy or its data volumes.
+name: xbtpulse-payments
+services:
+  postgres:
+    image: ${POSTGRES_IMAGE:?Pin the tested PostgreSQL image digest}
+    network_mode: host
+    restart: unless-stopped
+    command: [postgres, -c, listen_addresses=127.0.0.1, -p, "25432"]
+    environment:
+      POSTGRES_DB: btcpay
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Generate a dedicated password}
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+      - ./source/deploy/10-nbxplorer.sql:/docker-entrypoint-initdb.d/10-nbxplorer.sql:ro
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -h 127.0.0.1 -p 25432 -U postgres -d btcpay"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    mem_limit: 512m
+    cpus: 0.5
+    pids_limit: 128
+    logging: {driver: json-file, options: {max-size: 5m, max-file: "2"}}
+  nbxplorer:
+    image: ${RUNTIME_IMAGE:?Pin the patched ASP.NET runtime image digest}
+    user: "1000:1000"
+    network_mode: host
+    working_dir: /app
+    entrypoint: [dotnet, /app/NBXplorer.dll]
+    restart: unless-stopped
+    depends_on:
+      postgres: {condition: service_healthy}
+    environment:
+      HOME: /data
+      DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+      NBXPLORER_DATADIR: /data
+      NBXPLORER_NETWORK: mainnet
+      NBXPLORER_CHAINS: XBT
+      NBXPLORER_BIND: 127.0.0.1:24444
+      NBXPLORER_XBTRPCURL: http://127.0.0.1:18332/
+      NBXPLORER_XBTRPCUSER: pulse-read
+      NBXPLORER_XBTRPCPASSWORD: ${READ_RPC_CAPABILITY:?Set the read-only proxy capability}
+      NBXPLORER_XBTNODEENDPOINT: 127.0.0.1:18333
+      NBXPLORER_XBTSTARTHEIGHT: ${START_HEIGHT:?Use the fresh wallet observation height}
+      NBXPLORER_EXPOSERPC: "false"
+      NBXPLORER_POSTGRES: "User ID=postgres;Host=127.0.0.1;Port=25432;Database=nbxplorer;Password=${POSTGRES_PASSWORD}"
+    volumes:
+      - ./publish/nbxplorer:/app:ro
+      - ./data/nbxplorer:/data
+    read_only: true
+    tmpfs: ["/tmp:size=64m,mode=1777"]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 768m
+    cpus: 0.75
+    pids_limit: 128
+    logging: {driver: json-file, options: {max-size: 5m, max-file: "2"}}
+  web:
+    image: ${RUNTIME_IMAGE:?Pin the patched ASP.NET runtime image digest}
+    user: "1000:1000"
+    network_mode: host
+    working_dir: /app
+    entrypoint: [dotnet, /app/BTCPayServer.dll]
+    restart: unless-stopped
+    depends_on:
+      postgres: {condition: service_healthy}
+      nbxplorer: {condition: service_started}
+    environment:
+      HOME: /data
+      DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+      BTCPAY_DATADIR: /data
+      BTCPAY_PLUGINDIR: /data/plugins
+      BTCPAY_DOCKERDEPLOYMENT: "false"
+      BTCPAY_NETWORK: mainnet
+      BTCPAY_CHAINS: XBT
+      BTCPAY_BIND: 127.0.0.1:23000
+      BTCPAY_XBTEXPLORERURL: http://127.0.0.1:24444
+      BTCPAY_XBTEXPLORERCOOKIEFILE: /nbxplorer/Main/.cookie
+      BTCPAY_POSTGRES: "User ID=postgres;Host=127.0.0.1;Port=25432;Database=btcpay;Password=${POSTGRES_PASSWORD}"
+    volumes:
+      - ./publish/web:/app:ro
+      - ./data/btcpay:/data
+      - ./data/nbxplorer:/nbxplorer:ro
+    read_only: true
+    tmpfs: ["/tmp:size=128m,mode=1777"]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 1g
+    cpus: 1
+    pids_limit: 256
+    logging: {driver: json-file, options: {max-size: 5m, max-file: "2"}}

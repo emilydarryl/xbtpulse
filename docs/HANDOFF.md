@@ -1,5 +1,13 @@
 # XBT Pulse — Codex handoff
 
+## October 22 private mainnet receiving setup
+
+The owner created a dedicated encrypted, locked `xbtpulse` wallet and the private XBTPay administrator account. An isolated on-chain receiving deployment now runs at `/opt/xbtpulse-payments` on the VPS, accessible only by an operator SSH forward. The home gateway supplies a supervised reverse tunnel and authenticated read-only RPC filter; no node spending keys or mining RPC password were copied to the VPS. Its dedicated SSH account rejects shells and extra listeners. Tunnel restart/reconnection and loopback-only service listeners were verified. No mining configuration, public proxy or deployed marketplace code changed.
+
+The watch-only indexer verified XBT mainnet, synced from fresh-wallet observation height 978511 and observed new blocks. Three receiving addresses matched the node, indexer and merchant import. The XBT Pulse store uses XBT pricing, on-chain enabled and Lightning disabled. A clearly labeled unpaid 0.00010000 XBT setup invoice generated a matching checkout and was archived unpaid. No real payment or settlement test occurred. Release XBT tests, dependency audit and three read-proxy security tests passed. A Release-only build dependency advisory was patched to `Microsoft.Build.Tasks.Git 10.0.303`, alongside the existing Pkcs 10.0.13 override. Runtime/database images are pinned. A private pre-funding logical database dump was saved; its integrity was checked, not a complete restore.
+
+See [receiving operations and remaining gates](../experiments/market-payments/receiving-operations.md). Next: confirm and restore-test the owner's wallet backup, then an owner-chosen small paid invoice/confirmation/recovery trial. No customer checkout, fee collection, escrow or Lightning is live. Historical recovery is untested; txindex is absent and the P2P whitelist warning was left for separate evaluation. The public app's deployed revision remains `1b6e99ee9645b6f5bf64f4d630e99e22b18e08cf`.
+
 ## October 22 isolated payment and escrow lab
 
 The owner approved an isolated XBTPay trial and escrow prototype after discussing a proposed 2% seller success fee and XBT Lightning. Added [the lab](../experiments/market-payments/README.md): exact fee quotes, sorted 2-of-3 public-key scripts, simulated signed-shipping/inspection/dispute release, and a mocked Greenfield fee-invoice client with authenticated callbacks and authoritative invoice rechecks. The prototype runs only on loopback; production imports no lab code. Tracking is proposed for every physical shipment; signature is required for all initial escrow shipments, without treating a signature or tracking status as automatic release authority. No live shipping policy or fee changed.

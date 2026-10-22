@@ -1,5 +1,7 @@
 # XBT Market payments lab — October 22, 2026
 
+**Later October 22 milestone:** an isolated, private on-chain XBTPay deployment now uses the owner's locked wallet through a watch-only receiving account and restricted home-to-VPS connection. It generated an unpaid invoice; no real payment, public marketplace integration, fee, escrow or Lightning was enabled. See [receiving operations](receiving-operations.md). The original experiments and historical results below remain separate from that deployment.
+
 This is an isolated prototype, outside the production server. It does not sign, broadcast, receive or custody funds. No production fee, escrow requirement or Lightning option was enabled by these experiments.
 
 ## Run and inspect
