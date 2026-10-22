@@ -1,5 +1,13 @@
 # XBT Pulse — Codex handoff
 
+## October 22 real on-chain receipt and recovery test
+
+The owner reported saving the wallet backup and sent a real **10,000-sat XBT** test payment. XBTPay detected it without a manual Paid action, moved through Processing and automatically Settled after one confirmation at mainnet height 978518. The exact output matched the verified receiving script and remained unspent for the full 10,000 sats. The dedicated Knots wallet recorded the credit while remaining encrypted and locked. Transaction identifiers and private invoice/account details stay in the VPS verification records, not this public handoff.
+
+Payment services were briefly stopped for consistent database snapshots. Both databases were restored into disposable copies: data fingerprints matched across all 68 BTCPay and 19 NBXplorer public tables, including the settled invoice/payment record. Disposable copies were removed; the private services restarted and the checkout still showed Invoice Paid. This verifies this payment database recovery and restart, not a spending-wallet seed restore, induced reorg, complete host loss, refund, Lightning or escrow. The original pre-funding snapshot and new custom-format dumps remain private under `/opt/xbtpulse-payments/backups/`.
+
+The settled receipt displayed a 100-sat Network Cost and 9,900-sat Total Price, while Amount Paid, database invoice amount, payment record and the node's unspent receiving output were 10,000 sats. Review that fee-breakdown labeling/configuration before public checkout; no marketplace fee or separate fee output was collected. The public marketplace remains on its existing direct-payment flow, with no public checkout route added. Next: resolve the receipt breakdown, test merchant integration and reconciliation separately, and finish off-server backup/wallet-recovery work. [Receiving operations](../experiments/market-payments/receiving-operations.md) has the updated evidence and remaining gates.
+
 ## October 22 private mainnet receiving setup
 
 The owner created a dedicated encrypted, locked `xbtpulse` wallet and the private XBTPay administrator account. An isolated on-chain receiving deployment now runs at `/opt/xbtpulse-payments` on the VPS, accessible only by an operator SSH forward. The home gateway supplies a supervised reverse tunnel and authenticated read-only RPC filter; no node spending keys or mining RPC password were copied to the VPS. Its dedicated SSH account rejects shells and extra listeners. Tunnel restart/reconnection and loopback-only service listeners were verified. No mining configuration, public proxy or deployed marketplace code changed.
