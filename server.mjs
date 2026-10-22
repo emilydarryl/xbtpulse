@@ -1,4 +1,5 @@
 import {createSeller,sellerDashboard,publicSeller,attachListing,createOrder,accessOrder,changeOrder} from './lib/market-trades.mjs';
+import {marketFeesFromEnvironment} from './lib/market-fees.mjs';
 import {initializeMarketplace,submitListing,marketListings,manageListing,pruneMarketplace} from './lib/marketplace.mjs';
 import { createNodeObserver } from './lib/node-observations.mjs';
 import { createMarketPrices } from "./lib/market-prices.mjs";
@@ -58,6 +59,8 @@ await mkdir(dataDir, { recursive: true });
 const store = new Store(join(dataDir, "pulse.sqlite"));
 const nodeObserver = createNodeObserver(store, {enabled:process.env.NODE_OBSERVATIONS_ENABLED !== 'false'});
 initializeMarketplace(store);
+const marketFees=marketFeesFromEnvironment(store);
+const privateOrderView=order=>({...order,platformFee:marketFees.view(order)});
 initializeBlockReports(store);
 store.expireApplications();
 initializeAdmin(store);
@@ -106,6 +109,7 @@ const files = {
   "/market.css": "market.css",
   "/market.js": "market.js",
   "/market-trades.js": "market-trades.js",
+  "/market-fees.js": "market-fees.js",
   "/nodes": "nodes.html",
   "/nodes.js": "nodes.js",
   "/token-claim": "token-claim.html",
@@ -220,7 +224,7 @@ const server = http.createServer(async (req, res) => {
     const url = new URL(req.url, "http://localhost");
     const marketHost = req.headers.host?.split(':')[0] === 'market.xbtpulse.tech';
     if (marketHost && url.pathname === '/') url.pathname='/market';
-    if (marketHost && !['/market/payments','/market/help','/market/seller','/market/profile','/market/order','/market-trades.js','/api/market/seller','/api/market/profile','/api/market/orders','/market','/market/browse','/market/how','/market/sell','/market/manage','/market/rules','/market.js','/market.css','/style.css','/favicon.svg','/api/market/listings','/api/market/manage','/healthz'].includes(url.pathname)) return send(res,404,{error:'Not found'});
+    if (marketHost && !['/market/payments','/market/help','/market/seller','/market/profile','/market/order','/market-trades.js','/market-fees.js','/api/market/seller','/api/market/profile','/api/market/orders','/api/market/fees','/api/market/fee-webhook','/market','/market/browse','/market/how','/market/sell','/market/manage','/market/rules','/market.js','/market.css','/style.css','/favicon.svg','/api/market/listings','/api/market/manage','/healthz'].includes(url.pathname)) return send(res,404,{error:'Not found'});
 
     res.setHeader(
       "Content-Security-Policy",
@@ -254,18 +258,33 @@ const server = http.createServer(async (req, res) => {
       }
       return;
     }
+    if (url.pathname==='/api/market/fee-webhook') {
+      if(!marketFees.enabled)return send(res,404,{error:'Not found'});
+      if(req.method!=='POST')return send(res,405,{error:'Method not allowed.'});
+      try{let size=0;const chunks=[];for await(const chunk of req){size+=chunk.length;if(size>32768)return send(res,413,{error:'Callback too large.'});chunks.push(chunk);}
+        const result=marketFees.callback(Buffer.concat(chunks),req.headers['btcpay-sig']);
+        void marketFees.tick().catch(()=>{});return send(res,202,result);
+      }catch{return send(res,403,{error:'Invalid payment callback.'});}
+    }
+    if (url.pathname==='/api/market/fees') {
+      if(!marketFees.enabled)return send(res,404,{error:'Not found'});
+      if(req.method!=='POST')return send(res,405,{error:'Method not allowed.'});
+      if(![process.env.ADMIN_ORIGIN||'https://xbtpulse.tech',process.env.MARKET_ORIGIN||'https://market.xbtpulse.tech'].includes(req.headers.origin)||!req.headers['content-type']?.startsWith('application/json'))return send(res,403,{error:'Origin or content type not allowed.'});
+      try{const body=await jsonBody(req);return send(res,200,await marketFees.request(body.id,req.headers.authorization?.replace(/^Bearer /,''),body.sellerId));}
+      catch{return send(res,400,{error:'Unable to update this private fee invoice. Check your seller link and try again.'});}
+    }
     if (['/api/market/seller','/api/market/profile','/api/market/orders'].includes(url.pathname)) {
       try {
         const token=req.headers.authorization?.replace(/^Bearer /,'');
         if(req.method==='POST'&&(![process.env.ADMIN_ORIGIN||'https://xbtpulse.tech',process.env.MARKET_ORIGIN||'https://market.xbtpulse.tech'].includes(req.headers.origin)||!req.headers['content-type']?.startsWith('application/json')))return send(res,403,{error:'Origin or content type not allowed.'});
         if(req.method==='GET'){
           if(url.pathname.endsWith('/profile'))return send(res,200,publicSeller(store,url.searchParams.get('id')));
-          if(url.pathname.endsWith('/seller'))return send(res,200,sellerDashboard(store,url.searchParams.get('id'),token));
-          return send(res,200,accessOrder(store,url.searchParams.get('id'),token,url.searchParams.get('sellerId')));
+          if(url.pathname.endsWith('/seller')){const dashboard=sellerDashboard(store,url.searchParams.get('id'),token);dashboard.orders=dashboard.orders.map(order=>privateOrderView({...order,role:'seller'}));return send(res,200,dashboard);}
+          return send(res,200,privateOrderView(accessOrder(store,url.searchParams.get('id'),token,url.searchParams.get('sellerId'))));
         }
         if(req.method==='POST'){const b=await jsonBody(req);
           if(url.pathname.endsWith('/seller'))return send(res,200,b.action==='attach'?attachListing(store,b,token):createSeller(store,b,token));
-          if(url.pathname.endsWith('/orders'))return send(res,200,b.action?changeOrder(store,b,token):createOrder(store,b,token));
+          if(url.pathname.endsWith('/orders')){const order=b.action?changeOrder(store,b,token):createOrder(store,b,token,Date.now(),marketFees.enabled);if(b.action==='complete'||b.action==='confirm_refund')void marketFees.tick().catch(()=>{});return send(res,200,privateOrderView(order));}
         }
         return send(res,405,{error:'Method not allowed.'});
       }catch(e){return send(res,400,{error:e.message});}
@@ -658,6 +677,8 @@ server.listen(port, process.env.HOST || "127.0.0.1", () =>
 );
 void nodeObserver.poll();
 const nodeTimer = setInterval(() => { void nodeObserver.poll(); }, 60000);
+void marketFees.tick().catch(()=>{});
+const feeTimer=setInterval(()=>{void marketFees.tick().catch(()=>{});},30000);
 await collector.poll();
 captureChanges(store);
 capturePoolHistory(store,registry,researchedProfiles,Date.now(),Math.max(180000,pollSeconds*3000));
@@ -665,6 +686,7 @@ const timer = setInterval(async () => {
   store.expireApplications();
   pruneBlockReports(store);
   pruneMarketplace(store);
+  marketFees.prune();
   await collector.poll();
   captureChanges(store);
 capturePoolHistory(store,registry,researchedProfiles,Date.now(),Math.max(180000,pollSeconds*3000));
@@ -674,6 +696,7 @@ for (const signal of ["SIGTERM", "SIGINT"])
   process.on(signal, () => {
     clearInterval(timer);
     clearInterval(nodeTimer);
+    clearInterval(feeTimer);
     server.close(() => process.exit(0));
     setTimeout(() => process.exit(0), 5000).unref();
   });

@@ -1,0 +1,38 @@
+# Copy to the private fee-pilot directory alongside app/, data/ and a mode-0600 .env.
+# This uses a reviewed source snapshot mounted over a pinned local runtime image.
+services:
+  market:
+    image: ${FEE_PILOT_IMAGE:?Pin the local runtime image ID}
+    user: "0:0"
+    init: true
+    restart: unless-stopped
+    network_mode: host
+    working_dir: /app
+    entrypoint: ["node"]
+    command: ["server.mjs"]
+    env_file: .env
+    environment:
+      HOST: 127.0.0.1
+      PORT: 4318
+      DATA_DIR: /pilot-data
+      NODE_OBSERVATIONS_ENABLED: "false"
+      EXPLORER_API: ""
+      RPC_URL: ""
+    volumes:
+      - ./app:/app:ro
+      - ./data:/pilot-data
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 256m
+    cpus: 0.5
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4318/healthz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+    logging:
+      driver: json-file
+      options: {max-size: 5m, max-file: "2"}

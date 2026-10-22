@@ -49,3 +49,7 @@ Order events record actor, action and timestamp atomically with each state chang
 Added tables: `market_sellers`, `market_orders`, `market_order_events`. APIs: `/api/market/seller`, `/api/market/profile`, `/api/market/orders`; issue administration `/api/admin/market-issues` stays on the parent hostname. POSTs require allowed Origin and JSON; private reads/actions require the corresponding capability. Profile creation is capped at 30/hour globally; orders at 60/hour. Idempotent creation retries must match the original contents and capability. Existing API and operator telemetry remain separate.
 
 Escrow is not implemented. Before offering it, decide the custody/signing arrangement, XBT wallet compatibility, funding/release verification, deadlines, evidence and dispute authority, refund paths and operational responsibilities. Do not label the direct-pay pilot as protected trading.
+
+## Private platform-fee pilot
+
+The source now includes an off-by-default 2% seller fee with a separate XBTPay invoice and persistent reconciliation. It is enabled only in an isolated private pilot; the public deployment is unchanged. No seller purchase funds pass through the platform wallet. See [fee policy, configuration, recovery and launch gates](marketplace-fees.md). Verified platform-fee payment would establish payment of that fee only, not purchase completion, seller identity or delivery.
