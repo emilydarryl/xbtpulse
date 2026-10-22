@@ -25,3 +25,7 @@ Public API: `GET/POST /api/market/listings`. Public GET returns only published, 
 User configured DNS A record `market` → `2.25.153.143`. Caddy adds an isolated hostname block using the existing `xbtpulse-web:4317` upstream and automatic HTTPS. Preserve all existing routes and data. Additive SQLite table `market_listings` plus intake-limit metadata. Backups contain pending seller contact details and capability hashes; treat them as private.
 
 Only synthetic offers in an isolated local database are used for testing. Never publish synthetic production listings. Confirm empty production listing API, successful TLS, parent health/readiness, and unauthenticated moderation rejection after deployment.
+
+## Page navigation
+
+The short home page links to `/market/browse` (12 offers per page), `/market/how`, `/market/sell`, and `/market/rules`. Navigation stays visible on phones. Seller capability links use `/market/manage#manage=...`; original `/market#manage=...` links and old section bookmarks redirect to their dedicated page. No secrets are placed in query parameters or persistent browser storage.

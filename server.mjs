@@ -91,6 +91,12 @@ const collector = new Collector(store, source, { retention }),
   pollSeconds = Math.max(10, Number(process.env.POLL_SECONDS) || 30);
 const files = {
   "/market": "market.html",
+  "/market/browse": "market-browse.html",
+  "/market/how": "market-how.html",
+  "/market/sell": "market-sell.html",
+  "/market/manage": "market-manage.html",
+  "/market/rules": "market-rules.html",
+
   "/market.css": "market.css",
   "/market.js": "market.js",
   "/nodes": "nodes.html",
@@ -207,7 +213,7 @@ const server = http.createServer(async (req, res) => {
     const url = new URL(req.url, "http://localhost");
     const marketHost = req.headers.host?.split(':')[0] === 'market.xbtpulse.tech';
     if (marketHost && url.pathname === '/') url.pathname='/market';
-    if (marketHost && !['/market','/market.js','/market.css','/style.css','/favicon.svg','/api/market/listings','/api/market/manage','/healthz'].includes(url.pathname)) return send(res,404,{error:'Not found'});
+    if (marketHost && !['/market','/market/browse','/market/how','/market/sell','/market/manage','/market/rules','/market.js','/market.css','/style.css','/favicon.svg','/api/market/listings','/api/market/manage','/healthz'].includes(url.pathname)) return send(res,404,{error:'Not found'});
 
     res.setHeader(
       "Content-Security-Policy",
@@ -612,7 +618,7 @@ const server = http.createServer(async (req, res) => {
     res.end(
       req.method === "HEAD"
         ? undefined
-        : file.endsWith(".html") ? (file === "market.html" ? await readFile(join(root,"public",file),"utf8") : siteNavigation(await readFile(join(root,"public",file),"utf8"),url.pathname)) : await readFile(join(root, "public", file)),
+        : file.endsWith(".html") ? ((file === "market.html" || file.startsWith("market-")) ? await readFile(join(root,"public",file),"utf8") : siteNavigation(await readFile(join(root,"public",file),"utf8"),url.pathname)) : await readFile(join(root, "public", file)),
     );
   } catch (e) {
     console.error("Request failed:", e.message);
