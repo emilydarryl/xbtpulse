@@ -1,5 +1,11 @@
 # XBT Pulse — Codex handoff
 
+## October 22 isolated payment and escrow lab
+
+The owner approved an isolated XBTPay trial and escrow prototype after discussing a proposed 2% seller success fee and XBT Lightning. Added [the lab](../experiments/market-payments/README.md): exact fee quotes, sorted 2-of-3 public-key scripts, simulated signed-shipping/inspection/dispute release, and a mocked Greenfield fee-invoice client with authenticated callbacks and authoritative invoice rechecks. The prototype runs only on loopback; production imports no lab code. Tracking is proposed for every physical shipment; signature is required for all initial escrow shipments, without treating a signature or tracking status as automatic release authority. No live shipping policy or fee changed.
+
+Pinned XBTPay original tests: 10 gateway + 1 LND helper + 4 indexer + 31 checkout checks passed. A flagged Pkcs dependency was overridden to 10.0.13 in the disposable lab; 31 checkout checks passed again and the configured NuGet vulnerability scan was clear. One independent NBitcoin script cross-check passed; six local prototype tests passed. The final complete Node suite passed all 123 tests; syntax checks passed. These are source/mocked checks, not a real XBT payment, signature or recovery trial. No production credentials, wallets, channels, funds, ports or configuration were used. Next funded milestone needs a dedicated XBT backend, compatible signer/node and inbound Lightning liquidity. See lab notes for recovery, fee enforcement, arbitration and other open gates.
+
 ## October 22 seller profiles, direct-payment orders and issues
 
 Deployed application revision `1b6e99ee9645b6f5bf64f4d630e99e22b18e08cf`. Live marketplace pages, parent health/readiness and private/admin rejection checks passed. All 117 tests passed on the final release. Rollback image: `xbtpulse-rollback:before-market-trades`; consistent database snapshot: `/app/data/backup-before-market-trades-20261022.sqlite` inside the app data volume, mode 0600; prior source archive: `/tmp/xbtpulse-source-before-trades.tar`. No production test accounts, listings or orders were created. Database backup stays on the server.
